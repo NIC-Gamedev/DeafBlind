@@ -1,19 +1,25 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 public abstract class MovementBase : MonoBehaviour
 {
-    protected float movementSpeed;
-    protected float sprintMultiplier;
-    protected float jumpForce;
+    [SerializeField] protected float movementSpeed;
+    [SerializeField] protected float sprintMultiplier;
+    [SerializeField] protected float jumpForce;
 
     public Rigidbody rb { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
     protected virtual void Movement()
     {
-        return;
+    }
+    protected virtual void Movement(InputAction.CallbackContext callback)
+    {
+    }
+    protected virtual void Movement(Vector3 direction)
+    {
     }
 }

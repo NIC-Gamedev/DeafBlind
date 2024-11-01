@@ -2,7 +2,7 @@
     "name": "MainControll",
     "maps": [
         {
-            "name": "PlayerMovement",
+            "name": "Player",
             "id": "52b6bb7e-3776-4b18-ae36-0c5400bb1908",
             "actions": [
                 {
@@ -17,7 +17,7 @@
             ],
             "bindings": [
                 {
-                    "name": "3D Vector",
+                    "name": "KeyBoard",
                     "id": "0bd470df-ebb9-47ca-84de-77de3d2ad36a",
                     "path": "3DVector",
                     "interactions": "",
@@ -28,7 +28,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "forward",
+                    "name": "up",
                     "id": "d9ccb6b3-bf88-4c06-ab28-9037e99d37b5",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -39,7 +39,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "backward",
+                    "name": "down",
                     "id": "cff61425-9e44-4614-bcbd-fb39f49e4995",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -67,6 +67,83 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PlayerMovement",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "GamePad",
+                    "id": "54d58406-f3a9-4e78-a9ed-4ecfbdf2c23b",
+                    "path": "3DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "2ab29164-c6c3-479a-b456-b8c2e751851b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "9d5fe894-de77-4d6d-9b9b-898a4bde7c44",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "12496b75-ca05-4f76-8628-6e8aae166f93",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "096332b4-be20-45b4-a068-cee142f10512",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "forward",
+                    "id": "8b17fd6e-361b-4216-88bd-87fea612029e",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "backward",
+                    "id": "a815cb16-f4b3-4928-a071-453c709376c2",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
