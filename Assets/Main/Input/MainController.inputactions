@@ -1,5 +1,5 @@
 {
-    "name": "MainControll",
+    "name": "MainController",
     "maps": [
         {
             "name": "Player",
@@ -13,13 +13,40 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "MouseX",
+                    "type": "Value",
+                    "id": "8ec56cd9-f617-4aae-9a6a-17bfc1846df7",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseY",
+                    "type": "Value",
+                    "id": "f6ea378b-45d5-4d62-8538-35e6dd80c5b3",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "7516d29b-f8c0-4db5-b601-7acb24018f25",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "KeyBoard",
                     "id": "0bd470df-ebb9-47ca-84de-77de3d2ad36a",
-                    "path": "3DVector",
+                    "path": "3DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -28,7 +55,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "forward",
                     "id": "d9ccb6b3-bf88-4c06-ab28-9037e99d37b5",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -39,7 +66,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "backward",
                     "id": "cff61425-9e44-4614-bcbd-fb39f49e4995",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -147,6 +174,39 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c5b10781-d3c1-4a7a-a59f-bc7362eaed25",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05fe0e0a-5f9e-4f5c-8431-f079d36b60d8",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9d44864-4bcc-42ef-b071-80b1cb998857",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
