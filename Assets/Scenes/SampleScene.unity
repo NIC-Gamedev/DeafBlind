@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 95679191}
   - component: {fileID: 95679190}
   - component: {fileID: 95679189}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,6 +228,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &599784258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599784259}
+  m_Layer: 0
+  m_Name: GroundCheacker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &599784259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599784258}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.021, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650506818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &700883898
 GameObject:
@@ -683,9 +714,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
-  sprintMultiplier: 3
+  sprintMultiplier: 5
   jumpForce: 5
   FrictionAmount: 0.9
+  maxStaminaTime: 5
+  waitTimeBeforeStaminaRecover: 1
+  sneakingDevider: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheacker: {fileID: 599784259}
+  radius: 0.1
 --- !u!54 &1650506814
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -800,6 +839,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1012836040}
+  - {fileID: 599784259}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0.476, z: 0}
 --- !u!1660057539 &9223372036854775807
