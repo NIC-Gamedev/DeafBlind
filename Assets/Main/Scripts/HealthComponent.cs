@@ -12,7 +12,7 @@ public class ObjectHealth : MonoBehaviour
         currentHealth = maxHealth; 
     }
 
-    public void TakeHealth(float dmg)
+    public void GetDamage(float dmg)
     {
         currentHealth -= dmg;
     }
