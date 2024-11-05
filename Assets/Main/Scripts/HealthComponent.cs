@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
-    public float currentHealth;
+    [SerializeField] private float maxHealth = 100f;
+    private float currentHealth;
+
+    public static Action<float> OnHealthValueChange;
 
     protected virtual void Start()
     {
@@ -15,10 +18,12 @@ public class ObjectHealth : MonoBehaviour
     public void TakeHealth(float dmg)
     {
         currentHealth -= dmg;
+        OnHealthValueChange?.Invoke(currentHealth);
     }
 
     public void AddHealth(float heal)
     {
-        currentHealth += heal;      
+        currentHealth += heal;
+        OnHealthValueChange?.Invoke(currentHealth);
     }
 }

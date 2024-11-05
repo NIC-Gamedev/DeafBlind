@@ -34,7 +34,7 @@ public class PlayerMovement : MovementBase
 
     private void InputInit()
     {
-        inputActions = new MainController();
+        inputActions = InputManager.inputActions;
         inputActions.Player.Movement.Enable();
         inputActions.Player.Sprint.Enable();
         inputActions.Player.Jump.Enable();
