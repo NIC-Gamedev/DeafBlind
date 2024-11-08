@@ -8,9 +8,12 @@ public abstract class MovementBase : MonoBehaviour
 
     public Rigidbody rb { get; private set; }
 
+    protected Collider col;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
     }
 
     protected virtual void Movement()

@@ -110,7 +110,7 @@ public class PlayerMovement : MovementBase
     private void Jump(InputAction.CallbackContext callback)
     {
         Collider[] ground = Physics.OverlapSphere(groundCheacker.position, radius, groundLayer);
-        if (ground.Length > 0)
+        if (IsOnGround())
                 rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
     }
     
@@ -134,8 +134,8 @@ public class PlayerMovement : MovementBase
 
     private void OnDrawGizmos()
     {
-        if(groundCheacker) 
-            Gizmos.DrawWireSphere(groundCheacker.position, radius);
+        if(col) 
+            Gizmos.DrawWireSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius);
     }
 
     private void OnDestroy()
@@ -144,5 +144,24 @@ public class PlayerMovement : MovementBase
         inputActions.Player.Sprint.Disable();
         inputActions.Player.Jump.Disable();
         inputActions.Player.Sneak.Disable();
+    }
+
+
+    protected virtual bool IsOnGround(out Collider[] collider)
+    {
+        Collider[] ground = Physics.OverlapSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius, groundLayer);
+        collider = ground;
+        if (ground.Length > 0)
+            return true;
+
+        return false;
+    }
+    protected virtual bool IsOnGround()
+    {
+        Collider[] ground = Physics.OverlapSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius, groundLayer);
+        if (ground.Length > 0)
+            return true;
+
+        return false;
     }
 }
