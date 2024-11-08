@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Reflection;
 using UnityEngine;
 
@@ -19,9 +20,27 @@ public class WaveThrow : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        ThrowWave(collision, (Mathf.Abs(vel.x) + Mathf.Abs(vel.y) + Mathf.Abs(vel.z)), (Mathf.Abs(vel.x) + Mathf.Abs(vel.y) + Mathf.Abs(vel.z)) * 5,5);
+    }
+
+    protected void ThrowWave(Collision collision,float startLifeTime = 1, float startSize = 1,int emitCount = 1)
+    {
         ParticleSystem instance = Instantiate(waveParticle, collision.contacts[0].point, Quaternion.identity);
         var main = instance.main;
-        main.startLifetime = (Mathf.Abs(vel.x) + Mathf.Abs(vel.y) + Mathf.Abs(vel.z));
-        main.startSize = (Mathf.Abs(vel.x) + Mathf.Abs(vel.y) + Mathf.Abs(vel.z)) * 5; 
+        main.startLifetime = startLifeTime;
+        main.startSize = startSize;
+        StartCoroutine(EmitWave(instance, emitCount));
+    }
+    protected IEnumerator EmitWave(ParticleSystem particle,int count)
+    {
+        while (count > 0)
+        {
+            if (particle)
+            {
+                count--;
+                particle.Emit(1);
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

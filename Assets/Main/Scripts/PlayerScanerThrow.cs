@@ -17,10 +17,7 @@ public class PlayerScanerThrow : WaveThrow
         curentStepTime -= Time.deltaTime;  
         if (rb.velocity != Vector3.zero && curentStepTime < 0)
         {
-            ParticleSystem instance = Instantiate(waveParticle, collision.contacts[0].point, Quaternion.identity);
-            var main = instance.main;
-            main.startLifetime = 0.4f;
-            main.startSize = (Mathf.Abs(vel.x) + Mathf.Abs(vel.y) + Mathf.Abs(vel.z))/5;
+            ThrowWave(collision,0.4f, (Mathf.Abs(vel.x) + Mathf.Abs(vel.y) + Mathf.Abs(vel.z)) / 5,2);
             curentStepTime = stepTime;
         }
     }
