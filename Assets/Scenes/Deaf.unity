@@ -363,7 +363,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 0
+  weight: 1
   sharedProfile: {fileID: 11400000, guid: 1ba106c6b17ccc34a880622d2589715d, type: 2}
 --- !u!4 &320817324
 Transform:
@@ -884,7 +884,6 @@ GameObject:
   - component: {fileID: 1012836040}
   - component: {fileID: 1012836041}
   - component: {fileID: 1012836042}
-  - component: {fileID: 1012836043}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -960,19 +959,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: {x: 0.05, y: 0.05}
---- !u!114 &1012836043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012836039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11f1997bf112e148ae4242d8f6f4797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &1296168331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,7 +1053,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -2.605, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1296168335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1158,7 +1144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11f1997bf112e148ae4242d8f6f4797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &1370247501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1345,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650506812}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a98c9d6820d8ab4f8c12c039e568647, type: 3}
   m_Name: 
