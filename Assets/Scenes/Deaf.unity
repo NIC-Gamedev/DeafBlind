@@ -184,7 +184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc72ae7d82218c64c97a6d9c077bc439, type: 2}
+  - {fileID: 2100000, guid: 2ba2bbab11573ee4d9ab91090872cb0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1190,6 +1190,8 @@ GameObject:
   - component: {fileID: 1650506814}
   - component: {fileID: 1650506813}
   - component: {fileID: 1650506819}
+  - component: {fileID: 1650506821}
+  - component: {fileID: 1650506820}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -1354,6 +1356,32 @@ MonoBehaviour:
     type: 3}
   vel: {x: 0, y: 0, z: 0}
   stepTime: 0.5
+--- !u!114 &1650506820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650506812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f8422b3ef31f34a8084252ae524f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1650506821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650506812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af83f577ba6de4649becedd71819caf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
 --- !u!1 &1964831773
 GameObject:
   m_ObjectHideFlags: 0
