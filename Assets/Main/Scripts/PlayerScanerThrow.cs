@@ -6,7 +6,7 @@ public class PlayerScanerThrow : WaveThrow
 {
     public float stepTime;
     protected float curentStepTime;
-
+    [SerializeField] protected AudioClip playerMoveSound;
     protected override void Start()
     {
         base.Start();
@@ -17,8 +17,8 @@ public class PlayerScanerThrow : WaveThrow
         curentStepTime -= Time.deltaTime;  
         if (rb.velocity != Vector3.zero && curentStepTime < 0)
         {
-            ThrowWave(collision,0.4f, (Mathf.Abs(vel.x) + Mathf.Abs(vel.y) + Mathf.Abs(vel.z)) / 5,2);
             curentStepTime = stepTime;
+            audioManager.PlaySoundEffect(playerMoveSound, volume: 0.1f, ColideObject: collision);
         }
     }
 }

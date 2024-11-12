@@ -20,7 +20,11 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup sfxMixer;
     public AudioMixerGroup voicesMixer;
 
+    [SerializeField] protected ParticleSystem waveParticle;
+
     private Transform sfxRoot;
+
+
 
     private void Awake()
     {
@@ -36,7 +40,6 @@ public class AudioManager : MonoBehaviour
             Destroy(instance.gameObject);
             instance = this;
         }
-
         sfxRoot = new GameObject(SFX_PARENT_NAME).transform;
         sfxRoot.SetParent(transform);
     }
@@ -63,7 +66,7 @@ public class AudioManager : MonoBehaviour
     {
         StopTrack(audioName);
     }
-    public AudioSource PlaySoundEffect(string filepath,AudioMixerGroup mixer = null,float volume = 1,float pitch = 1,bool loop = false)
+    public AudioSource PlaySoundEffect(string filepath,AudioMixerGroup mixer = null,float volume = 1,float pitch = 1,bool loop = false, Collision ColideObject = null, float startLifeTime = 1, int emitCount = 1)
     {
         AudioClip clip = Resources.Load<AudioClip>(filepath);
 
@@ -72,16 +75,15 @@ public class AudioManager : MonoBehaviour
             Debug.LogError($"Could not load audio file '{filepath}'. Please make sure this exist audio");
             return null;
         }
-
-        return PlaySoundEffect(clip,mixer,volume,pitch,loop);
+        return PlaySoundEffect(clip,mixer,volume,pitch,loop,ColideObject);
     }
 
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false)
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, Collision ColideObject = null)
     {
         AudioSource effectSource = new GameObject(string.Format(SFX_NAME_FORMAT, clip.name)).AddComponent<AudioSource>();
 
         effectSource.transform.SetParent(sfxRoot);
-        effectSource.transform.position = sfxRoot.position;
+        effectSource.transform.position = ColideObject == null ? sfxRoot.position : ColideObject.contacts[0].point;
 
         effectSource.clip = clip;
 
@@ -92,7 +94,10 @@ public class AudioManager : MonoBehaviour
         effectSource.volume = volume;
         effectSource.spatialBlend = 0;
         effectSource.pitch = pitch;
-        effectSource.loop = loop;
+        effectSource.loop = loop;;
+
+        if(ColideObject != null) 
+            ThrowWave(ColideObject,clip.length, Mathf.Lerp(0.5f, 25f, volume), (int)Mathf.Lerp(1, 10, clip.length));
 
         effectSource.Play();
 
@@ -101,6 +106,7 @@ public class AudioManager : MonoBehaviour
 
         return effectSource;
     }
+
 
     public AudioSource PlayVoice(string filepath, float volume = 1, float pitch = 1, bool loop = false)
     {
@@ -186,5 +192,28 @@ public class AudioManager : MonoBehaviour
             return channel;
         }
         return null;
+    }
+
+
+
+    protected void ThrowWave(Collision collision, float startLifeTime = 1, float startSize = 1, int emitCount = 1)
+    {
+        ParticleSystem instance = Instantiate(waveParticle, collision.contacts[0].point, Quaternion.identity);
+        var main = instance.main;
+        main.startLifetime = startLifeTime;
+        main.startSize = startSize;
+        StartCoroutine(EmitWave(instance, emitCount));
+    }
+    protected IEnumerator EmitWave(ParticleSystem particle, int count)
+    {
+        while (count > 0)
+        {
+            if (particle)
+            {
+                count--;
+                particle.Emit(1);
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
