@@ -15,6 +15,6 @@ public class WaveThrow : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        audioManager.PlaySoundEffect(colideSound, volume:1, ColideObject: collision);
+        audioManager.PlaySoundEffect(colideSound, volume:1, minDistance:0.1f,maxDistance:17,ColideObject: collision);
     }
 }

@@ -18,7 +18,7 @@ public class PlayerScanerThrow : WaveThrow
         if (rb.velocity != Vector3.zero && curentStepTime < 0)
         {
             curentStepTime = stepTime;
-            audioManager.PlaySoundEffect(playerMoveSound, volume: 0.1f, ColideObject: collision);
+            audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f,minDistance:0.1f,maxDistance:5, ColideObject: collision);
         }
     }
 }
