@@ -267,30 +267,33 @@ public class AudioManager : MonoBehaviour
     protected IEnumerator EmitWave(ParticleSystem particle,AudioSource audioSource)
     {
         float[] spectrumData = new float[512];
-        var mainModule = particle.main;
-        while (audioSource.isPlaying)
+        if (particle)
         {
-            audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
-
-            float currentIntensity = 0f;
-            for (int i = 0; i < spectrumData.Length; i++)
+            var mainModule = particle.main;
+            while (audioSource.isPlaying)
             {
-                currentIntensity += spectrumData[i];
+                audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
+
+                float currentIntensity = 0f;
+                for (int i = 0; i < spectrumData.Length; i++)
+                {
+                    currentIntensity += spectrumData[i];
+                }
+
+                currentIntensity *= 100f;
+
+                float alpha = Mathf.Clamp01(currentIntensity);
+
+                Color startColor = new Color(1f, 1f, 1f, alpha);
+                mainModule.startColor = startColor;
+                mainModule.startSize = Mathf.Lerp(audioSource.minDistance, audioSource.maxDistance, currentIntensity);
+                var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
+                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(audioSource.maxDistance, audioSource.maxDistance, audioSource.maxDistance));
+
+                particle.Emit(1);
+
+                yield return new WaitForSeconds(0.1f);
             }
-
-            currentIntensity *= 100f; 
-
-            float alpha = Mathf.Clamp01(currentIntensity);
-
-            Color startColor = new Color(1f, 1f, 1f, alpha);
-            mainModule.startColor = startColor;
-            mainModule.startSize = Mathf.Lerp(audioSource.minDistance, audioSource.maxDistance, currentIntensity);
-            var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
-            psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(audioSource.maxDistance, audioSource.maxDistance, audioSource.maxDistance));
-
-            particle.Emit(1);
-
-            yield return new WaitForSeconds(0.1f);
         }
     }
 }
