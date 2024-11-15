@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ObjectHealth : MonoBehaviour
 {
-    [SerializeField] public float maxHealth = 100f;
-    public float currentHealth;
+    [SerializeField] private float maxHealth = 100f;
+    private float currentHealth;
 
     public static Action<float> OnHealthValueChange;
 
