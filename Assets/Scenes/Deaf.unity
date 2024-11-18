@@ -884,6 +884,8 @@ GameObject:
   - component: {fileID: 1012836040}
   - component: {fileID: 1012836041}
   - component: {fileID: 1012836042}
+  - component: {fileID: 1012836044}
+  - component: {fileID: 1012836043}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -959,6 +961,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: {x: 0.05, y: 0.05}
+--- !u!114 &1012836043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012836039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131f439a9376ea045a050e7d15043136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObject: {fileID: 1650506818}
+  animator: {fileID: 1012836044}
+  speedThreshold: 0
+--- !u!95 &1012836044
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012836039}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b1c90a27dff3084480b4afbff812b1b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1296168331
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +1010,6 @@ GameObject:
   - component: {fileID: 1296168332}
   - component: {fileID: 1296168335}
   - component: {fileID: 1296168336}
-  - component: {fileID: 1296168337}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1132,18 +1169,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &1296168337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296168331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11f1997bf112e148ae4242d8f6f4797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1370247501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,10 +1377,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a98c9d6820d8ab4f8c12c039e568647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveParticle: {fileID: 6698912603000144083, guid: feab6fe91acd3e4479442f1bb69f770d,
-    type: 3}
-  vel: {x: 0, y: 0, z: 0}
+  colideSound: {fileID: 0}
   stepTime: 0.5
+  playerMoveSound: {fileID: 0}
 --- !u!114 &1650506820
 MonoBehaviour:
   m_ObjectHideFlags: 0
