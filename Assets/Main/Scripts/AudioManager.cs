@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
 
@@ -13,8 +14,7 @@ public class AudioManager : MonoBehaviour
     private const string SFX_PARENT_NAME = "SFX";
     private const string SFX_NAME_FORMAT = "SFX - [{0}]";
 
-    public const float TRACK_TRANSITION_SPEED = 1f;
-    public static AudioManager instance { get; private set; }
+    public const float TRACK_TRANSITION_SPEED = 1f;    public static AudioManager instance { get; private set; }
 
     public Dictionary<int, AudioChannel> channels = new Dictionary<int, AudioChannel>();
 
@@ -48,12 +48,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlayAudioClip(AudioClip audioClip)
     {
-        PlaySoundEffect(audioClip);
+        PlaySoundEffect(audioClip,position:null);
     }
 
     public void PlayMusic(AudioClip audioClip)
     {
-        PlayTrack(audioClip);
+        PlayTrack(audioClip, pos:null);
     }
     public void StopMusic(AudioClip audioClip)
     {
@@ -104,10 +104,41 @@ public class AudioManager : MonoBehaviour
         effectSource.Play();
 
         if (ColideObject != null)
-            ThrowWave(ColideObject, clip.length, Mathf.Lerp(0.5f, 25f, volume), (int)Mathf.Lerp(1, 10, clip.length), effectSource);
+            ThrowWave(ColideObject, effectSource);
 
         if (!loop)
             Destroy(effectSource.gameObject,(clip.length / pitch) + 1);
+
+        return effectSource;
+    }
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Transform position = null)
+    {
+        AudioSource effectSource = new GameObject(string.Format(SFX_NAME_FORMAT, clip.name)).AddComponent<AudioSource>();
+
+        effectSource.transform.SetParent(sfxRoot);
+        effectSource.transform.position = position == null ? sfxRoot.position : position.position;
+
+        effectSource.clip = clip;
+
+        if (mixer == null)
+            mixer = sfxMixer;
+
+        effectSource.outputAudioMixerGroup = mixer;
+        effectSource.volume = volume;
+        effectSource.spatialBlend = 0;
+        effectSource.pitch = pitch;
+        effectSource.loop = loop;
+        effectSource.minDistance = minDistance;
+        effectSource.maxDistance = maxDistance;
+        effectSource.spatialBlend = 1;
+
+        effectSource.Play();
+
+        if (position != null)
+            ThrowWave(position, effectSource);
+
+        if (!loop)
+            Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
 
         return effectSource;
     }
@@ -119,7 +150,7 @@ public class AudioManager : MonoBehaviour
     }
     public AudioSource PlayVoice(AudioClip clip, float volume = 1, float pitch = 1, bool loop = false)
     {
-        return PlaySoundEffect(clip, voicesMixer, volume, pitch, loop);
+        return PlaySoundEffect(clip, voicesMixer, volume, pitch, loop,position:null);
     }
 
     public void StopSoundEffect(AudioClip clip) => StopSoundEffect(clip.name);
@@ -139,7 +170,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public AudioTrack PlayTrack(string filePath, int channel = 0, bool loop = true,float startingVolume = 0f,float volumeCap = 1f,float pitch = 1f)
+    public AudioTrack PlayTrack(string filePath, int channel = 0, bool loop = true,float startingVolume = 0f,float volumeCap = 1f,float pitch = 1f, float minDistance = 1, float maxDistance = 100, Collider collider = null)
     {
         AudioClip clip = Resources.Load<AudioClip>(filePath);
 
@@ -149,13 +180,75 @@ public class AudioManager : MonoBehaviour
             return null;
         }
 
-        return PlayTrack(clip, channel, loop, startingVolume, volumeCap,pitch, filePath);
+        return PlayTrack(clip, channel, loop, startingVolume, volumeCap,pitch, filePath,minDistance,maxDistance,collider);
+    }
+    public AudioTrack PlayTrack(string filePath, int channel = 0, bool loop = true, float startingVolume = 0f, float volumeCap = 1f, float pitch = 1f, float minDistance = 1, float maxDistance = 100, Transform pos = null)
+    {
+        AudioClip clip = Resources.Load<AudioClip>(filePath);
+
+        if (clip == null)
+        {
+            Debug.LogError($"Could not load audio file '{filePath}'. Please make sure this exists in the Resources directory");
+            return null;
+        }
+
+        return PlayTrack(clip, channel, loop, startingVolume, volumeCap, pitch, filePath, minDistance, maxDistance, pos);
     }
 
-    public AudioTrack PlayTrack(AudioClip clip, int channel = 0, bool loop = true, float startingVolume = 0f, float volumeCap = 1f,float pitch = 1f,string filePath = "")
+    public AudioTrack PlayTrack(AudioClip clip, int channel = 0, bool loop = true, float startingVolume = 0f, float volumeCap = 1f,float pitch = 1f,string filePath = "", float minDistance = 1, float maxDistance = 100, Collider collider = null)
     {
         AudioChannel audioChannel = TryGetChannel(channel, createIfNotExists:true);
         AudioTrack track = audioChannel.PlayTrack(clip, loop, startingVolume, volumeCap, pitch, filePath);
+
+        track.source.maxDistance = maxDistance;
+        track.source.minDistance = minDistance;
+
+        track.source.transform.SetParent(sfxRoot);
+        track.source.transform.position = sfxRoot.position;
+
+        track.source.clip = clip;
+        track.source.pitch = pitch;
+        track.source.loop = loop;
+        track.source.minDistance = minDistance;
+        track.source.maxDistance = maxDistance;
+        track.source.spatialBlend = 1;
+        track.source.transform.position = collider.transform.position;
+        track.source.transform.SetParent(collider.transform);
+        track.source.dopplerLevel = 0.1f;
+
+        if (collider != null)
+            ThrowWave(collider,track.source);
+
+        return track;
+    }
+
+    public AudioTrack PlayTrack(AudioClip clip, int channel = 0, bool loop = true, float startingVolume = 0f, float volumeCap = 1f, float pitch = 1f, string filePath = "", float minDistance = 1, float maxDistance = 100, Transform pos = null)
+    {
+        AudioChannel audioChannel = TryGetChannel(channel, createIfNotExists: true);
+        AudioTrack track = audioChannel.PlayTrack(clip, loop, startingVolume, volumeCap, pitch, filePath);
+
+        track.source.maxDistance = maxDistance;
+        track.source.minDistance = minDistance;
+
+        track.source.transform.SetParent(sfxRoot);
+        track.source.transform.position = sfxRoot.position;
+
+        track.source.clip = clip;
+        track.source.pitch = pitch;
+        track.source.loop = loop;
+        track.source.minDistance = minDistance;
+        track.source.maxDistance = maxDistance;
+        track.source.spatialBlend = 1;
+        track.source.dopplerLevel = 0.1f;
+
+        if (pos != null)
+        {
+            track.source.transform.position = pos.transform.position;
+            track.source.transform.SetParent(pos.transform);
+
+            ThrowWave(pos:pos, audioSource:track.source);
+        }
+
         return track;
     }
 
@@ -199,101 +292,104 @@ public class AudioManager : MonoBehaviour
         return null;
     }
 
-
-
-    protected void ThrowWave(Collision collision, float startLifeTime = 1, float startSize = 1, int emitCount = 1,AudioSource audioSource = null)
+    protected void ThrowWave(Collision collision,AudioSource audioSource = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, collision.contacts[0].point, Quaternion.identity);
         var main = instance.main;
-        main.startLifetime = startLifeTime;
-        main.startSize = startSize;
-        if(audioSource.loop) 
-            StartCoroutine(UpdateParticleBasedOnAudio(instance,audioSource, emitCount));
-        else
-        {
-            main.startLifetime = audioSource.clip.length;
-            main.startSize = audioSource.maxDistance;
-            StartCoroutine(EmitWave(instance,audioSource));
-        }
+
+        main.startLifetime = audioSource.clip.length;
+        main.startSize = audioSource.maxDistance;
+        StartCoroutine(EmitWave(instance, audioSource));
+
     }
-    protected IEnumerator UpdateParticleBasedOnAudio(ParticleSystem particle, AudioSource audioSource,int emitCount)
+    protected void ThrowWave(Transform pos, AudioSource audioSource = null)
     {
-        var main = particle.main;
-        float[] spectrumData = new float[512];
-        float previousIntensity = 0f;
-        float threshold = 0.1f;
-        float silenceThreshold = 0.01f;
-        float multiplier = 100f; 
-        float silenceTime = 0f;
+        ParticleSystem instance = Instantiate(waveParticle, pos.position, Quaternion.identity);
+        var main = instance.main;
 
-        while (audioSource.isPlaying)
-        {
-            audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
+        main.startLifetime = audioSource.clip.length;
+        main.startSize = audioSource.maxDistance;
+        StartCoroutine(EmitWave(instance, audioSource));
 
-            float currentIntensity = 0f;
-
-            for (int i = 0; i < spectrumData.Length; i++)
-            {
-                currentIntensity += spectrumData[i];
-            }
-            currentIntensity *= multiplier;
-
-            if (currentIntensity < silenceThreshold)
-            {
-                silenceTime += Time.deltaTime;
-            }
-            else
-            {
-                silenceTime = 0f;
-            }
-
-            if (Mathf.Abs(currentIntensity - previousIntensity) > threshold)
-            {
-                main.startSize = Mathf.Lerp(0.5f, 25f, currentIntensity);
-                main.startLifetime = Mathf.Lerp(0.5f, 5f, currentIntensity);
-                particle.Emit(1);
-            }
-
-            if (silenceTime > 0.5f)
-            {
-                silenceTime = 0f; 
-            }
-
-            previousIntensity = currentIntensity;
-
-            yield return null;
-        }
     }
-    protected IEnumerator EmitWave(ParticleSystem particle,AudioSource audioSource)
+    protected void ThrowWave(Collider collider, AudioSource audioSource = null)
     {
-        float[] spectrumData = new float[512];
+        ParticleSystem instance = Instantiate(waveParticle, collider.transform.position, Quaternion.identity);
+        var main = instance.main;
+        instance.transform.SetParent(collider.transform);
+
+        StartCoroutine(EmitWave(instance, audioSource));
+    }
+    protected IEnumerator EmitWave(ParticleSystem particle, AudioSource audioSource)
+    {
+        const int spectrumSize = 512;
+        float[] spectrumData = new float[spectrumSize];
         if (particle)
         {
             var mainModule = particle.main;
+            float previousIntensity = 0f;
+            var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
+            particle.transform.SetParent(audioSource.transform);
+            particle.transform.position = audioSource.transform.position;
+
+            if (audioSource.name == Microphone.devices[0].ToString())
+            {
+                audioSource.mute = true;
+            }
+
             while (audioSource.isPlaying)
             {
-                audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
-
-                float currentIntensity = 0f;
-                for (int i = 0; i < spectrumData.Length; i++)
+                if (particle == null)
                 {
-                    currentIntensity += spectrumData[i];
+                    break;
                 }
 
-                currentIntensity *= 100f;
 
-                float alpha = Mathf.Clamp01(currentIntensity);
+                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(audioSource.maxDistance, audioSource.maxDistance, audioSource.maxDistance) * 2);
+                audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
 
-                Color startColor = new Color(1f, 1f, 1f, alpha);
-                mainModule.startColor = startColor;
-                mainModule.startSize = Mathf.Lerp(audioSource.minDistance, audioSource.maxDistance, currentIntensity);
-                var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
-                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(audioSource.maxDistance, audioSource.maxDistance, audioSource.maxDistance));
+                float bassIntensity = CalculateBassIntensity(spectrumData,128);
 
-                particle.Emit(1);
 
-                yield return new WaitForSeconds(0.1f);
+                float alpha = Mathf.Clamp01(bassIntensity * 10f);
+                mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
+                mainModule.startSize = Mathf.Lerp(0.1f, 5f, alpha);
+
+                if (bassIntensity > previousIntensity * 1.2f)
+                {
+                    if (audioSource.loop)
+                    {
+                        mainModule.startLifetime = audioSource.maxDistance / 5;
+                        mainModule.startSize = audioSource.maxDistance * 2;
+                    }
+                    particle.Emit(1);
+                }
+
+                previousIntensity = bassIntensity;
+                if (!audioSource.loop)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
+                else
+                {
+                    mainModule.stopAction = ParticleSystemStopAction.None;
+                    yield return null;
+                }
             }
         }
     }
+
+    private unsafe float CalculateBassIntensity(float[] spectrumData, int length)
+    {
+        float bassIntensity = 0f;
+        fixed (float* spectrumPtr = spectrumData)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                bassIntensity += *(spectrumPtr + i);
+            }
+        }
+        return bassIntensity;
+    }
+
 }

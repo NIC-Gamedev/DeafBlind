@@ -23,7 +23,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void InputInit()
     {
-        inputActions = new MainController();
+        inputActions = InputManager.inputActions;
         inputActions.Player.Look.Enable();
         inputActions.Player.Look.performed += RotateCamera;
     }

@@ -71,6 +71,15 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d27b463-0437-4618-a20a-76ad1a69ed6c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,17 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""action"": ""Sneak"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5025f71-d68e-44dc-a72b-bcb024f2e984"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -290,6 +310,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Sneak = m_Player.FindAction("Sneak", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -356,6 +377,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Sneak;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @MainController m_Wrapper;
@@ -365,6 +387,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Sneak => m_Wrapper.m_Player_Sneak;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -389,6 +412,9 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Sneak.started += instance.OnSneak;
             @Sneak.performed += instance.OnSneak;
             @Sneak.canceled += instance.OnSneak;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -408,6 +434,9 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Sneak.started -= instance.OnSneak;
             @Sneak.performed -= instance.OnSneak;
             @Sneak.canceled -= instance.OnSneak;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -441,5 +470,6 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
