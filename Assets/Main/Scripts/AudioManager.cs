@@ -1,12 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
 
 public class AudioManager : MonoBehaviour
@@ -97,14 +92,17 @@ public class AudioManager : MonoBehaviour
         effectSource.spatialBlend = 0;
         effectSource.pitch = pitch;
         effectSource.loop = loop;
-        effectSource.minDistance = minDistance;
-        effectSource.maxDistance = maxDistance;
-        effectSource.spatialBlend = 1;
+
 
         effectSource.Play();
 
         if (ColideObject != null)
+        {
+            effectSource.minDistance = minDistance;
+            effectSource.maxDistance = maxDistance;
+            effectSource.spatialBlend = 1;
             ThrowWave(ColideObject, effectSource);
+        }
 
         if (!loop)
             Destroy(effectSource.gameObject,(clip.length / pitch) + 1);
@@ -128,14 +126,16 @@ public class AudioManager : MonoBehaviour
         effectSource.spatialBlend = 0;
         effectSource.pitch = pitch;
         effectSource.loop = loop;
-        effectSource.minDistance = minDistance;
-        effectSource.maxDistance = maxDistance;
-        effectSource.spatialBlend = 1;
 
         effectSource.Play();
 
         if (position != null)
+        {
+            effectSource.spatialBlend = 1;
+            effectSource.minDistance = minDistance;
+            effectSource.maxDistance = maxDistance;
             ThrowWave(position, effectSource);
+        }
 
         if (!loop)
             Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
@@ -209,15 +209,17 @@ public class AudioManager : MonoBehaviour
         track.source.clip = clip;
         track.source.pitch = pitch;
         track.source.loop = loop;
-        track.source.minDistance = minDistance;
-        track.source.maxDistance = maxDistance;
-        track.source.spatialBlend = 1;
-        track.source.transform.position = collider.transform.position;
-        track.source.transform.SetParent(collider.transform);
-        track.source.dopplerLevel = 0.1f;
 
         if (collider != null)
-            ThrowWave(collider,track.source);
+        {
+            track.source.minDistance = minDistance;
+            track.source.maxDistance = maxDistance;
+            track.source.spatialBlend = 1;
+            track.source.transform.position = collider.transform.position;
+            track.source.transform.SetParent(collider.transform);
+            track.source.dopplerLevel = 0.1f;
+            ThrowWave(collider, track.source);
+        }
 
         return track;
     }
@@ -236,15 +238,15 @@ public class AudioManager : MonoBehaviour
         track.source.clip = clip;
         track.source.pitch = pitch;
         track.source.loop = loop;
-        track.source.minDistance = minDistance;
-        track.source.maxDistance = maxDistance;
-        track.source.spatialBlend = 1;
-        track.source.dopplerLevel = 0.1f;
 
         if (pos != null)
         {
             track.source.transform.position = pos.transform.position;
             track.source.transform.SetParent(pos.transform);
+            track.source.minDistance = minDistance;
+            track.source.maxDistance = maxDistance;
+            track.source.spatialBlend = 1;
+            track.source.dopplerLevel = 0.1f;
 
             ThrowWave(pos:pos, audioSource:track.source);
         }
@@ -324,6 +326,11 @@ public class AudioManager : MonoBehaviour
     {
         const int spectrumSize = 512;
         float[] spectrumData = new float[spectrumSize];
+        if (audioSource.clip.name == "Microphone")
+        {
+            audioSource.outputAudioMixerGroup = voicesMixer;
+            voicesMixer.audioMixer.SetFloat("VoiceVol",-80);
+        }
         if (particle)
         {
             var mainModule = particle.main;
@@ -337,13 +344,12 @@ public class AudioManager : MonoBehaviour
                 audioSource.mute = true;
             }
 
-            while (audioSource.isPlaying)
+            while (audioSource.isPlaying || audioSource.loop)
             {
                 if (particle == null)
                 {
                     break;
                 }
-
 
                 psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(audioSource.maxDistance, audioSource.maxDistance, audioSource.maxDistance) * 2);
                 audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
