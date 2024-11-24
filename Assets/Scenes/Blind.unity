@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20928885}
   - component: {fileID: 20928886}
+  - component: {fileID: 20928887}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -167,7 +168,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe489b164b9241442b150b0ec3ee5eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicMixer: {fileID: 24300002, guid: 1df8a043b2f1d59478e33e21bf6688f4, type: 2}
+  musicMixer: {fileID: 450339259675818600, guid: 1df8a043b2f1d59478e33e21bf6688f4,
+    type: 2}
+  sfxMixer: {fileID: -4545405240886437856, guid: 1df8a043b2f1d59478e33e21bf6688f4,
+    type: 2}
+  voicesMixer: {fileID: 8686102384530287300, guid: 1df8a043b2f1d59478e33e21bf6688f4,
+    type: 2}
+--- !u!114 &20928887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20928884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582201119f8eca94ca5941917c188a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMixer: {fileID: 450339259675818600, guid: 1df8a043b2f1d59478e33e21bf6688f4,
+    type: 2}
   sfxMixer: {fileID: -4545405240886437856, guid: 1df8a043b2f1d59478e33e21bf6688f4,
     type: 2}
   voicesMixer: {fileID: 8686102384530287300, guid: 1df8a043b2f1d59478e33e21bf6688f4,
@@ -14603,7 +14623,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 20928886}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: PlayAudioClip
+        m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: f6af9a30303650c49a810bed312987d4,

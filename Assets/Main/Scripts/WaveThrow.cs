@@ -16,7 +16,7 @@ public class WaveThrow : MonoBehaviour
 
     [SerializeField] protected float minDistance;
     [SerializeField] protected float maxDistance;
-    protected AudioManager audioManager => AudioManager.instance;
+    protected PhysicalAudioManager audioManager => PhysicalAudioManager.instance;
 
     protected virtual void Start()
     {

@@ -12,7 +12,7 @@ public class PlayerVoice : MonoBehaviour
         {
             if(Microphone.devices.Length > 0)
             {
-                var audioTrack = AudioManager.instance.PlaySoundEffect(Microphone.Start(Microphone.devices[0].ToString(),true,1,AudioSettings.outputSampleRate),loop:true,minDistance:5,maxDistance:10,position:transform);
+                var audioTrack = PhysicalAudioManager.instance.PlayVoice(Microphone.Start(Microphone.devices[0].ToString(),true,1,AudioSettings.outputSampleRate),loop:true,minDistance:5,maxDistance:10,transform:transform);
                 audioTrack.transform.position = transform.position;
                 audioTrack.transform.SetParent(transform);
             }

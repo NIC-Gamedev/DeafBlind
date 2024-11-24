@@ -6,6 +6,6 @@ public class JustMusicThrower : MonoBehaviour
     public Collider collider2;
     private void Start()
     {
-        AudioManager.instance.PlayTrack(AudioClip,volumeCap:0.5f, collider:collider2,minDistance:2, maxDistance: 20);
+        PhysicalAudioManager.instance.PlayMusic(AudioClip, volume: 0.5f, pos:transform,minDistance:2, maxDistance: 20);
     }
 }
