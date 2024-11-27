@@ -14,6 +14,8 @@ public class PlayerCamera : MonoBehaviour
 
     private MainController inputActions;
 
+    [SerializeField] private Transform body;
+
     void Start()
     {
         Cursor.visible = false;
@@ -35,7 +37,7 @@ public class PlayerCamera : MonoBehaviour
         cameraRotation.x -= mouseAxis.y;
         cameraRotation.x = Mathf.Clamp(cameraRotation.x, -90f, 90f);
         transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
-        transform.parent.rotation = Quaternion.Euler(0, cameraRotation.y, 0);
+        body.rotation = Quaternion.Euler(0, cameraRotation.y, 0);
     }
 
     private void OnDestroy()

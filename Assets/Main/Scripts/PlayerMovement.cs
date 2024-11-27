@@ -19,16 +19,20 @@ public class PlayerMovement : MovementBase
     private bool isSneak;
     [Header("Jumping")]
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform groundCheacker;
     [SerializeField] private float radius;
+
+    public bool isSprinting { get; private set; }
 
     private Action OnStaminaEnd;
     protected override void Awake()
     {
         base.Awake();
-        InputInit();
         currentStaminaTime = maxStaminaTime;
         currentWaitTimeBeforeStaminaRecover = waitTimeBeforeStaminaRecover;
+    }
+    private void Start()
+    {
+        InputInit();
     }
 
 
@@ -57,16 +61,16 @@ public class PlayerMovement : MovementBase
     protected override void Movement()
     {
         Vector3 direction = transform.forward * input.z + transform.right * input.x;
-        bool isSprinting = inputActions.Player.Sprint.IsPressed();
+        bool sprintInput = inputActions.Player.Sprint.IsPressed();
 
-        if (!isSprinting)
+        if (!sprintInput)
         {
             StaminaRecover();
         }
 
         if (direction != Vector3.zero)
         {
-            if (isSprinting)
+            if (sprintInput)
             {
                 currentWaitTimeBeforeStaminaRecover = waitTimeBeforeStaminaRecover;
                 currentStaminaTime -= Time.deltaTime;
@@ -77,7 +81,8 @@ public class PlayerMovement : MovementBase
                 }
             }
 
-            float speedMultiplier = isSprinting ? sprintMultiplier : 1f;
+            float speedMultiplier = sprintInput ? sprintMultiplier : 1f;
+            isSprinting = speedMultiplier != 1; 
             float speedDevider = isSneak ? sneakingDevider : 1f;
             rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider, ForceMode.Force);
 
@@ -109,7 +114,6 @@ public class PlayerMovement : MovementBase
 
     private void Jump(InputAction.CallbackContext callback)
     {
-        Collider[] ground = Physics.OverlapSphere(groundCheacker.position, radius, groundLayer);
         if (IsOnGround())
                 rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
     }
@@ -147,7 +151,7 @@ public class PlayerMovement : MovementBase
     }
 
 
-    protected virtual bool IsOnGround(out Collider[] collider)
+    public virtual bool IsOnGround(out Collider[] collider)
     {
         Collider[] ground = Physics.OverlapSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius, groundLayer);
         collider = ground;
@@ -156,7 +160,7 @@ public class PlayerMovement : MovementBase
 
         return false;
     }
-    protected virtual bool IsOnGround()
+    public virtual bool IsOnGround()
     {
         Collider[] ground = Physics.OverlapSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius, groundLayer);
         if (ground.Length > 0)
