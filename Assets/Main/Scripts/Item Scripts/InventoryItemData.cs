@@ -11,4 +11,14 @@ public class InventoryItemData : ScriptableObject
     public string Description;
     public Sprite Icon;
     public int MaxStackSize;
+    public GameObject ItemPrefab;
+    public List<ItemField> Fields = new List<ItemField>();
+
+}
+[System.Serializable]
+public class ItemField
+{
+    public string FieldName; // Название поля
+    public string FieldType; // Тип поля (например, "int", "float", "bool")
+    public string FieldValue; // Значение поля в виде строки
 }

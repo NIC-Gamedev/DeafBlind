@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0c4e3f5e196ad84cbef2ad2ebe7c428, type: 3}
-  m_Name: Test Item 1
+  m_Name: Ball
   m_EditorClassIdentifier: 
-  ID: 0
-  DisplayName: Test Item 1
-  Description: This is a test item.
+  ID: 1
+  DisplayName: Ball
+  Description: Gumseed(ball)
   Icon: {fileID: 0}
   MaxStackSize: 1
+  ItemPrefab: {fileID: 2292133878925493012, guid: 9a7ca584d2e1bb54b84d87d5aa023c45,
+    type: 3}
+  Fields: []
