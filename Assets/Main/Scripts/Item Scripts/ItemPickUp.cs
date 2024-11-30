@@ -32,6 +32,7 @@ public class ItemPickUp : MonoBehaviour
     private bool playerInRange = false;
     private InventoryHolder playerInventory;
     public InventoryItemData ItemData;
+    private float pickUpRadius = 10;
     private void OnTriggerEnter(Collider other)
     {
         var inventory = other.transform.GetComponent<InventoryHolder>();
@@ -65,5 +66,11 @@ public class ItemPickUp : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    private void Start()
+    {
+        gameObject.GetComponent<SphereCollider>().radius = pickUpRadius;
+        gameObject.GetComponent<SphereCollider>().isTrigger = true;
     }
 }

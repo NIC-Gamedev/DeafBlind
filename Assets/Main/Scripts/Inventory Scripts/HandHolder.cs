@@ -11,6 +11,7 @@ public class HandHolder : MonoBehaviour
     public InventorySlot activeSlot; // The currently selected inventory slot
     public GameObject currentItemObject; // The current item in hand
 
+    
     private void Update()
     {
         HandleInput();
@@ -49,6 +50,10 @@ public class HandHolder : MonoBehaviour
         if (activeSlot != null && activeSlot.ItemData != null && activeSlot.ItemData.ItemPrefab != null)
         {
             currentItemObject = Instantiate(activeSlot.ItemData.ItemPrefab, dropPoint.position, dropPoint.rotation, dropPoint);
+            currentItemObject.GetComponent<Rigidbody>().useGravity = false;
+            currentItemObject.GetComponent<Rigidbody>().isKinematic = true;
+            currentItemObject.GetComponent<ItemPickUp>().enabled = false;
+            currentItemObject.GetComponent<CapsuleCollider>().enabled = false;
         }
     }
 

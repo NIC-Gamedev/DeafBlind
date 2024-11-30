@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c4e3f5e196ad84cbef2ad2ebe7c428, type: 3}
+  m_Name: Can
+  m_EditorClassIdentifier: 
+  ID: 2
+  DisplayName: Can
+  Description: Soda can
+  Icon: {fileID: 0}
+  MaxStackSize: 5
+  ItemPrefab: {fileID: 853460040208800107, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+    type: 3}
+  Fields: []
