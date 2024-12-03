@@ -17,6 +17,7 @@ MonoBehaviour:
   Description: Soda can
   Icon: {fileID: 0}
   MaxStackSize: 5
+  isUsable: 1
   ItemPrefab: {fileID: 853460040208800107, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
     type: 3}
   Fields: []
