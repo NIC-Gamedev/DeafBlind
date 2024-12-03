@@ -80,6 +80,51 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectItem1"",
+                    ""type"": ""Button"",
+                    ""id"": ""4bf17d07-a794-4520-9341-5843bce1852f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectItem2"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a5b4781-419d-4c56-a35c-ec3e2010cdc9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectItem3"",
+                    ""type"": ""Button"",
+                    ""id"": ""24d08f6d-33ce-496b-bb97-393ab8ecd3e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""08151e53-e6fa-4331-8426-cccc44347d54"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ffa78cd-081b-44db-9088-a42861dd1e9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,6 +336,72 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d8ba05c-93c2-4533-8c83-cf95c2096c1d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectItem1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0637dbf0-8951-4e2f-a5b2-98a18556eff9"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectItem2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7839828-3d95-49c7-885e-908d6d904528"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectItem3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""086a36dc-bc35-4d82-a553-3f4d14ac6249"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc91d6c4-14b3-4518-b8aa-17325fd030da"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d31c0ef-ce04-4561-b30f-ec09f6758062"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -311,6 +422,11 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Sneak = m_Player.FindAction("Sneak", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_SelectItem1 = m_Player.FindAction("SelectItem1", throwIfNotFound: true);
+        m_Player_SelectItem2 = m_Player.FindAction("SelectItem2", throwIfNotFound: true);
+        m_Player_SelectItem3 = m_Player.FindAction("SelectItem3", throwIfNotFound: true);
+        m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -378,6 +494,11 @@ public partial class @MainController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Sneak;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_SelectItem1;
+    private readonly InputAction m_Player_SelectItem2;
+    private readonly InputAction m_Player_SelectItem3;
+    private readonly InputAction m_Player_DropItem;
+    private readonly InputAction m_Player_UseItem;
     public struct PlayerActions
     {
         private @MainController m_Wrapper;
@@ -388,6 +509,11 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Sneak => m_Wrapper.m_Player_Sneak;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @SelectItem1 => m_Wrapper.m_Player_SelectItem1;
+        public InputAction @SelectItem2 => m_Wrapper.m_Player_SelectItem2;
+        public InputAction @SelectItem3 => m_Wrapper.m_Player_SelectItem3;
+        public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -415,6 +541,21 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @SelectItem1.started += instance.OnSelectItem1;
+            @SelectItem1.performed += instance.OnSelectItem1;
+            @SelectItem1.canceled += instance.OnSelectItem1;
+            @SelectItem2.started += instance.OnSelectItem2;
+            @SelectItem2.performed += instance.OnSelectItem2;
+            @SelectItem2.canceled += instance.OnSelectItem2;
+            @SelectItem3.started += instance.OnSelectItem3;
+            @SelectItem3.performed += instance.OnSelectItem3;
+            @SelectItem3.canceled += instance.OnSelectItem3;
+            @DropItem.started += instance.OnDropItem;
+            @DropItem.performed += instance.OnDropItem;
+            @DropItem.canceled += instance.OnDropItem;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -437,6 +578,21 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @SelectItem1.started -= instance.OnSelectItem1;
+            @SelectItem1.performed -= instance.OnSelectItem1;
+            @SelectItem1.canceled -= instance.OnSelectItem1;
+            @SelectItem2.started -= instance.OnSelectItem2;
+            @SelectItem2.performed -= instance.OnSelectItem2;
+            @SelectItem2.canceled -= instance.OnSelectItem2;
+            @SelectItem3.started -= instance.OnSelectItem3;
+            @SelectItem3.performed -= instance.OnSelectItem3;
+            @SelectItem3.canceled -= instance.OnSelectItem3;
+            @DropItem.started -= instance.OnDropItem;
+            @DropItem.performed -= instance.OnDropItem;
+            @DropItem.canceled -= instance.OnDropItem;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -471,5 +627,10 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSelectItem1(InputAction.CallbackContext context);
+        void OnSelectItem2(InputAction.CallbackContext context);
+        void OnSelectItem3(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }
