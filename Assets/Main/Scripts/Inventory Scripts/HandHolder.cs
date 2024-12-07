@@ -87,6 +87,8 @@ public class HandHolder : MonoBehaviour
         currentItemObject.GetComponent<Rigidbody>().isKinematic = true;
         currentItemObject.GetComponent<ItemPickUp>().enabled = false;
         currentItemObject.GetComponent<CapsuleCollider>().isTrigger = true;
+        currentItemObject.GetComponent<SphereCollider>().isTrigger = true;
+
     }
     private void DropItem()
     {
