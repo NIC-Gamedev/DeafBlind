@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Medkit
   m_EditorClassIdentifier: 
   ID: 3
-  DisplayName: 
-  Description: 
+  DisplayName: Medkit
+  Description: Medkit
   Icon: {fileID: 0}
   MaxStackSize: 1
   isUsable: 1
-  ItemPrefab: {fileID: 0}
+  ItemPrefab: {fileID: 8123028166904197507, guid: 79476d7f0edc93747b9a4e34e11f5748,
+    type: 3}
   Fields: []
