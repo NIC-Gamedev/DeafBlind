@@ -16,10 +16,12 @@ public class PlayerMovement : MovementBase
     private float currentWaitTimeBeforeStaminaRecover;
 
     [SerializeField] private float sneakingDevider;
-    private bool isSneak;
+    public bool isSneak { get; private set; }
     [Header("Jumping")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float radius;
+
+    private Vector3 colliderBottom => col.bounds.center - new Vector3(0, col.bounds.extents.y, 0);
 
     public bool isSprinting { get; private set; }
 
@@ -139,7 +141,7 @@ public class PlayerMovement : MovementBase
     private void OnDrawGizmos()
     {
         if(col) 
-            Gizmos.DrawWireSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius);
+            Gizmos.DrawWireSphere(colliderBottom, radius);
     }
 
     private void OnDestroy()
@@ -153,7 +155,7 @@ public class PlayerMovement : MovementBase
 
     public virtual bool IsOnGround(out Collider[] collider)
     {
-        Collider[] ground = Physics.OverlapSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius, groundLayer);
+        Collider[] ground = Physics.OverlapSphere(colliderBottom, radius, groundLayer);
         collider = ground;
         if (ground.Length > 0)
             return true;
@@ -162,7 +164,7 @@ public class PlayerMovement : MovementBase
     }
     public virtual bool IsOnGround()
     {
-        Collider[] ground = Physics.OverlapSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius, groundLayer);
+        Collider[] ground = Physics.OverlapSphere(colliderBottom, radius, groundLayer);
         if (ground.Length > 0)
             return true;
 

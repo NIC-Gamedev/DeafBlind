@@ -14,6 +14,17 @@ public class PlayerScanerThrow : WaveThrow
     [Range(0, 1)][SerializeField] protected float stepPitchRandomMax = 0;
 
     private Vector3 direction;
+
+    private Vector3 colliderBottom => col.bounds.center - new Vector3(0, col.bounds.extents.y, 0);
+    private Collider _col;
+    private Collider col { get { 
+            if (_col == null) 
+            { 
+                _col = GetComponent<Collider>();
+            }
+            return _col;
+        } 
+    }
     protected override void Start()
     {
         base.Start();
@@ -23,13 +34,18 @@ public class PlayerScanerThrow : WaveThrow
     }
     protected void OnCollisionStay(Collision collision)
     {
-        curentStepTime -= Time.deltaTime;  
+        curentStepTime -= Time.deltaTime;
         if (isMove() && curentStepTime < 0)
         {
             curentStepTime = stepTime;
-            audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f,minDistance:0.1f,maxDistance:5, ColideObject: collision);
+            audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, ColideObject: collision);
         }
     }
+
+/*    public void ThrowWave()
+    {
+        audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5,pos: colliderBottom);
+    }*/
      
     public bool isMove()
     {
