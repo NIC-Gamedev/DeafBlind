@@ -53,14 +53,13 @@ public class HandHolder : MonoBehaviour
         {
 
             usableComponent.Use();
+
             // Remove the item from the inventory
-            activeSlot.RemoveFromStack(1);
+            if (activeSlot.ItemData.isOneUse)  activeSlot.RemoveFromStack(1);
 
             // If the stack size reaches 0, clear the slot
-            if (activeSlot.StackSize <= 0)
-            {
-                activeSlot.ClearSlot();
-            }
+            if (activeSlot.StackSize <= 0) activeSlot.ClearSlot();
+            
             UpdateHandItem();
         }
         else
@@ -87,7 +86,7 @@ public class HandHolder : MonoBehaviour
         currentItemObject.GetComponent<Rigidbody>().isKinematic = true;
         currentItemObject.GetComponent<ItemPickUp>().enabled = false;
         currentItemObject.GetComponent<CapsuleCollider>().isTrigger = true;
-        currentItemObject.GetComponent<SphereCollider>().isTrigger = true;
+        currentItemObject.GetComponent<SphereCollider>().enabled = false;
 
     }
     private void DropItem()
