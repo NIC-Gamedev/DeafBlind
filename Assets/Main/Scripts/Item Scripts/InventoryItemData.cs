@@ -11,6 +11,9 @@ public class InventoryItemData : ScriptableObject
     public string Description;
     public Sprite Icon;
     public int MaxStackSize;
+    public bool isUsable;
+    public bool isQuestItem;
+    public bool isOneUse;
     public GameObject ItemPrefab;
     public List<ItemField> Fields = new List<ItemField>();
 

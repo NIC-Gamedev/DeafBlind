@@ -23,7 +23,10 @@ public class HandHolder : MonoBehaviour
         {
             DropItem();
         }
-
+        if (Input.GetKeyDown(KeyCode.Mouse1)) // Press 'E' to use the current item
+        {
+            UseItem();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectItem(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SelectItem(1);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SelectItem(2);
@@ -39,7 +42,31 @@ public class HandHolder : MonoBehaviour
         activeSlot = slot;
         UpdateHandItem();
     }
+    private void UseItem()
+    {
+        if (activeSlot == null || activeSlot.ItemData == null) return;
 
+        if (currentItemObject == null) return;
+
+        IUsable usableComponent = currentItemObject.GetComponent<IUsable>();
+        if (usableComponent != null)
+        {
+
+            usableComponent.Use();
+
+            // Remove the item from the inventory
+            if (activeSlot.ItemData.isOneUse)  activeSlot.RemoveFromStack(1);
+
+            // If the stack size reaches 0, clear the slot
+            if (activeSlot.StackSize <= 0) activeSlot.ClearSlot();
+            
+            UpdateHandItem();
+        }
+        else
+        {
+            Debug.Log("This item cannot be used.");
+        }
+    }
     private void UpdateHandItem()
     {
         if (currentItemObject != null)
@@ -50,13 +77,18 @@ public class HandHolder : MonoBehaviour
         if (activeSlot != null && activeSlot.ItemData != null && activeSlot.ItemData.ItemPrefab != null)
         {
             currentItemObject = Instantiate(activeSlot.ItemData.ItemPrefab, dropPoint.position, dropPoint.rotation, dropPoint);
-            currentItemObject.GetComponent<Rigidbody>().useGravity = false;
-            currentItemObject.GetComponent<Rigidbody>().isKinematic = true;
-            currentItemObject.GetComponent<ItemPickUp>().enabled = false;
-            currentItemObject.GetComponent<CapsuleCollider>().enabled = false;
+            TurnOffItem();
         }
     }
+    private void TurnOffItem()
+    {
+        currentItemObject.GetComponent<Rigidbody>().useGravity = false;
+        currentItemObject.GetComponent<Rigidbody>().isKinematic = true;
+        currentItemObject.GetComponent<ItemPickUp>().enabled = false;
+        currentItemObject.GetComponent<CapsuleCollider>().isTrigger = true;
+        currentItemObject.GetComponent<SphereCollider>().enabled = false;
 
+    }
     private void DropItem()
     {
         if (activeSlot == null || activeSlot.ItemData == null) return;
