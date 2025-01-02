@@ -5,14 +5,13 @@ public class ChaseState : MonoBehaviour, IAIState
     private GameObject target; // Цель для преследования
     private EnemyMovement enemyMovement; // Ссылка на компонент EnemyMovement
     private float stopDistance = 2f; // Расстояние, на котором враг остановится перед целью
-
+    private EnemyPerception enemyPerception;
     // Метод входа в состояние, принимает объект цели
+    
     public void EnterState(GameObject owner)
     {
-       //Its a chase so theres no need for a normal enter state , we need one with chase target
-    }
-    public void EnterState(GameObject owner, GameObject chaseTarget)
-    {
+        enemyPerception = gameObject.GetComponent<EnemyPerception>();
+        GameObject chaseTarget = enemyPerception.lastSeenTarget;
         enemyMovement = owner.GetComponent<EnemyMovement>();
 
         if (chaseTarget != null)
