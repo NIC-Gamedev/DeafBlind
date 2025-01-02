@@ -1,19 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : MonoBehaviour
+public class PatrolState : MonoBehaviour, IAIState
 {
-    [SerializeField] private float waypointThreshold = 1f; // Минимальное расстояние до точки для её достижения
-    private List<Transform> patrolWaypoints; // Список точек патрулирования
-    private int currentWaypointIndex = 0; // Индекс текущей точки патруля
-    [SerializeField]private EnemyMovement enemyMovement; // Ссылка на компонент движения врага
+    [SerializeField] private float waypointThreshold = 1f; // Минимальное расстояние до точки
+    private List<Transform> patrolWaypoints; // Список точек патруля
+    private int currentWaypointIndex = 0; // Индекс текущей точки
+    private EnemyMovement enemyMovement; // Ссылка на EnemyMovement
 
-    void Awake()
+    public void EnterState(GameObject owner)
     {
-        // Получаем ссылки на необходимые компоненты
-        enemyMovement = GetComponent<EnemyMovement>();
+        enemyMovement = owner.GetComponent<EnemyMovement>();
 
-        // Собираем все объекты с тегом PatrolWaypoints
+        // Собираем точки патруля
         GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("PatrolWaypoints");
         patrolWaypoints = new List<Transform>();
         foreach (GameObject waypoint in waypointObjects)
@@ -21,36 +20,35 @@ public class PatrolState : MonoBehaviour
             patrolWaypoints.Add(waypoint.transform);
         }
 
-        if (patrolWaypoints.Count == 0)
+        if (patrolWaypoints.Count > 0)
+        {
+            SetNextWaypoint();
+        }
+        else
         {
             Debug.LogWarning("Нет точек патрулирования с тегом 'PatrolWaypoints'.");
         }
     }
 
-    void OnEnable()
+    public void UpdateState()
     {
-        // Устанавливаем первую точку патруля
-        if (patrolWaypoints.Count > 0)
-        {
-            SetNextWaypoint();
-        }
-    }
+        if (patrolWaypoints == null || patrolWaypoints.Count == 0) return;
 
-    void Update()
-    {
-        if (patrolWaypoints.Count == 0) return;
-
-        // Проверяем, достиг ли враг текущей точки
-        float distanceToWaypoint = Vector3.Distance(transform.position, patrolWaypoints[currentWaypointIndex].position);
+        // Проверяем расстояние до текущей точки
+        float distanceToWaypoint = Vector3.Distance(enemyMovement.transform.position, patrolWaypoints[currentWaypointIndex].position);
         if (distanceToWaypoint <= waypointThreshold)
         {
             SetNextWaypoint();
         }
     }
 
+    public void ExitState()
+    {
+        // Можно добавить логику очистки, если требуется
+    }
+
     private void SetNextWaypoint()
     {
-        // Устанавливаем следующую точку патруля
         currentWaypointIndex = (currentWaypointIndex + 1) % patrolWaypoints.Count;
         enemyMovement.SetTarget(patrolWaypoints[currentWaypointIndex].gameObject);
     }
