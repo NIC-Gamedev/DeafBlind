@@ -25,6 +25,11 @@ public class ChaseState : MonoBehaviour, IAIState
         }
     }
 
+    public string GetStateName()
+    {
+        return "Chase";
+    }
+
     public void UpdateState()
     {
         if (target == null || enemyMovement == null) return;

@@ -30,6 +30,10 @@ public class PatrolState : MonoBehaviour, IAIState
         }
     }
 
+    public string GetStateName()
+    {
+        return "Patrol";
+    }
     public void UpdateState()
     {
         if (patrolWaypoints == null || patrolWaypoints.Count == 0) return;

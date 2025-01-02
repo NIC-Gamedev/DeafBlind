@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    private IAIState currentState; // Текущее состояние
-
+    [SerializeField] private IAIState currentState; // Текущее состояние
+    public string statea;
     public void SetState(IAIState newState)
     {
         if (currentState != null)
@@ -14,7 +15,7 @@ public class StateController : MonoBehaviour
         }
 
         currentState = newState; // Назначаем новое состояние
-
+        statea = newState.GetStateName();
         if (currentState != null)
         {
             currentState.EnterState(gameObject); // Активируем новое состояние

@@ -7,7 +7,7 @@ public interface IAIState
 
     // Метод, вызываемый каждый кадр
     void UpdateState();
-
+    string GetStateName();
     // Метод, вызываемый при выходе из состояния
     void ExitState();
 }
