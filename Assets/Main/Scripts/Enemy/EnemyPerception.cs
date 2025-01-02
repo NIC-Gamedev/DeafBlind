@@ -4,76 +4,76 @@ using UnityEngine;
 
 public class EnemyPerception : MonoBehaviour
 {
-    [SerializeField] private float detectionRadius = 10f; // Радиус обнаружения
-    [SerializeField] private float fieldOfViewAngle = 360f; // Угол поля зрения
-    [SerializeField] private LayerMask targetLayer; // Маска слоя для целей (например, игрок)
+    [SerializeField] private float visionRange = 10f; // Радиус зрения
+    [SerializeField] private float visionAngle = 90f; // Угол зрения (половина поля зрения)
+    [SerializeField] private LayerMask detectableLayers; // Слои для обнаружения объектов
 
-    private StateController stateController; // Ссылка на контроллер состояний
-    private Transform player; // Ссылка на игрока
-    private bool playerInSight = false; // Флаг, показывающий, что игрок в поле зрения
+    private List<GameObject> visibleObjects = new List<GameObject>(); // Список объектов в поле зрения
 
-    private void Awake()
+    // Метод для получения всех объектов в поле зрения
+    public List<GameObject> GetVisibleObjects()
     {
-        stateController = GetComponent<StateController>();
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        visibleObjects.Clear(); // Очищаем список перед каждым обновлением
+        Collider[] hits = Physics.OverlapSphere(transform.position, visionRange, detectableLayers); // Проверяем объекты в радиусе зрения
+
+        foreach (Collider hit in hits)
+        {
+            if (hit != null && IsInVisionAngle(hit.transform) && HasLineOfSight(hit))
+            {
+                visibleObjects.Add(hit.gameObject); // Добавляем объект в список видимых
+            }
+        }
+
+        return visibleObjects;
+    }
+
+    private bool IsInVisionAngle(Transform target)
+    {
+        Vector3 directionToTarget = (target.position - transform.position).normalized;
+        float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+        return angleToTarget <= visionAngle; // Проверяем, в поле зрения ли объект
+    }
+
+    private bool HasLineOfSight(Collider target)
+    {
+        Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
+        if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, visionRange, detectableLayers))
+        {
+            return hit.collider == target; // Проверяем, нет ли преграды на пути
+        }
+        return false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Рисуем радиус и угол зрения для визуализации
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, visionRange);
+
+        Vector3 leftBoundary = Quaternion.Euler(0, -visionAngle, 0) * transform.forward * visionRange;
+        Vector3 rightBoundary = Quaternion.Euler(0, visionAngle, 0) * transform.forward * visionRange;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
+        Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
     }
 
     private void Update()
     {
-        if (player == null) return;
+        // Получаем и выводим список объектов в поле зрения
+        List<GameObject> currentlyVisibleObjects = GetVisibleObjects();
 
-        // Проверяем, видит ли враг игрока
-        CheckPlayerSight();
-
-        // Если игрок в поле зрения, переключаемся на ChaseState
-        if (playerInSight)
+        if (currentlyVisibleObjects.Count > 0)
         {
-            if (stateController.GetCurrentState() is not ChaseState)
+            Debug.Log($"Объекты в поле зрения ({currentlyVisibleObjects.Count}):");
+            foreach (GameObject obj in currentlyVisibleObjects)
             {
-                stateController.SetState(new ChaseState()); // Переход в состояние преследования
+                Debug.Log($"- {obj.name} (Тег: {obj.tag})");
             }
         }
         else
         {
-            if (stateController.GetCurrentState() is not PatrolState)
-            {
-                stateController.SetState(new PatrolState()); // Переход в состояние патрулирования
-            }
+            Debug.Log("Никаких объектов в поле зрения.");
         }
-
-        stateController.UpdateController(); // Обновляем контроллер состояний
-    }
-
-    // Проверка, видит ли враг игрока
-    private void CheckPlayerSight()
-    {
-        Vector3 directionToPlayer = player.position - transform.position;
-        float distanceToPlayer = directionToPlayer.magnitude;
-
-        // Если игрок слишком далеко, не видим его
-        if (distanceToPlayer > detectionRadius)
-        {
-            playerInSight = false;
-            return;
-        }
-
-        // Проверяем, попадает ли игрок в угол поля зрения
-        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
-
-        if (angleToPlayer < fieldOfViewAngle / 2f)
-        {
-            // Проверяем, не блокирует ли что-то между врагом и игроком (лучевая проверка)
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit, detectionRadius, targetLayer))
-            {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    playerInSight = true; // Игрок видим
-                    return;
-                }
-            }
-        }
-
-        playerInSight = false; // Игрок не в поле зрения
     }
 }
