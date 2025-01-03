@@ -11,7 +11,7 @@ public class ChaseState : MonoBehaviour, IAIState
     public void EnterState(GameObject owner)
     {
         enemyPerception = gameObject.GetComponent<EnemyPerception>();
-        GameObject chaseTarget = enemyPerception.lastSeenTarget;
+        GameObject chaseTarget = enemyPerception.enemy;
         enemyMovement = owner.GetComponent<EnemyMovement>();
 
         if (chaseTarget != null)

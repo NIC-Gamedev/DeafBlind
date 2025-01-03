@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyPerception : MonoBehaviour
 {
@@ -10,10 +10,15 @@ public class EnemyPerception : MonoBehaviour
 
     [Header("Отладка")]
     [SerializeField] private List<GameObject> visibleObjects = new List<GameObject>(); // Список объектов в поле зрения (видимый в инспекторе)
+    public GameObject enemy;
+    // Ссылка на StateController для смены состояний
+    private StateController stateController;
 
-    private StateController stateController; // Ссылка на контроллер состояний
-
-    public GameObject lastSeenTarget; // Последняя видимая цель
+    private void Start()
+    {
+        // Получаем ссылку на StateController
+        stateController = GetComponent<StateController>();
+    }
 
     // Метод для получения всех объектов в поле зрения
     public List<GameObject> GetVisibleObjects()
@@ -21,31 +26,18 @@ public class EnemyPerception : MonoBehaviour
         visibleObjects.Clear(); // Очищаем список перед каждым обновлением
         Collider[] hits = Physics.OverlapSphere(transform.position, visionRange, detectableLayers); // Проверяем объекты в радиусе зрения
 
-        GameObject currentTarget = null; // Текущая цель
-
         foreach (Collider hit in hits)
         {
             if (hit != null && IsInVisionAngle(hit.transform) && HasLineOfSight(hit))
             {
                 visibleObjects.Add(hit.gameObject); // Добавляем объект в список видимых
-
-                // Если объект видим, устанавливаем его как текущую цель
-                currentTarget = hit.gameObject;
-
-                // Если цели нет, меняем состояние на Chase
-                if (stateController != null && lastSeenTarget != currentTarget)
+                enemy = hit.gameObject;
+                // Переключаем состояние на Chase, если видим объект
+                if (stateController != null)
                 {
-                    lastSeenTarget = currentTarget;
-                    stateController.SetState<ChaseState>(); // Переключаем состояние на Chase
+                    stateController.SetState<ChaseState>(); // Переключаемся на Chase состояние
                 }
             }
-        }
-
-        // Если текущая цель исчезла, возвращаемся к патрулированию
-        if (currentTarget == null && lastSeenTarget != null)
-        {
-            stateController.SetState<PatrolState>(); // Переключаем состояние на Patrol
-            lastSeenTarget = null; // Сбрасываем последнюю цель
         }
 
         return visibleObjects;
@@ -68,12 +60,6 @@ public class EnemyPerception : MonoBehaviour
         return false;
     }
 
-    private void Awake()
-    {
-        // Получаем ссылку на StateController
-        stateController = GetComponent<StateController>();
-    }
-
     private void OnDrawGizmosSelected()
     {
         // Рисуем радиус и угол зрения для визуализации
@@ -94,3 +80,4 @@ public class EnemyPerception : MonoBehaviour
         GetVisibleObjects();
     }
 }
+  

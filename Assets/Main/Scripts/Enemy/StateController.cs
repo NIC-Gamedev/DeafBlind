@@ -1,39 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    [SerializeField] private IAIState currentState; // Текущее состояние
-    public string statea;
+    private IAIState currentState; // Текущее состояние
+    public string Stato;
+    private void Start()
+    {
+        // Устанавливаем начальное состояние
+        SetState<PatrolState>(); // Пример начального состояния
+    }
 
-    // Обновленный обобщенный метод для установки состояния
+    private void Update()
+    {
+        // Обновляем текущее состояние каждый кадр
+        currentState?.UpdateState();
+    }
+
     public void SetState<T>() where T : MonoBehaviour, IAIState
     {
-        // Удаляем старое состояние, если оно есть
+        // Если текущее состояние не null, удаляем его
         if (currentState != null)
         {
-            currentState.ExitState(); // Завершаем текущее состояние
-            Destroy(currentState as MonoBehaviour); // Удаляем компонент
+            currentState.ExitState(); // Вызываем выход из состояния
+            Destroy(currentState as MonoBehaviour); // Удаляем компонент состояния
         }
 
-        // Добавляем новый компонент состояния
-        currentState = gameObject.AddComponent<T>() as IAIState;
-
-        // Устанавливаем имя состояния
-        statea = currentState.GetStateName();
-
-        // Входим в новое состояние
-        currentState?.EnterState(gameObject);
+        // Добавляем новое состояние как компонент
+        currentState = gameObject.AddComponent<T>(); // Добавляем новый компонент состояния
+        Stato = currentState.GetStateName();
+        currentState.EnterState(gameObject); // Активируем состояние
     }
 
     public IAIState GetCurrentState()
     {
         return currentState; // Возвращаем текущее состояние
-    }
-
-    public void UpdateController()
-    {
-        currentState?.UpdateState(); // Обновляем логику текущего состояния
     }
 }
