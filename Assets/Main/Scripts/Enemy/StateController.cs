@@ -7,7 +7,6 @@ public class StateController : MonoBehaviour
     private void Start()
     {
         // Устанавливаем начальное состояние
-        SetState<PatrolState>(); // Пример начального состояния
     }
 
     private void Update()

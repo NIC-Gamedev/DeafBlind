@@ -38,8 +38,12 @@ public class EnemyPerception : MonoBehaviour
                     stateController.SetState<ChaseState>(); // Переключаемся на Chase состояние
                 }
             }
+            
         }
-
+        if (visibleObjects.Count <= 0)
+        {
+            stateController.SetState<PatrolState>(); // Пример начального состояния
+        }
         return visibleObjects;
     }
 
