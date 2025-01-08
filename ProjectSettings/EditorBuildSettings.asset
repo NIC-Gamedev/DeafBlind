@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Blind.unity
     guid: fe55ed9f49aa0de4db7e3258558842c0
+  - enabled: 1
+    path: Assets/Scenes/Deaf.unity
+    guid: cba24d05ce9a447499215a2a194ffa55
   m_configObjects: {}

@@ -126,6 +126,37 @@ public class PhysicalAudioManager : MonoBehaviour
 
         return effectSource;
     }
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Vector3 pos = default)
+    {
+        if (pos == null)
+        {
+            Debug.LogError("Null reference in Physical sound, please add collision");
+            return null;
+        }
+        AudioSource effectSource = new GameObject(string.Format(SFX_NAME_FORMAT, clip.name)).AddComponent<AudioSource>();
+
+        effectSource.transform.position = pos;
+        effectSource.clip = clip;
+        if (mixer == null)
+            mixer = sfxMixer;
+        effectSource.outputAudioMixerGroup = mixer;
+        effectSource.volume = volume;
+        effectSource.spatialBlend = 0;
+        effectSource.pitch = pitch;
+        effectSource.loop = loop;
+        effectSource.minDistance = minDistance;
+        effectSource.maxDistance = maxDistance;
+        effectSource.spatialBlend = 1;
+
+        effectSource.Play();
+
+        ThrowWave(pos, effectSource);
+
+        if (!loop)
+            Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
+
+        return effectSource;
+    }
 
     public AudioSource PlayVoice(AudioClip clip, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 0, float maxDistance = 10, Transform transform = null)
     {
@@ -191,7 +222,7 @@ public class PhysicalAudioManager : MonoBehaviour
             musics.Remove(transform.gameObject);
         }
 
-        ThrowWave(pos: pos, audioSource: source);
+        ThrowWave(transform: pos, audioSource: source);
 
         return source;
     }
@@ -213,9 +244,17 @@ public class PhysicalAudioManager : MonoBehaviour
         StartCoroutine(EmitWave(instance, audioSource));
 
     }
-    protected void ThrowWave(Transform pos, AudioSource audioSource = null)
+    protected void ThrowWave(Transform transform, AudioSource audioSource = null)
     {
-        ParticleSystem instance = Instantiate(waveParticle, pos.position, Quaternion.identity);
+        ParticleSystem instance = Instantiate(waveParticle, transform.position, Quaternion.identity);
+        var main = instance.main;
+        main.startLifetime = audioSource.clip.length;
+        main.startSize = audioSource.maxDistance;
+        StartCoroutine(EmitWave(instance, audioSource));
+    }
+    protected void ThrowWave(Vector3 pos, AudioSource audioSource = null)
+    {
+        ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
         var main = instance.main;
         main.startLifetime = audioSource.clip.length;
         main.startSize = audioSource.maxDistance;
