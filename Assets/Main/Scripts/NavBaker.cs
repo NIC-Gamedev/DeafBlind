@@ -12,17 +12,16 @@ public class NavBaker : MonoBehaviour
     void Start()
     {
         NavisMesh = GetComponent<NavMeshSurface>();
-        NavisMesh.BuildNavMesh();
+
         StartCoroutine(NavMeshUpdate());
 
     }
 
     IEnumerator NavMeshUpdate()
     {
-        var data = NavisMesh.navMeshData;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
-        NavisMesh.UpdateNavMesh(data);
+        NavisMesh.BuildNavMesh();
     }
 
     // Update is called once per frame
