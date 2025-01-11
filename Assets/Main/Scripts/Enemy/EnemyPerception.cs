@@ -10,7 +10,6 @@ public class EnemyPerception : MonoBehaviour
 
     [Header("Отладка")]
     [SerializeField] private List<GameObject> visibleObjects = new List<GameObject>(); // Список объектов в поле зрения (видимый в инспекторе)
-    public GameObject enemy;
     // Ссылка на StateController для смены состояний
     private StateController stateController;
 
@@ -23,26 +22,15 @@ public class EnemyPerception : MonoBehaviour
     // Метод для получения всех объектов в поле зрения
     public List<GameObject> GetVisibleObjects()
     {
-        visibleObjects.Clear(); // Очищаем список перед каждым обновлением
+        visibleObjects.Clear();
         Collider[] hits = Physics.OverlapSphere(transform.position, visionRange, detectableLayers); // Проверяем объекты в радиусе зрения
 
         foreach (Collider hit in hits)
         {
             if (hit != null && IsInVisionAngle(hit.transform) && HasLineOfSight(hit))
             {
-                visibleObjects.Add(hit.gameObject); // Добавляем объект в список видимых
-                enemy = hit.gameObject;
-                // Переключаем состояние на Chase, если видим объект
-                if (stateController != null)
-                {
-                    stateController.SetState<ChaseState>(); // Переключаемся на Chase состояние
-                }
-            }
-            
-        }
-        if (visibleObjects.Count <= 0)
-        {
-            stateController.SetState<PatrolState>(); // Пример начального состояния
+                visibleObjects.Add(hit.gameObject);
+            }  
         }
         return visibleObjects;
     }
@@ -57,14 +45,15 @@ public class EnemyPerception : MonoBehaviour
     private bool HasLineOfSight(Collider target)
     {
         Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
-        if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, visionRange, detectableLayers))
+
+        if (Physics.Raycast(transform.position + Vector3.up, directionToTarget, out RaycastHit hit, visionRange, ~(1 << gameObject.layer)))
         {
-            return hit.collider == target; // Проверяем, нет ли преграды на пути
+            return hit.collider == target;
         }
         return false;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         // Рисуем радиус и угол зрения для визуализации
         Gizmos.color = Color.yellow;
@@ -76,12 +65,6 @@ public class EnemyPerception : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
-    }
-
-    private void Update()
-    {
-        // Обновляем список объектов в поле зрения
-        GetVisibleObjects();
     }
 }
   

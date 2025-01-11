@@ -12,15 +12,13 @@ public class EnemyMovement : MonoBehaviour
     private NavMeshAgent agent; // NavMeshAgent для управления движением
     private Rigidbody rb;
 
-    [SerializeField] private GameObject target;
-    private Vector3 targetPosition; // Текущая цель движения
-    private bool hasTarget = false; // Флаг наличия цели
+    [SerializeField] private Transform target;
+    public Vector3 targetPosition { private set; get; } // Текущая цель движения
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-       
         // Настроить параметры NavMeshAgent
         agent.speed = movementSpeed;
         agent.angularSpeed = rotationSpeed * 10f; // NavMeshAgent использует градусы/сек
@@ -31,10 +29,9 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        targetPosition = target.GetComponent<Transform>().position;
-        // Если есть цель, передать её NavMeshAgent
-        if (hasTarget)
+        if (target)
         {
+            targetPosition = target.transform.position;
             agent.SetDestination(targetPosition);
 
             // Получаем желаемое направление от NavMeshAgent
@@ -42,6 +39,19 @@ public class EnemyMovement : MonoBehaviour
 
             // Передаем направление в метод движения
             MoveUsingRigidbody(direction);
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
+    }
+    public void MoveInDirection(Vector3 direction)
+    {
+        if (agent.enabled)
+        {
+            agent.SetDestination(transform.position + direction.normalized);
+            Vector3 directionAgent = agent.desiredVelocity;
+            MoveUsingRigidbody(directionAgent);
         }
     }
 
@@ -76,12 +86,8 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // Публичный метод для установки цели извне
-    public void SetTarget(GameObject targetObject)
+    public void SetTarget(Transform targetObject)
     {
         target = targetObject;
-        targetPosition = target.GetComponent<Transform>().position;
-        hasTarget = true; // Устанавливаем флаг наличия цели
     }
-
-
 }
