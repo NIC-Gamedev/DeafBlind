@@ -46,7 +46,7 @@ public class EnemyPerception : MonoBehaviour
     {
         Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
 
-        if (Physics.Raycast(transform.position + Vector3.up, directionToTarget, out RaycastHit hit, visionRange, ~(1 << gameObject.layer)))
+        if (Physics.Raycast(transform.position + Vector3.up/3, directionToTarget, out RaycastHit hit, visionRange, ~(1 << gameObject.layer)))
         {
             return hit.collider == target;
         }

@@ -40,7 +40,7 @@ public class PsychoPatrolState : MonoBehaviour, IAIState
 
     public string GetStateName()
     {
-        return "Searching";
+        return "Patrol";
     }
 
     public void UpdateState()

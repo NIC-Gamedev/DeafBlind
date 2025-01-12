@@ -5,21 +5,42 @@ using UnityEngine.InputSystem;
 
 public class PlayerAnimation : BaseAnimator
 {
-    private MainController inputActions;
+    private MainController inputActions => InputManager.inputActions;
     private Vector3 input;
-    private PlayerMovement playerMovement;
-    private Rigidbody rb;
+    private PlayerMovement _playerMovement;
+    private PlayerMovement playerMovement {
+        get 
+        { 
+            if (_playerMovement == null) 
+            {
+                _playerMovement = GetComponent<PlayerMovement>();
+            }
+            return _playerMovement;
+        }
+        set { }
+    }
+    private Rigidbody _rb; 
+    private Rigidbody rb 
+    {
+        get
+        {
+            if (_rb == null)
+            {
+                _rb = GetComponent<Rigidbody>();
+            }
+            return _rb;
+        }
+        set
+        { }
+    }
     private List<ChainedAnimation> chainedAnimations = new List<ChainedAnimation>();
     private bool isJumpStart;
 
     protected override void Start()
     {
         base.Start();
-        inputActions = InputManager.inputActions;
         inputActions.Player.Movement.performed += callback => input = callback.ReadValue<Vector3>();
         inputActions.Player.Movement.canceled += callback => input = callback.ReadValue<Vector3>();
-        playerMovement = GetComponent<PlayerMovement>();
-        rb = GetComponent<Rigidbody>();
         InitAnimation();
     }
 

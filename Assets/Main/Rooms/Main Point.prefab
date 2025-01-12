@@ -456,6 +456,7 @@ Transform:
   m_Children:
   - {fileID: 1761473363001722733}
   - {fileID: 7453224487236243734}
+  - {fileID: 6563613884540126182}
   - {fileID: 7552472366996684334}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -737,7 +738,6 @@ Transform:
   - {fileID: 5782914003800721736}
   - {fileID: 2288481696228457210}
   - {fileID: 5943156535969385095}
-  - {fileID: 6563613884540126182}
   m_Father: {fileID: 7768012712902386479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3540383714551342571
@@ -971,6 +971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6563613884540126182}
+  - component: {fileID: 5528782364931825121}
   m_Layer: 0
   m_Name: Waypoints
   m_TagString: Untagged
@@ -986,9 +987,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3732984786187709949}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 153253297068487295}
@@ -998,8 +999,20 @@ Transform:
   - {fileID: 5930648094525922714}
   - {fileID: 3205346673194502578}
   - {fileID: 7276351681150880557}
-  m_Father: {fileID: 7552472366996684334}
+  m_Father: {fileID: 7768012712902386479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5528782364931825121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3732984786187709949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80d585bdf4f7c6428e11faa59671aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3922663959010066228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,11 +2443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8554481982107911886, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6563613884540126182}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 535668998454777752, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
         type: 3}

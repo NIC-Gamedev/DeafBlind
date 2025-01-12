@@ -2488,7 +2488,7 @@ GameObject:
   - component: {fileID: 7965721582127475362}
   - component: {fileID: 3472422021859410945}
   - component: {fileID: 5979120603203166597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Deaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}

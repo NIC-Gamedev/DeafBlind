@@ -36,14 +36,14 @@ public class PsychoIdleState : MonoBehaviour,IAIState
 
     private int randomWayIndex;
 
-    private TestCheckpointManager checkpointManager => TestCheckpointManager.instance;
+    private MapManager mapManager => ServiceLocator.instance.Get<MapManager>();
 
     public void EnterState(StateController owner)
     {
         enemyMovement.SetTarget(null);
         timer = idleTime;
         controller = owner;
-        randomWayIndex = Random.Range(0, checkpointManager.points.Length);
+        randomWayIndex = Random.Range(0, mapManager.mapData.allWayPoints.Count);
     }
     public void ExitState()
     {
@@ -59,7 +59,7 @@ public class PsychoIdleState : MonoBehaviour,IAIState
         timer -= Time.deltaTime;
         if( timer < 0)
         {
-            enemyMovement.SetTarget(checkpointManager.points[randomWayIndex]);
+            enemyMovement.SetTarget(ServiceLocator.instance.Get<MapManager>().mapData.allWayPoints[randomWayIndex]);
             controller.SetState<PsychoPatrolState>();
         }
 
