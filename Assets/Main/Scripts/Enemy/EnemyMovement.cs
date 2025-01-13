@@ -6,15 +6,15 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float movementSpeed = 5f; // Настройка скорости движения врага
+    [SerializeField] private float movementSpeed = 5f; 
+    [SerializeField] public float movementSpeedMultiplier = 1;
     [SerializeField] private float rotationSpeed = 10f; // Настройка скорости поворота врага
 
     private NavMeshAgent agent; // NavMeshAgent для управления движением
     private Rigidbody rb;
 
-    [SerializeField] private Transform target;
+    [SerializeField] public Transform target;
     public Vector3 targetPosition { private set; get; } // Текущая цель движения
-
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -60,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
         if (direction != Vector3.zero)
         {
             // Добавление силы для движения
-            rb.AddForce(direction.normalized * movementSpeed * 10f, ForceMode.Force);
+            rb.AddForce(direction.normalized * movementSpeed * 10f * movementSpeedMultiplier, ForceMode.Force);
 
             // Ограничение скорости
             Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);

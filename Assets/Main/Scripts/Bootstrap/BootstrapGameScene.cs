@@ -29,9 +29,14 @@ public class BootstrapGameScene : MonoBehaviour
         OnLevelGeneratorComplete += InitAfterGenerateComplete;
         levelGenerator.Generate(OnLevelGeneratorComplete);
     }
-
     private void InitAfterGenerateComplete()
     {
+        StartCoroutine(InitAfterGenerateCompleteIE());
+    }
+
+    private IEnumerator InitAfterGenerateCompleteIE()
+    {
+        yield return new WaitForEndOfFrame(); 
         navBaker.Initialize();
         mapManager.Initialize(levelGenerator);
         enemySpawner.Initialize(mapManager.mapData);

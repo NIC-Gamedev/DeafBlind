@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour,IService
 {
-    public MapData mapData;
+   [SerializeField] public MapData mapData;
 
     public void Initialize(LevelGenerator3D levelGenerator)
     {

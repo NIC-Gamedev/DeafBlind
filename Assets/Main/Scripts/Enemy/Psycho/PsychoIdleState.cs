@@ -40,7 +40,6 @@ public class PsychoIdleState : MonoBehaviour,IAIState
 
     public void EnterState(StateController owner)
     {
-        enemyMovement.SetTarget(null);
         timer = idleTime;
         controller = owner;
         randomWayIndex = Random.Range(0, mapManager.mapData.allWayPoints.Count);
@@ -60,6 +59,8 @@ public class PsychoIdleState : MonoBehaviour,IAIState
         if( timer < 0)
         {
             enemyMovement.SetTarget(ServiceLocator.instance.Get<MapManager>().mapData.allWayPoints[randomWayIndex]);
+            Debug.Log(ServiceLocator.instance.Get<MapManager>().mapData.allWayPoints[randomWayIndex]);
+            Debug.Log(enemyMovement.target);
             controller.SetState<PsychoPatrolState>();
         }
 

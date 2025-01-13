@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    private IAIState currentState;
+    public IAIState currentState { get; private set; }
     public string stateName;
 
-    private Dictionary<System.Type, IAIState> states = new Dictionary<System.Type, IAIState>();
+    public Dictionary<System.Type, IAIState> states = new Dictionary<System.Type, IAIState>();
     private void Start()
     {
         GetStates();

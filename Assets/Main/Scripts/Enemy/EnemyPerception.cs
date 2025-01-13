@@ -13,6 +13,8 @@ public class EnemyPerception : MonoBehaviour
     // Ссылка на StateController для смены состояний
     private StateController stateController;
 
+    private float viewAngle => Camera.main.fieldOfView * 1.5f;
+
     private void Start()
     {
         // Получаем ссылку на StateController
@@ -46,11 +48,29 @@ public class EnemyPerception : MonoBehaviour
     {
         Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
 
-        if (Physics.Raycast(transform.position + Vector3.up/3, directionToTarget, out RaycastHit hit, visionRange, ~(1 << gameObject.layer)))
+        if (Physics.Raycast(transform.position + Vector3.up/3, directionToTarget, out RaycastHit hit, visionRange, ~(1 << gameObject.layer))) //Побитовое вычесление маски, нужнл что бы она брала все слои кроме одно
         {
             return hit.collider == target;
         }
         return false;
+    }
+    public bool IsPlayerLookingAtMe(Transform player)
+    {
+        Vector3 directionToEnemy = (transform.position - player.position).normalized;
+
+        float angle = Vector3.Angle(player.forward, directionToEnemy);
+        if (angle > viewAngle / 2f)
+            return false;
+
+        float distanceToEnemy = Vector3.Distance(player.position, transform.position);
+        if (distanceToEnemy > visionRange)
+            return false;
+
+        if (Physics.Raycast(player.position, directionToEnemy, distanceToEnemy, ~(1 << gameObject.layer)))
+        {
+            return false;
+        }
+        return true;
     }
 
     private void OnDrawGizmos()

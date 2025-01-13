@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PsychoChaseState : MonoBehaviour, IAIState
 {
@@ -30,9 +31,9 @@ public class PsychoChaseState : MonoBehaviour, IAIState
 
     [SerializeField] private float _reactionTime;
     [SerializeField] private float _chaseTime;
-    private float reactionTime;
+    public float reactionTime;
     private float chaseTime;
-
+    public bool isPlayeLook;
 
     private StateController controller;
     public void EnterState(StateController owner)
@@ -45,7 +46,9 @@ public class PsychoChaseState : MonoBehaviour, IAIState
 
     public void ExitState()
     {
+        enemyMovement.movementSpeedMultiplier = 1;
         enemyMovement.SetTarget(null);
+        chaseTime = _chaseTime;
     }
 
     public string GetStateName()
@@ -58,13 +61,16 @@ public class PsychoChaseState : MonoBehaviour, IAIState
         if (reactionTime < 0)
         {
             var visibleObject = enemyPerception.GetVisibleObjects();
+            distance = float.MaxValue;
             foreach (var item in visibleObject)
             {
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
+                isPlayeLook = enemyPerception.IsPlayerLookingAtMe(item.transform);
                 if (distance > currentDistance)
                 {
                     distance = currentDistance;
-                    enemyMovement.SetTarget(item.transform);
+                    enemyMovement.SetTarget(isPlayeLook == false ? item.transform : null);
+                    enemyMovement.movementSpeedMultiplier = 1.5f;
                 }
             }
             if (visibleObject.Count == 0)

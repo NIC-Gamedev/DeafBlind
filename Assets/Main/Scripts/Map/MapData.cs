@@ -2,18 +2,19 @@ using Kartograph.Entities;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class MapData
 {
     private LevelGenerator3D levelGenerator;
     public SectionData[] sectionsData;
     public Section[] section;
-    public List<Transform> allWayPoints { get; private set;}
+    public List<Transform> allWayPoints;
     public MapData(LevelGenerator3D levelGenerator) 
     {
         this.levelGenerator = levelGenerator;
         section = levelGenerator.transform.GetComponentsInChildren<Section>();
         sectionsData = new SectionData[section.Length];
-
+        Debug.Log(levelGenerator.transform.childCount);
         for (int i = 0; i < sectionsData.Length; i++)
         {
             sectionsData[i] = new SectionData(section[i], i);
@@ -27,6 +28,15 @@ public class MapData
             }
         }
     }
+/*    
+    public Section[] GetSections()
+    {
+        List<Section> sections = new List<Section>();
+        for (int i = 0; i < levelGenerator.transform.childCount; i++)
+        {
+            levelGenerator.transform.GetChild()
+        }
+    }*/
 
     public class SectionData
     {
