@@ -552,16 +552,20 @@ MonoBehaviour:
   randomizeSeed: 1
   seed: 0
   sectionContainer: {fileID: 0}
-  maxLevelSize: 100
-  maxAllowedOrder: 10
+  maxLevelSize: 110
+  maxAllowedOrder: 20
   sectionPrefabs:
-  - {fileID: 5954002734793261067, guid: 4379c6334cf680645925e32bbb914dce, type: 3}
+  - {fileID: 5954002734793261067, guid: c3406029602040b429166829e1fe5699, type: 3}
   - {fileID: 6966684711659230585, guid: 6693e98487c8820478fcc312089f7dad, type: 3}
+  - {fileID: 6966684711659230585, guid: 7d0f578bbc9829344bfe68fcb2714dee, type: 3}
   endPrefabs:
   - {fileID: 8062183743418883365, guid: 55e54d17baccfc747a4786ed8d99053e, type: 3}
   initialSectionTags:
   - room
-  specialRules: []
+  specialRules:
+  - Tag: vent
+    MinAmount: 5
+    MaxAmount: 5
 --- !u!4 &1803113088
 Transform:
   m_ObjectHideFlags: 0
