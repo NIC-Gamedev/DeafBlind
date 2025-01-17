@@ -15,6 +15,8 @@ public class EnemyPerception : MonoBehaviour
 
     private float viewAngle => Camera.main.fieldOfView * 1.5f;
 
+    public Vector3 playerLastSeenPos;
+
     private void Start()
     {
         // Получаем ссылку на StateController

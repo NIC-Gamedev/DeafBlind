@@ -41,10 +41,9 @@ public class PlayerAnimation : BaseAnimator
         base.Start();
         inputActions.Player.Movement.performed += callback => input = callback.ReadValue<Vector3>();
         inputActions.Player.Movement.canceled += callback => input = callback.ReadValue<Vector3>();
-        InitAnimation();
     }
 
-    private void InitAnimation()
+    protected override void InitAnimation()
     {
         animationHash.Add("Idle", Animator.StringToHash("Idle"));
 
@@ -99,6 +98,9 @@ public class PlayerAnimation : BaseAnimator
 
     private int PlayerMoveAnimation(bool isSprint,bool isSit)
     {
+        if (isSit)
+            return animationHash[""];
+
         return animationHash[$"{(isSprint ? "Run" : "Walk")}{input}"];
     }
 

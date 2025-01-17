@@ -27,6 +27,19 @@ public class PsychoPatrolState : MonoBehaviour, IAIState
             return _enemyMovement;
         }
     }
+
+    private PsychoAudioListener _audioListener;
+    private PsychoAudioListener audioListener
+    {
+        get
+        {
+            if (_audioListener == null)
+            {
+                _audioListener = GetComponent<PsychoAudioListener>();
+            }
+            return _audioListener;
+        }
+    }
     private StateController controller;
 
     public void EnterState(StateController owner)
@@ -45,9 +58,17 @@ public class PsychoPatrolState : MonoBehaviour, IAIState
 
     public void UpdateState()
     {
+        if(audioListener.lastHearAudio != null)
+        {
+            enemyMovement.SetTarget(audioListener.lastHearAudio);
+        }
         var distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.z) , new Vector2(enemyMovement.targetPosition.x, enemyMovement.targetPosition.z));
         if (distance < 0.2)
         {
+            if (audioListener.lastHearAudio == enemyMovement.target)
+            {
+                Destroy(audioListener.lastHearAudio.gameObject);
+            }
             controller.SetState<PsychoIdleState>();
         }
 

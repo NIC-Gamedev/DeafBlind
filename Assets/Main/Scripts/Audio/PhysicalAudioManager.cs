@@ -21,6 +21,8 @@ public class PhysicalAudioManager : MonoBehaviour
 
     [SerializeField] protected ParticleSystem waveParticle;
 
+    public LayerMask audioListenerLayer;
+
     private Transform sfxRoot;
 
     private void Awake()
@@ -306,6 +308,17 @@ public class PhysicalAudioManager : MonoBehaviour
                     {
                         mainModule.startLifetime = audioSource.maxDistance / 5;
                         mainModule.startSize = audioSource.maxDistance * 2;
+                    }
+                    var audioSourceColiders = Physics.OverlapSphere(audioSource.transform.position, audioSource.maxDistance, audioListenerLayer);
+                    if (audioSourceColiders != null)
+                    {
+                        foreach (var item in audioSourceColiders)
+                        {
+                            if (item.TryGetComponent(out IListenAudio listenerAudio))
+                            {
+                                listenerAudio.OnListenAudio(audioSource.transform.position);
+                            }
+                        }
                     }
                     particle.Emit(1);
                 }

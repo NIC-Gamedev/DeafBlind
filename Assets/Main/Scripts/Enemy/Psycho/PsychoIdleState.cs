@@ -42,6 +42,7 @@ public class PsychoIdleState : MonoBehaviour,IAIState
     {
         timer = idleTime;
         controller = owner;
+        enemyMovement.SetTarget(null);
         randomWayIndex = Random.Range(0, mapManager.mapData.allWayPoints.Count);
     }
     public void ExitState()
@@ -59,8 +60,6 @@ public class PsychoIdleState : MonoBehaviour,IAIState
         if( timer < 0)
         {
             enemyMovement.SetTarget(ServiceLocator.instance.Get<MapManager>().mapData.allWayPoints[randomWayIndex]);
-            Debug.Log(ServiceLocator.instance.Get<MapManager>().mapData.allWayPoints[randomWayIndex]);
-            Debug.Log(enemyMovement.target);
             controller.SetState<PsychoPatrolState>();
         }
 

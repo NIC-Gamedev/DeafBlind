@@ -59,10 +59,8 @@ public class EnemyMovement : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
-            // Добавление силы для движения
             rb.AddForce(direction.normalized * movementSpeed * 10f * movementSpeedMultiplier, ForceMode.Force);
 
-            // Ограничение скорости
             Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             if (flatVel.magnitude > movementSpeed)
             {
@@ -70,10 +68,20 @@ public class EnemyMovement : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
 
-            // Плавный поворот в направлении движения
-            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            RotateToDirection(direction);
         }
+    }
+
+    public void RotateToObject(GameObject gameObject)
+    {
+        Vector3 direction = gameObject.transform.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
+    public void RotateToDirection(Vector3 direction)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
     void FixedUpdate()

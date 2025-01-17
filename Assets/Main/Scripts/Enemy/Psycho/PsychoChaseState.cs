@@ -1,10 +1,9 @@
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PsychoChaseState : MonoBehaviour, IAIState
 {
     private EnemyPerception _enemyPerception;
-    float distance = float.MaxValue;
+    float firstDistance = float.MaxValue;
     private EnemyPerception enemyPerception
     {
         get
@@ -61,16 +60,22 @@ public class PsychoChaseState : MonoBehaviour, IAIState
         if (reactionTime < 0)
         {
             var visibleObject = enemyPerception.GetVisibleObjects();
-            distance = float.MaxValue;
+            firstDistance = float.MaxValue;
             foreach (var item in visibleObject)
             {
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
                 isPlayeLook = enemyPerception.IsPlayerLookingAtMe(item.transform);
-                if (distance > currentDistance)
+                if (firstDistance > currentDistance)
                 {
-                    distance = currentDistance;
-                    enemyMovement.SetTarget(isPlayeLook == false ? item.transform : null);
-                    enemyMovement.movementSpeedMultiplier = 1.5f;
+                    firstDistance = currentDistance;
+                    enemyMovement.SetTarget(item.transform);
+                    enemyMovement.RotateToObject(item);
+                    enemyPerception.playerLastSeenPos = item.transform.position;
+                    enemyMovement.movementSpeedMultiplier = isPlayeLook == false ? 1.5f : 0;
+                    if (Vector3.Distance(transform.position,item.transform.position) < 1 && !isPlayeLook)
+                    {
+                        controller.SetState<PsychoAttackState>();
+                    }
                 }
             }
             if (visibleObject.Count == 0)
@@ -78,7 +83,7 @@ public class PsychoChaseState : MonoBehaviour, IAIState
                 chaseTime -= Time.deltaTime;
                 if(chaseTime < 0)
                 {
-                    controller.SetState<PsychoIdleState>();
+                    controller.SetState<PsychoLostPlayerState>();
                 }
             }
             else

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PsychoAnimation : BaseAnimator
@@ -21,8 +20,9 @@ public class PsychoAnimation : BaseAnimator
     public StateController stateController;
     public PsychoChaseState chaseState;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
         if (stateController == null)
         {
             stateController = GetComponent<StateController>();
@@ -36,15 +36,15 @@ public class PsychoAnimation : BaseAnimator
     protected override void Start()
     {
         base.Start();
-        InitAnimation();
     }
 
-    private void InitAnimation()
+    protected override void InitAnimation()
     {
         animationHash.Add("Idle", Animator.StringToHash("Idle"));
 
-        animationHash.Add($"Run", Animator.StringToHash("HumanM@Run01_Forward"));
+        animationHash.Add($"Run", Animator.StringToHash("1H@Sprint01"));
         animationHash.Add($"Walk", Animator.StringToHash("HumanM@Walk01_Forward"));
+        animationHash.Add($"Attack", Animator.StringToHash("RightHand@Attack01"));
     }
 
     protected override int GetState()
@@ -62,6 +62,11 @@ public class PsychoAnimation : BaseAnimator
         }
         else
             anim.speed = 1;
+
+        if(stateController.currentState is PsychoAttackState)
+        {
+            return animationHash["Attack"];
+        }
 
         if (stateController.currentState is PsychoPatrolState)
         {

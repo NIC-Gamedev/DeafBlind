@@ -472,7 +472,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b5d0477bee677d641a4debe11c87d428, type: 2}
+      objectReference: {fileID: 9100000, guid: 389a1a01ab680084ba36e07fcebc6fd9, type: 2}
     - target: {fileID: 6047749945468793425, guid: 15b9439e16125da42b0efb0c58b64160,
         type: 3}
       propertyPath: m_Layer
@@ -637,6 +637,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5718096812475729264}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 15b9439e16125da42b0efb0c58b64160,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8973675667499671853}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 15b9439e16125da42b0efb0c58b64160,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8850485488325658278}
   m_SourcePrefab: {fileID: 100100000, guid: 15b9439e16125da42b0efb0c58b64160, type: 3}
 --- !u!1 &6705433564753525742 stripped
 GameObject:
@@ -737,6 +745,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reactionTime: 1
   _chaseTime: 2
+  reactionTime: 0
+  isPlayeLook: 0
 --- !u!114 &6547006851994936587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +765,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   visibleObjects: []
+  playerLastSeenPos: {x: 0, y: 0, z: 0}
 --- !u!114 &3845588326438227487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,4 +831,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f177de393409e428b09e857252adc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAnimReloaded: 1
+  animationHash:
+    _serializedList:
+    - Key: Idle
+      Value: 2081823275
+    - Key: Run
+      Value: 839682798
+    - Key: Walk
+      Value: 1486762507
   stateController: {fileID: 962527688693210367}
+  chaseState: {fileID: 5973897860767247756}
+--- !u!114 &8973675667499671853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705433564753525742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7774b9bdc46525840bde0c37053723c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8850485488325658278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705433564753525742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556956bf40aff27418fee98dde1a33d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRadius: 0.4
+  damage: 30
+  timeBeforeAttack: 0.43
