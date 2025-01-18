@@ -65,6 +65,16 @@ public class PlayerAnimation : BaseAnimator
         animationHash.Add($"Walk{Vector3.back + Vector3.right}", Animator.StringToHash("HumanM@Walk01_BackwardRight"));
         animationHash.Add($"Walk{Vector3.back + Vector3.left}", Animator.StringToHash("HumanM@Walk01_BackwardLeft"));
 
+        animationHash.Add($"CrouchIdle", Animator.StringToHash("Human@Crouch01_Idle"));
+        animationHash.Add($"Crouch{Vector3.right}", Animator.StringToHash("Human@Crouch01_Walk_Right"));
+        animationHash.Add($"Crouch{Vector3.forward + Vector3.right}", Animator.StringToHash("Human@Crouch01_Walk_ForwardRight"));
+        animationHash.Add($"Crouch{Vector3.forward + Vector3.left}", Animator.StringToHash("Human@Crouch01_Walk_ForwardLeft"));
+        animationHash.Add($"Crouch{Vector3.forward}", Animator.StringToHash("Human@Crouch01_Walk_Forward"));
+        animationHash.Add($"Crouch{Vector3.left}", Animator.StringToHash("Human@Crouch01_Walk_Left"));
+        animationHash.Add($"Crouch{Vector3.back}", Animator.StringToHash("Human@Crouch01_Walk_Backward"));
+        animationHash.Add($"Crouch{Vector3.back + Vector3.right}", Animator.StringToHash("Human@Crouch01_Walk_BackwardRight"));
+        animationHash.Add($"Crouch{Vector3.back + Vector3.left}", Animator.StringToHash("Human@Crouch01_Walk_BackwardLeft"));
+
 
         animationHash.Add("StartJump", Animator.StringToHash("HumanM@Jump01 - Start"));
         animationHash.Add("Fall", Animator.StringToHash("HumanM@Fall01"));
@@ -92,14 +102,14 @@ public class PlayerAnimation : BaseAnimator
         if (input != Vector3.zero)
             return PlayerMoveAnimation(playerMovement.isSprinting,playerMovement.isSneak);
 
-        return animationHash["Idle"];
+        return playerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
     }
 
 
     private int PlayerMoveAnimation(bool isSprint,bool isSit)
     {
         if (isSit)
-            return animationHash[""];
+            return animationHash[$"Crouch{input}"];
 
         return animationHash[$"{(isSprint ? "Run" : "Walk")}{input}"];
     }

@@ -560,7 +560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1280202730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,7 +674,7 @@ Transform:
   m_GameObject: {fileID: 1280202729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.165, y: 6.371, z: 17.687}
+  m_LocalPosition: {x: -26.19, y: 6.371, z: 17.687}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1461,7 +1461,127 @@ PrefabInstance:
     - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
         type: 3}
       propertyPath: animationHash._serializedList.Array.size
-      value: 20
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[17].Key
+      value: CrouchIdle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[18].Key
+      value: Crouch(1.00, 0.00, 0.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[19].Key
+      value: Crouch(1.00, 0.00, 1.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[20].Key
+      value: Crouch(-1.00, 0.00, 1.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[21].Key
+      value: Crouch(0.00, 0.00, 1.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[22].Key
+      value: Crouch(-1.00, 0.00, 0.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[23].Key
+      value: Crouch(0.00, 0.00, -1.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[24].Key
+      value: Crouch(1.00, 0.00, -1.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[25].Key
+      value: Crouch(-1.00, 0.00, -1.00)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[26].Key
+      value: StartJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[27].Key
+      value: Fall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[28].Key
+      value: Land
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[17].Value
+      value: 1450945332
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[18].Value
+      value: -1863342234
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[19].Value
+      value: 1549988765
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[20].Value
+      value: 1781882159
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[21].Value
+      value: -1840930001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[22].Value
+      value: -350866533
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[23].Value
+      value: -33862511
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[24].Value
+      value: 1345106164
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[25].Value
+      value: -1838347036
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[26].Value
+      value: 443950900
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[27].Value
+      value: 1353860376
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184675066586674198, guid: 1553f54048bf25647973f497d1f7ac60,
+        type: 3}
+      propertyPath: animationHash._serializedList.Array.data[28].Value
+      value: -1035815286
       objectReference: {fileID: 0}
     - target: {fileID: 5228133346465936222, guid: 1553f54048bf25647973f497d1f7ac60,
         type: 3}

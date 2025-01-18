@@ -26,11 +26,14 @@ public class PlayerMovement : MovementBase
     public bool isSprinting { get; private set; }
 
     private Action OnStaminaEnd;
+
+    private float heightTemp;
     protected override void Awake()
     {
         base.Awake();
         currentStaminaTime = maxStaminaTime;
         currentWaitTimeBeforeStaminaRecover = waitTimeBeforeStaminaRecover;
+        heightTemp = (col as CapsuleCollider).height;
     }
     private void Start()
     {
@@ -92,7 +95,7 @@ public class PlayerMovement : MovementBase
 
             if (flatVel.magnitude > movementSpeed)
             {
-                Vector3 limitedVel = flatVel.normalized * movementSpeed;
+                Vector3 limitedVel = flatVel.normalized * movementSpeed * speedMultiplier / speedDevider;
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
@@ -135,7 +138,10 @@ public class PlayerMovement : MovementBase
 
     private void SneakPressed(InputAction.CallbackContext callback)
     {
+        var capsuleCol = (col as CapsuleCollider);
         isSneak = !isSneak;
+        if (isSneak) capsuleCol.height = 1.15f;
+        else capsuleCol.height = heightTemp;
     }
 
     private void OnDrawGizmos()

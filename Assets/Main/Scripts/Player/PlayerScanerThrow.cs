@@ -25,6 +25,20 @@ public class PlayerScanerThrow : WaveThrow
             return _col;
         } 
     }
+
+    private PlayerMovement _playerMovement;
+    private PlayerMovement playerMovement
+    {
+        get
+        {
+            if (_playerMovement == null)
+            {
+                _playerMovement = GetComponent<PlayerMovement>();
+            }
+            return _playerMovement;
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -34,11 +48,17 @@ public class PlayerScanerThrow : WaveThrow
     }
     protected void OnCollisionStay(Collision collision)
     {
-        curentStepTime -= Time.deltaTime;
-        if (isMove() && curentStepTime < 0)
+        if (isMove() && curentStepTime < 0 && !playerMovement.isSneak)
         {
             curentStepTime = stepTime;
-            audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, ColideObject: collision);
+            if(!playerMovement.isSprinting)
+                audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, ColideObject: collision);
+            else
+                audioManager.PlaySoundEffect(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 10, ColideObject: collision);
+        }
+        else
+        {
+            curentStepTime -= Time.deltaTime;
         }
     }
 
