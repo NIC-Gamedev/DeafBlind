@@ -30,14 +30,14 @@ public class GiantPatrolState : MonoBehaviour, IAIState
         }
     }
 
-    private PsychoAudioListener _audioListener;
-    private PsychoAudioListener audioListener
+    private GiantAudioListener _audioListener;
+    private GiantAudioListener audioListener
     {
         get
         {
             if (_audioListener == null)
             {
-                _audioListener = GetComponent<PsychoAudioListener>();
+                _audioListener = GetComponent<GiantAudioListener>();
             }
             return _audioListener;
         }

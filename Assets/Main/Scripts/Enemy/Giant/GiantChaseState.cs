@@ -30,7 +30,7 @@ public class GiantChaseState : MonoBehaviour, IAIState
 
     [SerializeField] private float _reactionTime;
     [SerializeField] private float _chaseTime;
-    public float reactionTime;
+    internal float reactionTime;
     private float chaseTime;
 
     private StateController controller;
