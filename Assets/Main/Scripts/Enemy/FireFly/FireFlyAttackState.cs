@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireFlyAttackState : MonoBehaviour,IAIState
@@ -28,14 +26,14 @@ public class FireFlyAttackState : MonoBehaviour,IAIState
             return _enemyMovement;
         }
     }
-    private GiantAttack _AttackState;
-    private GiantAttack attackState
+    private FireFlyAttack _AttackState;
+    private FireFlyAttack attackState
     {
         get
         {
             if (_AttackState == null)
             {
-                _AttackState = GetComponent<GiantAttack>();
+                _AttackState = GetComponent<FireFlyAttack>();
             }
             return _AttackState;
         }
