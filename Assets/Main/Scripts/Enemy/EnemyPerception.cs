@@ -48,14 +48,16 @@ public class EnemyPerception : MonoBehaviour
 
     private bool HasLineOfSight(Collider target)
     {
-        Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
+        Vector3 origin = transform.position + Vector3.up / 3;
+        Vector3 directionToTarget = (target.transform.position - origin).normalized;
 
-        if (Physics.Raycast(transform.position + Vector3.up/3, directionToTarget, out RaycastHit hit, visionRange, ~(1 << gameObject.layer))) //Побитовое вычесление маски, нужнл что бы она брала все слои кроме одно
+        if (Physics.Raycast(origin, directionToTarget, out RaycastHit hit, visionRange, ~(1 << gameObject.layer)))
         {
             return hit.collider == target;
         }
         return false;
     }
+
     public bool IsPlayerLookingAtMe(Transform player)
     {
         Vector3 directionToEnemy = (transform.position - player.position).normalized;

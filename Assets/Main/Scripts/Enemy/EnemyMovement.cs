@@ -38,7 +38,7 @@ public class EnemyMovement : MonoBehaviour
             Vector3 direction = agent.desiredVelocity;
 
             // Передаем направление в метод движения
-            MoveUsingRigidbody(direction);
+            MoveAndWatchToDirection(direction);
         }
         else
         {
@@ -51,11 +51,11 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.SetDestination(transform.position + direction.normalized);
             Vector3 directionAgent = agent.desiredVelocity;
-            MoveUsingRigidbody(directionAgent);
+            MoveTo(directionAgent);
         }
     }
 
-    private void MoveUsingRigidbody(Vector3 direction)
+    private void MoveAndWatchToDirection(Vector3 direction)
     {
         if (direction != Vector3.zero)
         {
@@ -69,6 +69,20 @@ public class EnemyMovement : MonoBehaviour
             }
 
             RotateToDirection(direction);
+        }
+    }
+    private void MoveTo(Vector3 direction)
+    {
+        if (direction != Vector3.zero)
+        {
+            rb.AddForce(direction.normalized * movementSpeed * 10f * movementSpeedMultiplier, ForceMode.Force);
+
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            if (flatVel.magnitude > movementSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * movementSpeed;
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            }
         }
     }
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BaseAttack : MonoBehaviour
 {
+    [SerializeField] protected float damage;
+    public Coroutine attackProcess;
 
-    protected Coroutine attackProcess;
-
-    protected LayerMask attackLayer;
-    protected virtual void Attack()
+    public LayerMask attackLayer;
+    public virtual void Attack()
     {
         if (attackProcess != null)
             return;

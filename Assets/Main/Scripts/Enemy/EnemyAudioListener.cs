@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAudioListener : MonoBehaviour
+public class EnemyAudioListener : MonoBehaviour,IListenAudio
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform lastHearAudio { get; set; }
+    public void OnListenAudio(Vector3 audioPos)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (lastHearAudio != null)
+            Destroy(lastHearAudio.gameObject);
+        var lastHear = new GameObject("LastHearAudio").transform;
+        lastHear.position = audioPos;
+        lastHearAudio = lastHear;
     }
 }

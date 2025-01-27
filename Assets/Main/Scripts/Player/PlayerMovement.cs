@@ -140,8 +140,16 @@ public class PlayerMovement : MovementBase
     {
         var capsuleCol = (col as CapsuleCollider);
         isSneak = !isSneak;
-        if (isSneak) capsuleCol.height = 1.15f;
-        else capsuleCol.height = heightTemp;
+        if (isSneak)
+        {
+            capsuleCol.center = new Vector3(0, -0.1572674f, 0);
+            capsuleCol.height = 1.567569f;
+        }
+        else
+        {
+            capsuleCol.height = heightTemp;
+            capsuleCol.center = Vector3.zero;
+        }
     }
 
     private void OnDrawGizmos()

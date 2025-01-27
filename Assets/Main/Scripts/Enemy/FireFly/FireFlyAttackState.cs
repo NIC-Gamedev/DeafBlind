@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class FireFlyAttackState : MonoBehaviour,IAIState
 {
@@ -39,8 +40,10 @@ public class FireFlyAttackState : MonoBehaviour,IAIState
         }
     }
 
-
+    [SerializeField] private float unAttackDistance;
     StateController controller;
+
+    float closestDistance = Mathf.Infinity;
     public void EnterState(StateController owner)
     {
         controller = owner;
@@ -58,9 +61,28 @@ public class FireFlyAttackState : MonoBehaviour,IAIState
 
     public void UpdateState()
     {
-        if (attackState.attackProcess == null)
+        Collider[] collider = Physics.OverlapSphere(transform.position, unAttackDistance, attackState.attackLayer);
+        if (collider.Length == 0)
         {
             controller.SetState<FireFlyChaseState>();
         }
+        else
+        {
+            closestDistance = Mathf.Infinity;
+            foreach (var item in collider)
+            {
+                float distance = Vector3.Distance(transform.position, item.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    enemyMovement.RotateToObject(item.gameObject);
+                }
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, unAttackDistance);
     }
 }

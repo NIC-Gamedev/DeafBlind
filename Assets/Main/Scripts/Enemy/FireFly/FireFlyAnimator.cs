@@ -45,6 +45,7 @@ public class FireFlyAnimator : BaseAnimator
         animationHash.Add("Idle", Animator.StringToHash("Idle"));
 
         animationHash.Add($"Walk", Animator.StringToHash("Walk"));
+        animationHash.Add($"Run", Animator.StringToHash("Sprint"));
         animationHash.Add($"Attack", Animator.StringToHash("Attack"));
     }
 
@@ -55,8 +56,11 @@ public class FireFlyAnimator : BaseAnimator
         {
             return animationHash["Attack"];
         }
-
-        if (stateController.currentState is FireFlyPatrolState || stateController.currentState is FireFlyChaseState)
+        if(stateController.currentState is FireFlyChaseState)
+        {
+            return animationHash[$"Run"];
+        }
+        if (stateController.currentState is FireFlyPatrolState)
         {
             return animationHash[$"Walk"];
         }

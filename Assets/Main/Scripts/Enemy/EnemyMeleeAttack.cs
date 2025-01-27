@@ -7,14 +7,13 @@ public class EnemyMeleeAttack : BaseAttack
     [SerializeField] protected Transform attackPos;
     [SerializeField] protected float attackRadius;
 
-    [SerializeField] protected uint damage;
     [SerializeField] protected float attackImpact;
     [SerializeField] protected float timeBeforeAttack;
     [SerializeField] protected float _timeToAttackAnimationEnd;
-    [SerializeField] protected float timeToAttackAnimationEnd;
+    protected float timeToAttackAnimationEnd;
 
 
-    protected override void Attack()
+    public override void Attack()
     {
         timeToAttackAnimationEnd = _timeToAttackAnimationEnd;
         base.Attack();

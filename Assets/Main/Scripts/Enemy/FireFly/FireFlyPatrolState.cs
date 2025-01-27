@@ -30,14 +30,14 @@ public class FireFlyPatrolState : MonoBehaviour,IAIState
         }
     }
 
-    private GiantAudioListener _audioListener;
-    private GiantAudioListener audioListener
+    private EnemyAudioListener _audioListener;
+    private EnemyAudioListener audioListener
     {
         get
         {
             if (_audioListener == null)
             {
-                _audioListener = GetComponent<GiantAudioListener>();
+                _audioListener = GetComponent<EnemyAudioListener>();
             }
             return _audioListener;
         }

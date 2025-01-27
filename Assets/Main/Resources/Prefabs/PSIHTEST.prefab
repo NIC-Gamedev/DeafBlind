@@ -730,6 +730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0c4c5810466d5498daaea91db918cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startState: {fileID: 3845588326438227487}
   stateName: 
 --- !u!114 &5973897860767247756
 MonoBehaviour:
@@ -778,7 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3e6ce248aefd34086e4b2a0f3895c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleTime: 1
+  idleTime: 0.24
   detectLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -866,6 +867,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556956bf40aff27418fee98dde1a33d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRadius: 0.4
-  damage: 30
-  timeBeforeAttack: 0.43
