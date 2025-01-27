@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -51,6 +52,8 @@ public class StalkerHuntState : MonoBehaviour,IAIState
     private StateController controller;
     public float attackDistance = 0.6f;
     bool isFind;
+
+    private Coroutine TryAttackProcces;
     public void EnterState(StateController owner)
     {
         controller = owner;
@@ -58,6 +61,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
         chaseTime = _chaseTime;
         stalking.ResetStalkingParam();
         enemyMovement.SetTarget(null);
+        TryAttackProcces = null;
     }
 
     public void ExitState()
@@ -83,8 +87,15 @@ public class StalkerHuntState : MonoBehaviour,IAIState
 
     public void UpdateState()
     {
-        if (reactionTime < 0)
+        if (reactionTime < 0 && TryAttackProcces == null)
         {
+            if (stalking.huntingPlayer != null)
+            {
+                if (!stalking.IsBehindPlayer(stalking.huntingPlayer.transform))
+                {
+                    controller.SetState<StalkerTryToGoBehindState>();
+                }
+            }
             var visibleObject = enemyPerception.GetVisibleObjects();
             firstDistance = float.MaxValue;
             foreach (var item in visibleObject)
@@ -94,6 +105,13 @@ public class StalkerHuntState : MonoBehaviour,IAIState
 
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
 
+                if (firstDistance > currentDistance)
+                {
+                    firstDistance = currentDistance;
+                    stalking.huntingPlayer = item;
+                    enemyPerception.playerLastSeenPos = item.transform.position;
+                }
+
                 if (isFind)
                 {
                     if (enemyPerception.IsPlayerLookingAtMe(item.transform))
@@ -101,9 +119,9 @@ public class StalkerHuntState : MonoBehaviour,IAIState
                         stalking.timerBefAttack -= Time.deltaTime;
 
 
-                        if (stalking.timerBefAttack < 0)
+                        if (StalkerStalking.FindNearestObject(visibleObject.ToArray()))
                         {
-                            //нападаем на ближайшего игрока
+                            TryAttackProcces = StartCoroutine(GoToAttak());
                         }
                         break;
                     }
@@ -114,14 +132,19 @@ public class StalkerHuntState : MonoBehaviour,IAIState
                 }
                 else
                 {
+                    if (stalking.timeOfStalking < 0)
+                    {
+                        stalking.stalkingLevel--;
 
-                }
-
-
-                if (firstDistance > currentDistance)
-                {
-                    firstDistance = currentDistance;
-                    enemyPerception.playerLastSeenPos = item.transform.position;
+                        if(stalking.stalkingLevel <= 0)
+                        {
+                            TryAttackProcces = StartCoroutine(GoToAttak());
+                        }
+                    }
+                    else
+                    {
+                        stalking.timeOfStalking -= Time.deltaTime;
+                    }
                 }
             }
 
@@ -143,5 +166,10 @@ public class StalkerHuntState : MonoBehaviour,IAIState
         {
             reactionTime -= Time.deltaTime;
         }
+    }
+
+    public IEnumerator GoToAttak()
+    {
+        yield return null;
     }
 }

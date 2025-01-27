@@ -24,19 +24,6 @@ public class StalkerStalking : MonoBehaviour
         timeOfStalking = _timeOfStalking;
     }
 
-
-    private void Update()
-    {
-        if (timeOfStalking < 0)
-        {
-            stalkingLevel--;
-        }
-        else
-        {
-            timeOfStalking -= Time.deltaTime;
-        }
-    }
-
     public void ResetStalkingParam()
     {
         timerBefAttack = _timerBefAttack;
@@ -62,5 +49,29 @@ public class StalkerStalking : MonoBehaviour
         }
 
         return bestWaypoint;
+    }
+    public bool IsBehindPlayer(Transform playerPos)
+    {
+        Vector3 directionToStalker = (transform.position - playerPos.position).normalized;
+        float dotProduct = Vector3.Dot(playerPos.forward, directionToStalker);
+
+        return dotProduct < 0;
+    }
+
+    public static GameObject FindNearestObject(GameObject[] gameObjects)
+    {
+        float currentDistance = float.MaxValue;
+        var nearestObject = gameObjects[0];
+        foreach (GameObject gameObject in gameObjects)
+        {
+            var distance = Vector3.Distance(gameObject.transform.position, gameObject.transform.position);
+            if (distance < currentDistance)
+            {
+                currentDistance = distance;
+                nearestObject = gameObject;
+            }
+        }
+
+        return nearestObject;
     }
 }
