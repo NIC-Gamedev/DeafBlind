@@ -1,10 +1,11 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : NetworkBehaviour
 {
     [SerializeField] private Vector2 mouseSensitivity = new Vector2(8,0.5f); 
 
@@ -16,12 +17,17 @@ public class PlayerCamera : MonoBehaviour
 
     [SerializeField] private Transform body;
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         InputInit();
+        if(!IsOwner)
+        {
+            this.enabled = false;
+        }
     }
+ 
 
     private void InputInit()
     {

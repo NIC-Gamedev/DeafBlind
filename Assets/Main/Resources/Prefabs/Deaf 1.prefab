@@ -2483,15 +2483,16 @@ GameObject:
   - component: {fileID: 8205739692950860676}
   - component: {fileID: 9051693971604488150}
   - component: {fileID: 7329045052709749765}
-  - component: {fileID: 8113203634700946291}
   - component: {fileID: 1639476909652721697}
   - component: {fileID: 7965721582127475362}
   - component: {fileID: 3472422021859410945}
   - component: {fileID: 5979120603203166597}
   - component: {fileID: 8950439461645276059}
-  - component: {fileID: -880809374810857028}
+  - component: {fileID: -589230575730602797}
+  - component: {fileID: 7580059520428791667}
+  - component: {fileID: 3694765581028459477}
   m_Layer: 0
-  m_Name: Deaf
+  m_Name: Deaf 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2567,29 +2568,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8113203634700946291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168191643025798806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08828eea2b542c142bb6a9a059be6b17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 5
-  sprintMultiplier: 5
-  jumpForce: 5
-  FrictionAmount: 0.9
-  maxStaminaTime: 5
-  waitTimeBeforeStaminaRecover: 1
-  sneakingDevider: 3
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  radius: 0.1
 --- !u!114 &1639476909652721697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2661,7 +2639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4083351425
+  GlobalObjectIdHash: 541049816
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2670,7 +2648,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-880809374810857028
+--- !u!114 &-589230575730602797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2679,7 +2657,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9168191643025798806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cbea955b6701e84db6f16840e63d971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
@@ -2701,3 +2679,40 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &7580059520428791667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168191643025798806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a2e4e2bd80bc4478c500acf2eb02b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 5
+  sprintMultiplier: 5
+  jumpForce: 5
+  FrictionAmount: 0.9
+  maxStaminaTime: 5
+  waitTimeBeforeStaminaRecover: 1
+  sneakingDevider: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  radius: 0.1
+--- !u!114 &3694765581028459477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168191643025798806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4991931517e5ab247b141a304df98cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 5979120603203166597}
