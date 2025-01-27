@@ -55,6 +55,18 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public void KeepDistance(GameObject player,float distance)
+    {
+        if (Vector3.Distance(player.transform.position, transform.position) > distance)
+        {
+            MoveInDirection(player.transform.position - transform.position);
+        }
+        else
+        {
+            MoveInDirection((player.transform.position - transform.position) * -1);
+        }
+    }
+
     private void MoveAndWatchToDirection(Vector3 direction)
     {
         if (direction != Vector3.zero)

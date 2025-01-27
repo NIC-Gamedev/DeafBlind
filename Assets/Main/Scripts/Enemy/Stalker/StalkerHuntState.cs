@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using static UnityEditor.Progress;
@@ -51,7 +52,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
 
     private StateController controller;
     public float attackDistance = 0.6f;
-    bool isFind;
+    public bool isFind;
 
     private Coroutine TryAttackProcces;
     public void EnterState(StateController owner)
@@ -69,6 +70,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
         enemyMovement.movementSpeedMultiplier = 1;
         enemyMovement.SetTarget(null);
         chaseTime = _chaseTime;
+        isFind = false;
     }
 
     public string GetStateName()
@@ -101,7 +103,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
             foreach (var item in visibleObject)
             {
                 if(!isFind) 
-                    isFind = IsFindMe(4,item);
+                    isFind = IsFindMe(5,item);
 
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
 
@@ -110,6 +112,8 @@ public class StalkerHuntState : MonoBehaviour,IAIState
                     firstDistance = currentDistance;
                     stalking.huntingPlayer = item;
                     enemyPerception.playerLastSeenPos = item.transform.position;
+
+                    enemyMovement.KeepDistance(stalking.huntingPlayer, stalking.keepingDistance);
                 }
 
                 if (isFind)
@@ -135,8 +139,8 @@ public class StalkerHuntState : MonoBehaviour,IAIState
                     if (stalking.timeOfStalking < 0)
                     {
                         stalking.stalkingLevel--;
-
-                        if(stalking.stalkingLevel <= 0)
+                        stalking.timeOfStalking = stalking._timeOfStalking;
+                        if (stalking.stalkingLevel <= 0)
                         {
                             TryAttackProcces = StartCoroutine(GoToAttak());
                         }
@@ -171,5 +175,6 @@ public class StalkerHuntState : MonoBehaviour,IAIState
     public IEnumerator GoToAttak()
     {
         yield return null;
+        Debug.Log("DIE!!");
     }
 }

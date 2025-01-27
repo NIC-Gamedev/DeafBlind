@@ -1,8 +1,7 @@
-
-using UnityEngine;
+using UnityEngine; 
 using UnityEngine.AI;
 
-public class StalkerTryToGoBehindState : MonoBehaviour,IAIState
+public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
 {
     private EnemyPerception _enemyPerception;
     private EnemyPerception enemyPerception
@@ -41,46 +40,43 @@ public class StalkerTryToGoBehindState : MonoBehaviour,IAIState
             return _stalking;
         }
     }
-    private StateController controller;
+    private StateController _controller;
 
-    [SerializeField] private float playerLostDistance = 20;
+    [SerializeField] private float playerLostDistance = 20f;
+
+    [SerializeField] private GameObject hidingSpotObj;
     public void EnterState(StateController owner)
     {
-        controller = owner;
+        _controller = owner;
     }
 
     public void UpdateState()
     {
+        var distance = Vector3.Distance(transform.position, stalking.huntingPlayer.transform.position);
         if (!stalking.IsBehindPlayer(stalking.huntingPlayer.transform))
         {
-            if(Vector3.Distance(transform.position,stalking.huntingPlayer.transform.position) < playerLostDistance)
+            if (distance < playerLostDistance)
             {
-                Vector3 hidingSpot = FindHidingSpot(stalking.huntingPlayer);
+                enemyMovement.KeepDistance(stalking.huntingPlayer, stalking.keepingDistance);
 
-                if (hidingSpot != null)
+                if(distance < stalking.keepingDistanceMIN)
                 {
-                    if (hidingSpot != transform.position)
-                    {
-                        var hidingSpotObj = new GameObject("hidingSpot");
-                        hidingSpotObj.transform.position = hidingSpot;
-                        enemyMovement.SetTarget(hidingSpotObj.transform);
-                    }
-                    else
-                    {
-                        enemyMovement.MoveInDirection(transform.position - stalking.huntingPlayer.transform.position);
-                    }
+                    _controller.SetState<StalkerHuntState>();
                 }
             }
             else
             {
-                controller.SetState<StalkerLostPlayer>();
+                _controller.SetState<StalkerLostPlayer>();
             }
         }
         else
         {
-            controller.SetState<StalkerHuntState>();
+            enemyMovement.KeepDistance(stalking.huntingPlayer, stalking.keepingDistance);
+            if (distance < stalking.keepingDistance) 
+                _controller.SetState<StalkerHuntState>();
         }
     }
+
 
     public string GetStateName()
     {
@@ -89,46 +85,6 @@ public class StalkerTryToGoBehindState : MonoBehaviour,IAIState
 
     public void ExitState()
     {
-    }
-
-    private Vector3 FindHidingSpot(GameObject player)
-    {
-        Vector3 bestSpot = transform.position;
-        float bestDistance = float.MaxValue;
-
-        // ѕровер€ем несколько направлений вокруг сталкера
-        for (int i = 0; i < 360; i += 45) // ѕровер€ем каждое 45 градусов
-        {
-            Vector3 direction = Quaternion.Euler(0, i, 0) * Vector3.forward;
-            Vector3 potentialSpot = transform.position + direction * 5f; // 5 метров в выбранном направлении
-
-            if (NavMesh.SamplePosition(potentialSpot, out NavMeshHit hit, 2f, NavMesh.AllAreas))
-            {
-                // ѕровер€ем, не видно ли эту точку игроку
-                if (!IsVisibleToPlayer(player,hit.position))
-                {
-                    float distance = Vector3.Distance(player.transform.position, hit.position);
-                    if (distance < bestDistance)
-                    {
-                        bestSpot = hit.position;
-                        bestDistance = distance;
-                    }
-                }
-            }
-        }
-
-        return bestSpot;
-    }
-
-    private bool IsVisibleToPlayer(GameObject player,Vector3 point)
-    {
-        Vector3 directionToPoint = (point - player.transform.position).normalized;
-        if (Physics.Raycast(player.transform.position, directionToPoint, out RaycastHit hit, playerLostDistance))
-        {
-            // ≈сли точка видима игроку
-            return hit.collider.gameObject == gameObject;
-        }
-
-        return false;
+        Destroy(hidingSpotObj.gameObject);
     }
 }

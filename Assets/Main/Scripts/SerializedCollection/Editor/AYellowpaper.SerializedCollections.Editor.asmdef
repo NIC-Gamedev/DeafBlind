@@ -1,5 +1,6 @@
 {
     "name": "AYellowpaper.SerializedCollections.Editor",
+    "rootNamespace": "",
     "references": [
         "GUID:d525ad6bd40672747bde77962f1c401e"
     ],

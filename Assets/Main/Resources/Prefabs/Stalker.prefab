@@ -127,6 +127,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3067195878463574999}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4906915231669869760}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
         type: 3}
@@ -147,7 +151,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2338056123672497558}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5679770495362561737}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7491898928408784133}
   m_SourcePrefab: {fileID: 100100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7, type: 3}
 --- !u!1 &7674190295086403339 stripped
 GameObject:
@@ -287,6 +299,18 @@ MonoBehaviour:
   movementSpeedMultiplier: 1
   rotationSpeed: 10
   target: {fileID: 0}
+--- !u!114 &3067195878463574999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674190295086403339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83a75a30b6a9714f8b7c1998f59e052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4906915231669869760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +338,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reactionTime: 1.77
   _chaseTime: 14.56
-  keepingDistance: 15.9
   attackDistance: 0.27
 --- !u!114 &3008841289147678738
 MonoBehaviour:
@@ -359,6 +382,24 @@ MonoBehaviour:
   detectLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &2338056123672497558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674190295086403339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05797005657d65242855d2b8134791ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBefAttack: 5
+  _timeOfStalking: 20
+  _stalkingLevel: 5
+  huntingPlayer: {fileID: 0}
+  keepingDistanceMIN: 4
+  keepingDistanceMAX: 15
 --- !u!195 &5679770495362561737
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -381,6 +422,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7491898928408784133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674190295086403339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fd1bde5ec0dd246b6e7c47b3e3bafd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLostDistance: 20
+  hidingSpotObj: {fileID: 0}
 --- !u!4 &7674190295086895889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400058, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,

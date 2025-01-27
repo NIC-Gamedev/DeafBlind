@@ -15,8 +15,9 @@ public class StalkerStalking : MonoBehaviour
 
     public GameObject huntingPlayer;
 
-    [SerializeField] public float keepingDistance;
-    public float keepingDistanceMultiplier = 1;
+    [SerializeField] public float keepingDistanceMIN = 4;
+    [SerializeField] public float keepingDistanceMAX = 15;
+    public float keepingDistance => Mathf.Lerp(keepingDistanceMIN, keepingDistanceMAX, stalkingLevel / 5f);
     void Start()
     {
         timerBefAttack = _timerBefAttack;

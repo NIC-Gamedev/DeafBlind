@@ -1,18 +1,81 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class StalkerHideState : MonoBehaviour
+public class StalkerHideState : MonoBehaviour,IAIState
 {
-    // Start is called before the first frame update
-    void Start()
+    private int randomWayIndex;
+    private EnemyMovement _enemyMovement;
+    private EnemyMovement enemyMovement
     {
-        
+        get
+        {
+            if (_enemyMovement == null)
+            {
+                _enemyMovement = GetComponent<EnemyMovement>();
+            }
+            return _enemyMovement;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private MapManager mapManager => ServiceLocator.instance.Get<MapManager>();
+    private StalkerStalking _stalking;
+    private StalkerStalking stalking
     {
-        
+        get
+        {
+            if (_stalking == null)
+            {
+                _stalking = GetComponent<StalkerStalking>();
+            }
+            return _stalking;
+        }
+    }
+
+    public void EnterState(StateController owner)
+    {
+        SelectWaypoint(transform.position, stalking.huntingPlayer.transform.position,15,40);
+    }
+
+    public void UpdateState()
+    {
+    }
+
+    public string GetStateName()
+    {
+        return "StalkerHideState";
+    }
+
+    public void ExitState()
+    {
+        stalking.huntingPlayer = null;
+    }
+
+    public void SelectWaypoint(Vector3 enemyPosition, Vector3 playerPosition, float minDistanceFromPlayer, float maxDistanceFromEnemy)
+    {
+        // Получаем все вейпоинты
+        var waypoints = ServiceLocator.instance.Get<MapManager>().mapData.allWayPoints;
+
+        // Фильтруем вейпоинты по условиям
+        var filteredWaypoints = waypoints
+            .Where(waypoint => Vector3.Distance(waypoint.position, playerPosition) >= minDistanceFromPlayer
+                               && Vector3.Distance(waypoint.position, enemyPosition) <= maxDistanceFromEnemy)
+            .ToList();
+
+        // Если есть подходящие вейпоинты
+        if (filteredWaypoints.Count > 0)
+        {
+            // Выбираем случайный из подходящих
+            int randomIndex = Random.Range(0, filteredWaypoints.Count);
+            enemyMovement.SetTarget(filteredWaypoints[randomIndex]);
+        }
+        else
+        {
+            // Нет подходящих вейпоинтов, можно задать fallback-логику
+            Debug.LogWarning("Нет подходящих вейпоинтов. Используется случайный.");
+            int randomIndex = Random.Range(0, waypoints.Count);
+            enemyMovement.SetTarget(waypoints[randomIndex]);
+        }
     }
 }
