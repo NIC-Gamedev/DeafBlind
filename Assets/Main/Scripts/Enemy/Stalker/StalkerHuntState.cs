@@ -54,6 +54,8 @@ public class StalkerHuntState : MonoBehaviour,IAIState
     public float attackDistance = 0.6f;
     public bool isFind;
 
+    public float revealRadius = 9;
+
     private Coroutine TryAttackProcces;
     public void EnterState(StateController owner)
     {
@@ -71,6 +73,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
         enemyMovement.SetTarget(null);
         chaseTime = _chaseTime;
         isFind = false;
+        stalking.timerBefAttack = stalking._timerBefAttack;
     }
 
     public string GetStateName()
@@ -91,51 +94,31 @@ public class StalkerHuntState : MonoBehaviour,IAIState
     {
         if (reactionTime < 0 && TryAttackProcces == null)
         {
-            if (stalking.huntingPlayer != null)
-            {
-                if (!stalking.IsBehindPlayer(stalking.huntingPlayer.transform))
-                {
-                    controller.SetState<StalkerTryToGoBehindState>();
-                }
-            }
             var visibleObject = enemyPerception.GetVisibleObjects();
             firstDistance = float.MaxValue;
             foreach (var item in visibleObject)
             {
                 if(!isFind) 
-                    isFind = IsFindMe(5,item);
+                    isFind = IsFindMe(revealRadius, item);
 
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
 
-                if (firstDistance > currentDistance)
+                if (firstDistance > currentDistance && !isFind)
                 {
                     firstDistance = currentDistance;
                     stalking.huntingPlayer = item;
                     enemyPerception.playerLastSeenPos = item.transform.position;
-
-                    enemyMovement.KeepDistance(stalking.huntingPlayer, stalking.keepingDistance);
                 }
 
                 if (isFind)
                 {
-                    if (enemyPerception.IsPlayerLookingAtMe(item.transform))
-                    {
-                        stalking.timerBefAttack -= Time.deltaTime;
-
-
-                        if (StalkerStalking.FindNearestObject(visibleObject.ToArray()))
-                        {
-                            TryAttackProcces = StartCoroutine(GoToAttak());
-                        }
-                        break;
-                    }
-                    else
-                    {
-                        controller.SetState<StalkerHideState>();
-                    }
+                    controller.SetState<StalkerRevealState>();
                 }
                 else
                 {
+                    enemyMovement.RotateToObject(stalking.huntingPlayer);
+
+                    enemyMovement.KeepDistance(stalking.huntingPlayer, stalking.keepingDistance);
                     if (stalking.timeOfStalking < 0)
                     {
                         stalking.stalkingLevel--;
@@ -151,7 +134,13 @@ public class StalkerHuntState : MonoBehaviour,IAIState
                     }
                 }
             }
-
+            if (stalking.huntingPlayer != null)
+            {
+                if (!stalking.IsBehindPlayer(stalking.huntingPlayer.transform) && !isFind)
+                {
+                    controller.SetState<StalkerTryToGoBehindState>();
+                }
+            }
 
             if (visibleObject.Count == 0)
             {
@@ -170,6 +159,12 @@ public class StalkerHuntState : MonoBehaviour,IAIState
         {
             reactionTime -= Time.deltaTime;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, revealRadius);
     }
 
     public IEnumerator GoToAttak()

@@ -339,6 +339,8 @@ MonoBehaviour:
   _reactionTime: 1.77
   _chaseTime: 14.56
   attackDistance: 0.27
+  isFind: 0
+  revealRadius: 4.6
 --- !u!114 &3008841289147678738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +400,7 @@ MonoBehaviour:
   _timeOfStalking: 20
   _stalkingLevel: 5
   huntingPlayer: {fileID: 0}
-  keepingDistanceMIN: 4
+  keepingDistanceMIN: 2
   keepingDistanceMAX: 15
 --- !u!195 &5679770495362561737
 NavMeshAgent:

@@ -32,14 +32,20 @@ public class StalkerHideState : MonoBehaviour,IAIState
             return _stalking;
         }
     }
-
+    StateController controller; 
     public void EnterState(StateController owner)
     {
+        controller = owner;
+        stalking.stalkingLevel = stalking._stalkingLevel;
         SelectWaypoint(transform.position, stalking.huntingPlayer.transform.position,15,40);
     }
 
     public void UpdateState()
     {
+        if(Vector3.Distance(transform.position, enemyMovement.targetPosition) < 1)
+        {
+            controller.SetState<StalkerIdleState>();
+        }
     }
 
     public string GetStateName()
