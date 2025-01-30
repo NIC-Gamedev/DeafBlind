@@ -6,41 +6,41 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float movementSpeed = 5f; // Настройка скорости движения врага
-    [SerializeField] private float rotationSpeed = 10f; // Настройка скорости поворота врага
+    [SerializeField] private float movementSpeed = 5f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    [SerializeField] private float rotationSpeed = 10f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-    private NavMeshAgent agent; // NavMeshAgent для управления движением
+    private NavMeshAgent agent; // NavMeshAgent пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private Rigidbody rb;
 
     [SerializeField] private GameObject target;
-    private Vector3 targetPosition; // Текущая цель движения
-    private bool hasTarget = false; // Флаг наличия цели
+    private Vector3 targetPosition; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private bool hasTarget = false; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
        
-        // Настроить параметры NavMeshAgent
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ NavMeshAgent
         agent.speed = movementSpeed;
-        agent.angularSpeed = rotationSpeed * 10f; // NavMeshAgent использует градусы/сек
+        agent.angularSpeed = rotationSpeed * 10f; // NavMeshAgent пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅ
         agent.acceleration = movementSpeed * 2f;
-        agent.updatePosition = false; // Позволяет нам самим двигать Rigidbody
-        agent.updateRotation = false; // Управляем поворотом вручную
+        agent.updatePosition = false; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Rigidbody
+        agent.updateRotation = false; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     void Update()
     {
         targetPosition = target.GetComponent<Transform>().position;
-        // Если есть цель, передать её NavMeshAgent
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ NavMeshAgent
         if (hasTarget)
         {
             agent.SetDestination(targetPosition);
 
-            // Получаем желаемое направление от NavMeshAgent
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ NavMeshAgent
             Vector3 direction = agent.desiredVelocity;
 
-            // Передаем направление в метод движения
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             MoveUsingRigidbody(direction);
         }
     }
@@ -49,18 +49,18 @@ public class EnemyMovement : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
-            // Добавление силы для движения
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             rb.AddForce(direction.normalized * movementSpeed * 10f, ForceMode.Force);
 
-            // Ограничение скорости
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             if (flatVel.magnitude > movementSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * movementSpeed;
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
 
-            // Плавный поворот в направлении движения
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
@@ -68,19 +68,19 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Синхронизируем позицию NavMeshAgent с Rigidbody
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ NavMeshAgent пїЅ Rigidbody
         if (agent.enabled)
         {
             agent.nextPosition = rb.position;
         }
     }
 
-    // Публичный метод для установки цели извне
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public void SetTarget(GameObject targetObject)
     {
         target = targetObject;
         targetPosition = target.GetComponent<Transform>().position;
-        hasTarget = true; // Устанавливаем флаг наличия цели
+        hasTarget = true; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     }
 
 

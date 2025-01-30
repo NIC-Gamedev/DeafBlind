@@ -12,18 +12,18 @@ public class ThrowableObjects : MonoBehaviour
     [SerializeField] private float upwardThrowModifier = 0.5f;
 
     private Rigidbody rb;
-    private PhysicMaterial material;
+    private PhysicsMaterial material;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.mass = weight;
 
-        material = new PhysicMaterial
+        material = new PhysicsMaterial
         {
             bounciness = bounciness,
-            frictionCombine = PhysicMaterialCombine.Average,
-            bounceCombine = PhysicMaterialCombine.Maximum
+            frictionCombine = PhysicsMaterialCombine.Average,
+            bounceCombine = PhysicsMaterialCombine.Maximum
         };
 
         if (TryGetComponent(out Collider collider))
@@ -34,7 +34,7 @@ public class ThrowableObjects : MonoBehaviour
 
     public void Throw(Vector3 direction)
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction.normalized * throwForce + Vector3.up * upwardThrowModifier, ForceMode.Impulse);
     }
 }

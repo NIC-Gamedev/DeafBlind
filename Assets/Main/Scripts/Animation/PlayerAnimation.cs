@@ -54,12 +54,12 @@ public class PlayerAnimation : BaseAnimator
     protected override int GetState()
     {
         bool isGround = playerMovement.IsOnGround();
-        if (rb.velocity.y > 0 && !isGround)
+        if (rb.linearVelocity.y > 0 && !isGround)
         {
             isJumpStart = true;
             return animationHash["StartJump"];
         }
-        else if (rb.velocity.y < 0 &&!isGround)
+        else if (rb.linearVelocity.y < 0 &&!isGround)
         {
             return animationHash["Fall"];
         }

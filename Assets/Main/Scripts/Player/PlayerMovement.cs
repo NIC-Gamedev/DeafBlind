@@ -86,12 +86,12 @@ public class PlayerMovement : MovementBase
             float speedDevider = isSneak ? sneakingDevider : 1f;
             rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider, ForceMode.Force);
 
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
             if (flatVel.magnitude > movementSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * movementSpeed;
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
         }
     }
@@ -123,7 +123,7 @@ public class PlayerMovement : MovementBase
     {
         if (Mathf.Abs(input.x) < 0.01f && Mathf.Abs(input.z) < 0.01f)
         {
-            Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             float amount = Mathf.Min(horizontalVelocity.magnitude, FrictionAmount);
 
             Vector3 frictionForce = horizontalVelocity.normalized * -amount;
