@@ -2,15 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAudioListener : MonoBehaviour,IListenAudio
+public class EnemyAudioListener : BaseAudioListener
 {
-    public Transform lastHearAudio { get; set; }
-    public void OnListenAudio(Vector3 audioPos)
-    {
-        if (lastHearAudio != null)
-            Destroy(lastHearAudio.gameObject);
-        var lastHear = new GameObject("LastHearAudio").transform;
-        lastHear.position = audioPos;
-        lastHearAudio = lastHear;
-    }
 }

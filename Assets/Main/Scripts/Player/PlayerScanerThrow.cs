@@ -52,9 +52,9 @@ public class PlayerScanerThrow : WaveThrow
         {
             curentStepTime = stepTime;
             if(!playerMovement.isSprinting)
-                audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, ColideObject: collision);
+                audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 15, ColideObject: collision, soundObject:gameObject);
             else
-                audioManager.PlaySoundEffect(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 10, ColideObject: collision);
+                audioManager.PlaySoundEffect(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 20, ColideObject: collision, soundObject: gameObject);
         }
         else
         {
@@ -62,11 +62,6 @@ public class PlayerScanerThrow : WaveThrow
         }
     }
 
-/*    public void ThrowWave()
-    {
-        audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5,pos: colliderBottom);
-    }*/
-     
     public bool isMove()
     {
         if (direction.x != 0 || direction.z != 0)

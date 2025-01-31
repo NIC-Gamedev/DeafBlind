@@ -43,7 +43,7 @@ public class PhysicalAudioManager : MonoBehaviour
         sfxRoot.SetParent(transform);
     }
 
-    public AudioSource PlaySoundEffect(string filepath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Collision ColideObject = null)
+    public AudioSource PlaySoundEffect(string filepath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Collision ColideObject = null,GameObject soundObject = null)
     {
         AudioClip clip = Resources.Load<AudioClip>(filepath);
 
@@ -52,9 +52,9 @@ public class PhysicalAudioManager : MonoBehaviour
             Debug.LogError($"Could not load audio file '{filepath}'. Please make sure this exist audio");
             return null;
         }
-        return PlaySoundEffect(clip, mixer, volume, pitch, loop, minDistance, maxDistance, ColideObject);
+        return PlaySoundEffect(clip, mixer, volume, pitch, loop, minDistance, maxDistance, ColideObject,soundObject);
     }
-    public AudioSource PlaySoundEffect(string filepath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Transform transforn = null)
+    public AudioSource PlaySoundEffect(string filepath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Transform transforn = null, GameObject soundObject = null)
     {
         AudioClip clip = Resources.Load<AudioClip>(filepath);
 
@@ -63,10 +63,10 @@ public class PhysicalAudioManager : MonoBehaviour
             Debug.LogError($"Could not load audio file '{filepath}'. Please make sure this exist audio");
             return null;
         }
-        return PlaySoundEffect(clip, mixer, volume, pitch, loop, minDistance, maxDistance, transforn);
+        return PlaySoundEffect(clip, mixer, volume, pitch, loop, minDistance, maxDistance, transforn, soundObject);
     }
 
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Collision ColideObject = null)
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Collision ColideObject = null, GameObject soundObject = null)
     {
         if (ColideObject == null)
         {
@@ -90,14 +90,14 @@ public class PhysicalAudioManager : MonoBehaviour
 
         effectSource.Play();
 
-        ThrowWave(ColideObject, effectSource);
+        ThrowWave(ColideObject, effectSource, soundObject);
 
         if (!loop)
             Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
 
         return effectSource;
     }
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Transform transform = null)
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Transform transform = null, GameObject soundObject = null)
     {
         if (transform == null)
         {
@@ -121,14 +121,14 @@ public class PhysicalAudioManager : MonoBehaviour
 
         effectSource.Play();
 
-        ThrowWave(transform, effectSource);
+        ThrowWave(transform, effectSource, soundObject);
 
         if (!loop)
             Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
 
         return effectSource;
     }
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Vector3 pos = default)
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Vector3 pos = default, GameObject soundObject = null)
     {
         if (pos == null)
         {
@@ -152,7 +152,7 @@ public class PhysicalAudioManager : MonoBehaviour
 
         effectSource.Play();
 
-        ThrowWave(pos, effectSource);
+        ThrowWave(pos, effectSource, soundObject);
 
         if (!loop)
             Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
@@ -160,7 +160,7 @@ public class PhysicalAudioManager : MonoBehaviour
         return effectSource;
     }
 
-    public AudioSource PlayVoice(AudioClip clip, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 0, float maxDistance = 10, Transform transform = null)
+    public AudioSource PlayVoice(AudioClip clip, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 0, float maxDistance = 10, Transform transform = null, GameObject soundObject = null)
     {
         return PlaySoundEffect(clip, voicesMixer, volume, pitch, loop, transform: transform);
     }
@@ -182,7 +182,7 @@ public class PhysicalAudioManager : MonoBehaviour
         }
     }
 
-    public AudioSource PlayMusic(string filePath, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, float minDistance = 1, float maxDistance = 100, Transform pos = null)
+    public AudioSource PlayMusic(string filePath, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, float minDistance = 1, float maxDistance = 100, Transform pos = null, GameObject soundObject = null)
     {
         AudioClip clip = Resources.Load<AudioClip>(filePath);
 
@@ -192,10 +192,10 @@ public class PhysicalAudioManager : MonoBehaviour
             return null;
         }
 
-        return PlayMusic(clip, channel, loop, volume, pitch, filePath, minDistance, maxDistance, pos);
+        return PlayMusic(clip, channel, loop, volume, pitch, filePath, minDistance, maxDistance, pos, soundObject);
     }
 
-    public AudioSource PlayMusic(AudioClip clip, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, string filePath = "", float minDistance = 1, float maxDistance = 100, Transform pos = null)
+    public AudioSource PlayMusic(AudioClip clip, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, string filePath = "", float minDistance = 1, float maxDistance = 100, Transform pos = null, GameObject soundObject = null)
     {
         if (pos == null)
         {
@@ -224,7 +224,7 @@ public class PhysicalAudioManager : MonoBehaviour
             musics.Remove(transform.gameObject);
         }
 
-        ThrowWave(transform: pos, audioSource: source);
+        ThrowWave(transform: pos, audioSource: source, soundObject:soundObject);
 
         return source;
     }
@@ -236,33 +236,33 @@ public class PhysicalAudioManager : MonoBehaviour
             musics.Remove(gameObject);
         }
     }
-    protected void ThrowWave(Collision collision, AudioSource audioSource = null)
+    protected void ThrowWave(Collision collision, AudioSource audioSource = null, GameObject soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, collision.contacts[0].point, Quaternion.identity);
         var main = instance.main;
 
         main.startLifetime = audioSource.clip.length;
         main.startSize = audioSource.maxDistance;
-        StartCoroutine(EmitWave(instance, audioSource));
+        StartCoroutine(EmitWave(instance, audioSource, soundObject));
 
     }
-    protected void ThrowWave(Transform transform, AudioSource audioSource = null)
+    protected void ThrowWave(Transform transform, AudioSource audioSource = null, GameObject soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, transform.position, Quaternion.identity);
         var main = instance.main;
         main.startLifetime = audioSource.clip.length;
         main.startSize = audioSource.maxDistance;
-        StartCoroutine(EmitWave(instance, audioSource));
+        StartCoroutine(EmitWave(instance, audioSource, soundObject));
     }
-    protected void ThrowWave(Vector3 pos, AudioSource audioSource = null)
+    protected void ThrowWave(Vector3 pos, AudioSource audioSource = null, GameObject soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
         var main = instance.main;
         main.startLifetime = audioSource.clip.length;
         main.startSize = audioSource.maxDistance;
-        StartCoroutine(EmitWave(instance, audioSource));
+        StartCoroutine(EmitWave(instance, audioSource, soundObject));
     }
-    protected IEnumerator EmitWave(ParticleSystem particle, AudioSource audioSource)
+    protected IEnumerator EmitWave(ParticleSystem particle, AudioSource audioSource, GameObject soundObject = null)
     {
         const int spectrumSize = 512;
         float[] spectrumData = new float[spectrumSize];
@@ -314,9 +314,13 @@ public class PhysicalAudioManager : MonoBehaviour
                     {
                         foreach (var item in audioSourceColiders)
                         {
+                            if (soundObject == item.gameObject)
+                                continue;
+
                             if (item.TryGetComponent(out IListenAudio listenerAudio))
                             {
-                                listenerAudio.OnListenAudio(audioSource.transform.position);
+                                if(Vector3.Distance(transform.position,item.transform.position) < listenerAudio.listenDistance)
+                                    listenerAudio.OnListenAudio(audioSource.transform.position);
                             }
                         }
                     }

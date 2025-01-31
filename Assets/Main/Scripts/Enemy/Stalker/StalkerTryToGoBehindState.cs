@@ -42,7 +42,7 @@ public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
             return _stalking;
         }
     }
-    private StateController _controller;
+    private StateController controller;
 
     [SerializeField] private float playerLostDistance = 20f;
 
@@ -50,7 +50,7 @@ public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
     public float revealRadius = 9;
     public void EnterState(StateController owner)
     {
-        _controller = owner;
+        controller = owner;
     }
     public bool isFind;
     public bool IsFindMe(float radius, GameObject player)
@@ -74,7 +74,7 @@ public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
 
                 if (isFind)
                 {
-                    _controller.SetState<StalkerHuntState>();
+                    controller.SetState<StalkerRevealState>();
                 }
                 else
                 {
@@ -83,14 +83,14 @@ public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
             }
             else
             {
-                _controller.SetState<StalkerLostPlayer>();
+                controller.SetState<StalkerLostPlayer>();
             }
         }
         else
         {
             enemyMovement.KeepDistance(stalking.huntingPlayer, stalking.keepingDistance);
             if (distance < stalking.keepingDistance) 
-                _controller.SetState<StalkerHuntState>();
+                controller.SetState<StalkerHuntState>();
         }
     }
 

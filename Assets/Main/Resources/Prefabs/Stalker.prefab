@@ -160,6 +160,22 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7491898928408784133}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2218890603806187425}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7776440584337951416}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2790881109732171020}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5148649470227758936}
   m_SourcePrefab: {fileID: 100100000, guid: 332a8a5bfb2fc4a18944ffe0345b93c7, type: 3}
 --- !u!1 &7674190295086403339 stripped
 GameObject:
@@ -262,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb2912012a3b094da2e0318a474883f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _listenDistance: 0
 --- !u!114 &802058711354782205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a8ac515a9c317418a17b6d6bdbf12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unAttackDistance: 0.72
+  attackDistance: 1
 --- !u!114 &3288461199321108178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +455,89 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLostDistance: 20
   hidingSpotObj: {fileID: 0}
+  revealRadius: 9
+  isFind: 0
+--- !u!114 &2218890603806187425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674190295086403339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f49f96922a20a4c89da8d66864ef38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7776440584337951416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674190295086403339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0102dc5f863a10447a8da41c4edf3fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimReloaded: 1
+  animationHash:
+    _serializedList:
+    - Key: Idle
+      Value: 2081823275
+    - Key: Walk
+      Value: 765711723
+    - Key: Run
+      Value: 1748754976
+    - Key: Attack
+      Value: 1080829965
+    - Key: Back
+      Value: -1801082829
+  stateController: {fileID: 7140873516549423180}
+  meleAttack: {fileID: 802058711354782205}
+  attackState: {fileID: 4906915231669869760}
+--- !u!114 &2790881109732171020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674190295086403339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88b35fa15d9a994cbfc06c33cf69be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listenDistance: 6
+--- !u!114 &5148649470227758936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674190295086403339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3405f9c5dbd541546b1768c211cdf63b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colideSound: {fileID: 8300000, guid: b26a4abde97fdab4eb51cff5f38afc59, type: 3}
+  volume: 0.59
+  pitch: 0.697
+  pitchRandomMin: 0.446
+  pitchRandomMax: 0.613
+  minDistance: 0
+  maxDistance: 40
+  lastVelocity: {x: 0, y: 0, z: 0}
+  playerMoveSound: {fileID: 8300000, guid: 0e2e79170a4f63145a92bd94cb4960f4, type: 3}
+  stepTime: 0.5
+  stepVol: 1
+  stepPitch: 1
+  stepPitchRandomMin: 0.432
+  stepPitchRandomMax: 0.609
+  soundMin: 0
+  soundMax: 20
 --- !u!4 &7674190295086895889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400058, guid: 332a8a5bfb2fc4a18944ffe0345b93c7,

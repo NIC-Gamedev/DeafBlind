@@ -36,6 +36,7 @@ public class StalkerHideState : MonoBehaviour,IAIState
     public void EnterState(StateController owner)
     {
         controller = owner;
+        enemyMovement.movementSpeedMultiplier = 4f;
         stalking.stalkingLevel = stalking._stalkingLevel;
         SelectWaypoint(transform.position, stalking.huntingPlayer.transform.position,15,40);
     }
@@ -44,6 +45,7 @@ public class StalkerHideState : MonoBehaviour,IAIState
     {
         if(Vector3.Distance(transform.position, enemyMovement.targetPosition) < 1)
         {
+            enemyMovement.movementSpeedMultiplier = 1f;
             controller.SetState<StalkerIdleState>();
         }
     }

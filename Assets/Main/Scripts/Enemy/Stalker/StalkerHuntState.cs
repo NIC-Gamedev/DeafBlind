@@ -55,8 +55,6 @@ public class StalkerHuntState : MonoBehaviour,IAIState
     public bool isFind;
 
     public float revealRadius = 9;
-
-    private Coroutine TryAttackProcces;
     public void EnterState(StateController owner)
     {
         controller = owner;
@@ -64,7 +62,6 @@ public class StalkerHuntState : MonoBehaviour,IAIState
         chaseTime = _chaseTime;
         stalking.ResetStalkingParam();
         enemyMovement.SetTarget(null);
-        TryAttackProcces = null;
     }
 
     public void ExitState()
@@ -92,7 +89,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
 
     public void UpdateState()
     {
-        if (reactionTime < 0 && TryAttackProcces == null)
+        if (reactionTime < 0)
         {
             var visibleObject = enemyPerception.GetVisibleObjects();
             firstDistance = float.MaxValue;
@@ -103,14 +100,14 @@ public class StalkerHuntState : MonoBehaviour,IAIState
 
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
 
-                if (firstDistance > currentDistance && !isFind)
+                if (firstDistance > currentDistance)
                 {
                     firstDistance = currentDistance;
                     stalking.huntingPlayer = item;
                     enemyPerception.playerLastSeenPos = item.transform.position;
                 }
 
-                if (isFind)
+                if (isFind && stalking.huntingPlayer)
                 {
                     controller.SetState<StalkerRevealState>();
                 }
@@ -125,7 +122,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
                         stalking.timeOfStalking = stalking._timeOfStalking;
                         if (stalking.stalkingLevel <= 0)
                         {
-                            TryAttackProcces = StartCoroutine(GoToAttak());
+                            controller.SetState<StalkerAttackState>();
                         }
                     }
                     else
@@ -165,11 +162,5 @@ public class StalkerHuntState : MonoBehaviour,IAIState
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, revealRadius);
-    }
-
-    public IEnumerator GoToAttak()
-    {
-        yield return null;
-        Debug.Log("DIE!!");
     }
 }

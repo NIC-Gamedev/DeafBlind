@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class StalkerAttackState : MonoBehaviour,IAIState
@@ -39,18 +40,34 @@ public class StalkerAttackState : MonoBehaviour,IAIState
         }
     }
 
-    [SerializeField] private float unAttackDistance;
+    private StalkerStalking _stalkerStalking;
+    private StalkerStalking stalkerStalking
+    {
+        get
+        {
+            if (_stalkerStalking == null)
+            {
+                _stalkerStalking = GetComponent<StalkerStalking>();
+            }
+            return _stalkerStalking;
+        }
+    }
     StateController controller;
 
-    float closestDistance = Mathf.Infinity;
+    public float attackDistance = 1;
+
+
+    public Coroutine TryAttackProcces;
     public void EnterState(StateController owner)
     {
         controller = owner;
-        attackState.Attack();
+        TryAttackProcces = StartCoroutine(GoToAttak());
     }
 
     public void ExitState()
     {
+        enemyMovement.movementSpeedMultiplier = 1;
+        TryAttackProcces = null;
     }
 
     public string GetStateName()
@@ -60,28 +77,30 @@ public class StalkerAttackState : MonoBehaviour,IAIState
 
     public void UpdateState()
     {
-        Collider[] collider = Physics.OverlapSphere(transform.position, unAttackDistance, attackState.attackLayer);
-        if (collider.Length == 0)
-        {
-            controller.SetState<StalkerHuntState>();
-        }
-        else
-        {
-            closestDistance = Mathf.Infinity;
-            foreach (var item in collider)
-            {
-                float distance = Vector3.Distance(transform.position, item.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    enemyMovement.RotateToObject(item.gameObject);
-                }
-            }
-        }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, unAttackDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
+    }
+
+    public IEnumerator GoToAttak()
+    {
+        while (attackState.attackProcess == null)
+        {
+            yield return new WaitForFixedUpdate();
+            if (Vector3.Distance(transform.position, stalkerStalking.huntingPlayer.transform.position) < attackDistance)
+            {
+                attackState.Attack();
+            }
+            else
+            {
+                enemyMovement.movementSpeedMultiplier = 8f;
+                enemyMovement.SetTarget(stalkerStalking.huntingPlayer.transform);
+            }
+        }
+
+        controller.SetState<StalkerHideState>();
     }
 }

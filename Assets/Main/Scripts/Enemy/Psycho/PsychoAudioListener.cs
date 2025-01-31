@@ -1,19 +1,11 @@
 using UnityEngine;
 
-public class PsychoAudioListener : MonoBehaviour,IListenAudio
+public class PsychoAudioListener : BaseAudioListener
 {
-    public Transform lastHearAudio { get; set; }
-    public void OnListenAudio(Vector3 audioPos) 
-    {
-        if(lastHearAudio != null)
-            Destroy(lastHearAudio.gameObject);
-        var lastHear = new GameObject("LastHearAudio").transform;
-        lastHear.position = audioPos;
-        lastHearAudio = lastHear;
-    }
 }
 
 public interface IListenAudio
 {
+    public float listenDistance { get; set; }
     public void OnListenAudio(Vector3 audioPos) { }
 }

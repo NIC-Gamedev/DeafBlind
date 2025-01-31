@@ -17,7 +17,7 @@ public class StalkerStalking : MonoBehaviour
 
     [SerializeField] public float keepingDistanceMIN = 4;
     [SerializeField] public float keepingDistanceMAX = 15;
-    public float keepingDistance => Mathf.Lerp(keepingDistanceMIN, keepingDistanceMAX, stalkingLevel / _stalkingLevel);
+    public float keepingDistance => Mathf.Lerp(keepingDistanceMIN, keepingDistanceMAX, (float)stalkingLevel / (float)_stalkingLevel);
     void Start()
     {
         timerBefAttack = _timerBefAttack;
@@ -29,6 +29,10 @@ public class StalkerStalking : MonoBehaviour
     {
         timerBefAttack = _timerBefAttack;
         timeOfStalking = _timeOfStalking;
+    }
+    private void Update()
+    {
+        Debug.Log(Mathf.Lerp(keepingDistanceMIN, keepingDistanceMAX, (float)stalkingLevel / (float)_stalkingLevel));
     }
 
     public static Vector3 FindBestWaypoint(Vector3 enemyPosition, Vector3 playerPosition, Vector3[] waypoints, float safeDistance)
