@@ -1,7 +1,4 @@
 using UnityEngine; 
-using UnityEngine.AI;
-using static UnityEditor.Progress;
-using UnityEngine.InputSystem.XR;
 
 public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
 {
@@ -47,7 +44,6 @@ public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
     [SerializeField] private float playerLostDistance = 20f;
 
     [SerializeField] private GameObject hidingSpotObj;
-    public float revealRadius = 9;
     public void EnterState(StateController owner)
     {
         controller = owner;
@@ -65,7 +61,7 @@ public class StalkerTryToGoBehindState : MonoBehaviour, IAIState
     {
         var distance = Vector3.Distance(transform.position, stalking.huntingPlayer.transform.position);
         if (!isFind)
-            isFind = IsFindMe(revealRadius, stalking.huntingPlayer);
+            isFind = IsFindMe(stalking.revealRadius, stalking.huntingPlayer);
         if (!stalking.IsBehindPlayer(stalking.huntingPlayer.transform))
         {
             if (distance < playerLostDistance)

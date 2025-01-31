@@ -319,7 +319,8 @@ public class PhysicalAudioManager : MonoBehaviour
 
                             if (item.TryGetComponent(out IListenAudio listenerAudio))
                             {
-                                if(Vector3.Distance(transform.position,item.transform.position) < listenerAudio.listenDistance)
+                                var dist = Vector3.Distance(audioSource.transform.position, item.transform.position);
+                                if (dist < listenerAudio.listenDistance)
                                     listenerAudio.OnListenAudio(audioSource.transform.position);
                             }
                         }

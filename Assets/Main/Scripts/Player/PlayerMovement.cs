@@ -89,7 +89,7 @@ public class PlayerMovement : MovementBase
             float speedMultiplier = sprintInput ? sprintMultiplier : 1f;
             isSprinting = speedMultiplier != 1; 
             float speedDevider = isSneak ? sneakingDevider : 1f;
-            rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider, ForceMode.Force);
+            rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider);
 
             Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 

@@ -54,7 +54,6 @@ public class StalkerHuntState : MonoBehaviour,IAIState
     public float attackDistance = 0.6f;
     public bool isFind;
 
-    public float revealRadius = 9;
     public void EnterState(StateController owner)
     {
         controller = owner;
@@ -96,7 +95,7 @@ public class StalkerHuntState : MonoBehaviour,IAIState
             foreach (var item in visibleObject)
             {
                 if(!isFind) 
-                    isFind = IsFindMe(revealRadius, item);
+                    isFind = IsFindMe(stalking.revealRadius, item);
 
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
 
@@ -156,11 +155,5 @@ public class StalkerHuntState : MonoBehaviour,IAIState
         {
             reactionTime -= Time.deltaTime;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, revealRadius);
     }
 }

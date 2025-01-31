@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BaseAudioListener : MonoBehaviour,IListenAudio
 {
@@ -18,7 +19,23 @@ public class BaseAudioListener : MonoBehaviour,IListenAudio
         if (lastHearAudio != null)
             Destroy(lastHearAudio.gameObject);
         var lastHear = new GameObject("LastHearAudio").transform;
-        lastHear.position = audioPos;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(audioPos, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            lastHear.position = new Vector3(hit.position.x, audioPos.y, hit.position.z);
+        }
+        else
+        {
+            if (NavMesh.SamplePosition(audioPos, out hit, 10.0f, NavMesh.AllAreas))
+            {
+                lastHear.position = new Vector3(hit.position.x, audioPos.y, hit.position.z);
+            }
+            else
+            {
+                lastHear.position = audioPos;
+            }
+        }
         lastHearAudio = lastHear;
     }
 

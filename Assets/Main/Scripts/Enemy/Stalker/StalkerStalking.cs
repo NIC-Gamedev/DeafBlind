@@ -13,6 +13,8 @@ public class StalkerStalking : MonoBehaviour
     public int _stalkingLevel = 5;
     internal int stalkingLevel;
 
+    public float revealRadius = 3;
+
     public GameObject huntingPlayer;
 
     [SerializeField] public float keepingDistanceMIN = 4;
@@ -29,10 +31,6 @@ public class StalkerStalking : MonoBehaviour
     {
         timerBefAttack = _timerBefAttack;
         timeOfStalking = _timeOfStalking;
-    }
-    private void Update()
-    {
-        Debug.Log(Mathf.Lerp(keepingDistanceMIN, keepingDistanceMAX, (float)stalkingLevel / (float)_stalkingLevel));
     }
 
     public static Vector3 FindBestWaypoint(Vector3 enemyPosition, Vector3 playerPosition, Vector3[] waypoints, float safeDistance)
@@ -78,5 +76,11 @@ public class StalkerStalking : MonoBehaviour
         }
 
         return nearestObject;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, revealRadius);
     }
 }

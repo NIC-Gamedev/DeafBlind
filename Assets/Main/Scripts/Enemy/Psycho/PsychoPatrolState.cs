@@ -28,14 +28,14 @@ public class PsychoPatrolState : MonoBehaviour, IAIState
         }
     }
 
-    private PsychoAudioListener _audioListener;
-    private PsychoAudioListener audioListener
+    private BaseAudioListener _audioListener;
+    private BaseAudioListener audioListener
     {
         get
         {
             if (_audioListener == null)
             {
-                _audioListener = GetComponent<PsychoAudioListener>();
+                _audioListener = GetComponent<BaseAudioListener>();
             }
             return _audioListener;
         }
