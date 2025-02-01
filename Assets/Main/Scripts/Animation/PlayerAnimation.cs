@@ -12,6 +12,8 @@ public class PlayerAnimation : BaseAnimator
     private List<ChainedAnimation> chainedAnimations = new List<ChainedAnimation>();
     private bool isJumpStart;
 
+  
+
     protected override void Start()
     {
         base.Start();

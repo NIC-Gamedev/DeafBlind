@@ -211,7 +211,6 @@ namespace FishNet.Example
                 _networkManager.ServerManager.StopConnection(true);
             else
                 _networkManager.ServerManager.StartConnection();
-
             DeselectButtons();
         }
 

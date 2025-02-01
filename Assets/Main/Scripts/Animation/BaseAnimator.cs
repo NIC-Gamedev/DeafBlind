@@ -1,7 +1,8 @@
+using FishNet.Object;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-public abstract class BaseAnimator : MonoBehaviour
+public abstract class BaseAnimator : NetworkBehaviour
 {
     protected int CurrentState;
     protected float LockedTill;
@@ -9,6 +10,7 @@ public abstract class BaseAnimator : MonoBehaviour
 
     protected Dictionary<object,int> animationHash = new Dictionary<object, int>();
 
+    
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();

@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FishNet;
+using FishNet.Object;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : NetworkBehaviour
 {
     [SerializeField] private Vector2 mouseSensitivity = new Vector2(8, 0.5f);
 
@@ -23,6 +25,17 @@ public class PlayerCamera : MonoBehaviour
         InputInit();
     }
 
+    public override void OnStartClient()
+    {
+        if(IsOwner)
+        {
+
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
     private void InputInit()
     {
         inputActions = InputManager.inputActions;
