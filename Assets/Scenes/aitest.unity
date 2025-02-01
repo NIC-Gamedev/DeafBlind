@@ -19344,6 +19344,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1,
         type: 3}
+      propertyPath: _deafPrefab
+      value: 
+      objectReference: {fileID: 5577466394593721105, guid: 0d8aee65b089e024fa3c1133fabab0c9,
+        type: 3}
+    - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1,
+        type: 3}
+      propertyPath: _blindPrefab
+      value: 
+      objectReference: {fileID: 5426180632684786090, guid: 1a2740eb5a1bc4043abd6f57d293574e,
+        type: 3}
+    - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1,
+        type: 3}
       propertyPath: _playerPrefab
       value: 
       objectReference: {fileID: 5577466394593721105, guid: 0d8aee65b089e024fa3c1133fabab0c9,

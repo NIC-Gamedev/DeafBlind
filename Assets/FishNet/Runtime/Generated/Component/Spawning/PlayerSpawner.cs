@@ -27,13 +27,17 @@ namespace FishNet.Component.Spawning
         /// Prefab to spawn for the player.
         /// </summary>
         [Tooltip("Prefab to spawn for the player.")]
-        [SerializeField]
-        private NetworkObject _playerPrefab;
+        
+        [SerializeField] private NetworkObject _deafPrefab; // Префаб первого персонажа
+        [SerializeField] private NetworkObject _blindPrefab; // Префаб второго персонажа
+
+        private bool _isDeafAChosen = false; // Флаг выбора первого персонажа
+        private bool _isBlindAChosen = false; // Флаг выбора второго персонажа
+        //private NetworkObject _playerPrefab;
         /// <summary>
         /// Sets the PlayerPrefab to use.
         /// </summary>
         /// <param name="nob"></param>
-        public void SetPlayerPrefab(NetworkObject nob) => _playerPrefab = nob;
         /// <summary>
         /// True to add player to the active scene when no global scenes are specified through the SceneManager.
         /// </summary>
@@ -92,7 +96,31 @@ namespace FishNet.Component.Spawning
         {
             if (!asServer)
                 return;
-            if (_playerPrefab == null)
+
+            NetworkObject selectedPrefab;
+
+            if (UnityEngine.Random.Range(0, 2) == 0)
+            {
+                selectedPrefab = _deafPrefab; // Первый персонаж
+            }
+            else
+            {
+                selectedPrefab = _blindPrefab; // Второй персонаж
+            }
+
+            // Определяем, какой персонаж спавнится для текущего игрока
+            if (!_isDeafAChosen)
+            {
+                selectedPrefab = _deafPrefab;
+                _isDeafAChosen = true;
+                _isBlindAChosen = true; // Второй игрок автоматически получает второго персонажа
+            }
+            else
+            {
+                selectedPrefab = _blindPrefab;
+            }
+
+            if (selectedPrefab == null)
             {
                 NetworkManagerExtensions.LogWarning($"Player prefab is empty and cannot be spawned for connection {conn.ClientId}.");
                 return;
@@ -100,9 +128,9 @@ namespace FishNet.Component.Spawning
 
             Vector3 position;
             Quaternion rotation;
-            SetSpawn(_playerPrefab.transform, out position, out rotation);
+            SetSpawn(selectedPrefab.transform, out position, out rotation);
 
-            NetworkObject nob = _networkManager.GetPooledInstantiated(_playerPrefab, position, rotation, true);
+            NetworkObject nob = _networkManager.GetPooledInstantiated(selectedPrefab, position, rotation, true);
             _networkManager.ServerManager.Spawn(nob, conn);
 
             //If there are no global scenes 

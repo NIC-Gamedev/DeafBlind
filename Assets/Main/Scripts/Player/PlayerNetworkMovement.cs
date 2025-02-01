@@ -48,7 +48,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
 
     private void InputInit()
-    {
+    { 
         inputActions = InputManager.inputActions;
         inputActions.Player.Movement.Enable();
         inputActions.Player.Sprint.Enable();
