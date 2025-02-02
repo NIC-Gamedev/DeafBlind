@@ -87,7 +87,7 @@ public class PlayerMovement : MovementBase
             }
 
             float speedMultiplier = sprintInput ? sprintMultiplier : 1f;
-            isSprinting = speedMultiplier != 1; 
+            isSprinting = speedMultiplier != 1;
             float speedDevider = isSneak ? sneakingDevider : 1f;
             rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider);
 
@@ -95,20 +95,15 @@ public class PlayerMovement : MovementBase
 
             if (flatVel.magnitude > movementSpeed)
             {
-<<<<<<< HEAD
-                Vector3 limitedVel = flatVel.normalized * movementSpeed;
-                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-=======
                 Vector3 limitedVel = flatVel.normalized * movementSpeed * speedMultiplier / speedDevider;
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
->>>>>>> dev/enemyAi
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
         }
     }
 
     private void StaminaRecover()
     {
-        if(currentWaitTimeBeforeStaminaRecover > 0) 
+        if (currentWaitTimeBeforeStaminaRecover > 0)
             currentWaitTimeBeforeStaminaRecover -= Time.deltaTime;
 
         if (currentStaminaTime < maxStaminaTime && currentWaitTimeBeforeStaminaRecover <= 0)
@@ -125,9 +120,9 @@ public class PlayerMovement : MovementBase
     private void Jump(InputAction.CallbackContext callback)
     {
         if (IsOnGround())
-                rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
     }
-    
+
 
     void FrictionControl()
     {
@@ -159,7 +154,7 @@ public class PlayerMovement : MovementBase
 
     private void OnDrawGizmos()
     {
-        if(col) 
+        if (col)
             Gizmos.DrawWireSphere(colliderBottom, radius);
     }
 

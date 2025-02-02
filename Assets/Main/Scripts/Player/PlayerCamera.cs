@@ -8,12 +8,11 @@ using FishNet.Object;
 
 public class PlayerCamera : NetworkBehaviour
 {
-<<<<<<< HEAD
+ 
     [SerializeField] private Vector2 mouseSensitivity = new Vector2(8, 0.5f);
-=======
-    [SerializeField] private Vector2 mouseSensitivity = new Vector2(8,0.5f); 
+
     [SerializeField] [Range(0,90f)]private float angleY = 90; 
->>>>>>> dev/enemyAi
+
 
     private Vector2 cameraRotation;
 

@@ -1,20 +1,17 @@
 using FishNet.Managing;
 using UnityEngine;
-
-public class Netcodetest : MonoBehaviour
+using FishNet;
+using FishNet.Object;
+public class Netcodetest : NetworkBehaviour
 {
     private NetworkManager _networkManager;
 
-    public void StartHost()
+    public override void OnStartClient()
     {
-        _networkManager = FindObjectOfType<NetworkManager>();
-
-        // Запускаем сервер (хост)
-        _networkManager.ServerManager.StartConnection();
-
-        // Подключаем локального клиента к себе
-        _networkManager.ClientManager.StartConnection();
-
-        Debug.Log("Хост запущен!");
+        base.OnStartClient();
+        if(!IsOwner)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -4,17 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Blind.unity
-    guid: fe55ed9f49aa0de4db7e3258558842c0
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/aitest.unity
-    guid: ddef91d319cc41d4f8d57e353b5c220e
-=======
-    path: Assets/Scenes/Deaf.unity
-    guid: cba24d05ce9a447499215a2a194ffa55
->>>>>>> dev/enemyAi
+  m_Scenes: []
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

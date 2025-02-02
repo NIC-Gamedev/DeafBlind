@@ -22,7 +22,7 @@ public class WaveThrow : MonoBehaviour
 
     private void LateUpdate()
     {
-        lastVelocity = rb.velocity;
+        lastVelocity = rb.linearVelocity;
     }
 
     protected virtual void Start()

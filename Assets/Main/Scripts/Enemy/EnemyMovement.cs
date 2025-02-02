@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,70 +6,43 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-<<<<<<< HEAD
-    [SerializeField] private float movementSpeed = 5f; // ��������� �������� �������� �����
-    [SerializeField] private float rotationSpeed = 10f; // ��������� �������� �������� �����
-=======
-    [SerializeField] private float movementSpeed = 5f; 
+    [SerializeField] private float movementSpeed = 5f;
     [SerializeField] public float movementSpeedMultiplier = 1;
-    [SerializeField] private float rotationSpeed = 10f; // ��������� �������� �������� �����
->>>>>>> dev/enemyAi
+    [SerializeField] private float rotationSpeed = 10f; // Íàñòðîéêà ñêîðîñòè ïîâîðîòà âðàãà
 
-    private NavMeshAgent agent; // NavMeshAgent ��� ���������� ���������
+    private NavMeshAgent agent; // NavMeshAgent äëÿ óïðàâëåíèÿ äâèæåíèåì
     private Rigidbody rb;
 
-<<<<<<< HEAD
-    [SerializeField] private GameObject target;
-    private Vector3 targetPosition; // ������� ���� ��������
-    private bool hasTarget = false; // ���� ������� ����
-
-=======
     [SerializeField] public Transform target;
-    public Vector3 targetPosition { private set; get; } // ������� ���� ��������
->>>>>>> dev/enemyAi
+    public Vector3 targetPosition { private set; get; } // Òåêóùàÿ öåëü äâèæåíèÿ
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-<<<<<<< HEAD
-       
-        // ��������� ��������� NavMeshAgent
-=======
-        // ��������� ��������� NavMeshAgent
->>>>>>> dev/enemyAi
+        // Íàñòðîèòü ïàðàìåòðû NavMeshAgent
         agent.speed = movementSpeed;
-        agent.angularSpeed = rotationSpeed * 10f; // NavMeshAgent ���������� �������/���
+        agent.angularSpeed = rotationSpeed * 10f; // NavMeshAgent èñïîëüçóåò ãðàäóñû/ñåê
         agent.acceleration = movementSpeed * 2f;
-        agent.updatePosition = false; // ��������� ��� ����� ������� Rigidbody
-        agent.updateRotation = false; // ��������� ��������� �������
+        agent.updatePosition = false; // Ïîçâîëÿåò íàì ñàìèì äâèãàòü Rigidbody
+        agent.updateRotation = false; // Óïðàâëÿåì ïîâîðîòîì âðó÷íóþ
     }
 
     void Update()
     {
-<<<<<<< HEAD
-        targetPosition = target.GetComponent<Transform>().position;
-        // ���� ���� ����, �������� � NavMeshAgent
-        if (hasTarget)
-=======
         if (target)
->>>>>>> dev/enemyAi
         {
             targetPosition = target.transform.position;
             agent.SetDestination(targetPosition);
 
-            // �������� �������� ����������� �� NavMeshAgent
+            // Ïîëó÷àåì æåëàåìîå íàïðàâëåíèå îò NavMeshAgent
             Vector3 direction = agent.desiredVelocity;
 
-<<<<<<< HEAD
-            // �������� ����������� � ����� ��������
-            MoveUsingRigidbody(direction);
-=======
-            // �������� ����������� � ����� ��������
+            // Ïåðåäàåì íàïðàâëåíèå â ìåòîä äâèæåíèÿ
             MoveAndWatchToDirection(direction);
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
         }
     }
     public void MoveInDirection(Vector3 direction)
@@ -79,11 +52,10 @@ public class EnemyMovement : MonoBehaviour
             agent.SetDestination(transform.position + direction.normalized);
             Vector3 directionAgent = agent.desiredVelocity;
             MoveTo(directionAgent);
->>>>>>> dev/enemyAi
         }
     }
 
-    public void KeepDistance(GameObject player,float distance)
+    public void KeepDistance(GameObject player, float distance)
     {
         if (Vector3.Distance(player.transform.position, transform.position) > distance)
         {
@@ -99,30 +71,16 @@ public class EnemyMovement : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
-<<<<<<< HEAD
-            // ���������� ���� ��� ��������
-            rb.AddForce(direction.normalized * movementSpeed * 10f, ForceMode.Force);
-
-            // ����������� ��������
-            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-=======
             rb.AddForce(direction.normalized * movementSpeed * 10f * movementSpeedMultiplier, ForceMode.Force);
 
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
->>>>>>> dev/enemyAi
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             if (flatVel.magnitude > movementSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * movementSpeed;
                 rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
 
-<<<<<<< HEAD
-            // ������� ������� � ����������� ��������
-            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-=======
             RotateToDirection(direction);
->>>>>>> dev/enemyAi
         }
     }
     private void MoveTo(Vector3 direction)
@@ -131,11 +89,11 @@ public class EnemyMovement : MonoBehaviour
         {
             rb.AddForce(direction.normalized * movementSpeed * 10f * movementSpeedMultiplier, ForceMode.Force);
 
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             if (flatVel.magnitude > movementSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * movementSpeed;
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
         }
     }
@@ -154,25 +112,16 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // �������������� ������� NavMeshAgent � Rigidbody
+        // Ñèíõðîíèçèðóåì ïîçèöèþ NavMeshAgent ñ Rigidbody
         if (agent.enabled)
         {
             agent.nextPosition = rb.position;
         }
     }
 
-<<<<<<< HEAD
-    // ��������� ����� ��� ��������� ���� �����
-    public void SetTarget(GameObject targetObject)
-    {
-        target = targetObject;
-        targetPosition = target.GetComponent<Transform>().position;
-        hasTarget = true; // ������������� ���� ������� ����
-=======
-    // ��������� ����� ��� ��������� ���� �����
+    // Ïóáëè÷íûé ìåòîä äëÿ óñòàíîâêè öåëè èçâíå
     public void SetTarget(Transform targetObject)
     {
         target = targetObject;
->>>>>>> dev/enemyAi
     }
 }

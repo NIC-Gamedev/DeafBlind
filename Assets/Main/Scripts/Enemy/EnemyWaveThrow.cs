@@ -40,7 +40,7 @@ public class EnemyWaveThrow : WaveThrow
     }
     protected void OnCollisionStay(Collision collision)
     {
-        if (Mathf.Abs(rb.velocity.x) > 1 || Mathf.Abs(rb.velocity.z) > 1)
+        if (Mathf.Abs(rb.linearVelocity.x) > 1 || Mathf.Abs(rb.linearVelocity.z) > 1)
         {
             curentStepTime = stepTime;
             audioManager.PlaySoundEffect(playerMoveSound, volume: 0.5f, minDistance: soundMin, maxDistance: soundMax, ColideObject: collision, soundObject: gameObject);
