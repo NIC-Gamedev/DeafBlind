@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using FishNet.Object;
+using FishNet.Connection;
 public class PlayerNetworkMovement : MovementNetworkBase
 {
-    MainController inputActions;
     private Vector3 input;
     [Header("Walking")]
     [SerializeField] private float FrictionAmount;
@@ -23,6 +24,8 @@ public class PlayerNetworkMovement : MovementNetworkBase
     public bool isSprinting { get; private set; }
 
     private Action OnStaminaEnd;
+
+    public MainController inputActions;
     protected override void Awake()
     {
         base.Awake();
@@ -34,22 +37,17 @@ public class PlayerNetworkMovement : MovementNetworkBase
         base.OnStartClient();
         if(base.IsOwner)
         {
-
+            InputInit();
         }
         else
         {
-            gameObject.GetComponent<PlayerNetworkMovement>().enabled = false;
         }
-    }
-    private void Start()
-    {
-        InputInit();
     }
 
 
     private void InputInit()
-    { 
-        inputActions = InputManager.inputActions;
+    {
+        inputActions = new MainController();
         inputActions.Player.Movement.Enable();
         inputActions.Player.Sprint.Enable();
         inputActions.Player.Jump.Enable();
@@ -65,7 +63,10 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
     private void FixedUpdate()
     {
-        Movement();
+        if (base.IsOwner)
+        {
+            Movement();
+        }
         FrictionControl();
     }
 
@@ -106,6 +107,8 @@ public class PlayerNetworkMovement : MovementNetworkBase
             }
         }
     }
+
+
 
     private void StaminaRecover()
     {

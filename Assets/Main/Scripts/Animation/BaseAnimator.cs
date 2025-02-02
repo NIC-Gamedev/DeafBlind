@@ -1,8 +1,10 @@
 using AYellowpaper.SerializedCollections;
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-public abstract class BaseAnimator : MonoBehaviour
+public abstract class BaseAnimator : NetworkBehaviour
 {
     protected int CurrentState;
     protected float LockedTill;
@@ -20,6 +22,8 @@ public abstract class BaseAnimator : MonoBehaviour
     {
         PlayerAnimationStateLogic();
     }
+
+    [ServerRpc(RequireOwnership = false)]
     protected void PlayerAnimationStateLogic()
     {
         var state = GetState();

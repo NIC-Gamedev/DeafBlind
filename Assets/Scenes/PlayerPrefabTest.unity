@@ -349,27 +349,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1048682407 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6886812641619171902, guid: 62fef855fe2e6224fac813309246e894,
-    type: 3}
-  m_PrefabInstance: {fileID: 1260512813263101115}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1048682413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048682407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6602383a75770a84a8bc8b3786717422, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 0}
-  _networkObjectCache: {fileID: 0}
 --- !u!1 &1105786613 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 998811254615237603, guid: 6e623509ae957d246b66344f6c906fcd,
@@ -577,19 +556,25 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3711954523
       objectReference: {fileID: 0}
+    - target: {fileID: 4538416603781415790, guid: 62fef855fe2e6224fac813309246e894,
+        type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 4172279625
+      objectReference: {fileID: 0}
     - target: {fileID: 5138195267981253030, guid: 62fef855fe2e6224fac813309246e894,
         type: 3}
       propertyPath: m_Name
       value: Blind
       objectReference: {fileID: 0}
+    - target: {fileID: 7693341598162236843, guid: 62fef855fe2e6224fac813309246e894,
+        type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 3715628923
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6886812641619171902, guid: 62fef855fe2e6224fac813309246e894,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1048682413}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62fef855fe2e6224fac813309246e894, type: 3}
 --- !u!1001 &6779244994973793193
 PrefabInstance:
@@ -608,6 +593,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729778635195450268, guid: 6e623509ae957d246b66344f6c906fcd,
+        type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 4231004123
       objectReference: {fileID: 0}
     - target: {fileID: 3649741552129244603, guid: 6e623509ae957d246b66344f6c906fcd,
         type: 3}

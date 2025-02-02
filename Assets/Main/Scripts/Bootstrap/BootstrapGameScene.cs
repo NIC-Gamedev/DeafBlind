@@ -27,7 +27,8 @@ public class BootstrapGameScene : MonoBehaviour
     {
         serviceLocator.Initialize();
         OnLevelGeneratorComplete += InitAfterGenerateComplete;
-        levelGenerator.Generate(OnLevelGeneratorComplete);
+        if(levelGenerator)
+            levelGenerator.Generate(OnLevelGeneratorComplete);
     }
     private void InitAfterGenerateComplete()
     {

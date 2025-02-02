@@ -7,13 +7,13 @@ public class PlayerAnimation : BaseAnimator
 {
     private MainController inputActions => InputManager.inputActions;
     private Vector3 input;
-    private PlayerMovement _playerMovement;
-    private PlayerMovement playerMovement {
+    private PlayerNetworkMovement _playerMovement;
+    private PlayerNetworkMovement playerMovement {
         get 
         { 
             if (_playerMovement == null) 
             {
-                _playerMovement = GetComponent<PlayerMovement>();
+                _playerMovement = GetComponent<PlayerNetworkMovement>();
             }
             return _playerMovement;
         }
@@ -33,7 +33,6 @@ public class PlayerAnimation : BaseAnimator
         set
         { }
     }
-    private List<ChainedAnimation> chainedAnimations = new List<ChainedAnimation>();
     private bool isJumpStart;
 
   
@@ -101,10 +100,11 @@ public class PlayerAnimation : BaseAnimator
             return animationHash["Land"];
         }
 
-        if (input != Vector3.zero)
-            return PlayerMoveAnimation(playerMovement.isSprinting,playerMovement.isSneak);
+        //if (input != Vector3.zero)
+        //    return PlayerMoveAnimation(playerMovement.isSprinting,playerMovement.isSneak);
 
-        return playerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
+        //return playerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
+        return animationHash["Idle"];
     }
 
 
@@ -114,12 +114,5 @@ public class PlayerAnimation : BaseAnimator
             return animationHash[$"Crouch{input}"];
 
         return animationHash[$"{(isSprint ? "Run" : "Walk")}{input}"];
-    }
-
-
-    unsafe struct ChainedAnimation
-    {
-        float timeToNextAnim;
-        string currentAnimationChain;
     }
 }

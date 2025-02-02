@@ -1,3 +1,4 @@
+using FishNet.Connection;
 using FishNet.Object;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,12 +18,11 @@ public abstract class MovementNetworkBase : NetworkBehaviour
         col = GetComponent<Collider>();
     }
 
+    [ServerRpc]
     protected virtual void Movement()
     {
     }
-    protected virtual void Movement(InputAction.CallbackContext callback)
-    {
-    }
+    [ServerRpc]
     protected virtual void Movement(Vector3 direction)
     {
     }
