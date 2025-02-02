@@ -5,10 +5,34 @@ using UnityEngine.InputSystem;
 
 public class PlayerAnimation : BaseAnimator
 {
-    private MainController inputActions;
+    private MainController inputActions => InputManager.inputActions;
     private Vector3 input;
-    private PlayerMovement playerMovement;
-    private Rigidbody rb;
+    private PlayerMovement _playerMovement;
+    private PlayerMovement playerMovement {
+        get 
+        { 
+            if (_playerMovement == null) 
+            {
+                _playerMovement = GetComponent<PlayerMovement>();
+            }
+            return _playerMovement;
+        }
+        set { }
+    }
+    private Rigidbody _rb; 
+    private Rigidbody rb 
+    {
+        get
+        {
+            if (_rb == null)
+            {
+                _rb = GetComponent<Rigidbody>();
+            }
+            return _rb;
+        }
+        set
+        { }
+    }
     private List<ChainedAnimation> chainedAnimations = new List<ChainedAnimation>();
     private bool isJumpStart;
 
@@ -17,35 +41,41 @@ public class PlayerAnimation : BaseAnimator
     protected override void Start()
     {
         base.Start();
-        inputActions = InputManager.inputActions;
         inputActions.Player.Movement.performed += callback => input = callback.ReadValue<Vector3>();
         inputActions.Player.Movement.canceled += callback => input = callback.ReadValue<Vector3>();
-        playerMovement = GetComponent<PlayerMovement>();
-        rb = GetComponent<Rigidbody>();
-        InitAnimation();
     }
 
-    private void InitAnimation()
+    protected override void InitAnimation()
     {
         animationHash.Add("Idle", Animator.StringToHash("Idle"));
 
-        animationHash.Add("RunRight", Animator.StringToHash("HumanM@Run01_Right"));
-        animationHash.Add("RunForwardRight", Animator.StringToHash("HumanM@Run01_ForwardRight"));
-        animationHash.Add("RunForwardLeft", Animator.StringToHash("HumanM@Run01_ForwardLeft"));
-        animationHash.Add("RunForward", Animator.StringToHash("HumanM@Run01_Forward"));
-        animationHash.Add("RunLeft", Animator.StringToHash("HumanM@Run01_Left"));
-        animationHash.Add("RunBackward", Animator.StringToHash("HumanM@Run01_Backward"));
-        animationHash.Add("RunBackwardRight", Animator.StringToHash("HumanM@Run01_BackwardRight"));
-        animationHash.Add("RunBackwardLeft", Animator.StringToHash("HumanM@Run01_BackwardLeft"));
+        animationHash.Add($"Run{Vector3.right}", Animator.StringToHash("HumanM@Run01_Right"));
+        animationHash.Add($"Run{Vector3.forward + Vector3.right}", Animator.StringToHash("HumanM@Run01_ForwardRight"));
+        animationHash.Add($"Run{Vector3.forward + Vector3.left}", Animator.StringToHash("HumanM@Run01_ForwardLeft"));
+        animationHash.Add($"Run{Vector3.forward}", Animator.StringToHash("HumanM@Run01_Forward"));
+        animationHash.Add($"Run{Vector3.left}", Animator.StringToHash("HumanM@Run01_Left"));
+        animationHash.Add($"Run{Vector3.back}", Animator.StringToHash("HumanM@Run01_Backward"));
+        animationHash.Add($"Run{Vector3.back + Vector3.right}", Animator.StringToHash("HumanM@Run01_BackwardRight"));
+        animationHash.Add($"Run{Vector3.back + Vector3.left}", Animator.StringToHash("HumanM@Run01_BackwardLeft"));
+                          
+        animationHash.Add($"Walk{Vector3.right}", Animator.StringToHash("HumanM@Walk01_Right"));
+        animationHash.Add($"Walk{Vector3.forward + Vector3.right}", Animator.StringToHash("HumanM@Walk01_ForwardRight"));
+        animationHash.Add($"Walk{Vector3.forward + Vector3.left}", Animator.StringToHash("HumanM@Walk01_ForwardLeft"));
+        animationHash.Add($"Walk{Vector3.forward}", Animator.StringToHash("HumanM@Walk01_Forward"));
+        animationHash.Add($"Walk{Vector3.left}", Animator.StringToHash("HumanM@Walk01_Left"));
+        animationHash.Add($"Walk{Vector3.back}", Animator.StringToHash("HumanM@Walk01_Backward"));
+        animationHash.Add($"Walk{Vector3.back + Vector3.right}", Animator.StringToHash("HumanM@Walk01_BackwardRight"));
+        animationHash.Add($"Walk{Vector3.back + Vector3.left}", Animator.StringToHash("HumanM@Walk01_BackwardLeft"));
 
-        animationHash.Add("WalkRight", Animator.StringToHash("HumanM@Walk01_Right"));
-        animationHash.Add("WalkForwardRight", Animator.StringToHash("HumanM@Walk01_ForwardRight"));
-        animationHash.Add("WalkForwardLeft", Animator.StringToHash("HumanM@Walk01_ForwardLeft"));
-        animationHash.Add("WalkForward", Animator.StringToHash("HumanM@Walk01_Forward"));
-        animationHash.Add("WalkLeft", Animator.StringToHash("HumanM@Walk01_Left"));
-        animationHash.Add("WalkBackward", Animator.StringToHash("HumanM@Walk01_Backward"));
-        animationHash.Add("WalkBackwardRight", Animator.StringToHash("HumanM@Walk01_BackwardRight"));
-        animationHash.Add("WalkBackwardLeft", Animator.StringToHash("HumanM@Walk01_BackwardLeft"));
+        animationHash.Add($"CrouchIdle", Animator.StringToHash("Human@Crouch01_Idle"));
+        animationHash.Add($"Crouch{Vector3.right}", Animator.StringToHash("Human@Crouch01_Walk_Right"));
+        animationHash.Add($"Crouch{Vector3.forward + Vector3.right}", Animator.StringToHash("Human@Crouch01_Walk_ForwardRight"));
+        animationHash.Add($"Crouch{Vector3.forward + Vector3.left}", Animator.StringToHash("Human@Crouch01_Walk_ForwardLeft"));
+        animationHash.Add($"Crouch{Vector3.forward}", Animator.StringToHash("Human@Crouch01_Walk_Forward"));
+        animationHash.Add($"Crouch{Vector3.left}", Animator.StringToHash("Human@Crouch01_Walk_Left"));
+        animationHash.Add($"Crouch{Vector3.back}", Animator.StringToHash("Human@Crouch01_Walk_Backward"));
+        animationHash.Add($"Crouch{Vector3.back + Vector3.right}", Animator.StringToHash("Human@Crouch01_Walk_BackwardRight"));
+        animationHash.Add($"Crouch{Vector3.back + Vector3.left}", Animator.StringToHash("Human@Crouch01_Walk_BackwardLeft"));
 
 
         animationHash.Add("StartJump", Animator.StringToHash("HumanM@Jump01 - Start"));
@@ -72,47 +102,18 @@ public class PlayerAnimation : BaseAnimator
         }
 
         if (input != Vector3.zero)
-            return PlayerMoveAnimation(playerMovement.isSprinting);
+            return PlayerMoveAnimation(playerMovement.isSprinting,playerMovement.isSneak);
 
-        return animationHash["Idle"];
+        return playerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
     }
 
 
-    private int PlayerMoveAnimation(bool isSprint)
+    private int PlayerMoveAnimation(bool isSprint,bool isSit)
     {
-        if (input == (Vector3.forward + Vector3.right))
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}ForwardRight"];
-        }
-        else if (input == Vector3.forward + Vector3.left)
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}ForwardLeft"];
-        }
-        else if (input == Vector3.back + Vector3.right)
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}BackwardRight"];
-        }
-        else if (input == Vector3.back + Vector3.left)
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}BackwardLeft"];
-        }
-        else if (input == Vector3.forward)
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}Forward"];
-        }
-        else if (input == Vector3.back)
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}Backward"];
-        }
-        else if (input == Vector3.right)
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}Right"];
-        }
-        else if (input == Vector3.left)
-        {
-            return animationHash[$"{(isSprint ? "Run" : "Walk")}Left"];
-        }
-        return animationHash["Idle"];
+        if (isSit)
+            return animationHash[$"Crouch{input}"];
+
+        return animationHash[$"{(isSprint ? "Run" : "Walk")}{input}"];
     }
 
 

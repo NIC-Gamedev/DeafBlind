@@ -1,37 +1,71 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
 public class StateController : MonoBehaviour
 {
-    private IAIState currentState; // Текущее состояние
-    public string Stato;
+    public IAIState currentState { get; private set; }
+    public MonoBehaviour startState;
+    public string stateName;
+
+    public Dictionary<System.Type, IAIState> states = new Dictionary<System.Type, IAIState>();
     private void Start()
     {
-        // Устанавливаем начальное состояние
+        GetStates();
+        SetState(startState.GetType());
+    }
+
+    private void GetStates()
+    {
+        states.Clear();
+        foreach (var state in GetComponents<IAIState>())
+        {
+            states.Add(state.GetType(), state);
+        }
     }
 
     private void Update()
     {
-        // Обновляем текущее состояние каждый кадр
         currentState?.UpdateState();
     }
 
     public void SetState<T>() where T : MonoBehaviour, IAIState
     {
-        // Если текущее состояние не null, удаляем его
         if (currentState != null)
         {
-            currentState.ExitState(); // Вызываем выход из состояния
-            Destroy(currentState as MonoBehaviour); // Удаляем компонент состояния
+            currentState.ExitState();
         }
 
-        // Добавляем новое состояние как компонент
-        currentState = gameObject.AddComponent<T>(); // Добавляем новый компонент состояния
-        Stato = currentState.GetStateName();
-        currentState.EnterState(gameObject); // Активируем состояние
+        currentState = states[typeof(T)];
+        if (currentState != null)
+        {
+            stateName = currentState.GetStateName();
+            currentState.EnterState(this);
+        }
+        else
+        {
+            Debug.LogWarning("В обьекте нет нужного состояния, добавьте его или не вызывайте");
+        }
+    }
+    public void SetState(System.Type stateType)
+    {
+        if (states.ContainsKey(stateType))
+        {
+            if (currentState != null)
+                currentState.ExitState();
+
+            currentState = states[stateType];
+            stateName = currentState.GetStateName();
+            currentState.EnterState(this);
+        }
+        else
+        {
+            Debug.LogWarning("State not found in the dictionary.");
+        }
     }
 
     public IAIState GetCurrentState()
     {
-        return currentState; // Возвращаем текущее состояние
+        return currentState;
     }
 }

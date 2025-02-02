@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3551259365456940659}
   - component: {fileID: 6564874785421009761}
   - component: {fileID: 4856879345321729989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4647419790336910985}
   - component: {fileID: 5752758805314891008}
   - component: {fileID: 6529965057779412971}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 2711579087817420073}
   - component: {fileID: 5389140883695290460}
   - component: {fileID: 2272276416750488801}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,6 +456,7 @@ Transform:
   m_Children:
   - {fileID: 1761473363001722733}
   - {fileID: 7453224487236243734}
+  - {fileID: 6563613884540126182}
   - {fileID: 7552472366996684334}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -490,7 +491,7 @@ GameObject:
   - component: {fileID: 4408983192756561212}
   - component: {fileID: 3291283993088392191}
   - component: {fileID: 5606024898897547441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +603,7 @@ GameObject:
   - component: {fileID: 2014592016251240775}
   - component: {fileID: 1269098219806731286}
   - component: {fileID: 2548746971486898510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,7 +739,6 @@ Transform:
   - {fileID: 5782914003800721736}
   - {fileID: 2288481696228457210}
   - {fileID: 5943156535969385095}
-  - {fileID: 6563613884540126182}
   m_Father: {fileID: 7768012712902386479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3540383714551342571
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 1004970355862238494}
   - component: {fileID: 1631219251443596305}
   - component: {fileID: 6775121287358235057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 305516745152554997}
   - component: {fileID: 3677226480306043118}
   - component: {fileID: 1795448088787713239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,6 +972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6563613884540126182}
+  - component: {fileID: 5528782364931825121}
   m_Layer: 0
   m_Name: Waypoints
   m_TagString: Untagged
@@ -987,9 +988,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3732984786187709949}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 153253297068487295}
@@ -999,8 +1000,20 @@ Transform:
   - {fileID: 5930648094525922714}
   - {fileID: 3205346673194502578}
   - {fileID: 7276351681150880557}
-  m_Father: {fileID: 7552472366996684334}
+  m_Father: {fileID: 7768012712902386479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5528782364931825121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3732984786187709949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80d585bdf4f7c6428e11faa59671aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3922663959010066228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,7 +1028,7 @@ GameObject:
   - component: {fileID: 3209555829451499140}
   - component: {fileID: 3038677533677914569}
   - component: {fileID: 4360748668087655785}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1157,7 +1170,7 @@ GameObject:
   - component: {fileID: 6543393597263195928}
   - component: {fileID: 2025534039310021060}
   - component: {fileID: 991187430300756378}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1329,7 +1342,7 @@ GameObject:
   - component: {fileID: 8901397189325358367}
   - component: {fileID: 159747425404059804}
   - component: {fileID: 6566755833413989669}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1493,7 @@ GameObject:
   - component: {fileID: 4709391792264575593}
   - component: {fileID: 8855005116235988482}
   - component: {fileID: 6680672640367984403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1654,7 +1667,7 @@ GameObject:
   - component: {fileID: 1284189129818858865}
   - component: {fileID: 5102874274534030265}
   - component: {fileID: 3028103693459104305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1796,7 +1809,7 @@ GameObject:
   - component: {fileID: 2417678786052812375}
   - component: {fileID: 6289138743373182623}
   - component: {fileID: 5097579691416178615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1972,7 +1985,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Main/Rooms/EndPoint.prefab
   m_GameObject: {fileID: 7052029859748052911}
+=======
+  m_GameObject: {fileID: 7314299598322866192}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6563613884540126182}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7940326779664675045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4298332930317632333, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5772657173573271682}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419136167311183732}
+  - component: {fileID: 9106596552912068193}
+  - component: {fileID: 7264984284794890998}
+  - component: {fileID: 6837138476585997651}
+  - component: {fileID: 6181401248824637955}
+  m_Layer: 6
+  m_Name: Cube (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &419136167311183732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4328231918974669465, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5772657173573271682}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7940326779664675045}
+>>>>>>> dev/enemyAi:Assets/Main/Rooms/Main Point.prefab
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -15.000001, y: 4.999998, z: 0}
@@ -2146,7 +2200,7 @@ GameObject:
   - component: {fileID: 2527840478163675672}
   - component: {fileID: 1894391361189121001}
   - component: {fileID: 8295934333215960132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2258,7 +2312,7 @@ GameObject:
   - component: {fileID: 4930389028371351345}
   - component: {fileID: 2661148785712718301}
   - component: {fileID: 6599410094465192820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2378,6 +2432,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Structure
       objectReference: {fileID: 0}
+<<<<<<< HEAD:Assets/Main/Rooms/EndPoint.prefab
     - target: {fileID: 2409172724971529074, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2402,6 +2457,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 5.0000005
+=======
+    - target: {fileID: 643151787902757576, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082794538470120090, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444953011492611030, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617810314417639849, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438480220545487112, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4298332930317632333, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+>>>>>>> dev/enemyAi:Assets/Main/Rooms/Main Point.prefab
       objectReference: {fileID: 0}
     - target: {fileID: 4328231918974669465, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
         type: 3}
@@ -2413,6 +2499,7 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+<<<<<<< HEAD:Assets/Main/Rooms/EndPoint.prefab
     - target: {fileID: 4328231918974669465, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2432,6 +2519,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 5.0000005
+=======
+    - target: {fileID: 5876354561810903761, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157087353707404543, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495682636876724400, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131072996255389711, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540050798939001280, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605026759444924006, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036103143337504072, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+>>>>>>> dev/enemyAi:Assets/Main/Rooms/Main Point.prefab
       objectReference: {fileID: 0}
     - target: {fileID: 8554481982107911886, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
         type: 3}
@@ -2498,6 +2621,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD:Assets/Main/Rooms/EndPoint.prefab
     - target: {fileID: 8713286454895427440, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2520,6 +2644,26 @@ PrefabInstance:
         type: 3}
       insertIndex: 3
       addedObject: {fileID: 6520047456297506432}
+=======
+    - target: {fileID: 8594635303502123790, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842173071212005270, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035130239897111582, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+>>>>>>> dev/enemyAi:Assets/Main/Rooms/Main Point.prefab
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 535668998454777752, guid: 59fa695d0ce3e5742bcec961c1fe8ed0,
         type: 3}
@@ -2623,7 +2767,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.026666665
+  m_VoxelSize: 0.16666667
   m_MinRegionArea: 1
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0

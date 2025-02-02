@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 using FishNet.Object;
+=======
+using AYellowpaper.SerializedCollections;
+>>>>>>> dev/enemyAi
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +12,9 @@ public abstract class BaseAnimator : NetworkBehaviour
     protected float LockedTill;
     protected Animator anim;
 
-    protected Dictionary<object,int> animationHash = new Dictionary<object, int>();
+    public bool isAnimReloaded;
+
+    [SerializedDictionary] public SerializedDictionary<string,int> animationHash = new SerializedDictionary<string, int>();
 
     
     protected virtual void Start()
@@ -26,6 +32,21 @@ public abstract class BaseAnimator : NetworkBehaviour
         if (state == CurrentState) return;
         anim.CrossFade(state, 0.1f, 0);
         CurrentState = state;
+    }
+
+    protected virtual void OnValidate()
+    {
+        if (!isAnimReloaded) 
+        { 
+            animationHash.Clear();
+            InitAnimation();
+            isAnimReloaded = true;
+        }
+    }
+
+    protected virtual void InitAnimation()
+    {
+
     }
 
     protected virtual int GetState()

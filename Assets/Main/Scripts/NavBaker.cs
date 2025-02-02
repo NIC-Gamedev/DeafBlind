@@ -1,32 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class NavBaker : MonoBehaviour
 {
-    public NavMeshSurface NavisMesh;
-    // Start is called before the first frame update
-    void Start()
+    public NavMeshSurface navisMesh;
+
+    private void OnValidate()
     {
-        NavisMesh = GetComponent<NavMeshSurface>();
-
-        StartCoroutine(NavMeshUpdate());
-
+        navisMesh = GetComponent<NavMeshSurface>();
     }
-
-    IEnumerator NavMeshUpdate()
+    public void Initialize()
     {
-        yield return new WaitForSeconds(1f);
-
-        NavisMesh.BuildNavMesh();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        navisMesh.BuildNavMesh();
     }
 }
