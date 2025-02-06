@@ -28,6 +28,9 @@ public class PlayerMovement : MovementBase
     private Action OnStaminaEnd;
 
     private float heightTemp;
+
+    public Vector3 ColliderCenterOnSneak;
+    public float heightOnSneak;
     protected override void Awake()
     {
         base.Awake();
@@ -142,8 +145,8 @@ public class PlayerMovement : MovementBase
         isSneak = !isSneak;
         if (isSneak)
         {
-            capsuleCol.center = new Vector3(0, -0.1572674f, 0);
-            capsuleCol.height = 1.567569f;
+            capsuleCol.center = ColliderCenterOnSneak;
+            capsuleCol.height = heightOnSneak;
         }
         else
         {

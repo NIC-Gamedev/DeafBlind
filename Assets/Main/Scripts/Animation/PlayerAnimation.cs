@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerAnimation : BaseAnimator
 {
-    private MainController inputActions => InputManager.inputActions;
-    private Vector3 input;
     private PlayerNetworkMovement _playerMovement;
     private PlayerNetworkMovement playerMovement {
         get 
@@ -40,8 +38,6 @@ public class PlayerAnimation : BaseAnimator
     protected override void Start()
     {
         base.Start();
-        inputActions.Player.Movement.performed += callback => input = callback.ReadValue<Vector3>();
-        inputActions.Player.Movement.canceled += callback => input = callback.ReadValue<Vector3>();
     }
 
     protected override void InitAnimation()
@@ -100,19 +96,18 @@ public class PlayerAnimation : BaseAnimator
             return animationHash["Land"];
         }
 
-        //if (input != Vector3.zero)
-        //    return PlayerMoveAnimation(playerMovement.isSprinting,playerMovement.isSneak);
+        if (playerMovement.input != Vector3.zero)
+            return PlayerMoveAnimation(playerMovement.isSprinting,playerMovement.isSneak);
 
-        //return playerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
-        return animationHash["Idle"];
+        return playerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
     }
 
 
     private int PlayerMoveAnimation(bool isSprint,bool isSit)
     {
         if (isSit)
-            return animationHash[$"Crouch{input}"];
+            return animationHash[$"Crouch{playerMovement.input}"];
 
-        return animationHash[$"{(isSprint ? "Run" : "Walk")}{input}"];
+        return animationHash[$"{(isSprint ? "Run" : "Walk")}{playerMovement.input}"];
     }
 }

@@ -2,10 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using FishNet.Object;
-using FishNet.Connection;
+using static UnityEngine.InputManagerEntry;
+using FishNet.Object.Synchronizing;
+using System.Collections;
+
 public class PlayerNetworkMovement : MovementNetworkBase
 {
-    private Vector3 input;
+    public Vector3 input { get; private set; }
     [Header("Walking")]
     [SerializeField] private float FrictionAmount;
 
@@ -16,7 +19,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
     private float currentWaitTimeBeforeStaminaRecover;
 
     [SerializeField] private float sneakingDevider;
-    private bool isSneak;
+    public bool isSneak { get; set; }
     [Header("Jumping")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float radius;
@@ -26,6 +29,16 @@ public class PlayerNetworkMovement : MovementNetworkBase
     private Action OnStaminaEnd;
 
     public MainController inputActions;
+    public bool isGrounded { private set; get; }
+
+    public Vector3 ColliderCenterOnSneak;
+    public float heightOnSneak;
+
+    private float heightTemp;
+
+
+
+    private bool isSneakReceived = false;
     protected override void Awake()
     {
         base.Awake();
@@ -38,9 +51,6 @@ public class PlayerNetworkMovement : MovementNetworkBase
         if(base.IsOwner)
         {
             InputInit();
-        }
-        else
-        {
         }
     }
 
@@ -57,7 +67,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
         inputActions.Player.Sneak.performed += SneakPressed;
 
-
+        heightTemp = (col as CapsuleCollider).height;
         inputActions.Player.Jump.performed += Jump;
     }
 
@@ -66,8 +76,15 @@ public class PlayerNetworkMovement : MovementNetworkBase
         if (base.IsOwner)
         {
             Movement();
+
+            bool onGround = IsOnGround();
+            if (isGrounded != onGround)
+            {
+                isGrounded = onGround;
+                SendServerGroundParam(isGrounded);
+            }
+            FrictionControl();
         }
-        FrictionControl();
     }
 
     protected override void Movement()
@@ -128,10 +145,9 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
     private void Jump(InputAction.CallbackContext callback)
     {
-        if (IsOnGround())
+        if (isGrounded)
             rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
     }
-
 
     void FrictionControl()
     {
@@ -144,10 +160,27 @@ public class PlayerNetworkMovement : MovementNetworkBase
             rb.AddForce(frictionForce, ForceMode.Impulse);
         }
     }
-
     private void SneakPressed(InputAction.CallbackContext callback)
     {
-        isSneak = !isSneak;
+        if (base.IsOwner)
+        {
+            if (gameObject.name == "Blind")
+                Debug.Log("It's Blind");
+
+            var capsuleCol = (col as CapsuleCollider);
+            isSneak = !isSneak;
+            SendServerSneakParam(isSneak);
+            if (isSneak)
+            {
+                capsuleCol.center = ColliderCenterOnSneak;
+                capsuleCol.height = heightOnSneak;
+            }
+            else
+            {
+                capsuleCol.height = heightTemp;
+                capsuleCol.center = Vector3.zero;
+            }
+        }
     }
 
     private void OnDrawGizmos()
@@ -158,10 +191,12 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
     private void OnDestroy()
     {
-        inputActions.Player.Movement.Disable();
-        inputActions.Player.Sprint.Disable();
-        inputActions.Player.Jump.Disable();
-        inputActions.Player.Sneak.Disable();
+        inputActions.Player.Movement.performed -= callback => input = callback.ReadValue<Vector3>();
+        inputActions.Player.Movement.canceled -= callback => input = callback.ReadValue<Vector3>();
+
+        inputActions.Player.Sneak.performed -= SneakPressed;
+
+        inputActions.Player.Jump.performed -= Jump;
     }
 
 
@@ -174,6 +209,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
         return false;
     }
+    
     public virtual bool IsOnGround()
     {
         Collider[] ground = Physics.OverlapSphere(col.bounds.center - new Vector3(0, col.bounds.extents.y, 0), radius, groundLayer);
@@ -181,5 +217,17 @@ public class PlayerNetworkMovement : MovementNetworkBase
             return true;
 
         return false;
+    }
+    [ServerRpc]
+    public void SendServerGroundParam(bool onGround)
+    {
+        Debug.Log($"{gameObject} is Grounded");
+        isGrounded = onGround;
+    }
+    [ServerRpc]
+    public void SendServerSneakParam(bool sneakParam)
+    {
+        isSneakReceived = sneakParam;
+        Debug.Log($"Sneack is {isSneak}");
     }
 }

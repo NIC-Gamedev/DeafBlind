@@ -20,21 +20,23 @@ public abstract class BaseAnimator : NetworkBehaviour
     }
     protected virtual void Update()
     {
-        PlayerAnimationStateLogic();
+        if(base.IsOwner)
+            PlayerAnimationStateLogic();
     }
 
-    [ServerRpc(RequireOwnership = false)]
     protected void PlayerAnimationStateLogic()
     {
         var state = GetState();
 
         if (state == CurrentState) return;
-        anim.CrossFade(state, 0.1f, 0);
-        CurrentState = state;
+
+        SendAnimationToServer(state);
     }
 
-    protected virtual void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
+
         if (!isAnimReloaded)
         {
             animationHash.Clear();
@@ -51,11 +53,25 @@ public abstract class BaseAnimator : NetworkBehaviour
     protected virtual int GetState()
     {
         return 0;
+    }
 
-        int LockState(int s, float t)
-        {
-            LockedTill = Time.time + t;
-            return s;
-        }
+    [ServerRpc]
+    private void SendAnimationToServer(int state)
+    {
+        if (state == CurrentState) return;
+
+        CurrentState = state;
+        SendAnimationToClients(state);
+    }
+    [ObserversRpc]
+    private void SendAnimationToClients(int state)
+    {
+        anim.CrossFade(state, 0.1f, 0);
+    }
+
+    public virtual int LockState(int s, float t)
+    {
+        LockedTill = Time.time + t;
+        return s;
     }
 }
