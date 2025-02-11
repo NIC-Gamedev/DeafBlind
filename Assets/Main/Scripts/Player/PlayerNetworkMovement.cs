@@ -76,14 +76,13 @@ public class PlayerNetworkMovement : MovementNetworkBase
         if (base.IsOwner)
         {
             Movement();
-
+            FrictionControl();
             bool onGround = IsOnGround();
             if (isGrounded != onGround)
             {
                 isGrounded = onGround;
                 SendServerGroundParam(isGrounded);
             }
-            FrictionControl();
         }
     }
 
@@ -111,10 +110,9 @@ public class PlayerNetworkMovement : MovementNetworkBase
             }
 
             float speedMultiplier = sprintInput ? sprintMultiplier : 1f;
-            isSprinting = speedMultiplier != 1;
+            isSprinting = speedMultiplier != 1f;
             float speedDevider = isSneak ? sneakingDevider : 1f;
-            rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider, ForceMode.Force);
-
+            SendMovementData(direction, speedMultiplier, speedDevider);
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
             if (flatVel.magnitude > movementSpeed)
@@ -124,6 +122,14 @@ public class PlayerNetworkMovement : MovementNetworkBase
             }
         }
     }
+    
+    [Rpc]
+    private void SendMovementData(Vector3 direction, float speedMultiplier, float speedDevider)
+    {
+        rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider, ForceMode.Force);
+    }
+
+
 
 
 
@@ -191,12 +197,15 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
     private void OnDestroy()
     {
-        inputActions.Player.Movement.performed -= callback => input = callback.ReadValue<Vector3>();
-        inputActions.Player.Movement.canceled -= callback => input = callback.ReadValue<Vector3>();
+        if (base.IsOwner)
+        {
+            inputActions.Player.Movement.performed -= callback => input = callback.ReadValue<Vector3>();
+            inputActions.Player.Movement.canceled -= callback => input = callback.ReadValue<Vector3>();
 
-        inputActions.Player.Sneak.performed -= SneakPressed;
+            inputActions.Player.Sneak.performed -= SneakPressed;
 
-        inputActions.Player.Jump.performed -= Jump;
+            inputActions.Player.Jump.performed -= Jump;
+        }
     }
 
 

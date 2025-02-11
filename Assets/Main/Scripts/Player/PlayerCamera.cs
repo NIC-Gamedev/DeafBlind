@@ -34,7 +34,7 @@ public class PlayerCamera : NetworkBehaviour
         }
         else
         {
-            virtualCamera.Priority = 0; // Сделать камеру неактивной для других игроков
+            virtualCamera.Priority = 0;
         }
     }
 
@@ -59,28 +59,27 @@ public class PlayerCamera : NetworkBehaviour
 
         if (IsOwner)
         {
-            // Обновляем камеру только на стороне клиента
             transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
             body.rotation = Quaternion.Euler(0, cameraRotation.y, 0);
         }
         else
         {
-            // Синхронизируем с другими клиентами через ClientRpc
             UpdateCameraRotationClientRpc();
         }
     }
-
-    // Теперь добавляем NetworkConnection как первый параметр в ClientRpc
+    
     [TargetRpc]
     public void UpdateCameraRotationClientRpc(NetworkConnection conn = null)
     {
-        // Это будет выполнено на всех клиентах
         transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
         body.rotation = Quaternion.Euler(0, cameraRotation.y, 0);
     }
 
     private void OnDestroy()
     {
-        inputActions.Disable();
+        if (IsOwner)
+        {
+            inputActions.Disable();
+        }
     }
 }

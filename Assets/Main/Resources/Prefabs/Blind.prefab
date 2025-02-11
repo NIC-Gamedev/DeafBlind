@@ -1532,7 +1532,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: cd2d4119c7d9955419229fd9a999a685, type: 3}
   m_Controller: {fileID: 9100000, guid: 663d2f49e1ca46f408590ab0f20e3d73, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
@@ -1808,6 +1808,8 @@ MonoBehaviour:
   - {fileID: 5064728990423627456}
   - {fileID: -3196154209627593484}
   - {fileID: 5205152668318776948}
+  - {fileID: -7803912585043878652}
+  - {fileID: 3830739025761879604}
   - {fileID: 2447365932547691466}
   - {fileID: 3098165343212065482}
   InitializedParentNetworkBehaviour: {fileID: 0}
@@ -1829,13 +1831,13 @@ MonoBehaviour:
   _enableStateForwarding: 1
   _networkTransform: {fileID: 0}
   _ownerInterpolation: 1
-  _ownerSmoothedProperties: 255
+  _ownerSmoothedProperties: 4294967295
   _adaptiveInterpolation: 3
-  _spectatorSmoothedProperties: 255
+  _spectatorSmoothedProperties: 4294967295
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 7
+  <PrefabId>k__BackingField: 10
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 10328472624943095705
   <SceneId>k__BackingField: 0
@@ -1857,12 +1859,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 3
-  _addedNetworkObject: {fileID: 3649741552129244603, guid: 6e623509ae957d246b66344f6c906fcd,
-    type: 3}
-  _networkObjectCache: {fileID: 3649741552129244603, guid: 6e623509ae957d246b66344f6c906fcd,
-    type: 3}
-  movementSpeed: 5
-  sprintMultiplier: 5
+  _addedNetworkObject: {fileID: 4538416603781415790}
+  _networkObjectCache: {fileID: 4538416603781415790}
+  movementSpeed: 20
+  sprintMultiplier: 2
   jumpForce: 5
   FrictionAmount: 0.9
   maxStaminaTime: 5
@@ -1872,8 +1872,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   radius: 0.1
-  ColliderCenterOnSneak: {x: 0, y: 0.01528144, z: 0}
-  heightOnSneak: 1.314601
+  ColliderCenterOnSneak: {x: 0, y: -0.00459379, z: 0}
+  heightOnSneak: 1.270188
 --- !u!1 &5162356912765425670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac4822951f1eb46a50d3e82cf8aa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 3
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
   mouseSensitivity: {x: 0.05, y: 0.05}
@@ -2526,9 +2526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c512d9cb447c1e7449ae5f5cf3861f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 4
   _addedNetworkObject: {fileID: 4538416603781415790}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 4538416603781415790}
   canvas: {fileID: 4310186038091915950}
   cam: {fileID: 0}
   virtualCamera: {fileID: 4325251907696718303}
@@ -3305,7 +3305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6602383a75770a84a8bc8b3786717422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 4
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
 --- !u!4 &8297064875560626680 stripped

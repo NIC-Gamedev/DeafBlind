@@ -17,12 +17,10 @@ public abstract class MovementNetworkBase : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
     }
-
-    [ServerRpc]
+    
     protected virtual void Movement()
     {
     }
-    [ServerRpc]
     protected virtual void Movement(Vector3 direction)
     {
     }
