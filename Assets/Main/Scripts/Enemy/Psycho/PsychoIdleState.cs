@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 
-public class PsychoIdleState : MonoBehaviour,IAIState
+public class PsychoIdleState : NetworkBehaviour,IAIState
 {
     [SerializeField]private float idleTime;
     [SerializeField]private LayerMask detectLayer;
@@ -43,7 +44,11 @@ public class PsychoIdleState : MonoBehaviour,IAIState
         timer = idleTime;
         controller = owner;
         enemyMovement.SetTarget(null);
-        randomWayIndex = Random.Range(0, mapManager.mapData.allWayPoints.Count);
+        if (IsServer)
+        {
+            int newIndex = Random.Range(0, mapManager.mapData.allWayPoints.Count);
+            SetWaypoint(newIndex);
+        }
     }
     public void ExitState()
     {
@@ -67,5 +72,11 @@ public class PsychoIdleState : MonoBehaviour,IAIState
         {
             controller.SetState<PsychoChaseState>();
         }
+    }
+    
+    [ObserversRpc]
+    private void SetWaypoint(int index)
+    {
+        randomWayIndex = index;
     }
 }

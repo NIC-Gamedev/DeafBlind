@@ -1,16 +1,19 @@
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class EnemyPerception : MonoBehaviour
 {
-    [Header("Настройки зрения")]
-    [SerializeField] private float visionRange = 10f; // Радиус зрения
-    [SerializeField] private float visionAngle = 90f; // Угол зрения (половина поля зрения)
-    [SerializeField] private LayerMask detectableLayers; // Слои для обнаружения объектов
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ")]
+    [SerializeField] private float visionRange = 10f; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    [SerializeField] private float visionAngle = 90f; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
+    [SerializeField] private LayerMask detectableLayers; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    [Header("Отладка")]
-    [SerializeField] private List<GameObject> visibleObjects = new List<GameObject>(); // Список объектов в поле зрения (видимый в инспекторе)
-    // Ссылка на StateController для смены состояний
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+    [SerializeField] private List<GameObject> visibleObjects = new List<GameObject>(); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+
+    public Collider[] visionRangeObjects;
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ StateController пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private StateController stateController;
 
     private float viewAngle => Camera.main.fieldOfView * 1.5f;
@@ -19,17 +22,17 @@ public class EnemyPerception : MonoBehaviour
 
     private void Start()
     {
-        // Получаем ссылку на StateController
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ StateController
         stateController = GetComponent<StateController>();
     }
 
-    // Метод для получения всех объектов в поле зрения
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public List<GameObject> GetVisibleObjects()
     {
         visibleObjects.Clear();
-        Collider[] hits = Physics.OverlapSphere(transform.position, visionRange, detectableLayers); // Проверяем объекты в радиусе зрения
+        visionRangeObjects = Physics.OverlapSphere(transform.position, visionRange, detectableLayers); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-        foreach (Collider hit in hits)
+        foreach (Collider hit in visionRangeObjects)
         {
             if (hit != null && IsInVisionAngle(hit.transform) && HasLineOfSight(hit))
             {
@@ -43,7 +46,7 @@ public class EnemyPerception : MonoBehaviour
     {
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
-        return angleToTarget <= visionAngle; // Проверяем, в поле зрения ли объект
+        return angleToTarget <= visionAngle; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     private bool HasLineOfSight(Collider target)
@@ -79,7 +82,7 @@ public class EnemyPerception : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Рисуем радиус и угол зрения для визуализации
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, visionRange);
 

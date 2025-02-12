@@ -1177,6 +1177,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -2105414249023024938}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f6cc8b4ede3098c42974b5e149401a0a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5883991215971895002}
     - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: f6cc8b4ede3098c42974b5e149401a0a,
         type: 3}
       insertIndex: -1
@@ -1228,7 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16133bc4263a0dc47a0e29b0a6731b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 8
+  movementSpeed: 20
   movementSpeedMultiplier: 1
   rotationSpeed: 10
   target: {fileID: 0}
@@ -1280,6 +1284,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   visibleObjects: []
+  visionRangeObjects: []
   playerLastSeenPos: {x: 0, y: 0, z: 0}
 --- !u!114 &559437582744465972
 MonoBehaviour:
@@ -1293,6 +1298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3e6ce248aefd34086e4b2a0f3895c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: -2105414249023024938}
+  _networkObjectCache: {fileID: 0}
   idleTime: 1
   detectLayer:
     serializedVersion: 2
@@ -1405,10 +1413,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.34163752
-  m_Height: 1.7894167
+  m_Radius: 0.37192404
+  m_Height: 2.0901039
   m_Direction: 1
-  m_Center: {x: 0.025943715, y: 0.8831786, z: 0}
+  m_Center: {x: -0.0043428936, y: -0.11712948, z: 0}
 --- !u!54 &5885720657918258576
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1417,7 +1425,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8055284384181740990}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1521,6 +1529,49 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     Scale: {x: 0, y: 0, z: 0}
     IsValid: 0
+--- !u!114 &5883991215971895002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8055284384181740990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: -2105414249023024938}
+  _networkObjectCache: {fileID: 0}
+  _componentConfiguration: 0
+  _synchronizeParent: 0
+  _packing:
+    Position: 1
+    Rotation: 1
+    Scale: 0
+  _interpolation: 2
+  _extrapolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  _clientAuthoritative: 1
+  _sendToOwner: 1
+  _interval: 1
+  _synchronizePosition: 1
+  _positionSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeRotation: 1
+  _rotationSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeScale: 1
+  _scaleSnapping:
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!4 &9074971120502569093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6990798827887157142, guid: f6cc8b4ede3098c42974b5e149401a0a,

@@ -61,10 +61,16 @@ public class PsychoChaseState : MonoBehaviour, IAIState
         {
             var visibleObject = enemyPerception.GetVisibleObjects();
             firstDistance = float.MaxValue;
+            isPlayeLook = false;
+            foreach (var visionRange in enemyPerception.visionRangeObjects)
+            {
+                if (isPlayeLook)
+                    break;
+                isPlayeLook = enemyPerception.IsPlayerLookingAtMe(visionRange.transform);
+            }
             foreach (var item in visibleObject)
             {
                 var currentDistance = Vector3.Distance(transform.position, item.transform.position);
-                isPlayeLook = enemyPerception.IsPlayerLookingAtMe(item.transform);
                 if (firstDistance > currentDistance)
                 {
                     firstDistance = currentDistance;
