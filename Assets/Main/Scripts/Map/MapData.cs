@@ -28,15 +28,6 @@ public class MapData
             }
         }
     }
-/*    
-    public Section[] GetSections()
-    {
-        List<Section> sections = new List<Section>();
-        for (int i = 0; i < levelGenerator.transform.childCount; i++)
-        {
-            levelGenerator.transform.GetChild()
-        }
-    }*/
 
     public class SectionData
     {
