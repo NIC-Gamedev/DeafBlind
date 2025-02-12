@@ -2,6 +2,7 @@
 using FishNet.Managing;
 using FishNet.Object;
 using System;
+using Unity.VisualScripting.YamlDotNet.Core;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -90,34 +91,55 @@ namespace FishNet.Component.Spawning
         }
 
         /// <summary>
-        /// Called when a client loads initial scenes after connecting.
+        /// Вызывается, когда клиент загрузил начальные сцены после подключения.
         /// </summary>
         private void SceneManager_OnClientLoadedStartScenes(NetworkConnection conn, bool asServer)
         {
             if (!asServer)
                 return;
 
-            NetworkObject selectedPrefab;
+            NetworkObject selectedPrefab = null;
 
-            if (UnityEngine.Random.Range(0, 2) == 0)
+            // Получаем выбор игрока из настроек
+            bool isBlind = Convert.ToBoolean(PlayerPrefs.GetString("IsBlind"));
+
+            // Определяем, является ли подключение локальным (с того же компьютера)
+            // Здесь предполагается, что локальный клиент подключается через "127.0.0.1"
+            bool isLocalClient = conn.GetAddress().Equals("127.0.0.1");
+
+            if (isLocalClient)
             {
-                selectedPrefab = _deafPrefab; // Первый персонаж
+                // Если клиент с того же компьютера – используем выбор игрока
+                if (isBlind)
+                {
+                    selectedPrefab = _blindPrefab;
+                    _isDeafAChosen = false;
+                    _isBlindAChosen = true; 
+
+                }
+                else
+                {
+                    selectedPrefab = _deafPrefab;
+                    _isDeafAChosen = true;
+                    _isBlindAChosen = false; 
+
+
+                }
             }
             else
             {
-                selectedPrefab = _blindPrefab; // Второй персонаж
-            }
-
-            // Определяем, какой персонаж спавнится для текущего игрока
-            if (!_isDeafAChosen)
-            {
-                selectedPrefab = _deafPrefab;
-                _isDeafAChosen = true;
-                _isBlindAChosen = true; // Второй игрок автоматически получает второго персонажа
-            }
-            else
-            {
-                selectedPrefab = _blindPrefab;
+                // Если клиент с другого компьютера в сети – игнорируем выбор игрока
+                // и используем оставшуюся логику выбора персонажа
+                if (_isDeafAChosen == false)
+                {
+                    selectedPrefab = _deafPrefab;
+                    _isDeafAChosen = true;
+                }
+                if(_isBlindAChosen == false)
+                {
+                    selectedPrefab = _blindPrefab;
+                    _isBlindAChosen = true; // Второй игрок получает второго персонаж
+                }
             }
 
             if (selectedPrefab == null)
@@ -133,12 +155,13 @@ namespace FishNet.Component.Spawning
             NetworkObject nob = _networkManager.GetPooledInstantiated(selectedPrefab, position, rotation, true);
             _networkManager.ServerManager.Spawn(nob, conn);
 
-            //If there are no global scenes 
+            // Если не используются глобальные сцены, добавляем в дефолтную
             if (_addToDefaultScene)
                 _networkManager.SceneManager.AddOwnerToDefaultScene(nob);
 
             OnSpawned?.Invoke(nob);
         }
+
 
 
         /// <summary>

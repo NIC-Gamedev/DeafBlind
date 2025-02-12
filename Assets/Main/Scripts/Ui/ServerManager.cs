@@ -4,30 +4,46 @@ using FishNet.Transporting.Tugboat;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using Unity.Collections;
 public class ServerManager : MonoBehaviour
 {
-    public NetworkManager networkManager;
-    private Tugboat tugboat;
+    private NetworkManager _networkManager;
+    private Tugboat _tugboat;
 
-    void Start()
-    {
-        
-    }
+ 
 
     private void OnLevelWasLoaded(int level)
     {
-        networkManager = GetComponent<NetworkManager>();
-        tugboat = GetComponent<Tugboat>();
-        Debug.Log(PlayerPrefs.GetInt("ServerPort", 80));
-        // Получаем порт из PlayerPrefs
-        int port = PlayerPrefs.GetInt("ServerPort", 80); // По умолчанию порт 80
+        _networkManager = GetComponent<NetworkManager>();
+        _tugboat = GetComponent<Tugboat>();
+        string isServer = PlayerPrefs.GetString("IsServer");
+
+        if (Convert.ToBoolean(isServer))
+        {
 
 
-        tugboat.SetPort((ushort)port);
-        // Запуск сервера
-        networkManager.ServerManager.StartConnection();
+            Debug.Log("Server port is set: " + PlayerPrefs.GetInt("ServerPort", 80));
+            // Получаем порт из PlayerPrefs
+            int port = PlayerPrefs.GetInt("ServerPort", 80); // По умолчанию порт 80
 
-        // Опционально: запустить клиент (хост)
-        networkManager.ClientManager.StartConnection();
+
+            _tugboat.SetPort((ushort)port);
+            // Запуск сервера
+            _networkManager.ServerManager.StartConnection();
+
+            // Опционально: запустить клиент (хост)
+            _networkManager.ClientManager.StartConnection();
+        }
+        else
+        {
+            string serverip = PlayerPrefs.GetString("ServerIp");
+
+            string[] parts = serverip.Split(':');
+
+            string ip = parts.Length > 0 ? parts[0] : "";
+            ushort port = Convert.ToUInt16(parts.Length > 1 ? parts[1] : "");
+            
+            _networkManager.ClientManager.StartConnection(ip, port);
+        }
     }
 }
