@@ -1,3 +1,4 @@
+using FishNet.Object.Synchronizing;
 using UnityEngine;
 
 public class PsychoAnimation : BaseAnimator
@@ -19,7 +20,6 @@ public class PsychoAnimation : BaseAnimator
 
     public StateController stateController;
     public PsychoChaseState chaseState;
-
     protected override void OnValidate()
     {
         base.OnValidate();

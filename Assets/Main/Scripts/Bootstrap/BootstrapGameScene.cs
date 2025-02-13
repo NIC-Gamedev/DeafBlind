@@ -33,7 +33,7 @@ public class BootstrapGameScene : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer(); 
-        enemySpawner.Initialize(mapManager.mapData);
+        enemySpawner.Spawn(mapManager.mapData.allWayPoints[Random.Range(0, mapManager.mapData.allWayPoints.Count)].transform.position);
     }
     private void InitAfterGenerateComplete()
     {

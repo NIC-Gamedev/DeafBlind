@@ -1,7 +1,4 @@
-using AYellowpaper.SerializedCollections;
 using FishNet.Object;
-using FishNet.Object.Synchronizing;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 public abstract class BaseAnimator : NetworkBehaviour
@@ -21,7 +18,7 @@ public abstract class BaseAnimator : NetworkBehaviour
     }
     protected virtual void Update()
     {
-        if (IsOwner || IsServer)
+        if (IsOwner)
         {
             AnimationStateLogic();
         }
@@ -32,14 +29,17 @@ public abstract class BaseAnimator : NetworkBehaviour
         var state = GetState();
 
         if (state == CurrentState) return;
-        anim.CrossFade(state, 0.1f, 0);
-        SendAnimationToServer(state);
+        if (IsServer)
+        {
+            SetState(state);
+        }
+        else if (IsOwner)
+        {
+            SendAnimationToServer(state);
+        }
     }
 
-    protected virtual void InitAnimation()
-    {
-
-    }
+    protected virtual void InitAnimation(){}
 
     protected virtual int GetState()
     {
@@ -51,12 +51,17 @@ public abstract class BaseAnimator : NetworkBehaviour
     {
         if (state == CurrentState) return;
 
-        CurrentState = state;
         SendAnimationToClients(state);
+    }
+    private void SetState(int state)
+    {
+        CurrentState = state; // Обновляем состояние на сервере
+        SendAnimationToClients(state); // Отправляем всем клиентам
     }
     [ObserversRpc]
     private void SendAnimationToClients(int state)
     {
+        CurrentState = state;
         anim.CrossFade(state, 0.1f, 0);
     }
 
