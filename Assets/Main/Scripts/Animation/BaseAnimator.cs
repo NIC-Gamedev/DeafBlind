@@ -12,37 +12,28 @@ public abstract class BaseAnimator : NetworkBehaviour
 
     public bool isAnimReloaded;
 
-    [SerializedDictionary] public SerializedDictionary<string, int> animationHash = new SerializedDictionary<string, int>();
+    public Dictionary<string, int> animationHash = new Dictionary<string, int>();
 
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();
+        InitAnimation();
     }
     protected virtual void Update()
     {
-        if(base.IsOwner)
-            PlayerAnimationStateLogic();
+        if (IsOwner || IsServer)
+        {
+            AnimationStateLogic();
+        }
     }
 
-    protected void PlayerAnimationStateLogic()
+    protected void AnimationStateLogic()
     {
         var state = GetState();
 
         if (state == CurrentState) return;
-
+        anim.CrossFade(state, 0.1f, 0);
         SendAnimationToServer(state);
-    }
-
-    protected override void OnValidate()
-    {
-        base.OnValidate();
-
-        if (!isAnimReloaded)
-        {
-            animationHash.Clear();
-            InitAnimation();
-            isAnimReloaded = true;
-        }
     }
 
     protected virtual void InitAnimation()

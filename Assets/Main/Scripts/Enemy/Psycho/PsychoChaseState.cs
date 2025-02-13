@@ -64,6 +64,8 @@ public class PsychoChaseState : MonoBehaviour, IAIState
             isPlayeLook = false;
             foreach (var visionRange in enemyPerception.visionRangeObjects)
             {
+                if(visionRange.CompareTag("Blind"))
+                    continue;
                 if (isPlayeLook)
                     break;
                 isPlayeLook = enemyPerception.IsPlayerLookingAtMe(visionRange.transform);
@@ -78,6 +80,7 @@ public class PsychoChaseState : MonoBehaviour, IAIState
                     enemyMovement.RotateToObject(item);
                     enemyPerception.playerLastSeenPos = item.transform.position;
                     enemyMovement.movementSpeedMultiplier = isPlayeLook == false ? 1.5f : 0;
+                    enemyMovement.rb.linearVelocity = isPlayeLook == false ? enemyMovement.rb.linearVelocity : Vector3.zero;
                     if (Vector3.Distance(transform.position,item.transform.position) < 1 && !isPlayeLook)
                     {
                         controller.SetState<PsychoAttackState>();

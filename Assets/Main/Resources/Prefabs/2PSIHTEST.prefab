@@ -963,6 +963,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 389a1a01ab680084ba36e07fcebc6fd9, type: 2}
+    - target: {fileID: 5866666021909216657, guid: f6cc8b4ede3098c42974b5e149401a0a,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6021470408492075593, guid: f6cc8b4ede3098c42974b5e149401a0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1232,7 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16133bc4263a0dc47a0e29b0a6731b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 20
+  movementSpeed: 8
   movementSpeedMultiplier: 1
   rotationSpeed: 10
   target: {fileID: 0}
@@ -1358,16 +1363,6 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: -2105414249023024938}
   _networkObjectCache: {fileID: 0}
   isAnimReloaded: 1
-  animationHash:
-    _serializedList:
-    - Key: Idle
-      Value: 2081823275
-    - Key: Run
-      Value: 839682798
-    - Key: Walk
-      Value: 1486762507
-    - Key: Attack
-      Value: 608407227
   stateController: {fileID: 9103002476469129160}
   chaseState: {fileID: 4815918166522730030}
 --- !u!114 &8578748723072273358
@@ -1416,7 +1411,7 @@ CapsuleCollider:
   m_Radius: 0.37192404
   m_Height: 2.0901039
   m_Direction: 1
-  m_Center: {x: -0.0043428936, y: -0.11712948, z: 0}
+  m_Center: {x: -0.0043428936, y: 1.02, z: 0}
 --- !u!54 &5885720657918258576
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1425,7 +1420,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8055284384181740990}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

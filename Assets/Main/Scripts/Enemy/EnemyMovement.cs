@@ -8,23 +8,22 @@ public class EnemyMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] public float movementSpeedMultiplier = 1;
-    [SerializeField] private float rotationSpeed = 10f; // Íàñòðîéêà ñêîðîñòè ïîâîðîòà âðàãà
+    [SerializeField] private float rotationSpeed = 10f;
 
-    private NavMeshAgent agent; // NavMeshAgent äëÿ óïðàâëåíèÿ äâèæåíèåì
-    private Rigidbody rb;
+    private NavMeshAgent agent;
+    public Rigidbody rb { get; private set; }
 
     [SerializeField] public Transform target;
-    public Vector3 targetPosition { private set; get; } // Òåêóùàÿ öåëü äâèæåíèÿ
+    public Vector3 targetPosition { private set; get; }
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-        // Íàñòðîèòü ïàðàìåòðû NavMeshAgent
         agent.speed = movementSpeed;
-        agent.angularSpeed = rotationSpeed * 10f; // NavMeshAgent èñïîëüçóåò ãðàäóñû/ñåê
+        agent.angularSpeed = rotationSpeed * 10f;
         agent.acceleration = movementSpeed * 2f;
-        agent.updatePosition = false; // Ïîçâîëÿåò íàì ñàìèì äâèãàòü Rigidbody
-        agent.updateRotation = false; // Óïðàâëÿåì ïîâîðîòîì âðó÷íóþ
+        agent.updatePosition = false; 
+        agent.updateRotation = false; 
     }
 
     void Update()
@@ -33,11 +32,8 @@ public class EnemyMovement : MonoBehaviour
         {
             targetPosition = target.transform.position;
             agent.SetDestination(targetPosition);
-
-            // Ïîëó÷àåì æåëàåìîå íàïðàâëåíèå îò NavMeshAgent
+            
             Vector3 direction = agent.desiredVelocity;
-
-            // Ïåðåäàåì íàïðàâëåíèå â ìåòîä äâèæåíèÿ
             MoveAndWatchToDirection(direction);
         }
         else
@@ -71,6 +67,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
+            direction -= new Vector3(0,direction.y,0);
             rb.AddForce(direction.normalized * movementSpeed * 10f * movementSpeedMultiplier, ForceMode.Force);
 
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
