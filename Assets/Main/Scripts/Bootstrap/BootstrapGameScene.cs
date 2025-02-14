@@ -25,7 +25,6 @@ public class BootstrapGameScene : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer(); 
-        serviceLocator.Initialize();
     }
     private void InitAfterGenerateComplete()
     {
@@ -35,6 +34,7 @@ public class BootstrapGameScene : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+        serviceLocator.Initialize();
         levelSpawner.OnLevelGeneratorComplete += InitAfterGenerateComplete;
         levelSpawner.GenerateLevel();
     }

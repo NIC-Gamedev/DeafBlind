@@ -26,7 +26,10 @@ public abstract class BaseAnimator : NetworkBehaviour
         var state = GetState();
 
         if (state == CurrentState) return;
-        SetState(state);
+        if (base.IsServerInitialized)
+        {
+            SetState(state);
+        }
         if (IsOwner)
         {
             SendAnimationToServer(state);
