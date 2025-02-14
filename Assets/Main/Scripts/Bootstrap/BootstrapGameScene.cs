@@ -21,23 +21,22 @@ public class BootstrapGameScene : NetworkBehaviour
         if(!mapManager)
             mapManager = FindAnyObjectByType<MapManager>();
     }
-    
-    public void Awake()
-    {
-        base.OnStartServer();
-        serviceLocator.Initialize();
-        levelSpawner.OnLevelGeneratorComplete += InitAfterGenerateComplete;
-        levelSpawner.GenerateLevel();
-    }
 
     public override void OnStartServer()
     {
         base.OnStartServer(); 
-        enemySpawner.Spawn(mapManager.mapData.allWayPoints[Random.Range(0, mapManager.mapData.allWayPoints.Count)].transform.position);
+        serviceLocator.Initialize();
     }
     private void InitAfterGenerateComplete()
     {
         StartCoroutine(InitAfterGenerateCompleteIE());
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        levelSpawner.OnLevelGeneratorComplete += InitAfterGenerateComplete;
+        levelSpawner.GenerateLevel();
     }
 
     private IEnumerator InitAfterGenerateCompleteIE()
@@ -45,7 +44,8 @@ public class BootstrapGameScene : NetworkBehaviour
         yield return new WaitForEndOfFrame(); 
         navBaker.Initialize();
         mapManager.Initialize(levelSpawner.levelGenerator);
-
+        if(IsServerInitialized)
+            enemySpawner.Spawn(mapManager.mapData.allWayPoints[Random.Range(0, mapManager.mapData.allWayPoints.Count)].transform.position);
         RegisterServices();
     }
 

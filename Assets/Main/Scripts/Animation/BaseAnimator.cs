@@ -18,22 +18,16 @@ public abstract class BaseAnimator : NetworkBehaviour
     }
     protected virtual void Update()
     {
-        if (IsOwner)
-        {
-            AnimationStateLogic();
-        }
+        AnimationStateLogic();
     }
 
-    protected void AnimationStateLogic()
+    private void AnimationStateLogic()
     {
         var state = GetState();
 
         if (state == CurrentState) return;
-        if (IsServer)
-        {
-            SetState(state);
-        }
-        else if (IsOwner)
+        SetState(state);
+        if (IsOwner)
         {
             SendAnimationToServer(state);
         }
@@ -55,12 +49,13 @@ public abstract class BaseAnimator : NetworkBehaviour
     }
     private void SetState(int state)
     {
-        CurrentState = state; // Обновляем состояние на сервере
-        SendAnimationToClients(state); // Отправляем всем клиентам
+        CurrentState = state;
+        SendAnimationToClients(state);
     }
     [ObserversRpc]
     private void SendAnimationToClients(int state)
     {
+        if (anim == null) return; 
         CurrentState = state;
         anim.CrossFade(state, 0.1f, 0);
     }

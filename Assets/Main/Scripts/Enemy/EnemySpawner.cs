@@ -8,7 +8,7 @@ public class EnemySpawner : NetworkBehaviour
 {
     public StateController enemyPrefab;
 
-    [Server]
+    [ServerRpc(RequireOwnership = false)]
     public void Spawn(Vector3 position)
     {
         if (enemyPrefab)
