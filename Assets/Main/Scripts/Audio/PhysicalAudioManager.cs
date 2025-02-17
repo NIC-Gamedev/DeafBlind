@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Audio;
 using static UnityEngine.ParticleSystem;
@@ -14,6 +16,7 @@ public class PhysicalAudioManager : MonoBehaviour
     public static PhysicalAudioManager instance { get; private set; }
 
     public Dictionary<GameObject, AudioSource> musics = new Dictionary<GameObject, AudioSource>();
+    private Dictionary<GameObject, EventInstance> eventInsts = new Dictionary<GameObject, EventInstance>();
 
     public AudioMixerGroup musicMixer;
     public AudioMixerGroup sfxMixer;
@@ -227,6 +230,43 @@ public class PhysicalAudioManager : MonoBehaviour
         ThrowWave(transform: pos, audioSource: source, soundObject:soundObject);
 
         return source;
+    }
+    
+    public EventInstance PlayMusicEvent(string eventPath, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, float minDistance = 1, float maxDistance = 100, Transform pos = null, GameObject soundObject = null)
+    {
+        if (pos == null)
+        {
+            Debug.LogError("Null reference in Physical sound, please add transform");
+            return default;
+        }
+
+        // Создаём FMOD EventInstance
+        EventInstance sound = RuntimeManager.CreateInstance(eventPath);
+
+        // Применяем настройки 3D-позиционирования
+        RuntimeManager.AttachInstanceToGameObject(sound, pos);
+
+        // Настраиваем громкость и питч через параметры (если настроены в FMOD Studio)
+        sound.setParameterByName("Volume", volume);
+        sound.setParameterByName("Pitch", pitch);
+
+        // Запускаем звук
+        sound.start();
+
+        // Добавляем в список активных звуков
+        if (!eventInsts.ContainsKey(pos.gameObject))
+            eventInsts.Add(pos.gameObject, sound);
+        else
+        {
+            eventInsts[pos.gameObject].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            eventInsts[pos.gameObject].release();
+            eventInsts[pos.gameObject] = sound;
+        }
+
+        // Вызываем ThrowWave (если оно важно в твоём коде)
+        //ThrowWave(pos, soundObject);
+
+        return sound;
     }
 
     public void StopMusic(GameObject gameObject)

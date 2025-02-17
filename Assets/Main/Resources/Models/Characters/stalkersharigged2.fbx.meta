@@ -1,0 +1,708 @@
+fileFormatVersion: 2
+guid: 0d7d0db2b1dd306408a522cf3643a70e
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 1
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: tors
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: lyaha.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: lyaha.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: sustav.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: sustav.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: noga.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: noga.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: puazo
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: grud
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: sheya
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: golova
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: clyucica.L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: picepc.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ruka.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: lopata.L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: lopata.R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.014
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.015
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.016
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.002
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.006
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.007
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.003
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.008
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.009
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.004
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.010
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.011
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.005
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.012
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ladon.L.013
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: stalkersharigged2(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: stalkersharigged2(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: osnova
+      parentName: Armature
+      position: {x: -0, y: 0, z: -0.06989438}
+      rotation: {x: 0.5, y: -0.49999997, z: -0.50000006, w: 0.50000006}
+      scale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
+    - name: osnova_end
+      parentName: osnova
+      position: {x: -0, y: 0.017654184, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: tors
+      parentName: Armature
+      position: {x: 0.00019596942, y: -0.006804509, z: 0.07312596}
+      rotation: {x: 0.4676769, y: -0.53035676, z: -0.46767694, w: 0.5303568}
+      scale: {x: 0.9999998, y: 0.9999998, z: 0.9999997}
+    - name: puazo
+      parentName: tors
+      position: {x: 5.873723e-10, y: 0.017222462, z: -1.3968382e-12}
+      rotation: {x: -0.000000014901161, y: -0.000000059604645, z: -0.013134077, w: 0.9999138}
+      scale: {x: 0.9999999, y: 1.0000001, z: 1.0000001}
+    - name: grud
+      parentName: puazo
+      position: {x: -3.0443925e-10, y: 0.016035808, z: 8.922587e-12}
+      rotation: {x: 0.000000098936155, y: -0.00000005710496, z: -0.10156049, w: 0.99482936}
+      scale: {x: 0.99999994, y: 0.9999999, z: 1}
+    - name: sheya
+      parentName: grud
+      position: {x: -1.8304863e-10, y: 0.025054246, z: -6.208509e-12}
+      rotation: {x: -0.00000011950034, y: 0.00000021134173, z: 0.1932316, w: 0.9811532}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: golova
+      parentName: sheya
+      position: {x: 3.5035033e-10, y: 0.008885778, z: -1.4299104e-11}
+      rotation: {x: -0.000000043243176, y: -0.0000001119124, z: -0.1197762, w: 0.99280095}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000002}
+    - name: golova_end
+      parentName: golova
+      position: {x: -0, y: 0.017852714, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: clyucica.L
+      parentName: grud
+      position: {x: -1.8304863e-10, y: 0.025054246, z: -6.208509e-12}
+      rotation: {x: 0.6121503, y: 0.45500317, z: 0.4549354, w: 0.4596498}
+      scale: {x: 1, y: 1, z: 1}
+    - name: picepc.L
+      parentName: clyucica.L
+      position: {x: 0.0000000011920929, y: 0.016219381, z: 0.000000005662441}
+      rotation: {x: 0.05940614, y: -0.034602117, z: 0.056237362, w: -0.99604774}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000005}
+    - name: ruka.L
+      parentName: picepc.L
+      position: {x: 2.2351741e-10, y: 0.02402517, z: 0.0000000014156103}
+      rotation: {x: -0.0185343, y: -0.00053644157, z: 0.022580601, w: 0.99957305}
+      scale: {x: 0.99999976, y: 1.0000001, z: 1}
+    - name: ladon.L
+      parentName: ruka.L
+      position: {x: -5.9604643e-10, y: 0.028210739, z: 0.0000000020489097}
+      rotation: {x: -0.019508678, y: 0.0014503425, z: -0.021875605, w: 0.9995693}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000002}
+    - name: ladon.L.002
+      parentName: ladon.L
+      position: {x: -0.0028122247, y: 0.011527319, z: -0.00032195597}
+      rotation: {x: 0.020185025, y: 0.0074172094, z: -0.0003906505, w: 0.99976873}
+      scale: {x: 0.99999994, y: 0.9999999, z: 1.0000001}
+    - name: ladon.L.006
+      parentName: ladon.L.002
+      position: {x: 0.0000000010430813, y: 0.00271839, z: 0.0000000018626451}
+      rotation: {x: -0.0084619345, y: -0.000067710855, z: 0.00015485317, w: 0.9999642}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000002}
+    - name: ladon.L.007
+      parentName: ladon.L.006
+      position: {x: 5.9604643e-10, y: 0.00254731, z: 0.0000000040233132}
+      rotation: {x: 0.03674451, y: -0.0002777618, z: 0.0067179194, w: -0.9993021}
+      scale: {x: 1, y: 1.0000001, z: 0.9999998}
+    - name: ladon.L.007_end
+      parentName: ladon.L.007
+      position: {x: -0, y: 0.0027183848, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.L.003
+      parentName: ladon.L
+      position: {x: -0.000618052, y: 0.011586705, z: 0.00003495991}
+      rotation: {x: 0.023786701, y: 0.007844199, z: -0.021724472, w: 0.9994502}
+      scale: {x: 1.0000002, y: 0.9999999, z: 1.0000002}
+    - name: ladon.L.008
+      parentName: ladon.L.003
+      position: {x: -3.72529e-10, y: 0.0030449347, z: 0.000000002249144}
+      rotation: {x: -0.040701263, y: -0.00000046659238, z: -0.007033148, w: 0.99914664}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000001}
+    - name: ladon.L.009
+      parentName: ladon.L.008
+      position: {x: 6.705522e-10, y: 0.002855783, z: 0.000000005364418}
+      rotation: {x: 0.03866318, y: -0.000019736271, z: 0.00687004, w: -0.9992287}
+      scale: {x: 1, y: 0.9999998, z: 0.9999999}
+    - name: ladon.L.009_end
+      parentName: ladon.L.009
+      position: {x: -0, y: 0.0030449538, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.L.004
+      parentName: ladon.L
+      position: {x: 0.0016142548, y: 0.011314113, z: 0.00038468777}
+      rotation: {x: 0.024673918, y: 0.007948993, z: -0.026987921, w: 0.9992996}
+      scale: {x: 0.9999997, y: 0.9999997, z: 1}
+    - name: ladon.L.010
+      parentName: ladon.L.004
+      position: {x: -1.862645e-10, y: 0.0026969397, z: -6.705522e-10}
+      rotation: {x: -0.008214626, y: 0.000008245928, z: -0.001649406, w: 0.9999649}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: ladon.L.011
+      parentName: ladon.L.010
+      position: {x: 7.4505804e-11, y: 0.0025256625, z: 0.0000000013411044}
+      rotation: {x: 0.03678136, y: 0.000033325032, z: 0.006470657, w: -0.9993024}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000002}
+    - name: ladon.L.011_end
+      parentName: ladon.L.011
+      position: {x: -0, y: 0.0026969595, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.L.005
+      parentName: ladon.L
+      position: {x: 0.0038195872, y: 0.010859802, z: 0.0007227495}
+      rotation: {x: 0.026602786, y: 0.008176359, z: -0.038443904, w: 0.9988731}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: ladon.L.012
+      parentName: ladon.L.005
+      position: {x: 0.0000000010803342, y: 0.0024292874, z: -0.000000007636845}
+      rotation: {x: 0.04012287, y: 0.00009692459, z: 0.0061882017, w: 0.99917567}
+      scale: {x: 1.0000004, y: 0.9999999, z: 0.9999999}
+    - name: ladon.L.013
+      parentName: ladon.L.012
+      position: {x: 3.352761e-10, y: 0.002295942, z: 0.000000004172325}
+      rotation: {x: 0.034322087, y: 0.00023833875, z: 0.005989719, w: -0.99939287}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000002}
+    - name: ladon.L.013_end
+      parentName: ladon.L.013
+      position: {x: -0, y: 0.002429293, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.L.014
+      parentName: ladon.L
+      position: {x: -0.0035896164, y: 0.003337772, z: -0.0012914118}
+      rotation: {x: 0.33061478, y: 0.040244475, z: -0.013286005, w: 0.94281375}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: ladon.L.015
+      parentName: ladon.L.014
+      position: {x: -0, y: 0.003618994, z: -0.000000008206116}
+      rotation: {x: 0.025092918, y: 0.056055848, z: -0.025939478, w: -0.99777514}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.L.016
+      parentName: ladon.L.015
+      position: {x: -0.0000000018626451, y: 0.002158764, z: -0.0000000017695129}
+      rotation: {x: 0.011170022, y: -0.08488336, z: -0.03932438, w: -0.99555194}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000001}
+    - name: ladon.L.016_end
+      parentName: ladon.L.016
+      position: {x: -0, y: 0.0027502095, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: clyucica.R
+      parentName: grud
+      position: {x: -1.1497457e-10, y: 0.025054246, z: 0.00039193887}
+      rotation: {x: 0.108930096, y: 0.5579978, z: 0.8153359, w: -0.109544896}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: picepc.R
+      parentName: clyucica.R
+      position: {x: 8.9406965e-10, y: 0.016219378, z: -0.0000000025331974}
+      rotation: {x: 0.18962902, y: -0.031619728, z: -0.14428559, w: 0.9706816}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
+    - name: ruka.R
+      parentName: picepc.R
+      position: {x: 6.705522e-10, y: 0.02402517, z: -0.0000000043958424}
+      rotation: {x: -0.017194195, y: -0.00021410544, z: -0.0613858, w: 0.99796605}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: ladon.R
+      parentName: ruka.R
+      position: {x: -0, y: 0.028210735, z: -0.000000003799796}
+      rotation: {x: -0.019508844, y: -0.0014502751, z: 0.021875706, w: 0.9995693}
+      scale: {x: 1.0000002, y: 1.0000002, z: 0.99999994}
+    - name: ladon.R.002
+      parentName: ladon.R
+      position: {x: 0.002812224, y: 0.011527317, z: -0.00032194777}
+      rotation: {x: 0.020185111, y: -0.0074173026, z: 0.00039065978, w: 0.9997687}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000004}
+    - name: ladon.R.006
+      parentName: ladon.R.002
+      position: {x: -1.4901161e-10, y: 0.0027183904, z: 0.0000000012665987}
+      rotation: {x: -0.008461848, y: 0.00006774206, z: -0.00015491075, w: 0.9999642}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
+    - name: ladon.R.007
+      parentName: ladon.R.006
+      position: {x: -5.9604643e-10, y: 0.00254731, z: 0.000000003054738}
+      rotation: {x: -0.122558974, y: -0.00027594477, z: 0.022408312, w: 0.9922082}
+      scale: {x: 1.0000002, y: 1, z: 1.0000004}
+    - name: ladon.R.007_end
+      parentName: ladon.R.007
+      position: {x: -0, y: 0.0027183848, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.R.003
+      parentName: ladon.R
+      position: {x: 0.00061805116, y: 0.011586705, z: 0.000034968256}
+      rotation: {x: 0.023786595, y: -0.007844428, z: 0.021724468, w: 0.99945027}
+      scale: {x: 1.0000006, y: 1.0000001, z: 1.0000006}
+    - name: ladon.R.008
+      parentName: ladon.R.003
+      position: {x: 6.3329936e-10, y: 0.003044945, z: 0.0000000015785917}
+      rotation: {x: -0.045667194, y: 0.00000044051538, z: 0.007891435, w: 0.9989256}
+      scale: {x: 0.9999997, y: 0.99999994, z: 0.99999976}
+    - name: ladon.R.009
+      parentName: ladon.R.008
+      position: {x: -0.000000001117587, y: 0.002855778, z: 0.000000009685754}
+      rotation: {x: -0.08556594, y: -0.000019602372, z: 0.015204698, w: 0.99621654}
+      scale: {x: 1.0000006, y: 1.0000002, z: 1.0000004}
+    - name: ladon.R.009_end
+      parentName: ladon.R.009
+      position: {x: -0, y: 0.0030449538, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.R.004
+      parentName: ladon.R
+      position: {x: -0.0016142548, y: 0.011314109, z: 0.0003846955}
+      rotation: {x: 0.024673887, y: -0.007949231, z: 0.026987782, w: 0.99929965}
+      scale: {x: 1.0000002, y: 1, z: 1.0000002}
+    - name: ladon.R.010
+      parentName: ladon.R.004
+      position: {x: 2.6077032e-10, y: 0.0026969388, z: 3.352761e-10}
+      rotation: {x: -0.008214627, y: -0.000008228232, z: 0.0016494557, w: 0.9999649}
+      scale: {x: 0.99999994, y: 1.0000002, z: 1.0000002}
+    - name: ladon.R.011
+      parentName: ladon.R.010
+      position: {x: 1.4901161e-10, y: 0.0025256583, z: 0.0000000055134297}
+      rotation: {x: -0.122788124, y: 0.000033258555, z: 0.02160392, w: 0.99219775}
+      scale: {x: 1.0000004, y: 0.9999999, z: 1.0000002}
+    - name: ladon.R.011_end
+      parentName: ladon.R.011
+      position: {x: -0, y: 0.0026969595, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.R.005
+      parentName: ladon.R
+      position: {x: -0.003819586, y: 0.0108598, z: 0.00072275713}
+      rotation: {x: 0.026602777, y: -0.008176585, z: 0.03844394, w: 0.9988731}
+      scale: {x: 1.0000007, y: 1.0000001, z: 1.0000005}
+    - name: ladon.R.012
+      parentName: ladon.R.005
+      position: {x: 3.352761e-10, y: 0.0024292972, z: 0.0000000024959443}
+      rotation: {x: 0.040122796, y: -0.0000968864, z: -0.0061883563, w: 0.9991756}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000004}
+    - name: ladon.R.013
+      parentName: ladon.R.012
+      position: {x: 3.352761e-10, y: 0.0022959288, z: 0.0000000035762786}
+      rotation: {x: -0.17046519, y: 0.00023488354, z: 0.029764274, w: 0.984914}
+      scale: {x: 1, y: 1.0000002, z: 1.0000002}
+    - name: ladon.R.013_end
+      parentName: ladon.R.013
+      position: {x: -0, y: 0.002429293, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ladon.R.014
+      parentName: ladon.R
+      position: {x: 0.0035896145, y: 0.0033377723, z: -0.0012914086}
+      rotation: {x: -0.17844354, y: 0.027045267, z: -0.20148855, w: 0.9627195}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000006}
+    - name: ladon.R.015
+      parentName: ladon.R.014
+      position: {x: -8.9406965e-10, y: 0.0036189924, z: 0.0000000012409873}
+      rotation: {x: 0.103642754, y: -0.055465303, z: 0.10713882, w: -0.98727053}
+      scale: {x: 0.9999997, y: 1.0000001, z: 1}
+    - name: ladon.R.016
+      parentName: ladon.R.015
+      position: {x: 6.705522e-10, y: 0.0021587622, z: -0.0000000016577542}
+      rotation: {x: 0.015033588, y: 0.08482566, z: 0.052923426, w: -0.9948757}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000001}
+    - name: ladon.R.016_end
+      parentName: ladon.R.016
+      position: {x: -0, y: 0.0027502095, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lyaha.L
+      parentName: tors
+      position: {x: -0.0017295629, y: 0.010033513, z: -0.010451719}
+      rotation: {x: 0.7086099, y: -0.037380155, z: 0.70324326, w: 0.04386121}
+      scale: {x: 0.9999921, y: 1.0000002, z: 0.99999976}
+    - name: sustav.L
+      parentName: lyaha.L
+      position: {x: -6.1001626e-10, y: 0.034074638, z: -2.840534e-10}
+      rotation: {x: -0.0051041725, y: 0.00030993632, z: 0.02267575, w: 0.9997298}
+      scale: {x: 1.0000004, y: 1, z: 1}
+    - name: noga.L
+      parentName: sustav.L
+      position: {x: 0.0000000011152588, y: 0.0045755417, z: -1.094304e-10}
+      rotation: {x: 0.08484631, y: -0.0020843328, z: -0.020321904, w: 0.9961847}
+      scale: {x: 1.0000007, y: 1.0000008, z: 0.9999999}
+    - name: lopata.L
+      parentName: noga.L
+      position: {x: 4.0046869e-10, y: 0.042420216, z: -7.4505804e-11}
+      rotation: {x: -0.74059224, y: 0.0000003612367, z: 0.00567159, w: 0.67193097}
+      scale: {x: 0.9999997, y: 0.99999976, z: 0.99999964}
+    - name: lopata.L_end
+      parentName: lopata.L
+      position: {x: -0, y: 0.020140585, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lyaha.R
+      parentName: tors
+      position: {x: -0.0017295621, y: 0.01003351, z: 0.010843658}
+      rotation: {x: 0.70324326, y: -0.043860525, z: 0.7086098, w: 0.037380844}
+      scale: {x: 0.9999919, y: 1, z: 0.9999998}
+    - name: sustav.R
+      parentName: lyaha.R
+      position: {x: -6.91507e-10, y: 0.034074645, z: -2.4214386e-10}
+      rotation: {x: -0.0051041655, y: -0.00031000306, z: -0.02267571, w: 0.9997299}
+      scale: {x: 1.0000002, y: 0.9999997, z: 1}
+    - name: noga.R
+      parentName: sustav.R
+      position: {x: -1.44355e-10, y: 0.004575541, z: 3.329478e-10}
+      rotation: {x: 0.0848463, y: 0.0020843826, z: 0.02032187, w: 0.9961847}
+      scale: {x: 1.0000004, y: 1.0000005, z: 0.9999999}
+    - name: lopata.R
+      parentName: noga.R
+      position: {x: 4.5634804e-10, y: 0.04242021, z: -2.7008354e-10}
+      rotation: {x: -0.7405922, y: -0.00000034749962, z: -0.005671529, w: 0.67193085}
+      scale: {x: 1.0000001, y: 1.0000004, z: 0.99999994}
+    - name: lopata.R_end
+      parentName: lopata.R
+      position: {x: -0, y: 0.020140585, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cube
+      parentName: stalkersharigged2(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
