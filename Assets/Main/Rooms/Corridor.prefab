@@ -742,7 +742,6 @@ MonoBehaviour:
   - corridor
   createsTags:
   - room
-  - ventroom
   deadEndChance: 0
 --- !u!114 &2357140749241904414
 MonoBehaviour:

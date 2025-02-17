@@ -631,8 +631,7 @@ MonoBehaviour:
   tags:
   - room
   createsTags:
-  - corridor
-  - vent
+  - MainHallSpawn
   deadEndChance: 0
 --- !u!1 &3131747489344734033
 GameObject:

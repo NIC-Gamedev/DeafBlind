@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 1708967560}
   - component: {fileID: 1708967559}
   - component: {fileID: 1708967562}
+  - component: {fileID: 1708967563}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -351,7 +352,7 @@ Transform:
   m_GameObject: {fileID: 1708967558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: 1.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -401,6 +402,30 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1708967563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708967558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aecb9c4d5fa293b4293ee6550810c55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TagContainers:
+  - {fileID: 11400000, guid: 22da381281a6a74419134a820c859109, type: 2}
+  ConsoleDesign:
+    prefixText: 
+    prefixColor: {r: 1, g: 1, b: 1, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    showPrefix: 0
+    showLog: 0
+    showWarning: 0
+    showError: 0
+    prefixClrStr: <color=#FFFFFF>
+    textClrStr: <color=#FFFFFF>
 --- !u!1 &1745521591
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,20 +577,19 @@ MonoBehaviour:
   randomizeSeed: 1
   seed: 0
   sectionContainer: {fileID: 0}
-  maxLevelSize: 110
-  maxAllowedOrder: 20
+  maxLevelSize: 200
+  maxAllowedOrder: 10
   sectionPrefabs:
-  - {fileID: 5954002734793261067, guid: c3406029602040b429166829e1fe5699, type: 3}
-  - {fileID: 6966684711659230585, guid: 6693e98487c8820478fcc312089f7dad, type: 3}
-  - {fileID: 6966684711659230585, guid: 7d0f578bbc9829344bfe68fcb2714dee, type: 3}
+  - {fileID: 7428806719187381883, guid: 31e31eaee2d49ac46bd4bd1474e76006, type: 3}
+  - {fileID: 144433138431143244, guid: 6266829b5dfbb6b49a1033b2c6088c32, type: 3}
   endPrefabs:
-  - {fileID: 8062183743418883365, guid: 55e54d17baccfc747a4786ed8d99053e, type: 3}
+  - {fileID: 1507596983847483420, guid: 55e54d17baccfc747a4786ed8d99053e, type: 3}
   initialSectionTags:
-  - room
+  - InitialSpawnPoint
   specialRules:
-  - Tag: vent
-    MinAmount: 5
-    MaxAmount: 5
+  - Tag: InitialSpawnPoint
+    MinAmount: 1
+    MaxAmount: 1
 --- !u!4 &1803113088
 Transform:
   m_ObjectHideFlags: 0
