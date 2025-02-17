@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioChannel
+public partial class AudioChannel
 {
     private const string TRACK_CONTAINER_NAME_FORMAT = "Channel - [{0}]";
     public int channelIndex { get; private set; }
@@ -22,28 +22,7 @@ public class AudioChannel
         trackContainer = new GameObject(string.Format(TRACK_CONTAINER_NAME_FORMAT, channel)).transform;
         trackContainer.SetParent(AudioManager.instance.transform);
     }
-
-    public AudioTrack PlayTrack(AudioClip clip, bool loop, float startingVolume,float volumeCap,float pitch,string filePath)
-    {
-        if(TryGetTrack(clip.name,out AudioTrack existingTrack))
-        {
-            if (!existingTrack.isPlaying)
-                existingTrack.Play();
-
-            SetAsActiveTrack(existingTrack);
-
-            return existingTrack;
-        }
-
-        AudioTrack track = new AudioTrack(clip,loop,startingVolume,volumeCap, pitch, this,AudioManager.instance.musicMixer,filePath);
-
-        track.Play();
-
-        SetAsActiveTrack(track);
-
-        return track;
-    }
-
+    
     public bool TryGetTrack(string trackName, out AudioTrack value)
     {
         trackName = trackName.ToLower();
@@ -89,7 +68,7 @@ public class AudioChannel
                 if (track == activeTrack && track.volume == targetVol)
                     continue;
 
-                track.volume = Mathf.MoveTowards(track.volume, targetVol, AudioManager.TRACK_TRANSITION_SPEED * Time.deltaTime);
+                track.volume = Mathf.MoveTowards(track.volume, targetVol, 1 * Time.deltaTime);
 
                 if (track != activeTrack &&  track.volume == 0)
                 {

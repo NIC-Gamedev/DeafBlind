@@ -8,19 +8,12 @@ public class FmodTest : MonoBehaviour
     public bool makeSound;
     public string soundPath;
     public EventReference refer;
-
-    private void Start()
-    {
-        if (RuntimeManager.HaveAllBanksLoaded)
-            Debug.Log("FMOD банки загружены!");
-        else
-            Debug.LogError("FMOD банки НЕ загружены!");
-    }
+    public float vol;
     private void Update()
     {
         if (makeSound)
         {
-            RuntimeManager.PlayOneShot(refer);
+            AudioManager.instance.Play(refer,vol,1,false);
             makeSound = false;
         }
     }
