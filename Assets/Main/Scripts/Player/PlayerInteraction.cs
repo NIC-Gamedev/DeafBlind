@@ -24,7 +24,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (interactSphere[i].TryGetComponent(out InteractiveObjects interactiveObjects))
             {
-                PhysicalAudioManager.instance.PlaySoundEffect(clip: interactSound, transform: interactiveObjects.transform);
+                PhysicalAudioManager.instance.Play(audioRef: interactSound, transform: interactiveObjects.transform);
                 interactiveObjects.InteractiveInvoke();
             }
         }

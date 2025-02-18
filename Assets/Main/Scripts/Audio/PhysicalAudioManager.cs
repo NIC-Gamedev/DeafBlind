@@ -1,32 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem;
 
 public class PhysicalAudioManager : MonoBehaviour
 {
-
-    private const string SFX_PARENT_NAME = "SFX";
-    private const string SFX_NAME_FORMAT = "SFX - [{0}]";
-
-    public const float TRACK_TRANSITION_SPEED = 1f; 
     public static PhysicalAudioManager instance { get; private set; }
-
-    public Dictionary<GameObject, AudioSource> musics = new Dictionary<GameObject, AudioSource>();
-    private Dictionary<GameObject, EventInstance> eventInsts = new Dictionary<GameObject, EventInstance>();
-
-    public AudioMixerGroup musicMixer;
-    public AudioMixerGroup sfxMixer;
-    public AudioMixerGroup voicesMixer;
-
+    
+    [SerializeField] private List<EventInstance> _activeSounds = new List<EventInstance>();
+    
     [SerializeField] protected ParticleSystem waveParticle;
 
     public LayerMask audioListenerLayer;
-
-    private Transform sfxRoot;
 
     private void Awake()
     {
@@ -42,267 +32,105 @@ public class PhysicalAudioManager : MonoBehaviour
             Destroy(instance.gameObject);
             instance = this;
         }
-        sfxRoot = new GameObject(SFX_PARENT_NAME).transform;
-        sfxRoot.SetParent(transform);
     }
-
-    public AudioSource PlaySoundEffect(string filepath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Collision ColideObject = null,GameObject soundObject = null)
+    public EventInstance PlayByPos(EventReference audioRef, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Vector3 pos = default)
     {
-        AudioClip clip = Resources.Load<AudioClip>(filepath);
-
-        if (clip == null)
+        EventInstance eventInstance = RuntimeManager.CreateInstance(audioRef);
+        
+        eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(pos));
+        eventInstance.setVolume(volume);
+        eventInstance.setPitch(pitch);
+        if (loop)
         {
-            Debug.LogError($"Could not load audio file '{filepath}'. Please make sure this exist audio");
-            return null;
+            _activeSounds.Add(eventInstance);
+            eventInstance.setCallback((FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
+            {
+                if (type == FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED)
+                {
+                    EventInstance instance = new EventInstance(instancePtr);
+                    instance.start();
+                }
+                return FMOD.RESULT.OK;
+            }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
         }
-        return PlaySoundEffect(clip, mixer, volume, pitch, loop, minDistance, maxDistance, ColideObject,soundObject);
-    }
-    public AudioSource PlaySoundEffect(string filepath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Transform transforn = null, GameObject soundObject = null)
-    {
-        AudioClip clip = Resources.Load<AudioClip>(filepath);
+        
+        eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 5.0f);
+        eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 50.0f);
 
-        if (clip == null)
-        {
-            Debug.LogError($"Could not load audio file '{filepath}'. Please make sure this exist audio");
-            return null;
-        }
-        return PlaySoundEffect(clip, mixer, volume, pitch, loop, minDistance, maxDistance, transforn, soundObject);
-    }
-
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Collision ColideObject = null, GameObject soundObject = null)
-    {
-        if (ColideObject == null)
-        {
-            Debug.LogError("Null reference in Physical sound, please add collision");
-            return null;
-        }
-        AudioSource effectSource = new GameObject(string.Format(SFX_NAME_FORMAT, clip.name)).AddComponent<AudioSource>();
-
-        effectSource.transform.position = ColideObject.contacts[0].point;
-        effectSource.clip = clip;
-        if (mixer == null)
-            mixer = sfxMixer;
-        effectSource.outputAudioMixerGroup = mixer;
-        effectSource.volume = volume;
-        effectSource.spatialBlend = 0;
-        effectSource.pitch = pitch;
-        effectSource.loop = loop;
-        effectSource.minDistance = minDistance;
-        effectSource.maxDistance = maxDistance;
-        effectSource.spatialBlend = 1;
-
-        effectSource.Play();
-
-        ThrowWave(ColideObject, effectSource, soundObject);
-
-        if (!loop)
-            Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
-
-        return effectSource;
-    }
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Transform transform = null, GameObject soundObject = null)
-    {
-        if (transform == null)
-        {
-            Debug.LogError("Null reference in Physical sound, please add collision");
-            return null;
-        }
-        AudioSource effectSource = new GameObject(string.Format(SFX_NAME_FORMAT, clip.name)).AddComponent<AudioSource>();
-
-        effectSource.transform.position = transform.position;
-        effectSource.clip = clip;
-        if (mixer == null)
-            mixer = sfxMixer;
-        effectSource.outputAudioMixerGroup = mixer;
-        effectSource.volume = volume;
-        effectSource.spatialBlend = 0;
-        effectSource.pitch = pitch;
-        effectSource.loop = loop;
-        effectSource.minDistance = minDistance;
-        effectSource.maxDistance = maxDistance;
-        effectSource.spatialBlend = 1;
-
-        effectSource.Play();
-
-        ThrowWave(transform, effectSource, soundObject);
-
-        if (!loop)
-            Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
-
-        return effectSource;
-    }
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Vector3 pos = default, GameObject soundObject = null)
-    {
-        if (pos == null)
-        {
-            Debug.LogError("Null reference in Physical sound, please add collision");
-            return null;
-        }
-        AudioSource effectSource = new GameObject(string.Format(SFX_NAME_FORMAT, clip.name)).AddComponent<AudioSource>();
-
-        effectSource.transform.position = pos;
-        effectSource.clip = clip;
-        if (mixer == null)
-            mixer = sfxMixer;
-        effectSource.outputAudioMixerGroup = mixer;
-        effectSource.volume = volume;
-        effectSource.spatialBlend = 0;
-        effectSource.pitch = pitch;
-        effectSource.loop = loop;
-        effectSource.minDistance = minDistance;
-        effectSource.maxDistance = maxDistance;
-        effectSource.spatialBlend = 1;
-
-        effectSource.Play();
+        eventInstance.start();
 
         ThrowWave(pos, effectSource, soundObject);
 
         if (!loop)
-            Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
+            eventInstance.release();
 
-        return effectSource;
+        return eventInstance;
     }
-
-    public AudioSource PlayVoice(AudioClip clip, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 0, float maxDistance = 10, Transform transform = null, GameObject soundObject = null)
+    public EventInstance PlayByTransform(EventReference audioRef, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100,Transform transform = null)
     {
-        return PlaySoundEffect(clip, voicesMixer, volume, pitch, loop, transform: transform);
-    }
-
-    public void StopSoundEffect(AudioClip clip) => StopSoundEffect(clip.name);
-
-    public void StopSoundEffect(string soundName)
-    {
-        soundName = soundName.ToLower();
-
-        AudioSource[] sources = sfxRoot.GetComponentsInChildren<AudioSource>();
-        foreach (var source in sources)
+        EventInstance eventInstance = RuntimeManager.CreateInstance(audioRef);
+        
+        eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+        eventInstance.setVolume(volume);
+        eventInstance.setPitch(pitch);
+        if (loop)
         {
-            if (source.clip.name.ToLower() == soundName)
+            _activeSounds.Add(eventInstance);
+            eventInstance.setCallback((FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
             {
-                Destroy(source.gameObject);
-                return;
+                if (type == FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED)
+                {
+                    EventInstance instance = new EventInstance(instancePtr);
+                    instance.start();
+                }
+                return FMOD.RESULT.OK;
+            }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
+        }
+        
+        eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 5.0f);
+        eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 50.0f);
+
+        eventInstance.start();
+
+        ThrowWave(transform.pos, effectSource, soundObject);
+
+        if (!loop)
+        {
+            eventInstance.release();
+        }
+
+        return eventInstance;
+    }
+    
+    public void Stop(EventReference reference)
+    {
+        for (int i = _activeSounds.Count - 1; i >= 0; i--)
+        {
+            FMOD.Studio.EventInstance effectInstance = _activeSounds[i];
+            
+            effectInstance.getDescription(out FMOD.Studio.EventDescription eventDescription);
+            eventDescription.getPath(out string path);
+            
+            if (path.Contains(reference.Path))
+            {
+                effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                effectInstance.release();
+                _activeSounds.RemoveAt(i);
             }
         }
     }
-
-    public AudioSource PlayMusic(string filePath, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, float minDistance = 1, float maxDistance = 100, Transform pos = null, GameObject soundObject = null)
-    {
-        AudioClip clip = Resources.Load<AudioClip>(filePath);
-
-        if (clip == null)
-        {
-            Debug.LogError($"Could not load audio file '{filePath}'. Please make sure this exists in the Resources directory");
-            return null;
-        }
-
-        return PlayMusic(clip, channel, loop, volume, pitch, filePath, minDistance, maxDistance, pos, soundObject);
-    }
-
-    public AudioSource PlayMusic(AudioClip clip, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, string filePath = "", float minDistance = 1, float maxDistance = 100, Transform pos = null, GameObject soundObject = null)
-    {
-        if (pos == null)
-        {
-            Debug.LogError("Null reference in Physical sound, please add transform");
-            return null;
-        }
-        AudioSource source = new GameObject(string.Format(pos.gameObject.name, clip.name)).AddComponent<AudioSource>();
-
-        source.transform.position = pos.transform.position;
-        source.transform.SetParent(pos.transform);
-        source.clip = clip;
-
-        source.minDistance = minDistance;
-        source.maxDistance = maxDistance;
-
-        source.spatialBlend = 1;
-        source.volume = volume;
-        source.loop = loop;
-        source.dopplerLevel = 0.1f;
-        source.Play();
-
-        if (!musics.ContainsKey(transform.gameObject))
-            musics.Add(transform.gameObject,source);
-        else
-        {
-            musics.Remove(transform.gameObject);
-        }
-
-        ThrowWave(transform: pos, audioSource: source, soundObject:soundObject);
-
-        return source;
-    }
-    
-    public EventInstance PlayMusicEvent(string eventPath, int channel = 0, bool loop = true, float volume = 1f, float pitch = 1f, float minDistance = 1, float maxDistance = 100, Transform pos = null, GameObject soundObject = null)
-    {
-        if (pos == null)
-        {
-            Debug.LogError("Null reference in Physical sound, please add transform");
-            return default;
-        }
-
-        // Создаём FMOD EventInstance
-        EventInstance sound = RuntimeManager.CreateInstance(eventPath);
-
-        // Применяем настройки 3D-позиционирования
-        RuntimeManager.AttachInstanceToGameObject(sound, pos);
-
-        // Настраиваем громкость и питч через параметры (если настроены в FMOD Studio)
-        sound.setParameterByName("Volume", volume);
-        sound.setParameterByName("Pitch", pitch);
-
-        // Запускаем звук
-        sound.start();
-
-        // Добавляем в список активных звуков
-        if (!eventInsts.ContainsKey(pos.gameObject))
-            eventInsts.Add(pos.gameObject, sound);
-        else
-        {
-            eventInsts[pos.gameObject].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            eventInsts[pos.gameObject].release();
-            eventInsts[pos.gameObject] = sound;
-        }
-
-        // Вызываем ThrowWave (если оно важно в твоём коде)
-        //ThrowWave(pos, soundObject);
-
-        return sound;
-    }
-
-    public void StopMusic(GameObject gameObject)
-    {
-        if (musics.ContainsKey(gameObject))
-        {
-            musics.Remove(gameObject);
-        }
-    }
-    protected void ThrowWave(Collision collision, AudioSource audioSource = null, GameObject soundObject = null)
-    {
-        ParticleSystem instance = Instantiate(waveParticle, collision.contacts[0].point, Quaternion.identity);
-        var main = instance.main;
-
-        main.startLifetime = audioSource.clip.length;
-        main.startSize = audioSource.maxDistance;
-        StartCoroutine(EmitWave(instance, audioSource, soundObject));
-
-    }
-    protected void ThrowWave(Transform transform, AudioSource audioSource = null, GameObject soundObject = null)
-    {
-        ParticleSystem instance = Instantiate(waveParticle, transform.position, Quaternion.identity);
-        var main = instance.main;
-        main.startLifetime = audioSource.clip.length;
-        main.startSize = audioSource.maxDistance;
-        StartCoroutine(EmitWave(instance, audioSource, soundObject));
-    }
-    protected void ThrowWave(Vector3 pos, AudioSource audioSource = null, GameObject soundObject = null)
+    protected void ThrowWave(Vector3 pos, EventInstance eventInstance, GameObject soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
         var main = instance.main;
-        main.startLifetime = audioSource.clip.length;
-        main.startSize = audioSource.maxDistance;
-        StartCoroutine(EmitWave(instance, audioSource, soundObject));
+        eventInstance.getDescription(out EventDescription eventDescription);
+        eventDescription.getLength(out var length);
+        main.startLifetime = (float)length/1000f;
+        eventInstance.getMinMaxDistance(out var min, out var max);
+        main.startSize = max;
+        StartCoroutine(EmitWave(instance, eventInstance, soundObject));
     }
-    protected IEnumerator EmitWave(ParticleSystem particle, AudioSource audioSource, GameObject soundObject = null)
+    protected IEnumerator EmitWave(ParticleSystem particle, EventInstance audioSource, GameObject soundObject = null)
     {
         const int spectrumSize = 512;
         float[] spectrumData = new float[spectrumSize];

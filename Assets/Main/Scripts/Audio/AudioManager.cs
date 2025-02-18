@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
 
         return eventInstance;
     }
-    public void StopTrack(EventReference reference)
+    public void Stop(EventReference reference)
     {
         for (int i = _activeSounds.Count - 1; i >= 0; i--)
         {
