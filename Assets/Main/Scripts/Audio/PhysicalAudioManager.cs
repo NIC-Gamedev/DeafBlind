@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using FMOD;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -49,17 +51,18 @@ public class PhysicalAudioManager : MonoBehaviour
                 {
                     EventInstance instance = new EventInstance(instancePtr);
                     instance.start();
+                    ThrowWave(transform.position, eventInstance, transform);
                 }
                 return FMOD.RESULT.OK;
             }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
         }
         
-        eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 5.0f);
-        eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 50.0f);
+        eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minDistance);
+        eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxDistance);
 
         eventInstance.start();
 
-        ThrowWave(pos, effectSource, soundObject);
+        ThrowWave(pos, eventInstance);
 
         if (!loop)
             eventInstance.release();
@@ -82,17 +85,18 @@ public class PhysicalAudioManager : MonoBehaviour
                 {
                     EventInstance instance = new EventInstance(instancePtr);
                     instance.start();
+                    ThrowWave(transform.position, eventInstance, transform);
                 }
                 return FMOD.RESULT.OK;
             }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
         }
         
-        eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 5.0f);
-        eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 50.0f);
+        eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minDistance);
+        eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxDistance);
 
         eventInstance.start();
 
-        ThrowWave(transform.pos, effectSource, soundObject);
+        ThrowWave(transform.position, eventInstance, transform);
 
         if (!loop)
         {
@@ -119,7 +123,7 @@ public class PhysicalAudioManager : MonoBehaviour
             }
         }
     }
-    protected void ThrowWave(Vector3 pos, EventInstance eventInstance, GameObject soundObject = null)
+    protected void ThrowWave(Vector3 pos, EventInstance eventInstance, Transform soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
         var main = instance.main;
@@ -130,41 +134,52 @@ public class PhysicalAudioManager : MonoBehaviour
         main.startSize = max;
         StartCoroutine(EmitWave(instance, eventInstance, soundObject));
     }
-    protected IEnumerator EmitWave(ParticleSystem particle, EventInstance audioSource, GameObject soundObject = null)
+    protected IEnumerator EmitWave(ParticleSystem particle, EventInstance eventInstance, Transform soundObject = null)
     {
-        const int spectrumSize = 512;
-        float[] spectrumData = new float[spectrumSize];
-        if (audioSource.clip.name == "Microphone")
+        /*if (audioSource.clip.name == "Microphone")
         {
             audioSource.outputAudioMixerGroup = voicesMixer;
             voicesMixer.audioMixer.SetFloat("VoiceVol", -80);
-        }
+        }*/
 
         if (particle)
         {
             var mainModule = particle.main;
             float previousIntensity = 0f;
+            const int spectrumSize = 512;
+            float[] spectrumData = new float[spectrumSize];
             var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
-            particle.transform.SetParent(audioSource.transform);
-            particle.transform.position = audioSource.transform.position;
+            eventInstance.getPlaybackState(out var playbackState);
+            eventInstance.getMinMaxDistance(out var min,out var max);
+            eventInstance.getChannelGroup(out var channelGroup);
+            RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out  var fft);
+            fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, spectrumSize);
+            channelGroup.addDSP(0, fft);
 
-            if (audioSource.name == Microphone.devices[0].ToString())
+            /*if (eventInstance.name == Microphone.devices[0].ToString())
             {
-                audioSource.mute = true;
-            }
+                eventInstance.mute = true;
+            }*/
 
-            while (audioSource.isPlaying || audioSource.loop)
+            while (playbackState == PLAYBACK_STATE.PLAYING)
             {
                 if (particle == null)
                 {
                     break;
                 }
 
-                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(audioSource.maxDistance, audioSource.maxDistance, audioSource.maxDistance) * 2);
-                audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
+                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
 
                 float bassIntensity = CalculateBassIntensity(spectrumData, 128);
-
+                
+                if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out var data,out var size) == RESULT.OK)
+                {
+                    DSP_PARAMETER_FFT fftData = Marshal.PtrToStructure<DSP_PARAMETER_FFT>(data);
+                    if (fftData.numchannels > 0)
+                    {
+                        fftData.spectrum[0].CopyTo(spectrumData, 0);
+                    }
+                }
 
                 float alpha = Mathf.Clamp01(bassIntensity * 10f);
                 mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
@@ -172,12 +187,12 @@ public class PhysicalAudioManager : MonoBehaviour
 
                 if (bassIntensity > previousIntensity * 1.2f)
                 {
-                    if (audioSource.loop)
+                    /*if (eventInstance.loop)
                     {
-                        mainModule.startLifetime = audioSource.maxDistance / 5;
-                        mainModule.startSize = audioSource.maxDistance * 2;
-                    }
-                    var audioSourceColiders = Physics.OverlapSphere(audioSource.transform.position, audioSource.maxDistance, audioListenerLayer);
+                        mainModule.startLifetime = eventInstance.maxDistance / 5;
+                        mainModule.startSize = eventInstance.maxDistance * 2;
+                    }*/
+                    var audioSourceColiders = Physics.OverlapSphere(particle.transform.position, max, audioListenerLayer);
                     if (audioSourceColiders != null)
                     {
                         foreach (var item in audioSourceColiders)
@@ -187,9 +202,9 @@ public class PhysicalAudioManager : MonoBehaviour
 
                             if (item.TryGetComponent(out IListenAudio listenerAudio))
                             {
-                                var dist = Vector3.Distance(audioSource.transform.position, item.transform.position);
+                                var dist = Vector3.Distance(particle.transform.position, item.transform.position);
                                 if (dist < listenerAudio.listenDistance)
-                                    listenerAudio.OnListenAudio(audioSource.transform.position);
+                                    listenerAudio.OnListenAudio(particle.transform.position);
                             }
                         }
                     }
@@ -197,15 +212,7 @@ public class PhysicalAudioManager : MonoBehaviour
                 }
 
                 previousIntensity = bassIntensity;
-                if (!audioSource.loop)
-                {
-                    yield return new WaitForSeconds(0.1f);
-                }
-                else
-                {
-                    mainModule.stopAction = ParticleSystemStopAction.None;
-                    yield return null;
-                }
+                yield return null;
             }
         }
     }

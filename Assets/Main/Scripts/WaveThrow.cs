@@ -37,6 +37,6 @@ public class WaveThrow : MonoBehaviour
             pitch = Random.Range(pitchRandomMin, pitchRandomMax);
         }
         if(lastVelocity.y < -1)
-            audioManager.Play(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,ColideObject: collision,pitch: pitch,soundObject: gameObject);
+            audioManager.PlayByPos(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,pos: collision,pitch: pitch);
     }
 }

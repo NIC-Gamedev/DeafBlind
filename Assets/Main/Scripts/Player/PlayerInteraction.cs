@@ -1,11 +1,12 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
     private MainController mainController;
-    [SerializeField] private AudioClip interactSound;
-    [SerializeField] private AudioClip cantInteractSound;
+    [SerializeField] private EventReference interactSound;
+    [SerializeField] private EventReference cantInteractSound;
     [SerializeField] private float interactRadius;
 
     public void Start()
@@ -24,7 +25,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (interactSphere[i].TryGetComponent(out InteractiveObjects interactiveObjects))
             {
-                PhysicalAudioManager.instance.Play(audioRef: interactSound, transform: interactiveObjects.transform);
+                PhysicalAudioManager.instance.PlayByTransform(audioRef: interactSound, transform: interactiveObjects.transform);
                 interactiveObjects.InteractiveInvoke();
             }
         }
