@@ -18,6 +18,13 @@ public class WaveThrow : MonoBehaviour
     [SerializeField] protected float maxDistance;
     protected PhysicalAudioManager audioManager => PhysicalAudioManager.instance;
 
+    public Vector3 lastVelocity;
+
+    private void LateUpdate()
+    {
+        lastVelocity = rb.linearVelocity;
+    }
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,6 +36,7 @@ public class WaveThrow : MonoBehaviour
         {
             pitch = Random.Range(pitchRandomMin, pitchRandomMax);
         }
-        audioManager.PlaySoundEffect(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,ColideObject: collision,pitch: pitch);
+        //if(lastVelocity.y < -1)
+        //    audioManager.PlayByPos(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,pos: collision,pitch: pitch);
     }
 }

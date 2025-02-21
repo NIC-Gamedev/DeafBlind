@@ -1,39 +1,71 @@
-using System;
+using FishNet.Object;
 using System.Collections.Generic;
 using UnityEngine;
-public abstract class BaseAnimator : MonoBehaviour
+public abstract class BaseAnimator : NetworkBehaviour
 {
     protected int CurrentState;
     protected float LockedTill;
     protected Animator anim;
 
-    protected Dictionary<object,int> animationHash = new Dictionary<object, int>();
+    public bool isAnimReloaded;
+
+    public Dictionary<string, int> animationHash = new Dictionary<string, int>();
 
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();
+        InitAnimation();
     }
     protected virtual void Update()
     {
-        PlayerAnimationStateLogic();
+        AnimationStateLogic();
     }
-    protected void PlayerAnimationStateLogic()
+
+    private void AnimationStateLogic()
     {
         var state = GetState();
 
         if (state == CurrentState) return;
-        anim.CrossFade(state, 0.1f, 0);
-        CurrentState = state;
+        if (base.IsServerInitialized)
+        {
+            SetState(state);
+        }
+        if (IsOwner)
+        {
+            SendAnimationToServer(state);
+        }
     }
+
+    protected virtual void InitAnimation(){}
 
     protected virtual int GetState()
     {
-        return 0;     
+        return 0;
+    }
 
-        int LockState(int s, float t)
-        {
-            LockedTill = Time.time + t;
-            return s;
-        }
+    [ServerRpc]
+    private void SendAnimationToServer(int state)
+    {
+        if (state == CurrentState) return;
+
+        SendAnimationToClients(state);
+    }
+    private void SetState(int state)
+    {
+        CurrentState = state;
+        SendAnimationToClients(state);
+    }
+    [ObserversRpc]
+    private void SendAnimationToClients(int state)
+    {
+        if (anim == null) return; 
+        CurrentState = state;
+        anim.CrossFade(state, 0.1f, 0);
+    }
+
+    public virtual int LockState(int s, float t)
+    {
+        LockedTill = Time.time + t;
+        return s;
     }
 }
