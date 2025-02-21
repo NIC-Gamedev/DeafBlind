@@ -43,7 +43,7 @@ public class EnemyWaveThrow : WaveThrow
         if (Mathf.Abs(rb.linearVelocity.x) > 1 || Mathf.Abs(rb.linearVelocity.z) > 1)
         {
             curentStepTime = stepTime;
-            audioManager.Play(playerMoveSound, volume: 0.5f, minDistance: soundMin, maxDistance: soundMax, ColideObject: collision, soundObject: gameObject);
+            //audioManager.Play(playerMoveSound, volume: 0.5f, minDistance: soundMin, maxDistance: soundMax, ColideObject: collision, soundObject: gameObject);
         }
         else
         {

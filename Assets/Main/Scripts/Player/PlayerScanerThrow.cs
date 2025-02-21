@@ -51,10 +51,10 @@ public class PlayerScanerThrow : WaveThrow
         if (isMove() && curentStepTime < 0 && !playerMovement.isSneak)
         {
             curentStepTime = stepTime;
-            if(!playerMovement.isSprinting)
-                audioManager.Play(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, ColideObject: collision, soundObject:gameObject);
-            else
-                audioManager.Play(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, ColideObject: collision, soundObject: gameObject);
+            //if(!playerMovement.isSprinting)
+                //audioManager.Play(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, ColideObject: collision, soundObject:gameObject);
+            //else
+                //audioManager.Play(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, ColideObject: collision, soundObject: gameObject);
         }
         else
         {
