@@ -102,7 +102,7 @@ namespace FishNet.Component.Spawning
 
             // Получаем выбор игрока из настроек
             bool isBlind = Convert.ToBoolean(PlayerPrefs.GetString("IsBlind"));
-
+            Debug.Log("Isblind" + isBlind);
             // Определяем, является ли подключение локальным (с того же компьютера)
             // Здесь предполагается, что локальный клиент подключается через "127.0.0.1"
             bool isLocalClient = conn.GetAddress().Equals("127.0.0.1");

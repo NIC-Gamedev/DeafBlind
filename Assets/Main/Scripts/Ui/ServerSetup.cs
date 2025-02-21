@@ -14,6 +14,7 @@ public class ServerSetup : MonoBehaviour
             PlayerPrefs.SetString("IsServer", "true");
             PlayerPrefs.SetInt("ServerPort", port);
             SceneManager.LoadScene("ProceduralGenTest"); // Перейти на сцену сервера
+
         }
         else
         {

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - PatrolWaypoints
+  - FxTemporaire
+  - Spawn
   layers:
   - Default
   - TransparentFX
