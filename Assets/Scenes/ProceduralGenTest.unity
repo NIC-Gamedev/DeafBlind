@@ -352,7 +352,7 @@ Transform:
   m_GameObject: {fileID: 1708967558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.52}
+  m_LocalPosition: {x: 0, y: 1, z: 0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -582,12 +582,20 @@ MonoBehaviour:
   sectionPrefabs:
   - {fileID: 7428806719187381883, guid: 31e31eaee2d49ac46bd4bd1474e76006, type: 3}
   - {fileID: 144433138431143244, guid: 6266829b5dfbb6b49a1033b2c6088c32, type: 3}
+  - {fileID: 2714844086940027184, guid: 17b525a0347e32c43ab45ab5e9fad148, type: 3}
+  - {fileID: 1958681794313335563, guid: f0b85bb537675e14b87dcac8aed377af, type: 3}
   endPrefabs:
   - {fileID: 1507596983847483420, guid: 55e54d17baccfc747a4786ed8d99053e, type: 3}
   initialSectionTags:
   - InitialSpawnPoint
   specialRules:
   - Tag: InitialSpawnPoint
+    MinAmount: 1
+    MaxAmount: 1
+  - Tag: SecurityFromSpawn
+    MinAmount: 1
+    MaxAmount: 1
+  - Tag: MedPunkt
     MinAmount: 1
     MaxAmount: 1
 --- !u!4 &1803113088

@@ -112,8 +112,9 @@ MonoBehaviour:
   tags:
   - Mainhall
   createsTags:
-  - InitialSpawnPoint
   - Mainhall
+  - SecurityFromSpawn
+  - MedPunkt
   deadEndChance: 0
 --- !u!1 &94166101236349133
 GameObject:

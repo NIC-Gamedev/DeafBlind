@@ -3736,7 +3736,7 @@ MonoBehaviour:
   tags:
   - InitialSpawnPoint
   createsTags:
-  - Mainhall
+  - SecurityFromSpawn
   deadEndChance: 0
 --- !u!1 &8694122990525080780
 GameObject:
