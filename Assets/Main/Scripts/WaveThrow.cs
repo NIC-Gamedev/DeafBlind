@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Reflection;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class WaveThrow : MonoBehaviour
 {
     protected Rigidbody rb;
     [Header("ColideSound")]
-    [SerializeField] protected AudioClip colideSound;
+    [SerializeField] protected EventReference colideSound;
 
     [Range(0,1)] [SerializeField] protected float volume = 1;
     [Range(0,1)] [SerializeField] protected float pitch = 1;
@@ -36,7 +37,7 @@ public class WaveThrow : MonoBehaviour
         {
             pitch = Random.Range(pitchRandomMin, pitchRandomMax);
         }
-        //if(lastVelocity.y < -1)
-        //    audioManager.PlayByPos(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,pos: collision,pitch: pitch);
+        if(lastVelocity.y < -1)
+            audioManager.PlayByPos(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,pos: collision.contacts[0].point,pitch: pitch);
     }
 }

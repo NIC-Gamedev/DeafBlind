@@ -1,3 +1,4 @@
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class PlayerScanerThrow : WaveThrow
 {
     [Header("StepSound")]
 
-    [SerializeField] protected AudioClip playerMoveSound;
+    [SerializeField] protected EventReference playerMoveSound;
     public float stepTime;
     protected float curentStepTime;
     [Range(0, 1)][SerializeField] protected float stepVol = 1;
@@ -51,10 +52,10 @@ public class PlayerScanerThrow : WaveThrow
         if (isMove() && curentStepTime < 0 && !playerMovement.isSneak)
         {
             curentStepTime = stepTime;
-            //if(!playerMovement.isSprinting)
-                //audioManager.Play(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, ColideObject: collision, soundObject:gameObject);
-            //else
-                //audioManager.Play(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, ColideObject: collision, soundObject: gameObject);
+            if(!playerMovement.isSprinting)
+                audioManager.PlayByPos(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, pos: collision.contacts[0].point);
+            else
+                audioManager.PlayByPos(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, pos: collision.contacts[0].point);
         }
         else
         {

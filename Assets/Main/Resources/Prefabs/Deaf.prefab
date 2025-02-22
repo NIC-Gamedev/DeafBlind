@@ -297,70 +297,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95de75898acb4894d8560b9f41a34620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 3649741552129244603}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 3649741552129244603}
   isAnimReloaded: 1
-  animationHash:
-    _serializedList:
-    - Key: Idle
-      Value: 2081823275
-    - Key: Run(1.00, 0.00, 0.00)
-      Value: 2108449852
-    - Key: Run(1.00, 0.00, 1.00)
-      Value: 2013106690
-    - Key: Run(-1.00, 0.00, 1.00)
-      Value: 1091457173
-    - Key: Run(0.00, 0.00, 1.00)
-      Value: -797153096
-    - Key: Run(-1.00, 0.00, 0.00)
-      Value: 274090267
-    - Key: Run(0.00, 0.00, -1.00)
-      Value: -1814924355
-    - Key: Run(1.00, 0.00, -1.00)
-      Value: 817340736
-    - Key: Run(-1.00, 0.00, -1.00)
-      Value: -1175294597
-    - Key: Walk(1.00, 0.00, 0.00)
-      Value: -1463908936
-    - Key: Walk(1.00, 0.00, 1.00)
-      Value: -585754227
-    - Key: Walk(-1.00, 0.00, 1.00)
-      Value: -1597406981
-    - Key: Walk(0.00, 0.00, 1.00)
-      Value: 1486762507
-    - Key: Walk(-1.00, 0.00, 0.00)
-      Value: 1660299577
-    - Key: Walk(0.00, 0.00, -1.00)
-      Value: -1053658159
-    - Key: Walk(1.00, 0.00, -1.00)
-      Value: 1293603962
-    - Key: Walk(-1.00, 0.00, -1.00)
-      Value: 320464628
-    - Key: CrouchIdle
-      Value: 1450945332
-    - Key: Crouch(1.00, 0.00, 0.00)
-      Value: -1863342234
-    - Key: Crouch(1.00, 0.00, 1.00)
-      Value: 1549988765
-    - Key: Crouch(-1.00, 0.00, 1.00)
-      Value: 1781882159
-    - Key: Crouch(0.00, 0.00, 1.00)
-      Value: -1840930001
-    - Key: Crouch(-1.00, 0.00, 0.00)
-      Value: -350866533
-    - Key: Crouch(0.00, 0.00, -1.00)
-      Value: -33862511
-    - Key: Crouch(1.00, 0.00, -1.00)
-      Value: 1345106164
-    - Key: Crouch(-1.00, 0.00, -1.00)
-      Value: -1838347036
-    - Key: StartJump
-      Value: 443950900
-    - Key: Fall
-      Value: 1353860376
-    - Key: Land
-      Value: -1035815286
 --- !u!95 &2714114309824000358
 Animator:
   serializedVersion: 7
@@ -445,7 +385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a98c9d6820d8ab4f8c12c039e568647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colideSound: {fileID: 8300000, guid: 0a46181d2284daf4ea900c060534630d, type: 3}
+  colideSound:
+    Guid:
+      Data1: -1100872744
+      Data2: 1103481048
+      Data3: -524491124
+      Data4: 2072024542
+    Path: event:/Interactables/Wooden Collision
   volume: 0.125
   pitch: 1
   pitchRandomMin: 0.503
@@ -453,7 +399,13 @@ MonoBehaviour:
   minDistance: 5
   maxDistance: 20
   lastVelocity: {x: 0, y: 0, z: 0}
-  playerMoveSound: {fileID: 8300000, guid: 0e2e79170a4f63145a92bd94cb4960f4, type: 3}
+  playerMoveSound:
+    Guid:
+      Data1: -385494015
+      Data2: 1195472629
+      Data3: -2064153176
+      Data4: 1900422219
+    Path: event:/Character/Player Footsteps
   stepTime: 0.5
   stepVol: 1
   stepPitch: 1
@@ -483,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
   IgnoredParameters: []
@@ -505,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
   _componentConfiguration: 0
@@ -548,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591af504d40bf2047be1c7e60fb2d643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
   movementSpeed: 5
@@ -581,15 +533,14 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
+  - {fileID: 4145979754116566038}
   - {fileID: -9058194595701247593}
   - {fileID: 2955802239629264974}
   - {fileID: -5482656074028921359}
   - {fileID: 1457572327187550515}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7640640126259735051}
   InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects:
-  - {fileID: 0}
+  InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
@@ -613,7 +564,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 9
+  <PrefabId>k__BackingField: 13
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 11895508318762620009
   <SceneId>k__BackingField: 0
@@ -2563,7 +2514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac4822951f1eb46a50d3e82cf8aa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 3
+  _componentIndexCache: 4
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
   mouseSensitivity: {x: 0.05, y: 0.05}
@@ -3253,6 +3204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6602383a75770a84a8bc8b3786717422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 3649741552129244603}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 3649741552129244603}

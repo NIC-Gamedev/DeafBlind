@@ -1556,7 +1556,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a98c9d6820d8ab4f8c12c039e568647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colideSound: {fileID: 8300000, guid: 0a46181d2284daf4ea900c060534630d, type: 3}
+  colideSound:
+    Guid:
+      Data1: -1100872744
+      Data2: 1103481048
+      Data3: -524491124
+      Data4: 2072024542
+    Path: event:/Interactables/Wooden Collision
   volume: 0.125
   pitch: 1
   pitchRandomMin: 0.503
@@ -1564,7 +1570,13 @@ MonoBehaviour:
   minDistance: 5
   maxDistance: 20
   lastVelocity: {x: 0, y: 0, z: 0}
-  playerMoveSound: {fileID: 8300000, guid: 0e2e79170a4f63145a92bd94cb4960f4, type: 3}
+  playerMoveSound:
+    Guid:
+      Data1: 347416895
+      Data2: 1223030430
+      Data3: 47099559
+      Data4: -643625871
+    Path: event:/Character/Enemy Footsteps
   stepTime: 0.5
   stepVol: 1
   stepPitch: 1
@@ -1582,8 +1594,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a75cd9fd9b192c45a7c42353e508a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactSound: {fileID: 8300000, guid: b3bfeea9367e63343b51c59aa3f18459, type: 3}
-  cantInteractSound: {fileID: 8300000, guid: 6df52c551b51d6844b74b816e764bd19, type: 3}
+  interactSound:
+    Guid:
+      Data1: -1003740608
+      Data2: 1122878646
+      Data3: 1192915876
+      Data4: -364537359
+    Path: event:/Interactables/Barrel Roll
+  cantInteractSound:
+    Guid:
+      Data1: 708724966
+      Data2: 1130599676
+      Data3: -768382828
+      Data4: 8080861
+    Path: event:/UI/Cancel
   interactRadius: 3
 --- !u!114 &2601992791307198760
 MonoBehaviour:
@@ -1778,7 +1802,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 10
+  <PrefabId>k__BackingField: 11
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 10328472624943095705
   <SceneId>k__BackingField: 0
