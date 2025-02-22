@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem;
+using Debug = UnityEngine.Debug;
 
 public class PhysicalAudioManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PhysicalAudioManager : MonoBehaviour
     [SerializeField] protected ParticleSystem waveParticle;
 
     public LayerMask audioListenerLayer;
+    
+    private const int SpectrumSize = 512;
 
     private void Awake()
     {
@@ -42,6 +45,19 @@ public class PhysicalAudioManager : MonoBehaviour
         eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(pos));
         eventInstance.setVolume(volume);
         eventInstance.setPitch(pitch);
+        
+
+        // Создаём DSP для FFT анализа
+        FMOD.ChannelGroup channelGroup;
+        RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out var fft);
+        fft.setParameterInt((int)FMOD.DSP_FFT.WINDOWTYPE, (int)FMOD.DSP_FFT_WINDOW.HANNING);
+        fft.setParameterInt((int)FMOD.DSP_FFT.WINDOWSIZE, SpectrumSize * 2);
+        RuntimeManager.CoreSystem.getMasterChannelGroup(out channelGroup);
+        channelGroup.addDSP(FMOD.CHANNELCONTROL_DSP_INDEX.HEAD, fft);
+        channelGroup.addDSP(0, fft);
+
+        // Добавляем DSP в ChannelGroup перед стартом!
+        
         if (loop)
         {
             _activeSounds.Add(eventInstance);
@@ -51,7 +67,7 @@ public class PhysicalAudioManager : MonoBehaviour
                 {
                     EventInstance instance = new EventInstance(instancePtr);
                     instance.start();
-                    ThrowWave(transform.position, eventInstance, transform);
+                    ThrowWave(transform.position, eventInstance,fft, transform);
                 }
                 return FMOD.RESULT.OK;
             }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
@@ -61,8 +77,7 @@ public class PhysicalAudioManager : MonoBehaviour
         eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxDistance);
 
         eventInstance.start();
-
-        ThrowWave(pos, eventInstance);
+        ThrowWave(pos, eventInstance,fft);
 
         if (!loop)
             eventInstance.release();
@@ -76,6 +91,17 @@ public class PhysicalAudioManager : MonoBehaviour
         eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
         eventInstance.setVolume(volume);
         eventInstance.setPitch(pitch);
+        
+        eventInstance.getChannelGroup(out var channelGroup);
+
+        // Создаём DSP для FFT анализа
+        RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out var fft);
+        fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, 1024); // Окно 1024
+        fft.setActive(true); // Включаем DSP
+
+        // Добавляем DSP в ChannelGroup перед стартом!
+        channelGroup.addDSP(0, fft);
+        
         if (loop)
         {
             _activeSounds.Add(eventInstance);
@@ -85,7 +111,7 @@ public class PhysicalAudioManager : MonoBehaviour
                 {
                     EventInstance instance = new EventInstance(instancePtr);
                     instance.start();
-                    ThrowWave(transform.position, eventInstance, transform);
+                    ThrowWave(transform.position, eventInstance,fft, transform);
                 }
                 return FMOD.RESULT.OK;
             }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
@@ -96,7 +122,7 @@ public class PhysicalAudioManager : MonoBehaviour
 
         eventInstance.start();
 
-        ThrowWave(transform.position, eventInstance, transform);
+        ThrowWave(transform.position, eventInstance,fft, transform);
 
         if (!loop)
         {
@@ -123,63 +149,54 @@ public class PhysicalAudioManager : MonoBehaviour
             }
         }
     }
-    protected void ThrowWave(Vector3 pos, EventInstance eventInstance, Transform soundObject = null)
+    protected void ThrowWave(Vector3 pos, EventInstance eventInstance,DSP fft, Transform soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
         var main = instance.main;
         eventInstance.getDescription(out EventDescription eventDescription);
+        eventDescription.loadSampleData();
         eventDescription.getLength(out var length);
-        main.startLifetime = (float)length/1000f;
+        Debug.Log($"Length: {length}");
+        main.startLifetime = (float)length;
         eventInstance.getMinMaxDistance(out var min, out var max);
         main.startSize = max;
-        StartCoroutine(EmitWave(instance, eventInstance, soundObject));
+        StartCoroutine(EmitWave(instance, eventInstance,fft, soundObject));
     }
-    protected IEnumerator EmitWave(ParticleSystem particle, EventInstance eventInstance, Transform soundObject = null)
+    protected IEnumerator EmitWave(ParticleSystem particle, EventInstance eventInstance,DSP fft, Transform soundObject = null)
     {
-        /*if (audioSource.clip.name == "Microphone")
-        {
-            audioSource.outputAudioMixerGroup = voicesMixer;
-            voicesMixer.audioMixer.SetFloat("VoiceVol", -80);
-        }*/
 
         if (particle)
         {
             var mainModule = particle.main;
             float previousIntensity = 0f;
-            const int spectrumSize = 512;
-            float[] spectrumData = new float[spectrumSize];
+            float[] spectrumData = new float[SpectrumSize*2];
             var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
             eventInstance.getPlaybackState(out var playbackState);
             eventInstance.getMinMaxDistance(out var min,out var max);
-            eventInstance.getChannelGroup(out var channelGroup);
-            RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out  var fft);
-            fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, spectrumSize);
-            channelGroup.addDSP(0, fft);
 
-            /*if (eventInstance.name == Microphone.devices[0].ToString())
+            while (playbackState == PLAYBACK_STATE.PLAYING || playbackState == PLAYBACK_STATE.STARTING)
             {
-                eventInstance.mute = true;
-            }*/
-
-            while (playbackState == PLAYBACK_STATE.PLAYING)
-            {
+                eventInstance.getPlaybackState(out var newPlaybackState);
+                playbackState = newPlaybackState;
                 if (particle == null)
                 {
                     break;
                 }
-
-                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
-
-                float bassIntensity = CalculateBassIntensity(spectrumData, 128);
                 
                 if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out var data,out var size) == RESULT.OK)
                 {
                     DSP_PARAMETER_FFT fftData = Marshal.PtrToStructure<DSP_PARAMETER_FFT>(data);
-                    if (fftData.numchannels > 0)
+                    Debug.Log($"FFT Data Size: {size}");
+                    Debug.Log($"FFT Channels: {fftData.numchannels}");
+                    if (fftData.numchannels > 0 && fftData.spectrum.Length > 0)
                     {
                         fftData.spectrum[0].CopyTo(spectrumData, 0);
                     }
                 }
+                
+                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
+
+                float bassIntensity = CalculateBassIntensity(spectrumData, 128);
 
                 float alpha = Mathf.Clamp01(bassIntensity * 10f);
                 mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
@@ -192,6 +209,11 @@ public class PhysicalAudioManager : MonoBehaviour
                         mainModule.startLifetime = eventInstance.maxDistance / 5;
                         mainModule.startSize = eventInstance.maxDistance * 2;
                     }*/
+                    eventInstance.getDescription(out EventDescription eventDescription);
+                    eventDescription.loadSampleData();
+                    eventDescription.getLength(out var length);
+                    Debug.Log($"Length: {length}");
+                    mainModule.startLifetime = (float)length;
                     var audioSourceColiders = Physics.OverlapSphere(particle.transform.position, max, audioListenerLayer);
                     if (audioSourceColiders != null)
                     {
@@ -212,7 +234,7 @@ public class PhysicalAudioManager : MonoBehaviour
                 }
 
                 previousIntensity = bassIntensity;
-                yield return null;
+                yield return new WaitForSeconds((0.1f));
             }
         }
     }
