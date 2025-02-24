@@ -6,7 +6,9 @@ using FishNet.Managing.Client;
 using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
-public class ErrorCatcher : MonoBehaviour
+using Cinemachine;
+using FishNet.Object;
+public class ErrorCatcher : NetworkBehaviour
 {
     private NetworkManager networkManager;
     public GameObject UnableToConnectPanel;
@@ -17,8 +19,16 @@ public class ErrorCatcher : MonoBehaviour
     {
         // Получаем ссылку на NetworkManager
         networkManager = InstanceFinder.NetworkManager;
-    }
 
+    }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (!base.IsOwner)
+        {
+            gameObject.active = false;
+        }
+    }
     private void OnEnable()
     {
         // Подписываемся на событие изменения состояния подключения клиента

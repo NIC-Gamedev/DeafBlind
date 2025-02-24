@@ -36,7 +36,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
     private float heightTemp;
 
-
+    public GameObject pausePanel;
 
     private bool isSneakReceived = false;
     protected override void Awake()
@@ -66,11 +66,25 @@ public class PlayerNetworkMovement : MovementNetworkBase
         inputActions.Player.Movement.canceled += callback => input = callback.ReadValue<Vector3>();
 
         inputActions.Player.Sneak.performed += SneakPressed;
-
+        inputActions.Player.Pause.Enable();
+        inputActions.Player.Pause.performed += Pause;
         heightTemp = (col as CapsuleCollider).height;
         inputActions.Player.Jump.performed += Jump;
     }
+    private void Pause(InputAction.CallbackContext callback)
+    {
+        pausePanel.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
+    }
+
+    public void UnPause()
+    {
+        pausePanel.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     private void FixedUpdate()
     {
         if (base.IsOwner)
