@@ -41,47 +41,53 @@ public class PhysicalAudioManager : MonoBehaviour
     public EventInstance PlayByPos(EventReference audioRef, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100, Vector3 pos = default)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(audioRef);
-        
-        eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(pos));
+
+        eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
         eventInstance.setVolume(volume);
         eventInstance.setPitch(pitch);
-        
+
+        eventInstance.getChannelGroup(out var channelGroup);
 
         // Создаём DSP для FFT анализа
         RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out var fft);
-        
-        fft.setParameterInt((int)FMOD.DSP_FFT.WINDOWTYPE, (int)FMOD.DSP_FFT_WINDOW.BLACKMAN);
-        fft.setParameterInt((int)FMOD.DSP_FFT.WINDOWSIZE, SpectrumSize);
-        
-        FMODUnity.RuntimeManager.CoreSystem.getMasterChannelGroup(out var channelGroup);
-        channelGroup.addDSP(FMOD.CHANNELCONTROL_DSP_INDEX.HEAD, fft);
+
         // Добавляем DSP в ChannelGroup перед стартом!
-        
-        if (loop)
+        channelGroup.addDSP(0, fft);
+        fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, SpectrumSize * 2); // Окно 1024
+        fft.setActive(true); // Включаем DSP
+        eventInstance.setCallback((FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
         {
-            _activeSounds.Add(eventInstance);
-            eventInstance.setCallback((FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
+            switch (type)
             {
-                if (type == FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED)
-                {   
-                    EventInstance instance = new EventInstance(instancePtr);
-                    instance.start();
-                    ThrowWave(transform.position, eventInstance,fft, transform);
-                }
-                return FMOD.RESULT.OK;
-            }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
-        }
-        
+                case EVENT_CALLBACK_TYPE.STOPPED:
+                    if (loop)
+                    {
+                        _activeSounds.Add(eventInstance);
+                        EventInstance instance = new EventInstance(instancePtr);
+                        Sound sound = new Sound(parameterPtr);
+                        instance.start();
+                        ThrowWave(transform.position, eventInstance, fft, transform);
+                    }
+                    break;
+                case EVENT_CALLBACK_TYPE.SOUND_PLAYED:
+
+                    break;
+            }
+            return FMOD.RESULT.OK;
+        }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
+
+
         eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minDistance);
         eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxDistance);
 
         eventInstance.start();
-        fft.getNumInputs(out var a);
-        Debug.Log("Count: " + a);
-        ThrowWave(pos, eventInstance,fft);
-    
+
+        ThrowWave(transform.position, eventInstance, fft, transform);
+
         if (!loop)
+        {
             eventInstance.release();
+        }
 
         return eventInstance;
     }
@@ -100,7 +106,7 @@ public class PhysicalAudioManager : MonoBehaviour
 
         // Добавляем DSP в ChannelGroup перед стартом!
         channelGroup.addDSP(0, fft);
-        fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, SpectrumSize); // Окно 1024
+        fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, SpectrumSize*2); // Окно 1024
         fft.setActive(true); // Включаем DSP
         eventInstance.setCallback((FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
         {
@@ -185,7 +191,7 @@ public class PhysicalAudioManager : MonoBehaviour
                 }
                 if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out var data,out var size) == RESULT.OK)
                 {
-                    DSP_PARAMETER_FFT fftData = Marshal.PtrToStructure<DSP_PARAMETER_FFT>(data);
+                    DSP_PARAMETER_FFT fftData = (FMOD.DSP_PARAMETER_FFT)Marshal.PtrToStructure(data, typeof(FMOD.DSP_PARAMETER_FFT));
                     Debug.Log($"Num channels: {fftData.numchannels} || spectrum len: {fftData.spectrum.Length}");
                     if (fftData.numchannels > 0 && fftData.spectrum.Length > 0)
                     {
@@ -228,7 +234,7 @@ public class PhysicalAudioManager : MonoBehaviour
                     particle.Emit(1);
                 }
                 previousIntensity = bassIntensity;
-                yield return new WaitForSeconds((0.05f));
+                yield return new WaitForSeconds((0.1f));
             }
         }
     }

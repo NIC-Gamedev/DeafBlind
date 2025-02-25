@@ -1412,6 +1412,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &479206689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5436,7 +5437,7 @@ PrefabInstance:
     - target: {fileID: 1790204820841046889, guid: de8a766b405063241ba84f300b77982b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2431812158620571784, guid: de8a766b405063241ba84f300b77982b,
         type: 3}

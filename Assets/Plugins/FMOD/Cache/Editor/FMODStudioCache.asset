@@ -410,7 +410,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638753806562441530
+  lastModified: 638761049573064830
   FileSizes:
   - Name: Desktop
     Value: 4014
@@ -481,7 +481,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/Dialogue_EN.bank
   Name: Dialogue_EN
   StudioPath: bank:/Dialogue_EN
-  lastModified: 638753806560459493
+  lastModified: 638761049571536077
   FileSizes:
   - Name: Desktop
     Value: 61120
@@ -552,7 +552,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/Dialogue_JP.bank
   Name: Dialogue_JP
   StudioPath: bank:/Dialogue_JP
-  lastModified: 638753806561863680
+  lastModified: 638761049572862877
   FileSizes:
   - Name: Desktop
     Value: 66560
@@ -572,7 +572,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638760286871114239
+  lastModified: 638761049740075873
   FileSizes:
   - Name: Desktop
     Value: 21568480
@@ -724,7 +724,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/VO.bank
   Name: VO
   StudioPath: bank:/VO
-  lastModified: 638753806738952277
+  lastModified: 638761049744459337
   FileSizes:
   - Name: Desktop
     Value: 38624
@@ -787,7 +787,7 @@ MonoBehaviour:
   - {fileID: 5694896707932647243}
   StringsBanks:
   - {fileID: -3393566324157846045}
-  cacheTime: 638760286871114239
+  cacheTime: 638761049744459337
   cacheVersion: 131622
 --- !u!114 &178148701451473675
 MonoBehaviour:
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638753806738014879
+  lastModified: 638761049743639948
   FileSizes:
   - Name: Desktop
     Value: 222464
@@ -1288,7 +1288,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638753806562406152
+  lastModified: 638761049573044831
   FileSizes:
   - Name: Desktop
     Value: 15592
@@ -1308,7 +1308,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638753806626170852
+  lastModified: 638761049633613930
   FileSizes:
   - Name: Desktop
     Value: 10454368
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   Path: Assets/Main/FModProject/MainProject/Build/Desktop/Dialogue_CN.bank
   Name: Dialogue_CN
   StudioPath: bank:/Dialogue_CN
-  lastModified: 638753806558924820
+  lastModified: 638761049570294870
   FileSizes:
   - Name: Desktop
     Value: 52416
