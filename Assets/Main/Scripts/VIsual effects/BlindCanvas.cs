@@ -1,3 +1,4 @@
+using System.Collections;
 using Cinemachine;
 using FishNet.Object;
 using UnityEngine;
@@ -24,11 +25,12 @@ public class BlindCanvas : NetworkBehaviour
 
     private void Start()
     {
-        Init();
+        StopCoroutine(InitCO());
     }
 
-    public void Init()
+    public IEnumerator InitCO()
     {
+        yield return new WaitForSeconds(0.1f);
         if (IsOwner)
         {
             if (cam == null)
