@@ -97,7 +97,6 @@ https://www.fmod.com/docs/studio/authoring-events.html#automation-and-modulation
 			<destination>{5ccf0d7b-2e57-4cac-91a7-b06ab02db3f1}</destination>
 		</relationship>
 		<relationship name="modules">
-			<destination>{4fb44967-b597-49b3-8033-5ae3cd5ca8cf}</destination>
 			<destination>{365b7f3b-aa1c-4ba4-aa8a-d0260a201fc3}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
@@ -111,7 +110,6 @@ https://www.fmod.com/docs/studio/authoring-events.html#automation-and-modulation
 	</object>
 	<object class="ParameterProxy" id="{05b83f1c-2689-426d-a7e3-995e1c66778f}">
 		<relationship name="modules">
-			<destination>{4fb44967-b597-49b3-8033-5ae3cd5ca8cf}</destination>
 			<destination>{365b7f3b-aa1c-4ba4-aa8a-d0260a201fc3}</destination>
 		</relationship>
 		<relationship name="preset">
@@ -149,19 +147,6 @@ https://www.fmod.com/docs/studio/authoring-events.html#automation-and-modulation
 	<object class="AutomationTrack" id="{5ccf0d7b-2e57-4cac-91a7-b06ab02db3f1}">
 		<relationship name="automator">
 			<destination>{6b9b3ff0-d908-457a-b0c4-ac26929e951f}</destination>
-		</relationship>
-	</object>
-	<object class="MultiSound" id="{4fb44967-b597-49b3-8033-5ae3cd5ca8cf}">
-		<property name="start">
-			<value>2.5</value>
-		</property>
-		<property name="length">
-			<value>5.5</value>
-		</property>
-		<relationship name="sounds">
-			<destination>{83e5f2b1-089f-4a10-90c3-4ba9cdc6f7a6}</destination>
-			<destination>{7ab3da9d-7a2c-47bc-ab1b-3f52130c8f09}</destination>
-			<destination>{1616b94b-1afe-4530-985b-5a88af0be9c1}</destination>
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{365b7f3b-aa1c-4ba4-aa8a-d0260a201fc3}">
@@ -202,21 +187,6 @@ https://www.fmod.com/docs/studio/authoring-events.html#automation-and-modulation
 	</object>
 	<object class="MixerBusPanner" id="{855833f0-0dd9-4d21-b456-c99a7b9c49b3}" />
 	<object class="MixerBusFader" id="{54bf4690-d5c5-4422-93ba-f56056d9a12f}" />
-	<object class="SingleSound" id="{83e5f2b1-089f-4a10-90c3-4ba9cdc6f7a6}">
-		<relationship name="audioFile">
-			<destination>{da18f860-f84e-4a59-83d8-38b576a4addc}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{7ab3da9d-7a2c-47bc-ab1b-3f52130c8f09}">
-		<relationship name="audioFile">
-			<destination>{5f328e09-2fa9-4419-a9f7-d05a01cc82c8}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{1616b94b-1afe-4530-985b-5a88af0be9c1}">
-		<relationship name="audioFile">
-			<destination>{8b796aa0-a071-448f-9aae-00a19369d15d}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusEffectChain" id="{cbbadc60-1723-4848-adf3-07abaa41bd5f}">
 		<relationship name="effects">
 			<destination>{504cd9a5-b8b4-4601-9aae-8bd70972b7af}</destination>
