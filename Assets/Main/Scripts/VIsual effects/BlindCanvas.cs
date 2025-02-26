@@ -22,32 +22,30 @@ public class BlindCanvas : NetworkBehaviour
     }
 
     public LayerMask blindCullingMask;
-
-    private void Start()
+    
+    public override void OnStartClient()
     {
+        base.OnStartClient();
         StopCoroutine(InitCO());
     }
 
     public IEnumerator InitCO()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
         if (IsOwner)
         {
-            if (cam == null)
+            cam = Camera.main.GetComponent<CinemachineBrain>();
+            if (cam.isActiveAndEnabled == virtualCamera)
             {
-                cam = Camera.main.GetComponent<CinemachineBrain>();
-                if (cam.isActiveAndEnabled == virtualCamera)
-                {
-                    canvas.worldCamera = Camera.main;
-                    Camera.main.cullingMask = blindCullingMask;
-                    canvas.transform.SetParent(null);
+                canvas.worldCamera = Camera.main;
+                Camera.main.cullingMask = blindCullingMask;
+                canvas.transform.SetParent(null);
 
-                }
             }
         }
         else
         {
             canvas.enabled = false;
-        }
+        }   
     }
 }

@@ -58,7 +58,6 @@ public class PhysicalAudioManager : MonoBehaviour
                     }
                     break;
                 case EVENT_CALLBACK_TYPE.SOUND_PLAYED:
-
                     break;
             }
             return FMOD.RESULT.OK;
@@ -164,76 +163,73 @@ public class PhysicalAudioManager : MonoBehaviour
     }
     protected IEnumerator EmitWave(ParticleSystem particle, EventInstance eventInstance,DSP fft, Transform soundObject = null)
     {
-        if (particle)
-        {
-            var mainModule = particle.main;
-            float previousIntensity = 0f;
-            float[] spectrumData = new float[SpectrumSize*2];
-            var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
-            //eventInstance.getPlaybackState(out var playbackState);
-            eventInstance.getMinMaxDistance(out var min,out var max);
-            int maxCountOfCycle = 100;
-
-            IntPtr data;
-            uint size;
-            while (true)
+            if (particle)
             {
-                if (particle == null || !eventInstance.hasHandle())
-                {
-                    break;
-                }
-                
-                /*eventInstance.getPlaybackState(out var newPlaybackState);
-                playbackState = newPlaybackState;*/
-                
-                if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out data,out size) == RESULT.OK)
-                {
-                    DSP_PARAMETER_FFT fftData = (FMOD.DSP_PARAMETER_FFT)Marshal.PtrToStructure(data, typeof(FMOD.DSP_PARAMETER_FFT));
-                    if (fftData.numchannels > 0 && fftData.spectrum.Length > 0)
-                    {
-                        fftData.spectrum[0].CopyTo(spectrumData, 0);
-                    }
-                    else
-                    {
-                        yield return new WaitForSeconds(0.1f);
-                        continue;
-                    }
-                }
-                
-                psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
+                var mainModule = particle.main;
+                float previousIntensity = 0f;
+                float[] spectrumData = new float[SpectrumSize*2];
+                var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
+                //eventInstance.getPlaybackState(out var playbackState);
+                eventInstance.getMinMaxDistance(out var min,out var max);
+                int maxCountOfCycle = 100;
 
-                float bassIntensity = CalculateBassIntensity(spectrumData, SpectrumSize*2);
-                float alpha = Mathf.Clamp01(bassIntensity * 10f);
-                mainModule.startLifetime = Mathf.Pow(bassIntensity, 0.3f) * 5f;
-                mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
-                mainModule.startSize = min;
-
-                if (bassIntensity >= previousIntensity)
+                IntPtr data;
+                uint size;
+                while (particle != null || eventInstance.hasHandle())
                 {
-                    var audioSourceColiders = Physics.OverlapSphere(particle.transform.position, max, audioListenerLayer);
-                    if (audioSourceColiders != null)
+                
+                    /*eventInstance.getPlaybackState(out var newPlaybackState);
+                    playbackState = newPlaybackState;*/
+                
+                    if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out data,out size) == RESULT.OK)
                     {
-                        foreach (var item in audioSourceColiders)
+                        DSP_PARAMETER_FFT fftData = (FMOD.DSP_PARAMETER_FFT)Marshal.PtrToStructure(data, typeof(FMOD.DSP_PARAMETER_FFT));
+                        if (fftData.numchannels > 0 && fftData.spectrum.Length > 0)
                         {
-                            if (soundObject == item.gameObject)
-                                continue;
-
-                            if (item.TryGetComponent(out IListenAudio listenerAudio))
-                            {
-                                var dist = Vector3.Distance(particle.transform.position, item.transform.position);
-                                if (dist < listenerAudio.listenDistance)
-                                    listenerAudio.OnListenAudio(particle.transform.position);
-                            }
+                            fftData.spectrum[0].CopyTo(spectrumData, 0);
+                        }
+                        else
+                        {
+                            yield return new WaitForSeconds(0.1f);
+                            continue;
                         }
                     }
-                    particle.Emit(1);
+                
+                    psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
+
+                    float bassIntensity = CalculateBassIntensity(spectrumData, SpectrumSize*2);
+                    float alpha = Mathf.Clamp01(bassIntensity * 10f);
+                    mainModule.startLifetime = Mathf.Pow(bassIntensity, 0.3f) * 5f;
+                    mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
+                    mainModule.startSize = min;
+
+                    if (bassIntensity >= previousIntensity * 1.2f)
+                    {
+                        var audioSourceColiders = Physics.OverlapSphere(particle.transform.position, max, audioListenerLayer);
+                        if (audioSourceColiders != null)
+                        {
+                            foreach (var item in audioSourceColiders)
+                            {
+                                if (soundObject == item.gameObject)
+                                    continue;
+
+                                if (item.TryGetComponent(out IListenAudio listenerAudio))
+                                {
+                                    var dist = Vector3.Distance(particle.transform.position, item.transform.position);
+                                    if (dist < listenerAudio.listenDistance)
+                                        listenerAudio.OnListenAudio(particle.transform.position);
+                                }
+                            }
+                        }
+                        particle.Emit(1);
+                    }
+                    previousIntensity = bassIntensity;
+                    yield return new WaitForSeconds(0.05f);
                 }
-                previousIntensity = bassIntensity;
-                yield return new WaitForSeconds(0.05f);
             }
-        }
-        eventInstance.release();
-        fft.release();
+            
+            fft.release(); //на будущеее просто проведи чаннел груп или найди его а после удали fft 
+            eventInstance.release();   
     }
 
     private unsafe float CalculateBassIntensity(float[] spectrumData, int length)
