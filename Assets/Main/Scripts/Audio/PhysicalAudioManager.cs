@@ -6,10 +6,7 @@ using FMOD;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem;
-using Debug = UnityEngine.Debug;
 
 public class PhysicalAudioManager : MonoBehaviour
 {
@@ -45,30 +42,34 @@ public class PhysicalAudioManager : MonoBehaviour
         eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(pos));
         eventInstance.setVolume(volume);
         eventInstance.setPitch(pitch);
-        eventInstance.setCallback((FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
+        eventInstance.getChannelGroup(out var channelGroup2);
+        channelGroup2.getNumDSPs(out var num);
+        
+        if (loop) //Кароче с лупами есть такой прикол что он вызвает утечку памяти
         {
-            switch (type)
-            {
-                case EVENT_CALLBACK_TYPE.STOPPED:
-                    if (loop)
+            eventInstance.setCallback(
+                (FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
+                {
+                    switch (type)
                     {
-                        _activeSounds.Add(eventInstance);
-                        eventInstance.start();
-                        ExecuteThrowWaveCO(pos, eventInstance);
+                        case EVENT_CALLBACK_TYPE.STOPPED:
+                            _activeSounds.Add(eventInstance);
+                            eventInstance.start();
+                            ExecuteThrowWaveCO(pos, eventInstance);
+                            break;
+                        case EVENT_CALLBACK_TYPE.SOUND_PLAYED:
+                            break;
                     }
-                    break;
-                case EVENT_CALLBACK_TYPE.SOUND_PLAYED:
-                    break;
-            }
-            return FMOD.RESULT.OK;
-        }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
-
+                    return FMOD.RESULT.OK;
+                },
+                FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED
+            );
+        }
 
         eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minDistance);
         eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxDistance);
-
-        eventInstance.start();
         
+        eventInstance.start();
         ExecuteThrowWaveCO(pos, eventInstance);
         
         return eventInstance;
@@ -81,11 +82,7 @@ public class PhysicalAudioManager : MonoBehaviour
             RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out fft);
             fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, SpectrumSize * 2);
             channelGroup.addDSP(0, fft);
-            if (channelGroup.getNumDSPs(out var a) == RESULT.OK)
-            {
-                Debug.Log(a);
-            }
-            ThrowWave(pos, eventInstance, fft);
+            ThrowWave(pos, eventInstance, fft,channelGroup);
         }));
     }
 
@@ -105,27 +102,29 @@ public class PhysicalAudioManager : MonoBehaviour
         eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
         eventInstance.setVolume(volume);
         eventInstance.setPitch(pitch);
-        
-        eventInstance.setCallback((FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
+        if (loop)
         {
-            switch (type)
-            {
-                case EVENT_CALLBACK_TYPE.STOPPED:
-                    if (loop)
+            eventInstance.setCallback(
+                (FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr) =>
+                {
+                    switch (type)
                     {
-                        _activeSounds.Add(eventInstance);
-                        eventInstance.start();
-                        ExecuteThrowWaveCO(transform.position, eventInstance);
+                        case EVENT_CALLBACK_TYPE.STOPPED:
+                            _activeSounds.Add(eventInstance);
+                            eventInstance.start();
+                            ExecuteThrowWaveCO(transform.position, eventInstance);
+
+                            break;
+                        case EVENT_CALLBACK_TYPE.SOUND_PLAYED:
+
+                            break;
                     }
-                    break;
-                case EVENT_CALLBACK_TYPE.SOUND_PLAYED:
-                    
-                    break;
-            }
-            return FMOD.RESULT.OK;
-        }, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
-        
-        
+                    return FMOD.RESULT.OK;
+                },
+                FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED
+            );
+        }
+
         eventInstance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minDistance);
         eventInstance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxDistance);
 
@@ -153,11 +152,11 @@ public class PhysicalAudioManager : MonoBehaviour
             }
         }
     }
-    protected void ThrowWave(Vector3 pos, EventInstance eventInstance,DSP fft, Transform soundObject = null)
+    protected void ThrowWave(Vector3 pos, EventInstance eventInstance,DSP fft,ChannelGroup channelGroup, Transform soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
         var main = instance.main;
-        eventInstance.getMinMaxDistance(out var min, out var max);
+        eventInstance.getMinMaxDistance(out var min, out var max); //подазриваю что что-то именно тут не так, хотя может как раз дело в очистке памяти вдруг она приводит к ошибкам глянь кароче да
         main.startSize = max;
         StartCoroutine(EmitWave(instance, eventInstance,fft, soundObject));
     }
@@ -169,18 +168,13 @@ public class PhysicalAudioManager : MonoBehaviour
                 float previousIntensity = 0f;
                 float[] spectrumData = new float[SpectrumSize*2];
                 var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
-                //eventInstance.getPlaybackState(out var playbackState);
                 eventInstance.getMinMaxDistance(out var min,out var max);
-                int maxCountOfCycle = 100;
+                eventInstance.getChannelGroup(out var channelGroup);
 
                 IntPtr data;
                 uint size;
-                while (particle != null || eventInstance.hasHandle())
+                while (particle != null || eventInstance.hasHandle() || psRenderer != null)
                 {
-                
-                    /*eventInstance.getPlaybackState(out var newPlaybackState);
-                    playbackState = newPlaybackState;*/
-                
                     if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out data,out size) == RESULT.OK)
                     {
                         DSP_PARAMETER_FFT fftData = (FMOD.DSP_PARAMETER_FFT)Marshal.PtrToStructure(data, typeof(FMOD.DSP_PARAMETER_FFT));
@@ -194,7 +188,10 @@ public class PhysicalAudioManager : MonoBehaviour
                             continue;
                         }
                     }
-                
+                    if (!psRenderer)
+                    {
+                        break;
+                    }
                     psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
 
                     float bassIntensity = CalculateBassIntensity(spectrumData, SpectrumSize*2);
@@ -226,10 +223,10 @@ public class PhysicalAudioManager : MonoBehaviour
                     previousIntensity = bassIntensity;
                     yield return new WaitForSeconds(0.05f);
                 }
+                channelGroup.removeDSP(fft);
+                fft.release();
+                eventInstance.release();  
             }
-            
-            fft.release(); //на будущеее просто проведи чаннел груп или найди его а после удали fft 
-            eventInstance.release();   
     }
 
     private unsafe float CalculateBassIntensity(float[] spectrumData, int length)

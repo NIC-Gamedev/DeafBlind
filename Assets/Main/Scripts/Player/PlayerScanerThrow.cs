@@ -52,10 +52,11 @@ public class PlayerScanerThrow : WaveThrow
         if (isMove() && curentStepTime < 0 && !playerMovement.isSneak)
         {
             curentStepTime = stepTime;
-            if(!playerMovement.isSprinting)
+            Debug.Log("asdasd");
+            /*if(!playerMovement.isSprinting)
                 audioManager.PlayByPos(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, pos: collision.contacts[0].point);
             else
-                audioManager.PlayByPos(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, pos: collision.contacts[0].point);
+                audioManager.PlayByPos(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, pos: collision.contacts[0].point);*/
         }
         else
         {
