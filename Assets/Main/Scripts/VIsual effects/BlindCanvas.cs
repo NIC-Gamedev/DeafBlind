@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using FishNet.Connection;
 using FishNet.Object;
 using UnityEngine;
 
@@ -22,16 +23,10 @@ public class BlindCanvas : NetworkBehaviour
     }
 
     public LayerMask blindCullingMask;
-    
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        StopCoroutine(InitCO());
-    }
 
-    public IEnumerator InitCO()
+    public override void OnOwnershipClient(NetworkConnection prevOwner)
     {
-        yield return new WaitForSeconds(1f);
+        base.OnOwnershipClient(prevOwner);
         if (IsOwner)
         {
             cam = Camera.main.GetComponent<CinemachineBrain>();

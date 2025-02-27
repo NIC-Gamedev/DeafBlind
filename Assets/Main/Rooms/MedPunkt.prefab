@@ -171,7 +171,6 @@ Transform:
   - {fileID: 6555359392079338541}
   - {fileID: 7355421567199286030}
   - {fileID: 6014407448339243251}
-  - {fileID: 5211408294979122934}
   m_Father: {fileID: 6565524900159500056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186811262284506509
@@ -308,9 +307,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433916290936977068}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 0
-  m_Shape: 0
   m_Color: {r: 1, g: 0.9905793, b: 0.3820755, a: 1}
   m_Intensity: 10
   m_Range: 3
@@ -360,8 +358,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &3179041294396957331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,9 +521,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2200576724153145996}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 2
-  m_Shape: 0
   m_Color: {r: 1, g: 0.99215686, b: 0.38039216, a: 1}
   m_Intensity: 2
   m_Range: 1
@@ -571,8 +572,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &3425106113621515884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,6 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5211408294979122934}
+  - component: {fileID: 5679900259229549400}
   m_Layer: 0
   m_Name: wayPoints
   m_TagString: Untagged
@@ -620,7 +626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2244480758318890567}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -639,8 +645,20 @@ Transform:
   - {fileID: 3057629117151388521}
   - {fileID: 1654917359118917209}
   - {fileID: 1057450561475130339}
-  m_Father: {fileID: 7753633160148391871}
+  m_Father: {fileID: 6565524900159500056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5679900259229549400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244480758318890567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80d585bdf4f7c6428e11faa59671aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2337030175375446088
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +881,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5211408294979122934}
   - {fileID: 4079028747634895227}
   - {fileID: 3670482573171790825}
   - {fileID: 7753633160148391871}
@@ -1072,9 +1091,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6618767619187642747}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 0
-  m_Shape: 0
   m_Color: {r: 1, g: 0.9905793, b: 0.3820755, a: 1}
   m_Intensity: 10
   m_Range: 3
@@ -1124,8 +1142,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &5264366518993884091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,9 +1243,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7176661413773165898}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 2
-  m_Shape: 0
   m_Color: {r: 1, g: 0.99215686, b: 0.38039216, a: 1}
   m_Intensity: 2
   m_Range: 1
@@ -1273,8 +1294,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &6011291370016022692
 MonoBehaviour:
   m_ObjectHideFlags: 0
