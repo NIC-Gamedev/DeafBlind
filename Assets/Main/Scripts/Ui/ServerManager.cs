@@ -9,7 +9,9 @@ using Unity.Collections;
 using UnityEngine.SceneManagement;
 public class ServerManager : MonoBehaviour
 {
+    [SerializeField]
     private NetworkManager _networkManager;
+    [SerializeField]
     private Tugboat _tugboat;
 
     private void Awake()

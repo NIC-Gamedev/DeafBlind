@@ -58,6 +58,7 @@ public class PlayerMovement : MovementBase
 
 
         inputActions.Player.Jump.performed += Jump;
+        
     }
 
     private void FixedUpdate()

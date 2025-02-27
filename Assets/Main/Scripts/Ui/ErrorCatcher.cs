@@ -6,6 +6,8 @@ using FishNet.Managing.Client;
 using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using Cinemachine;
+using FishNet.Object;
 public class ErrorCatcher : MonoBehaviour
 {
     private NetworkManager networkManager;
@@ -17,8 +19,9 @@ public class ErrorCatcher : MonoBehaviour
     {
         // Получаем ссылку на NetworkManager
         networkManager = InstanceFinder.NetworkManager;
-    }
 
+    }
+   
     private void OnEnable()
     {
         // Подписываемся на событие изменения состояния подключения клиента
