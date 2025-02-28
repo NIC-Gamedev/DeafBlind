@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class EnemyWaveThrow : WaveThrow
 {
     [Header("StepSound")]
 
-    [SerializeField] protected AudioClip playerMoveSound;
+    [SerializeField] protected EventReference footstepSound;
     public float stepTime;
     protected float curentStepTime;
     [Range(0, 1)][SerializeField] protected float stepVol = 1;
     [Range(0, 1)][SerializeField] protected float stepPitch = 1;
-    [Range(0, 1)][SerializeField] protected float stepPitchRandomMin = 0;
-    [Range(0, 1)][SerializeField] protected float stepPitchRandomMax = 0;
-
-    [SerializeField] private float soundMin = 0;
+    
     [SerializeField] private float soundMax = 10;
 
     private Vector3 direction;
@@ -40,10 +38,10 @@ public class EnemyWaveThrow : WaveThrow
     }
     protected void OnCollisionStay(Collision collision)
     {
-        if (Mathf.Abs(rb.linearVelocity.x) > 1 || Mathf.Abs(rb.linearVelocity.z) > 1)
+        if (curentStepTime < 0 &&( Mathf.Abs(rb.linearVelocity.x) > 1 || Mathf.Abs(rb.linearVelocity.z) > 1))
         {
             curentStepTime = stepTime;
-            //audioManager.Play(playerMoveSound, volume: 0.5f, minDistance: soundMin, maxDistance: soundMax, ColideObject: collision, soundObject: gameObject);
+            audioManager.PlayByPos(footstepSound,collision.contacts[0].point,stepVol,stepPitch);
         }
         else
         {

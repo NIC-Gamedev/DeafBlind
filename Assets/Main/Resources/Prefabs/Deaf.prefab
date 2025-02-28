@@ -3423,6 +3423,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5286911182174280390, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286911182174280390, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286911182174280390, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: -5482656074028921359}
+    - target: {fileID: 5286911182174280390, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286911182174280390, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UnPause
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286911182174280390, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayerNetworkMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286911182174280390, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181070499344308266, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3462,6 +3502,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 710768224108953959, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
+        type: 3}
+      propertyPath: _objectHealth
+      value: 
+      objectReference: {fileID: 2879799913157870573}
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3505,17 +3550,17 @@ PrefabInstance:
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.25029796
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.25029796
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.25029796
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
@@ -3555,12 +3600,12 @@ PrefabInstance:
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20.490288
+      value: 191
       objectReference: {fileID: 0}
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 11.532135
+      value: 63.814
       objectReference: {fileID: 0}
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
@@ -3577,6 +3622,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785274283536546186, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
+        type: 3}
+      propertyPath: _objectHealth
+      value: 
+      objectReference: {fileID: 2879799913157870573}
     - target: {fileID: 7073317381689047983, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3592,10 +3647,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: HpStaminaPanel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 710768224108953959, guid: db8d5f44ddb3ed04289b50ab8ca076ab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 674917848270143316, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1503098651893645477}
   m_SourcePrefab: {fileID: 100100000, guid: db8d5f44ddb3ed04289b50ab8ca076ab, type: 3}
 --- !u!224 &935076796988050678 stripped
 RectTransform:
@@ -3603,6 +3663,26 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2074245994494159027}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1555142138024400871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 674917848270143316, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 2074245994494159027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1503098651893645477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555142138024400871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee6be4d0749e49741ab8dd612747e49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNetwork: {fileID: -5482656074028921359}
+  animationDuration: 0.5
 --- !u!1001 &9201966541690776879
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
     [Header("Walking")]
     [SerializeField] private float FrictionAmount;
 
-    [SerializeField] private float maxStaminaTime;
+    [SerializeField] public float maxStaminaTime;
     private float currentStaminaTime;
 
     [SerializeField] private float waitTimeBeforeStaminaRecover;
@@ -26,8 +26,6 @@ public class PlayerNetworkMovement : MovementNetworkBase
 
     public bool isSprinting { get; private set; }
 
-    private Action OnStaminaEnd;
-
     public MainController inputActions;
     public bool isGrounded { private set; get; }
 
@@ -39,6 +37,8 @@ public class PlayerNetworkMovement : MovementNetworkBase
     public GameObject pausePanel;
 
     private bool isSneakReceived = false;
+
+    public Action<float> OnStaminaChanged;
     protected override void Awake()
     {
         base.Awake();
@@ -116,6 +116,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
             {
                 currentWaitTimeBeforeStaminaRecover = waitTimeBeforeStaminaRecover;
                 currentStaminaTime -= Time.deltaTime;
+                OnStaminaChanged?.Invoke(currentStaminaTime);
 
                 if (currentStaminaTime < 0)
                 {
@@ -140,7 +141,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
     [Rpc]
     private void SendMovementData(Vector3 direction, float speedMultiplier, float speedDevider)
     {
-        rb.AddForce(direction.normalized * movementSpeed * 10f * speedMultiplier / speedDevider, ForceMode.Force);
+        rb.AddForce(direction.normalized * (movementSpeed * 10f * speedMultiplier) / speedDevider, ForceMode.Force);
     }
 
 
@@ -155,7 +156,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
         if (currentStaminaTime < maxStaminaTime && currentWaitTimeBeforeStaminaRecover <= 0)
         {
             currentStaminaTime = Mathf.MoveTowards(currentStaminaTime, maxStaminaTime, Time.deltaTime);
-
+            OnStaminaChanged?.Invoke(currentStaminaTime);
             if (Mathf.Approximately(currentStaminaTime, maxStaminaTime))
             {
                 inputActions.Player.Sprint.Enable();

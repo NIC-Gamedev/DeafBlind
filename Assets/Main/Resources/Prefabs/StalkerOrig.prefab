@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StalkerOrig
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 33f30a16761e8054d810724b99704dd8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 33f30a16761e8054d810724b99704dd8,
         type: 3}
       propertyPath: m_Controller
@@ -289,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16133bc4263a0dc47a0e29b0a6731b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 215
   movementSpeedMultiplier: 1
   rotationSpeed: 10
   target: {fileID: 0}
@@ -464,6 +469,7 @@ MonoBehaviour:
   NetworkBehaviours:
   - {fileID: 4433038183118836063}
   - {fileID: 1068746727929494822}
+  - {fileID: 4021457830830555997}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -510,7 +516,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3405f9c5dbd541546b1768c211cdf63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colideSound: {fileID: 8300000, guid: b26a4abde97fdab4eb51cff5f38afc59, type: 3}
+  colideSound:
+    Guid:
+      Data1: -1100872744
+      Data2: 1103481048
+      Data3: -524491124
+      Data4: 2072024542
+    Path: event:/Interactables/Wooden Collision
   volume: 0.59
   pitch: 0.697
   pitchRandomMin: 0.446
@@ -518,13 +530,16 @@ MonoBehaviour:
   minDistance: 0
   maxDistance: 40
   lastVelocity: {x: 0, y: 0, z: 0}
-  playerMoveSound: {fileID: 8300000, guid: 0e2e79170a4f63145a92bd94cb4960f4, type: 3}
+  footstepSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   stepTime: 0.5
   stepVol: 1
   stepPitch: 1
-  stepPitchRandomMin: 0.432
-  stepPitchRandomMax: 0.609
-  soundMin: 0
   soundMax: 20
 --- !u!54 &5052957911733328857
 Rigidbody:
@@ -594,10 +609,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0981075
-  m_Height: 0.79541445
+  m_Radius: 0.16793533
+  m_Height: 1.0069304
   m_Direction: 1
-  m_Center: {x: -0.011319593, y: -0.005347073, z: 0}
+  m_Center: {x: -0.0030947775, y: -0.002297163, z: 0}
 --- !u!114 &4021457830830555997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,9 +625,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 6843669454940950776}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6843669454940950776}
   _componentConfiguration: 0
   _synchronizeParent: 0
   _packing:

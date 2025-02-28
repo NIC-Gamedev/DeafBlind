@@ -4,42 +4,22 @@ using UnityEngine.UI;
 
 public class UIHpBar : MonoBehaviour
 {
-    private ObjectHealth _objectHealth;
+    [SerializeField] private ObjectHealth _objectHealth;
     private Slider _slider;
-
-    // Значение урона, которое будет наноситься каждые 5 секунд (для теста)
-    [SerializeField] private float testDamageAmount = 5f;
-    // Длительность анимации изменения ширины и позиции (в секундах)
+    
     [SerializeField] private float animationDuration = 0.5f;
-
-    // Ссылка на текущую анимационную корутину (чтобы при новом изменении остановить предыдущую)
+    
     private Coroutine currentAnimation;
 
     void Start()
     {
-        // Получаем компонент ObjectHealth из родительского объекта
-        _objectHealth = GetComponentInParent<ObjectHealth>();
         _slider = GetComponent<Slider>();
-      
-
-        // Подписываемся на событие изменения здоровья
+        
         ObjectHealth.OnHealthValueChange += OnHealthChanged;
-
-        StartCoroutine(TakeHP());
-    }
-
-    private IEnumerator TakeHP()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(5f);
-            _objectHealth.GetDamage(5f);
-        }
     }
 
     void OnDestroy()
     {
-        // Отписываемся от события, чтобы избежать утечек памяти
         ObjectHealth.OnHealthValueChange -= OnHealthChanged;
     }
 
