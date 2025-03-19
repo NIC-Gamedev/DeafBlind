@@ -2,6 +2,7 @@ using UnityEngine;
 using FishNet.Broadcast;
 using FishNet.Connection;
 using FishNet;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,27 +11,29 @@ public class ChatBroadcast : MonoBehaviour
 {
     public Transform chatHolder;
     public GameObject msgElement;
-
+    public Button sendButton; // Добавьте ссылку на кнопку
+    public ScrollRect scrollRect; // Scroll View для прокрутки
     public TMP_InputField playerUsername, playerMsg;
 
     private void OnEnable()
     {
         InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
         InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
+        sendButton.onClick.AddListener(SendMessage); // Привяжите метод к кнопке
+
     }
 
     private void OnDisable()
     {
         InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
         InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
+        sendButton.onClick.RemoveListener(SendMessage); // Удалите привязку метода
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-          SendMessage();
-        }
+       
     }
 
     private void SendMessage()
@@ -45,12 +48,29 @@ public class ChatBroadcast : MonoBehaviour
             InstanceFinder.ServerManager.Broadcast(msg);
         if(InstanceFinder.IsClient)
             InstanceFinder.ClientManager.Broadcast(msg);
+
+
+        playerMsg.text = ""; // Очистка после отправки
     }
 
     private void OnMessageReceived(Message msg, Channel channel)
     {
         GameObject finalMessage = Instantiate(msgElement, chatHolder);
         finalMessage.GetComponent<TMP_Text>().text = msg.username + ": " + msg.message;
+
+        Canvas.ForceUpdateCanvases(); // Обновляем UI
+        ScrollToBottom();
+    }
+
+    private void ScrollToBottom()
+    {
+        StartCoroutine(ScrollToBottomCoroutine());
+    }
+
+    private IEnumerator ScrollToBottomCoroutine()
+    {
+        yield return null; // Ждем один кадр, чтобы UI успел обновиться
+        scrollRect.verticalNormalizedPosition = 0f; // Прокрутка вниз
     }
 
     private void OnClientMessageReceived(NetworkConnection connection, Message msg, Channel channel)
