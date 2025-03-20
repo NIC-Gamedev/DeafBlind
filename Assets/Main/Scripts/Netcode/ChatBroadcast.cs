@@ -13,7 +13,7 @@ public class ChatBroadcast : MonoBehaviour
     public GameObject msgElement;
     public Button sendButton; // Добавьте ссылку на кнопку
     public ScrollRect scrollRect; // Scroll View для прокрутки
-    public TMP_InputField playerUsername, playerMsg;
+    public TMP_InputField  playerMsg;
 
     private void OnEnable()
     {
@@ -40,7 +40,7 @@ public class ChatBroadcast : MonoBehaviour
     {
         Message msg = new Message()
         {
-            username = playerUsername.text,
+            username = PlayerPrefs.GetString("Username"),
             message = playerMsg.text
         };
         
