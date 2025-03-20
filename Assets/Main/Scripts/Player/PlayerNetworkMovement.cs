@@ -35,6 +35,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
     private float heightTemp;
 
     public GameObject pausePanel;
+    public GameObject ChatPanel;
 
     private bool isSneakReceived = false;
 
@@ -70,7 +71,27 @@ public class PlayerNetworkMovement : MovementNetworkBase
         inputActions.Player.Pause.performed += Pause;
         heightTemp = (col as CapsuleCollider).height;
         inputActions.Player.Jump.performed += Jump;
+        inputActions.Player.OpenChat.performed += ControlChatPanel;
+
     }
+
+    private void ControlChatPanel(InputAction.CallbackContext callback)
+    {
+        Debug.Log("Chat is open");
+        ChatBroadcast chat =  ChatPanel.GetComponentInChildren<ChatBroadcast>();
+        if (ChatPanel.activeSelf)
+        {
+            chat.SendMessage();
+            ChatPanel.SetActive(false);
+        }
+        else
+        {
+
+            ChatPanel.SetActive(true);
+            ChatPanel.GetComponentInChildren<TMPro.TMP_InputField>().ActivateInputField();
+        }
+    }
+
     private void Pause(InputAction.CallbackContext callback)
     {
         pausePanel.SetActive(true);

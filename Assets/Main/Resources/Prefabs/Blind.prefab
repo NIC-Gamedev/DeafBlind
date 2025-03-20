@@ -1839,7 +1839,8 @@ MonoBehaviour:
   radius: 0.1
   ColliderCenterOnSneak: {x: 0, y: -0.00459379, z: 0}
   heightOnSneak: 1.270188
-  pausePanel: {fileID: 0}
+  pausePanel: {fileID: 3606669625246631786}
+  ChatPanel: {fileID: 6445139273582562899}
 --- !u!114 &3302183967494193835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3578,6 +3579,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe31d0542957b0f45a8889c0b9be8755, type: 3}
+--- !u!1 &3606669625246631786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6643838380648814053, guid: fe31d0542957b0f45a8889c0b9be8755,
+    type: 3}
+  m_PrefabInstance: {fileID: 7944016746160689807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6445139273582562899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3985524186790976732, guid: fe31d0542957b0f45a8889c0b9be8755,
+    type: 3}
+  m_PrefabInstance: {fileID: 7944016746160689807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7362539506459062438 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 581579563112079913, guid: fe31d0542957b0f45a8889c0b9be8755,

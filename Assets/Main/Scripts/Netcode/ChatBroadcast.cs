@@ -11,32 +11,17 @@ public class ChatBroadcast : MonoBehaviour
 {
     public Transform chatHolder;
     public GameObject msgElement;
-    public Button sendButton; // Добавьте ссылку на кнопку
     public ScrollRect scrollRect; // Scroll View для прокрутки
     public TMP_InputField  playerMsg;
 
-    private void OnEnable()
-    {
-        InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
-        InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
-        sendButton.onClick.AddListener(SendMessage); // Привяжите метод к кнопке
-
-    }
-
-    private void OnDisable()
-    {
-        InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
-        InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
-        sendButton.onClick.RemoveListener(SendMessage); // Удалите привязку метода
-
-    }
+   
 
     private void Update()
     {
        
     }
 
-    private void SendMessage()
+    public void SendMessage()
     {
         Message msg = new Message()
         {

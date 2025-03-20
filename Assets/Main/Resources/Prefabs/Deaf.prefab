@@ -519,6 +519,7 @@ MonoBehaviour:
   ColliderCenterOnSneak: {x: 0, y: -0.00459379, z: 0}
   heightOnSneak: 1.270188
   pausePanel: {fileID: 5069792170965024907}
+  ChatPanel: {fileID: 3253657154747877810}
 --- !u!114 &3649741552129244603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3511,6 +3512,12 @@ PrefabInstance:
 --- !u!224 &1331391312106927943 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 581579563112079913, guid: fe31d0542957b0f45a8889c0b9be8755,
+    type: 3}
+  m_PrefabInstance: {fileID: 1902809119929177454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3253657154747877810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3985524186790976732, guid: fe31d0542957b0f45a8889c0b9be8755,
     type: 3}
   m_PrefabInstance: {fileID: 1902809119929177454}
   m_PrefabAsset: {fileID: 0}
