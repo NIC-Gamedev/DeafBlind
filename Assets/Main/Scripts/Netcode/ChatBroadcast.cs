@@ -14,7 +14,19 @@ public class ChatBroadcast : MonoBehaviour
     public ScrollRect scrollRect; // Scroll View для прокрутки
     public TMP_InputField  playerMsg;
 
-   
+    private void OnEnable()
+    {
+        InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
+        InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
+
+    }
+
+    private void OnDisable()
+    {
+        InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
+        InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
+
+    }
 
     private void Update()
     {
@@ -34,7 +46,7 @@ public class ChatBroadcast : MonoBehaviour
         if(InstanceFinder.IsClient)
             InstanceFinder.ClientManager.Broadcast(msg);
 
-
+        Debug.Log("Message was sent");
         playerMsg.text = ""; // Очистка после отправки
     }
 

@@ -71,6 +71,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
         inputActions.Player.Pause.performed += Pause;
         heightTemp = (col as CapsuleCollider).height;
         inputActions.Player.Jump.performed += Jump;
+        inputActions.Player.OpenChat.Enable();
         inputActions.Player.OpenChat.performed += ControlChatPanel;
 
     }
@@ -78,11 +79,11 @@ public class PlayerNetworkMovement : MovementNetworkBase
     private void ControlChatPanel(InputAction.CallbackContext callback)
     {
         Debug.Log("Chat is open");
-        ChatBroadcast chat =  ChatPanel.GetComponentInChildren<ChatBroadcast>();
+        ChatBroadcast chat =  ChatPanel.GetComponentInParent<ChatBroadcast>();
         if (ChatPanel.activeSelf)
         {
             chat.SendMessage();
-            ChatPanel.SetActive(false);
+            //ChatPanel.SetActive(false);
         }
         else
         {
