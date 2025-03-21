@@ -13,7 +13,7 @@ public class ChatBroadcast : MonoBehaviour
     public GameObject msgElement;
     public ScrollRect scrollRect; // Scroll View для прокрутки
     public TMP_InputField  playerMsg;
-
+    
     private void OnEnable()
     {
         InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
@@ -38,7 +38,9 @@ public class ChatBroadcast : MonoBehaviour
         Message msg = new Message()
         {
             username = PlayerPrefs.GetString("Username"),
-            message = playerMsg.text
+            message = playerMsg.text,
+            senderConnectionId = InstanceFinder.ClientManager.Connection.ClientId
+
         };
         
         if(InstanceFinder.IsServer)
@@ -52,6 +54,7 @@ public class ChatBroadcast : MonoBehaviour
 
     private void OnMessageReceived(Message msg, Channel channel)
     {
+       
         GameObject finalMessage = Instantiate(msgElement, chatHolder);
         finalMessage.GetComponent<TMP_Text>().text = msg.username + ": " + msg.message;
 
@@ -72,6 +75,8 @@ public class ChatBroadcast : MonoBehaviour
 
     private void OnClientMessageReceived(NetworkConnection connection, Message msg, Channel channel)
     {
+        if (msg.senderConnectionId == InstanceFinder.ClientManager.Connection.ClientId)
+            return;
         InstanceFinder.ServerManager.Broadcast(msg);
     }
 
@@ -79,5 +84,7 @@ public class ChatBroadcast : MonoBehaviour
     {
         public string username;
         public string message;
+        public int senderConnectionId; // Добавляем идентификатор соединения отправителя
+
     }
 }
