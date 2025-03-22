@@ -53,6 +53,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
         {
             InputInit();
         }
+       
     }
 
 
@@ -84,11 +85,11 @@ public class PlayerNetworkMovement : MovementNetworkBase
         {
             chat.SendMessage();
             //ChatPanel.SetActive(false);
+           
         }
         else
         {
 
-            ChatPanel.SetActive(true);
             ChatPanel.GetComponentInChildren<TMPro.TMP_InputField>().ActivateInputField();
         }
     }
