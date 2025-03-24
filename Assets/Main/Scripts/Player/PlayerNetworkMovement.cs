@@ -5,6 +5,9 @@ using FishNet.Object;
 using static UnityEngine.InputManagerEntry;
 using FishNet.Object.Synchronizing;
 using System.Collections;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerNetworkMovement : MovementNetworkBase
 {
@@ -81,32 +84,23 @@ public class PlayerNetworkMovement : MovementNetworkBase
     {
         Debug.Log("Chat is open");
         ChatBroadcast chat =  ChatPanel.GetComponentInParent<ChatBroadcast>();
-        if (ChatPanel.activeSelf)
-        {
-            chat.SendMessage();
-            //ChatPanel.SetActive(false);
-           
-        }
-        else
-        {
-
-            ChatPanel.GetComponentInChildren<TMPro.TMP_InputField>().ActivateInputField();
-        }
+        UnityEngine.UI.Image[] images = ChatPanel.GetComponentsInChildren<UnityEngine.UI.Image>();
+        chat.SendMessage();
     }
-
+   
     private void Pause(InputAction.CallbackContext callback)
     {
         pausePanel.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
 
     }
 
     public void UnPause()
     {
         pausePanel.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
     private void FixedUpdate()
     {

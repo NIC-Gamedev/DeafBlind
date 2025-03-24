@@ -15,7 +15,7 @@ public class ChatBroadcast : MonoBehaviour
     public TMP_InputField playerMsg;
     private float messageHeight = 25f; // Высота одного сообщения
 
-    public Image viewport, scrollbar;
+    public Image  scrollbar , scrollview;
     public Scrollbar scroll;
 
     private void OnEnable()
@@ -36,9 +36,53 @@ public class ChatBroadcast : MonoBehaviour
     {
 
     }
+    public void SetAlpha(float alpha)
+    {
+        ApplyAlpha(scrollbar, alpha);
+        ApplyAlpha(scroll.GetComponent<Image>(), alpha);
+        Debug.Log(alpha);
+        if(alpha == 255)
+        {
+            ApplyAlpha(scrollview, 100f);
 
+        }
+        else
+        {
+            ApplyAlpha(scrollview, 0f);
+
+
+        }
+        Debug.Log("Disabling");
+        if (scrollbar != null)
+        {
+            ColorBlock cb = scroll.colors;
+            cb.selectedColor = new Color(cb.selectedColor.r, cb.selectedColor.g, cb.selectedColor.b, alpha);
+            cb.normalColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, alpha);
+            cb.disabledColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, alpha);
+            cb.highlightedColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, alpha);
+            cb.pressedColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, alpha);
+            scroll.colors = cb;
+        }
+
+    }
+
+    private void ApplyAlpha(Image img, float alpha)
+    {
+        if (img != null)
+        {
+            img.canvasRenderer.SetAlpha(alpha);
+        }
+    }
     public void SendMessage()
     {
+        if(playerMsg.gameObject.activeSelf == false)
+        {
+            SetAlpha(255f);
+            playerMsg.gameObject.SetActive(true);
+            playerMsg.ActivateInputField();
+            return;
+        }
+   
         Message msg = new Message()
         {
             username = PlayerPrefs.GetString("Username"),
@@ -46,6 +90,8 @@ public class ChatBroadcast : MonoBehaviour
             senderConnectionId = InstanceFinder.ClientManager.Connection.ClientId
 
         };
+        playerMsg.gameObject.SetActive(false);
+        SetAlpha(0f);
 
         if (InstanceFinder.IsServer)
             InstanceFinder.ServerManager.Broadcast(msg);
@@ -53,12 +99,9 @@ public class ChatBroadcast : MonoBehaviour
             InstanceFinder.ClientManager.Broadcast(msg);
 
         Debug.Log("Message was sent");
-
-        //Color color = viewport.color;
-        //color.a = 0f; // Устанавливаем альфу в 0 (полностью прозрачный)
-        //viewport.color = color;
-        //scrollbar.color = color;
-
+      
+        if (playerMsg.text == "")
+            return;
         playerMsg.text = ""; // Очистка после отправки
     }
 
@@ -100,27 +143,5 @@ public class ChatBroadcast : MonoBehaviour
         public int senderConnectionId; // Добавляем идентификатор соединения отправителя
 
     }
-    //public void SetAlphaToZero(bool isReverse)
-    //{
-    //    Color color = viewport.color;
-    //    color.a = isReverse ? 1f : 0f; // 1f = полностью видно, 0f = прозрачно
-    //    viewport.color = color;
-
-    //    ColorBlock colorBlock = scroll.colors;
-    //    colorBlock.normalColor = color;
-    //    colorBlock.highlightedColor = color;
-    //    colorBlock.pressedColor = color;
-    //    colorBlock.selectedColor = color;
-
-    //    // Держим disabledColor.a на 128 (в диапазоне 0-1 это 128/255)
-    //    Color disabledColor = color;
-    //    disabledColor.a = 128f / 255f;
-    //    colorBlock.disabledColor = disabledColor;
-
-    //    msgElement.SetActive(isReverse);
-        
-
-
-    //}
-
+   
 }
