@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: -5482656074028921359}
   - component: {fileID: 3649741552129244603}
   - component: {fileID: 3102023108300936289}
+  - component: {fileID: 1774197755046409125}
   m_Layer: 8
   m_Name: Deaf
   m_TagString: Untagged
@@ -540,10 +541,12 @@ MonoBehaviour:
   - {fileID: -9058194595701247593}
   - {fileID: 2955802239629264974}
   - {fileID: -5482656074028921359}
+  - {fileID: 1774197755046409125}
   - {fileID: 1457572327187550515}
   - {fileID: 7640640126259735051}
   InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
+  InitializedNestedNetworkObjects:
+  - {fileID: 7039367735228372826}
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
@@ -567,7 +570,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 13
+  <PrefabId>k__BackingField: 14
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 11895508318762620009
   <SceneId>k__BackingField: 0
@@ -589,6 +592,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 0}
+--- !u!114 &1774197755046409125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998811254615237603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd7e950482dcaa47885e75b794e8798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 4
+  _addedNetworkObject: {fileID: 3649741552129244603}
+  _networkObjectCache: {fileID: 3649741552129244603}
+  voiceEvent:
+    Guid:
+      Data1: 862575915
+      Data2: 1308857357
+      Data3: 1961368197
+      Data4: -700790181
+    Path: event:/Character/VoiceChat
 --- !u!1 &1108625588232933670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2621,7 +2646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac4822951f1eb46a50d3e82cf8aa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 4
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
   mouseSensitivity: {x: 0.05, y: 0.05}
@@ -3463,6 +3488,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7275050931023846903, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275050931023846903, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: <ComponentIndex>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275050931023846903, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: InitializedParentNetworkBehaviour
+      value: 
+      objectReference: {fileID: 7640640126259735051}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3484,6 +3524,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 380263821596363437}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7039367735228372826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7275050931023846903, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+    type: 3}
+  m_PrefabInstance: {fileID: 380263821596363437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2074245994494159027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3682,7 +3734,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNetwork: {fileID: -5482656074028921359}
-  animationDuration: 0.5
 --- !u!1001 &9201966541690776879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3783,6 +3834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6602383a75770a84a8bc8b3786717422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}

@@ -35,6 +35,7 @@ public class PhysicalAudioManager : MonoBehaviour
             instance = this;
         }
     }
+    
     public EventInstance PlayByPos(EventReference audioRef,Vector3 pos, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(audioRef);

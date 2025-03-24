@@ -233,6 +233,36 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8963503402075664331, guid: eb01a9f62828d414590edefb40e36b47,
+        type: 3}
+      propertyPath: Banks.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963503402075664331, guid: eb01a9f62828d414590edefb40e36b47,
+        type: 3}
+      propertyPath: 'Banks.Array.data[0]'
+      value: Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963503402075664331, guid: eb01a9f62828d414590edefb40e36b47,
+        type: 3}
+      propertyPath: 'Banks.Array.data[1]'
+      value: SFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963503402075664331, guid: eb01a9f62828d414590edefb40e36b47,
+        type: 3}
+      propertyPath: 'Banks.Array.data[2]'
+      value: VO
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963503402075664331, guid: eb01a9f62828d414590edefb40e36b47,
+        type: 3}
+      propertyPath: 'Banks.Array.data[3]'
+      value: Vehicles
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963503402075664331, guid: eb01a9f62828d414590edefb40e36b47,
+        type: 3}
+      propertyPath: 'Banks.Array.data[4]'
+      value: Vehicles
+      objectReference: {fileID: 0}
     - target: {fileID: 9075178658281359641, guid: eb01a9f62828d414590edefb40e36b47,
         type: 3}
       propertyPath: m_AgentTypeID

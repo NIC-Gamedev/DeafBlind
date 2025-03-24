@@ -56,6 +56,9 @@ MonoBehaviour:
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: 8033644542277143470}
+  - {fileID: 3731124048033157141}
+  - {fileID: 206325480233485336}
+  - {fileID: 3994708625487244223}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -81,7 +84,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 6
+  <PrefabId>k__BackingField: 10
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 10299896521713222557
   <SceneId>k__BackingField: 0
@@ -215,9 +218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c649503fa47a9428a1632941dc03a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 0}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 7556588378162505550}
   serviceLocator: {fileID: 923786745503927337}
   navBaker: {fileID: 0}
   enemySpawner: {fileID: 0}
@@ -247,9 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c775d140afd2c4188099cef719e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 7556588378162505550}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 7556588378162505550}
   enemyPrefab: {fileID: 9103002476469129160, guid: a12486eab6a34fa4f97a29802ed6e0f1,
     type: 3}
 --- !u!114 &6784184999571444537
@@ -279,9 +282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf51ab8c32cd384285aad27728f3a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 7556588378162505550}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 7556588378162505550}
   levelGenerator: {fileID: 0}
 --- !u!1 &3195000950861283477
 GameObject:
@@ -294,6 +297,7 @@ GameObject:
   - component: {fileID: 6056311520619811023}
   - component: {fileID: 1767910521953321260}
   - component: {fileID: 700059434451604873}
+  - component: {fileID: 8963503402075664331}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -328,12 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe489b164b9241442b150b0ec3ee5eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicMixer: {fileID: 450339259675818600, guid: 1df8a043b2f1d59478e33e21bf6688f4,
-    type: 2}
-  sfxMixer: {fileID: -4545405240886437856, guid: 1df8a043b2f1d59478e33e21bf6688f4,
-    type: 2}
-  voicesMixer: {fileID: 8686102384530287300, guid: 1df8a043b2f1d59478e33e21bf6688f4,
-    type: 2}
 --- !u!114 &700059434451604873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,17 +344,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582201119f8eca94ca5941917c188a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicMixer: {fileID: 450339259675818600, guid: 1df8a043b2f1d59478e33e21bf6688f4,
-    type: 2}
-  sfxMixer: {fileID: -4545405240886437856, guid: 1df8a043b2f1d59478e33e21bf6688f4,
-    type: 2}
-  voicesMixer: {fileID: 8686102384530287300, guid: 1df8a043b2f1d59478e33e21bf6688f4,
-    type: 2}
   waveParticle: {fileID: 6698912603000144083, guid: feab6fe91acd3e4479442f1bb69f770d,
     type: 3}
   audioListenerLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &8963503402075664331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195000950861283477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadEvent: 1
+  UnloadEvent: 2
+  Banks:
+  - Master
+  CollisionTag: 
+  PreloadSamples: 0
 --- !u!1 &5308569847560922319
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SerializedVersion: 0
   m_AgentTypeID: 0
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}

@@ -4765,7 +4765,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3195000950861283477, guid: eb01a9f62828d414590edefb40e36b47,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2053048227}
   m_SourcePrefab: {fileID: 100100000, guid: eb01a9f62828d414590edefb40e36b47, type: 3}
 --- !u!114 &2053048223 stripped
 MonoBehaviour:
@@ -4803,6 +4807,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53152ed86a469214f9a9a76a804435de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2053048226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3195000950861283477, guid: eb01a9f62828d414590edefb40e36b47,
+    type: 3}
+  m_PrefabInstance: {fileID: 2053048222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2053048227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053048226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadEvent: 1
+  UnloadEvent: 2
+  Banks:
+  - Master
+  CollisionTag: 
+  PreloadSamples: 0
 --- !u!1 &2056861266
 GameObject:
   m_ObjectHideFlags: 0
@@ -5477,9 +5505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f99a020797162d4aa4422c0ad60a2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 2068729888}
-  _networkObjectCache: {fileID: 0}
   UnableToConnectPanel: {fileID: 730991475}
   ServerClosedWithErrorPanel: {fileID: 435269227}
   ServerConnectedStoppedPanel: {fileID: 2005480302}
