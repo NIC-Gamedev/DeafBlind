@@ -15,8 +15,16 @@ public class ChatBroadcast : MonoBehaviour
     public TMP_InputField playerMsg;
     private float messageHeight = 25f; // Высота одного сообщения
 
-    public Image  scrollbar , scrollview;
+    // Переменные что мы переводим в прозрачный режим
+    public Image  scrollbar , scrollview, chatBackground;
     public Scrollbar scroll;
+
+    private Coroutine fadeCoroutine;
+    [SerializeField]
+    private float fadeDuration = 3f; // Время исчезновения
+    private float visibleDuration = 5f; // Время перед исчезновением
+
+    bool Ischatopen;
 
     private void OnEnable()
     {
@@ -27,15 +35,13 @@ public class ChatBroadcast : MonoBehaviour
 
     private void OnDisable()
     {
-        InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
-        InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
+        InstanceFinder.ClientManager.UnregisterBroadcast<Message>(OnMessageReceived);
+        InstanceFinder.ServerManager.UnregisterBroadcast<Message>(OnClientMessageReceived);
 
     }
 
-    private void Update()
-    {
-
-    }
+    
+    #region Обработка UI
     public void SetAlpha(float alpha)
     {
         ApplyAlpha(scrollbar, alpha);
@@ -52,7 +58,6 @@ public class ChatBroadcast : MonoBehaviour
 
 
         }
-        Debug.Log("Disabling");
         if (scrollbar != null)
         {
             ColorBlock cb = scroll.colors;
@@ -73,6 +78,56 @@ public class ChatBroadcast : MonoBehaviour
             img.canvasRenderer.SetAlpha(alpha);
         }
     }
+    
+    private void ScrollToBottom()
+    {
+        StartCoroutine(ScrollToBottomCoroutine());
+    }
+
+    private IEnumerator ScrollToBottomCoroutine()
+    {
+        yield return null; // Ждем один кадр, чтобы UI успел обновиться
+        scrollRect.verticalNormalizedPosition = 0f; // Прокрутка вниз
+    }
+    private void ShowChatBackground()
+    {
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+
+        ApplyAlpha(chatBackground, 1f); // Делаем фон видимым
+
+        if (!Ischatopen) // Запускаем скрытие только если чат закрыт
+            fadeCoroutine = StartCoroutine(HideChatBackgroundAfterDelay());
+    }
+
+    private IEnumerator HideChatBackgroundAfterDelay()
+    {
+        yield return new WaitForSeconds(visibleDuration); // Ждем 5 секунд
+
+        float elapsedTime = 0f;
+        float startAlpha = chatBackground.color.a;
+
+        while (elapsedTime < fadeDuration)
+        {
+            if (Ischatopen) // Если чат открыт — выходим из корутины
+            {
+                ApplyAlpha(chatBackground, 1f);
+                yield break;
+            }
+
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, 0f, elapsedTime / fadeDuration);
+            ApplyAlpha(chatBackground, newAlpha);
+            yield return null;
+        }
+
+        ApplyAlpha(chatBackground, 0f); // Полностью скрываем фон
+    }
+
+
+    #endregion
+
+    #region Логика обработки сообщений
     public void SendMessage()
     {
         if(playerMsg.gameObject.activeSelf == false)
@@ -80,6 +135,8 @@ public class ChatBroadcast : MonoBehaviour
             SetAlpha(255f);
             playerMsg.gameObject.SetActive(true);
             playerMsg.ActivateInputField();
+            ShowChatBackground(); // Делаем фон непрозрачным
+            Ischatopen = true;
             return;
         }
    
@@ -102,6 +159,7 @@ public class ChatBroadcast : MonoBehaviour
       
         if (playerMsg.text == "")
             return;
+        Ischatopen = false;
         playerMsg.text = ""; // Очистка после отправки
     }
 
@@ -116,17 +174,8 @@ public class ChatBroadcast : MonoBehaviour
 
         Canvas.ForceUpdateCanvases(); // Обновляем UI
         ScrollToBottom();
-    }
+        ShowChatBackground(); // Делаем фон непрозрачным
 
-    private void ScrollToBottom()
-    {
-        StartCoroutine(ScrollToBottomCoroutine());
-    }
-
-    private IEnumerator ScrollToBottomCoroutine()
-    {
-        yield return null; // Ждем один кадр, чтобы UI успел обновиться
-        scrollRect.verticalNormalizedPosition = 0f; // Прокрутка вниз
     }
 
     private void OnClientMessageReceived(NetworkConnection connection, Message msg, Channel channel)
@@ -143,5 +192,7 @@ public class ChatBroadcast : MonoBehaviour
         public int senderConnectionId; // Добавляем идентификатор соединения отправителя
 
     }
-   
+
+    #endregion
+
 }

@@ -2746,7 +2746,9 @@ MonoBehaviour:
   playerMsg: {fileID: 9195981295772997772}
   scrollbar: {fileID: 1129779753866739430}
   scrollview: {fileID: 7382554337385618719}
+  chatBackground: {fileID: 2558240858929065505}
   scroll: {fileID: 6661388356794106508}
+  fadeDuration: 1
 --- !u!1 &3212833339783862143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,7 +3844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5233664839982021467
@@ -4818,7 +4820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7838228098326403377
 RectTransform:
   m_ObjectHideFlags: 0
