@@ -164,8 +164,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac4822951f1eb46a50d3e82cf8aa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5426180632684786090}
+  _networkObjectCache: {fileID: 0}
   mouseSensitivity: {x: 0.05, y: 0.05}
+  angleY: 90
   body: {fileID: 0}
+  virtualCamera: {fileID: 0}
 --- !u!95 &267895784429074752
 Animator:
   serializedVersion: 7
@@ -377,6 +382,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   radius: 0.1
+  ColliderCenterOnSneak: {x: 0, y: 0, z: 0}
+  heightOnSneak: 0
 --- !u!114 &3762073161816987888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +475,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   radius: 0.1
+  ColliderCenterOnSneak: {x: 0, y: 0, z: 0}
+  heightOnSneak: 0
+  pausePanel: {fileID: 0}
 --- !u!114 &5426180632684786090
 MonoBehaviour:
   m_ObjectHideFlags: 0
