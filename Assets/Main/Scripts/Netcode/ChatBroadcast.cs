@@ -40,7 +40,11 @@ public class ChatBroadcast : MonoBehaviour
 
     }
 
-    
+    private void Start()
+    {
+        SendMessage();
+    }
+
     #region Обработка UI
     public void SetAlpha(float alpha)
     {
@@ -149,17 +153,20 @@ public class ChatBroadcast : MonoBehaviour
         };
         playerMsg.gameObject.SetActive(false);
         SetAlpha(0f);
-
+        if (playerMsg.text == "")
+        {
+            Ischatopen = false;
+            return;
+        }
         if (InstanceFinder.IsServer)
             InstanceFinder.ServerManager.Broadcast(msg);
         if (InstanceFinder.IsClient)
             InstanceFinder.ClientManager.Broadcast(msg);
 
         Debug.Log("Message was sent");
-      
-        if (playerMsg.text == "")
-            return;
         Ischatopen = false;
+
+
         playerMsg.text = ""; // Очистка после отправки
     }
 
