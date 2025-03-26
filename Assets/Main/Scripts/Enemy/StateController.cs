@@ -44,7 +44,7 @@ public class StateController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("В обьекте нет нужного состояния, добавьте его или не вызывайте");
+            Debug.LogWarning("В обьекте нет нужного состояния, добавьте его или не вызывайте сучка!");
         }
     }
     public void SetState(System.Type stateType)

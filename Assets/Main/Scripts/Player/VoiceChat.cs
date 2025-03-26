@@ -40,7 +40,7 @@ namespace Main.Scripts.Player
 
         public override void OnStartClient()
         {
-            if (IsOwner) // должно быть !IsOwner
+            if (IsOwner) // должно быть !IsOwne
             {
                 RuntimeManager.CoreSystem.getRecordNumDrivers(out _numOfDrivers, out _numOfDriversConnected);
 
@@ -74,6 +74,7 @@ namespace Main.Scripts.Player
         private IEnumerator Wait()
         {
             yield return new WaitForSeconds(latency);
+            _channel.setPaused(_playOrPause);
             PhysicalAudioManager.instance.PlayPhysSound(ref _sound,ref _channelGroup,ref _channel,transform);
             _playOkay = true;
             Debug.Log("Ready To Play!");
