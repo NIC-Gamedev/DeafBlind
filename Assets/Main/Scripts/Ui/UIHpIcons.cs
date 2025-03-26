@@ -14,13 +14,13 @@ public class UIHpIcons : MonoBehaviour
     void Start()
     {
         _objectHealth = GetComponentInParent<ObjectHealth>();
-        ObjectHealth.OnHealthValueChange += OnHealthChanged;
+        _objectHealth.OnHealthValueChange += OnHealthChanged;
     }
 
 
     void OnDestroy()
     {
-        ObjectHealth.OnHealthValueChange -= OnHealthChanged;
+        _objectHealth.OnHealthValueChange -= OnHealthChanged;
     }
 
    
@@ -30,15 +30,15 @@ public class UIHpIcons : MonoBehaviour
 
         if (healthPercentage >= 66.6f)
         {
-            ActivateIcon(0); // При здоровье 66.6% и выше активна первая иконка
+            ActivateIcon(0); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 66.6% пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
         else if (healthPercentage >= 33.33f)
         {
-            ActivateIcon(1); // При здоровье от 33.33% до 66.6% активна вторая иконка
+            ActivateIcon(1); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 33.33% пїЅпїЅ 66.6% пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
         else
         {
-            ActivateIcon(2); // При здоровье ниже 33.33% активна третья иконка
+            ActivateIcon(2); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 33.33% пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 
