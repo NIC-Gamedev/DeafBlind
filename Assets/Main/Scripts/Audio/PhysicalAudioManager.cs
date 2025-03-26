@@ -146,7 +146,7 @@ public class PhysicalAudioManager : MonoBehaviour
     
     public IEnumerator IsChannelPlay(Channel channel,System.Action<Channel> onSuccess)
     {
-        channel.isPlaying(out var isPlaying);
+        channel.getPaused(out var isPlaying);
         while (isPlaying == false)
         {
             Debug.Log("NotPlay");
@@ -154,7 +154,6 @@ public class PhysicalAudioManager : MonoBehaviour
             yield return null;
         }
         Debug.Log("Play");
-        yield return new WaitForSeconds(1.2f);
         onSuccess?.Invoke(channel);
     }
     public EventInstance InstanceByTransform(EventReference audioRef,Transform transform, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100)
