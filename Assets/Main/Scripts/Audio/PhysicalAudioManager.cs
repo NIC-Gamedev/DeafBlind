@@ -7,6 +7,7 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
+using Debug = UnityEngine.Debug;
 
 public class PhysicalAudioManager : MonoBehaviour
 {
@@ -36,7 +37,41 @@ public class PhysicalAudioManager : MonoBehaviour
         }
     }
     
-    public EventInstance PlayByPos(EventReference audioRef,Vector3 pos, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100)
+    public void CreateSoundByTransform(ref Sound sound,int numOfChannels, int sampleRate, ref CREATESOUNDEXINFO _exinfo, ChannelGroup channelGroup, Channel channel,Transform transform, bool playOnStart = true, float minDistance = 1, float maxDistance = 100)
+    {
+        _exinfo.cbsize = Marshal.SizeOf(typeof(FMOD.CREATESOUNDEXINFO));
+        _exinfo.numchannels = numOfChannels;
+        _exinfo.format = FMOD.SOUND_FORMAT.PCM16;
+        _exinfo.defaultfrequency = sampleRate;
+        _exinfo.length = (uint)sampleRate * sizeof(short) * (uint)numOfChannels;
+        FMOD.ATTRIBUTES_3D attributes = FMODUnity.RuntimeUtils.To3DAttributes(transform);
+        RuntimeManager.CoreSystem.createSound(_exinfo.userdata, FMOD.MODE.LOOP_NORMAL | FMOD.MODE.OPENUSER, ref _exinfo, out sound);
+        channel.set3DMinMaxDistance(minDistance, maxDistance);
+        StartCoroutine(UpdateChannelPos(transform, channel));
+
+        if (playOnStart)
+        {
+            PlayPhysSound(ref sound, ref channelGroup, ref channel,transform);
+        }
+    }
+
+    private IEnumerator UpdateChannelPos(Transform target, Channel channel)
+    {
+        while (channel.isPlaying(out bool isPlaying) == FMOD.RESULT.OK && isPlaying)
+        {
+            FMOD.ATTRIBUTES_3D attributes = FMODUnity.RuntimeUtils.To3DAttributes(target);
+            channel.set3DAttributes(ref attributes.position, ref attributes.velocity);
+            yield return null; // Ждём один кадр
+        }
+    }
+
+    public void PlayPhysSound(ref Sound sound, ref ChannelGroup channelGroup, ref Channel channel,Transform transform)
+    {
+        RuntimeManager.CoreSystem.playSound(sound, channelGroup, true, out channel);
+        ExecuteThrowWaveCO(transform, sound,ref channel);
+    }
+    
+    public EventInstance InstanceByPos(EventReference audioRef,Vector3 pos, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(audioRef);
 
@@ -83,8 +118,20 @@ public class PhysicalAudioManager : MonoBehaviour
             RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out fft);
             fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, SpectrumSize * 2);
             channelGroup.addDSP(0, fft);
-            ThrowWave(pos, eventInstance, fft,channelGroup);
+            ThrowInstanceWave(pos, eventInstance, fft,channelGroup);
         }));
+    }
+    
+    private void ExecuteThrowWaveCO(Transform transform, Sound sound,ref Channel channel)
+    {
+        DSP fft = default;
+        StartCoroutine(IsChannelPlay(channel, (channel1 =>
+        {
+            RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out fft);
+            fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, SpectrumSize * 2);
+            channel1.addDSP(0, fft);
+            ThrowSoundWave(transform.position, sound, fft,channel1);
+        })));
     }
 
     public IEnumerator TryGetChannelGroup(EventInstance eventInstance,System.Action<ChannelGroup> onSuccess)
@@ -96,7 +143,21 @@ public class PhysicalAudioManager : MonoBehaviour
         }
         onSuccess?.Invoke(channelGroup);
     }
-    public EventInstance PlayByTransform(EventReference audioRef,Transform transform, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100)
+    
+    public IEnumerator IsChannelPlay(Channel channel,System.Action<Channel> onSuccess)
+    {
+        channel.isPlaying(out var isPlaying);
+        while (isPlaying == false)
+        {
+            Debug.Log("NotPlay");
+            channel.isPlaying(out isPlaying);
+            yield return null;
+        }
+        Debug.Log("Play");
+        yield return new WaitForSeconds(1.2f);
+        onSuccess?.Invoke(channel);
+    }
+    public EventInstance InstanceByTransform(EventReference audioRef,Transform transform, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(audioRef);
         
@@ -153,13 +214,21 @@ public class PhysicalAudioManager : MonoBehaviour
             }
         }
     }
-    protected void ThrowWave(Vector3 pos, EventInstance eventInstance,DSP fft,ChannelGroup channelGroup, Transform soundObject = null)
+    protected void ThrowInstanceWave(Vector3 pos, EventInstance eventInstance,DSP fft,ChannelGroup channelGroup, Transform soundObject = null)
     {
         ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
         var main = instance.main;
-        eventInstance.getMinMaxDistance(out var min, out var max); //подазриваю что что-то именно тут не так, хотя может как раз дело в очистке памяти вдруг она приводит к ошибкам глянь кароче да
+        eventInstance.getMinMaxDistance(out var min, out var max);
         main.startSize = max;
         StartCoroutine(EmitWave(instance, eventInstance,fft, soundObject));
+    }
+    protected void ThrowSoundWave(Vector3 pos, Sound sound,DSP fft,Channel channel, Transform soundObject = null)
+    {
+        ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
+        var main = instance.main;
+        sound.get3DMinMaxDistance (out var min, out var max);
+        main.startSize = max;
+        StartCoroutine(EmitWave(instance, sound,fft,channel, soundObject));
     }
     protected IEnumerator EmitWave(ParticleSystem particle, EventInstance eventInstance,DSP fft, Transform soundObject = null)
     {
@@ -227,6 +296,75 @@ public class PhysicalAudioManager : MonoBehaviour
                 channelGroup.removeDSP(fft);
                 fft.release();
                 eventInstance.release();  
+            }
+    }
+    
+        protected IEnumerator EmitWave(ParticleSystem particle, Sound sound,DSP fft,Channel channel, Transform soundObject = null)
+    {
+            if (particle)
+            {
+                var mainModule = particle.main;
+                float previousIntensity = 0f;
+                float[] spectrumData = new float[SpectrumSize*2];
+                var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
+                sound.get3DMinMaxDistance(out var min,out var max);
+
+                IntPtr data;
+                uint size;
+                while (particle != null || sound.hasHandle() || psRenderer != null)
+                {
+                    if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out data,out size) == RESULT.OK)
+                    {
+                        Debug.Log("Infinity");
+                        DSP_PARAMETER_FFT fftData = (FMOD.DSP_PARAMETER_FFT)Marshal.PtrToStructure(data, typeof(FMOD.DSP_PARAMETER_FFT));
+                        if (fftData.numchannels > 0 && fftData.spectrum.Length > 0)
+                        {
+                            fftData.spectrum[0].CopyTo(spectrumData, 0);
+                        }
+                        else
+                        {
+                            yield return new WaitForSeconds(0.1f);
+                            continue;
+                        }
+                    }
+                    if (!psRenderer)
+                    {
+                        break;
+                    }
+                    psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
+
+                    float bassIntensity = CalculateBassIntensity(spectrumData, SpectrumSize*2);
+                    float alpha = Mathf.Clamp01(bassIntensity * 10f);
+                    mainModule.startLifetime = Mathf.Pow(bassIntensity, 0.3f) * 5f;
+                    mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
+                    mainModule.startSize = min;
+
+                    if (bassIntensity >= previousIntensity * 1.2f)
+                    {
+                        var audioSourceColiders = Physics.OverlapSphere(particle.transform.position, max, audioListenerLayer);
+                        if (audioSourceColiders != null)
+                        {
+                            foreach (var item in audioSourceColiders)
+                            {
+                                if (soundObject == item.gameObject)
+                                    continue;
+
+                                if (item.TryGetComponent(out IListenAudio listenerAudio))
+                                {
+                                    var dist = Vector3.Distance(particle.transform.position, item.transform.position);
+                                    if (dist < listenerAudio.listenDistance)
+                                        listenerAudio.OnListenAudio(particle.transform.position);
+                                }
+                            }
+                        }
+                        particle.Emit(1);
+                    }
+                    previousIntensity = bassIntensity;
+                    yield return new WaitForSeconds(0.05f);
+                }
+                channel.removeDSP(fft);
+                fft.release();
+                sound.release();  
             }
     }
 

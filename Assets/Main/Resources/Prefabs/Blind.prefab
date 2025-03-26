@@ -1624,13 +1624,11 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
-  voiceEvent:
-    Guid:
-      Data1: 346256310
-      Data2: 1230514760
-      Data3: -632039288
-      Data4: -683773863
-    Path: event:/Character/VoiceEvent
+  PlayAndPause: 32
+  ReverbOnSwith: 98
+  recordDeviceIndex: 0
+  recordDeviceName: 
+  latency: 1
 --- !u!54 &2125074627681875609
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3415,6 +3413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181070499344308266, guid: 6dc5f926b8a0efe46be7893ab6d58131,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7275050931023846903, guid: 6dc5f926b8a0efe46be7893ab6d58131,
         type: 3}

@@ -1,94 +1,102 @@
+using System;
 using System.Collections;
 using FishNet.Object;
-using FMOD.Studio;
+using FMOD;
 using FMODUnity;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
-using STOP_MODE = FMOD.Studio.STOP_MODE;
+using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 namespace Main.Scripts.Player
 {
     public class VoiceChat : NetworkBehaviour
     {
-          private const int SampleRate = 48000;
-          private const int ClipBufferSize = 1024;
-          private AudioClip _microphoneClip;
-          private bool _isTransmitting;
+        private Sound _sound;
+        private CREATESOUNDEXINFO _exinfo;
+        private Channel _channel;
+        private ChannelGroup _channelGroup;
 
-          [SerializeField] private EventReference voiceEvent;
-          private EventInstance _voiceInstance;
+        public KeyCode PlayAndPause;
+        public KeyCode ReverbOnSwith;
 
-          public override void OnStartClient()
-          {
-              base.OnStartClient();
-              if (IsOwner)
-              {
-                  if (Microphone.devices.Length > 0)
-                  {
-                      _microphoneClip = Microphone.Start(Microphone.devices[0], true, 1, SampleRate);
-                      StartCoroutine(StreamVoiceCoroutine());   
-                  }
-              }
-          }
-
-          private IEnumerator StreamVoiceCoroutine()
-          {
-              float[] audioBuffer = new float[ClipBufferSize];
-              int prevPos = 0;
+        private int _numOfDriversConnected = 0;
+        private int _numOfDrivers = 0;
         
-              while (IsOwner)
-              {
-                  int currPos = Microphone.GetPosition(null);
-                  if (currPos < prevPos) currPos = SampleRate;
-            
-                  if (currPos - prevPos >= ClipBufferSize)
-                  {
-                      _microphoneClip.GetData(audioBuffer, prevPos);
-                      TransmitVoiceRpc(audioBuffer);
-                      prevPos = (prevPos + ClipBufferSize) % SampleRate;
-                  }
-                  yield return null;
-              }
-          }
+        [SerializeField] private int recordDeviceIndex = 0;
+        [SerializeField] private string recordDeviceName;
+        [SerializeField] private float latency;
 
-          [ServerRpc]
-          private void TransmitVoiceRpc(float[] audioData)
-          {
-              BroadcastVoiceObserversRpc(audioData);
-          }
+        private Guid _micGuid;
+        private int _sampleRate;
+        private SPEAKERMODE _speakermode;
+        private int _numOfChannels;
+        private DRIVER_STATE _driverState;
 
-          [ObserversRpc]
-          private void BroadcastVoiceObserversRpc(float[] audioData)
-          {
-              if (!IsOwner) PlayVoice(audioData);
-          }
+        private bool _dspEnbled = false;
+        private bool _playOrPause = true;
+        private bool _playOkay = false;
 
-          private void PlayVoice(float[] audioData)
-          {
-              if (!_voiceInstance.isValid())
-              {
-                  _voiceInstance = PhysicalAudioManager.instance.PlayByTransform(
-                      voiceEvent, 
-                      transform,
-                      minDistance: 5f,
-                      maxDistance: 20f
-                  );
-              }
-        
-              _voiceInstance.setParameterByName("VoiceData", ConvertAudioToIntensity(audioData));
-          }
 
-          private float ConvertAudioToIntensity(float[] data)
-          {
-              float sum = 0;
-              foreach (var sample in data) sum += Mathf.Abs(sample);
-              return Mathf.Clamp01(sum / data.Length * 10f);
-          }
+        public override void OnStartClient()
+        {
+            if (IsOwner) // должно быть !IsOwner
+            {
+                RuntimeManager.CoreSystem.getRecordNumDrivers(out _numOfDrivers, out _numOfDriversConnected);
 
-          public override void OnStopClient()
-          {
-              base.OnStopClient();
-              _voiceInstance.stop(STOP_MODE.IMMEDIATE);
-              _voiceInstance.release();
-          }
+                if (_numOfDriversConnected == 0)
+                {
+                    Debug.Log("Dont find any connected microphone");
+                }
+                else
+                {
+                    Debug.Log($"You have {_numOfDriversConnected} devices");
+                }
+
+                RuntimeManager.CoreSystem.getRecordDriverInfo(
+                    recordDeviceIndex,
+                    out recordDeviceName,
+                    50,
+                    out _micGuid,
+                    out _sampleRate,
+                    out _speakermode,
+                    out _numOfChannels,
+                    out _driverState
+                );
+                
+                PhysicalAudioManager.instance.CreateSoundByTransform(ref _sound,_numOfChannels,_sampleRate,ref _exinfo, _channelGroup, _channel,transform,false,0f, 20f);
+                RuntimeManager.CoreSystem.recordStart(recordDeviceIndex, _sound, true);
+
+                StartCoroutine(Wait());
+            }
+        }
+
+        private IEnumerator Wait()
+        {
+            yield return new WaitForSeconds(latency);
+            PhysicalAudioManager.instance.PlayPhysSound(ref _sound,ref _channelGroup,ref _channel,transform);
+            _playOkay = true;
+            Debug.Log("Ready To Play!");
+        }
+
+        private void Update()
+        {
+            if (IsOwner)// должно быть !IsOwner
+            {
+                if (Input.GetKeyDown(PlayAndPause) && _playOkay)
+                {
+                    _playOrPause = !_playOrPause;
+                    _channel.setPaused(_playOrPause);
+                }
+
+                if (Input.GetKeyDown(ReverbOnSwith))
+                {
+                    FMOD.REVERB_PROPERTIES propOn = PRESET.CONCERTHALL();
+                    FMOD.REVERB_PROPERTIES propOff = PRESET.OFF();
+                    _dspEnbled = !_dspEnbled;
+                    RuntimeManager.CoreSystem.setReverbProperties(1, ref _dspEnbled ? ref propOn : ref propOff);
+                }
+            }
+        }
     }
 }

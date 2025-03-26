@@ -607,13 +607,11 @@ MonoBehaviour:
   _componentIndexCache: 4
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
-  voiceEvent:
-    Guid:
-      Data1: 862575915
-      Data2: 1308857357
-      Data3: 1961368197
-      Data4: -700790181
-    Path: event:/Character/VoiceChat
+  PlayAndPause: 32
+  ReverbOnSwith: 98
+  recordDeviceIndex: 0
+  recordDeviceName: 
+  latency: 1
 --- !u!1 &1108625588232933670
 GameObject:
   m_ObjectHideFlags: 0
