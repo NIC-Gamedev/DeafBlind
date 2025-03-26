@@ -1624,8 +1624,8 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
-  PlayAndPause: 32
-  ReverbOnSwith: 98
+  PlayAndPause: 118
+  ReverbOnSwith: 114
   recordDeviceIndex: 0
   recordDeviceName: 
   latency: 1
@@ -3485,6 +3485,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 710768224108953959, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
+        type: 3}
+      propertyPath: _objectHealth
+      value: 
+      objectReference: {fileID: 3302183967494193835}
     - target: {fileID: 1167343633217037381, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3600,6 +3605,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4785274283536546186, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
+        type: 3}
+      propertyPath: _objectHealth
+      value: 
+      objectReference: {fileID: 3302183967494193835}
     - target: {fileID: 7073317381689047983, guid: db8d5f44ddb3ed04289b50ab8ca076ab,
         type: 3}
       propertyPath: m_AnchorMax.x

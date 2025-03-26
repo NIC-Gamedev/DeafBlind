@@ -37,10 +37,10 @@ namespace Main.Scripts.Player
         private bool _playOrPause = true;
         private bool _playOkay = false;
 
-
+        private byte[] _audioBuffer = new byte[1024]; // Буфер для передачи звука
         public override void OnStartClient()
         {
-            if (IsOwner) // должно быть !IsOwne
+            if (IsOwner)
             {
                 RuntimeManager.CoreSystem.getRecordNumDrivers(out _numOfDrivers, out _numOfDriversConnected);
 
@@ -75,29 +75,50 @@ namespace Main.Scripts.Player
         {
             yield return new WaitForSeconds(latency);
             _channel.setPaused(_playOrPause);
-            PhysicalAudioManager.instance.PlayPhysSound(ref _sound,ref _channelGroup,ref _channel,transform);
+            SendVoiceData();
             _playOkay = true;
             Debug.Log("Ready To Play!");
         }
 
         private void Update()
         {
-            if (IsOwner)// должно быть !IsOwner
+            if (IsOwner && _playOkay)
             {
-                if (Input.GetKeyDown(PlayAndPause) && _playOkay)
+                // Отправляем звук по сети
+                if (Input.GetKeyDown(PlayAndPause) )
                 {
                     _playOrPause = !_playOrPause;
-                    _channel.setPaused(_playOrPause);
                 }
-
+                _channel.setPaused(_playOrPause);
                 if (Input.GetKeyDown(ReverbOnSwith))
                 {
-                    FMOD.REVERB_PROPERTIES propOn = PRESET.CONCERTHALL();
-                    FMOD.REVERB_PROPERTIES propOff = PRESET.OFF();
+                    REVERB_PROPERTIES propOn = PRESET.CONCERTHALL();
+                    REVERB_PROPERTIES propOff = PRESET.OFF();
                     _dspEnbled = !_dspEnbled;
                     RuntimeManager.CoreSystem.setReverbProperties(1, ref _dspEnbled ? ref propOn : ref propOff);
                 }
             }
+            /*else if(IsOwner && _playOkay)
+            {
+                if (Input.GetKeyDown(PlayAndPause) )
+                {
+                    _playOrPause = !_playOrPause;
+                }
+            }*/
+        }
+        
+        
+        [ServerRpc]
+        private void SendVoiceData()
+        {
+            // Передаем звук всем клиентам, кроме отправителя
+            ReceiveVoiceData();
+        }
+
+        [ObserversRpc]
+        private void ReceiveVoiceData()
+        {
+            PhysicalAudioManager.instance.PlayPhysSound(ref _sound, ref _channelGroup, ref _channel, transform, true);
         }
     }
 }

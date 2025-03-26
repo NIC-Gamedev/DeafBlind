@@ -15,12 +15,12 @@ public class UIHpBar : MonoBehaviour
     {
         _slider = GetComponent<Slider>();
         
-        ObjectHealth.OnHealthValueChange += OnHealthChanged;
+        _objectHealth.OnHealthValueChange += OnHealthChanged;
     }
 
     void OnDestroy()
     {
-        ObjectHealth.OnHealthValueChange -= OnHealthChanged;
+        _objectHealth.OnHealthValueChange -= OnHealthChanged;
     }
 
     private void OnHealthChanged(float currentHealth)

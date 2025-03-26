@@ -47,6 +47,7 @@ public class PhysicalAudioManager : MonoBehaviour
         FMOD.ATTRIBUTES_3D attributes = FMODUnity.RuntimeUtils.To3DAttributes(transform);
         RuntimeManager.CoreSystem.createSound(_exinfo.userdata, FMOD.MODE.LOOP_NORMAL | FMOD.MODE.OPENUSER, ref _exinfo, out sound);
         channel.set3DMinMaxDistance(minDistance, maxDistance);
+        sound.set3DMinMaxDistance(minDistance, maxDistance);
         StartCoroutine(UpdateChannelPos(transform, channel));
 
         if (playOnStart)
@@ -57,6 +58,7 @@ public class PhysicalAudioManager : MonoBehaviour
 
     private IEnumerator UpdateChannelPos(Transform target, Channel channel)
     {
+        yield return new WaitForSeconds(1.2f);
         while (channel.isPlaying(out bool isPlaying) == FMOD.RESULT.OK && isPlaying)
         {
             FMOD.ATTRIBUTES_3D attributes = FMODUnity.RuntimeUtils.To3DAttributes(target);
@@ -65,10 +67,10 @@ public class PhysicalAudioManager : MonoBehaviour
         }
     }
 
-    public void PlayPhysSound(ref Sound sound, ref ChannelGroup channelGroup, ref Channel channel,Transform transform)
+    public void PlayPhysSound(ref Sound sound, ref ChannelGroup channelGroup, ref Channel channel,Transform transform,bool isLoop = false)
     {
         RuntimeManager.CoreSystem.playSound(sound, channelGroup, true, out channel);
-        ExecuteThrowWaveCO(transform, sound,ref channel);
+        ExecuteThrowWaveCO(transform, sound,ref channel,isLoop);
     }
     
     public EventInstance InstanceByPos(EventReference audioRef,Vector3 pos, float volume = 1, float pitch = 1, bool loop = false, float minDistance = 1, float maxDistance = 100)
@@ -122,7 +124,7 @@ public class PhysicalAudioManager : MonoBehaviour
         }));
     }
     
-    private void ExecuteThrowWaveCO(Transform transform, Sound sound,ref Channel channel)
+    private void ExecuteThrowWaveCO(Transform transform, Sound sound,ref Channel channel,bool isLoop = false)
     {
         DSP fft = default;
         StartCoroutine(IsChannelPlay(channel, (channel1 =>
@@ -130,7 +132,7 @@ public class PhysicalAudioManager : MonoBehaviour
             RuntimeManager.CoreSystem.createDSPByType(DSP_TYPE.FFT, out fft);
             fft.setParameterInt((int)DSP_FFT.WINDOWSIZE, SpectrumSize * 2);
             channel1.addDSP(0, fft);
-            ThrowSoundWave(transform.position, sound, fft,channel1);
+            ThrowSoundWave(transform, sound, fft,channel1,isLoop:isLoop);
         })));
     }
 
@@ -221,13 +223,17 @@ public class PhysicalAudioManager : MonoBehaviour
         main.startSize = max;
         StartCoroutine(EmitWave(instance, eventInstance,fft, soundObject));
     }
-    protected void ThrowSoundWave(Vector3 pos, Sound sound,DSP fft,Channel channel, Transform soundObject = null)
+    protected void ThrowSoundWave(Transform soundTransform, Sound sound,DSP fft,Channel channel, Transform soundObject = null,bool isLoop = false)
     {
-        ParticleSystem instance = Instantiate(waveParticle, pos, Quaternion.identity);
+        ParticleSystem instance = Instantiate(waveParticle, soundTransform.position, Quaternion.identity);
         var main = instance.main;
         sound.get3DMinMaxDistance (out var min, out var max);
+        if (isLoop)
+        {
+            main.stopAction = ParticleSystemStopAction.None;
+        }
         main.startSize = max;
-        StartCoroutine(EmitWave(instance, sound,fft,channel, soundObject));
+        StartCoroutine(EmitWave(instance, sound,fft,channel,soundTransform, soundObject));
     }
     protected IEnumerator EmitWave(ParticleSystem particle, EventInstance eventInstance,DSP fft, Transform soundObject = null)
     {
@@ -267,7 +273,7 @@ public class PhysicalAudioManager : MonoBehaviour
                     float alpha = Mathf.Clamp01(bassIntensity * 10f);
                     mainModule.startLifetime = Mathf.Pow(bassIntensity, 0.3f) * 5f;
                     mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
-                    mainModule.startSize = min;
+                    mainModule.startSize = new MinMaxCurve(min,Mathf.Lerp(min,max,bassIntensity));
 
                     if (bassIntensity >= previousIntensity * 1.2f)
                     {
@@ -298,7 +304,7 @@ public class PhysicalAudioManager : MonoBehaviour
             }
     }
     
-        protected IEnumerator EmitWave(ParticleSystem particle, Sound sound,DSP fft,Channel channel, Transform soundObject = null)
+        protected IEnumerator EmitWave(ParticleSystem particle, Sound sound,DSP fft,Channel channel,Transform soundTransform, Transform soundObject = null)
     {
             if (particle)
             {
@@ -314,7 +320,6 @@ public class PhysicalAudioManager : MonoBehaviour
                 {
                     if (fft.getParameterData((int)DSP_FFT.SPECTRUMDATA, out data,out size) == RESULT.OK)
                     {
-                        Debug.Log("Infinity");
                         DSP_PARAMETER_FFT fftData = (FMOD.DSP_PARAMETER_FFT)Marshal.PtrToStructure(data, typeof(FMOD.DSP_PARAMETER_FFT));
                         if (fftData.numchannels > 0 && fftData.spectrum.Length > 0)
                         {
@@ -326,17 +331,21 @@ public class PhysicalAudioManager : MonoBehaviour
                             continue;
                         }
                     }
+                    
                     if (!psRenderer)
                     {
                         break;
                     }
+                    
+                    psRenderer.transform.position = soundTransform.position;
                     psRenderer.bounds = new Bounds(psRenderer.transform.position, new Vector3(min, max, max) * 2);
 
                     float bassIntensity = CalculateBassIntensity(spectrumData, SpectrumSize*2);
                     float alpha = Mathf.Clamp01(bassIntensity * 10f);
                     mainModule.startLifetime = Mathf.Pow(bassIntensity, 0.3f) * 5f;
                     mainModule.startColor = new MinMaxGradient(new Color(1f, 1f, 1f, alpha));
-                    mainModule.startSize = min;
+                    
+                    mainModule.startSize = new MinMaxCurve(min,Mathf.Lerp(min,max,bassIntensity));
 
                     if (bassIntensity >= previousIntensity * 1.2f)
                     {
