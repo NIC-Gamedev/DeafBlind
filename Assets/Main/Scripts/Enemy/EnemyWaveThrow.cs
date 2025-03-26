@@ -41,7 +41,7 @@ public class EnemyWaveThrow : WaveThrow
         if (curentStepTime < 0 &&( Mathf.Abs(rb.linearVelocity.x) > 1 || Mathf.Abs(rb.linearVelocity.z) > 1))
         {
             curentStepTime = stepTime;
-            audioManager.PlayByPos(footstepSound,collision.contacts[0].point,stepVol,stepPitch);
+            audioManager.InstanceByPos(footstepSound,collision.contacts[0].point,stepVol,stepPitch);
         }
         else
         {

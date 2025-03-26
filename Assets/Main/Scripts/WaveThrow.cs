@@ -39,6 +39,6 @@ public class WaveThrow : MonoBehaviour
         }
         Debug.Log("hahahah");
         if(lastVelocity.y < -1)
-            audioManager.PlayByPos(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,pos: collision.contacts[0].point,pitch: pitch);
+            audioManager.InstanceByPos(colideSound, volume: volume, minDistance:minDistance,maxDistance:maxDistance,pos: collision.contacts[0].point,pitch: pitch);
     }
 }
