@@ -75,16 +75,20 @@ namespace Main.Scripts.Player
         {
             yield return new WaitForSeconds(latency);
             _channel.setPaused(_playOrPause);
-            SendVoiceData();
+            PhysicalAudioManager.instance.PlayPhysSound(ref _sound, ref _channelGroup, ref _channel, transform, true);
             _playOkay = true;
             Debug.Log("Ready To Play!");
         }
 
         private void Update()
         {
-            if (IsOwner && _playOkay)
+            if (_playOkay)
             {
-                // Отправляем звук по сети
+                /*if (IsOwner)
+                {
+                    _channel.setVolume(0);                    
+                }*/
+                
                 if (Input.GetKeyDown(PlayAndPause) )
                 {
                     _playOrPause = !_playOrPause;
@@ -98,27 +102,6 @@ namespace Main.Scripts.Player
                     RuntimeManager.CoreSystem.setReverbProperties(1, ref _dspEnbled ? ref propOn : ref propOff);
                 }
             }
-            /*else if(IsOwner && _playOkay)
-            {
-                if (Input.GetKeyDown(PlayAndPause) )
-                {
-                    _playOrPause = !_playOrPause;
-                }
-            }*/
-        }
-        
-        
-        [ServerRpc]
-        private void SendVoiceData()
-        {
-            // Передаем звук всем клиентам, кроме отправителя
-            ReceiveVoiceData();
-        }
-
-        [ObserversRpc]
-        private void ReceiveVoiceData()
-        {
-            PhysicalAudioManager.instance.PlayPhysSound(ref _sound, ref _channelGroup, ref _channel, transform, true);
         }
     }
 }

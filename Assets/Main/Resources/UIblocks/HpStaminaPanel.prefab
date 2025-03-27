@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1121450335040763437}
   - component: {fileID: 3653425149195720460}
-  - component: {fileID: 710768224108953959}
   m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -90,20 +89,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &710768224108953959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674917848270143316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e24374e3bf359e4d8a652e3c0ddaebf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testDamageAmount: 5
-  animationDuration: 0.5
 --- !u!1 &1182455931110899106
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e24374e3bf359e4d8a652e3c0ddaebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testDamageAmount: 5
+  _objectHealth: {fileID: 0}
   animationDuration: 0.5
 --- !u!1 &2264777750105354879
 GameObject:

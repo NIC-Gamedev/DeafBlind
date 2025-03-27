@@ -26,7 +26,7 @@ public class ServerManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != "ProceduralGenTest") return; // Проверяем, что загружена нужная сцена
+        if (scene.name != "ProceduralGenTest") return; // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ Р·Р°РіСЂСѓР¶РµРЅР° РЅСѓР¶РЅР°СЏ СЃС†РµРЅР°
 
         _networkManager = GetComponent<NetworkManager>();
         _tugboat = GetComponent<Tugboat>();
