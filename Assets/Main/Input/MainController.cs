@@ -134,6 +134,15 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VoiceChat"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd278466-ca30-4368-8d7d-284b1d68b995"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -422,6 +431,17 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""909b40c6-a829-47da-94ee-f5bff3aa415a"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VoiceChat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -448,6 +468,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_VoiceChat = m_Player.FindAction("VoiceChat", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -521,6 +542,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DropItem;
     private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_VoiceChat;
     public struct PlayerActions
     {
         private @MainController m_Wrapper;
@@ -537,6 +559,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @VoiceChat => m_Wrapper.m_Player_VoiceChat;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -582,6 +605,9 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @VoiceChat.started += instance.OnVoiceChat;
+            @VoiceChat.performed += instance.OnVoiceChat;
+            @VoiceChat.canceled += instance.OnVoiceChat;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -622,6 +648,9 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @VoiceChat.started -= instance.OnVoiceChat;
+            @VoiceChat.performed -= instance.OnVoiceChat;
+            @VoiceChat.canceled -= instance.OnVoiceChat;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -662,5 +691,6 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         void OnDropItem(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnVoiceChat(InputAction.CallbackContext context);
     }
 }

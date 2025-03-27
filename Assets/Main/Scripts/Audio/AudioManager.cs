@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using FMOD;
 using FMOD.Studio;
 using FMODUnity;
@@ -27,13 +28,31 @@ public class AudioManager : MonoBehaviour
             DestroyImmediate(gameObject);
         }
     }
-
-    public void Play(EventReference audioRef)
+    public void CreateSound(ref Sound sound, int numOfChannels, int sampleRate, ref CREATESOUNDEXINFO _exinfo, ChannelGroup channelGroup, Channel channel, bool playOnStart = true)
     {
-        Play(audioRef,1,1,false);
+        _exinfo.cbsize = Marshal.SizeOf(typeof(FMOD.CREATESOUNDEXINFO));
+        _exinfo.numchannels = numOfChannels;
+        _exinfo.format = FMOD.SOUND_FORMAT.PCM16;
+        _exinfo.defaultfrequency = sampleRate;
+        _exinfo.length = (uint)sampleRate * sizeof(short) * (uint)numOfChannels;
+        RuntimeManager.CoreSystem.createSound(_exinfo.userdata, FMOD.MODE.LOOP_NORMAL | FMOD.MODE.OPENUSER, ref _exinfo, out sound);
+
+        if (playOnStart)
+        {
+            PlaySound(ref sound, ref channelGroup, ref channel);
+        }
+    }
+    public void PlaySound(ref Sound sound, ref ChannelGroup channelGroup, ref Channel channel)
+    {
+        RuntimeManager.CoreSystem.playSound(sound, channelGroup, true, out channel);
     }
 
-    public EventInstance Play(EventReference audioRef, float volume = 1, float pitch = 1, bool loop = false)
+    public void PlayInstance(EventReference audioRef)
+    {
+        PlayInstance(audioRef,1,1,false);
+    }
+
+    public EventInstance PlayInstance(EventReference audioRef, float volume = 1, float pitch = 1, bool loop = false)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(audioRef);
         eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(Camera.main.transform));

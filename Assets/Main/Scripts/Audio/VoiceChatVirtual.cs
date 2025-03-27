@@ -1,0 +1,114 @@
+using FishNet.Object;
+using FMOD;
+using FMODUnity;
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using Debug = UnityEngine.Debug;
+
+public class VoiceChatVirtual : NetworkBehaviour
+{
+    private Sound _sound;
+    private CREATESOUNDEXINFO _exinfo;
+    private Channel _channel;
+    private ChannelGroup _channelGroup;
+
+    public KeyCode ReverbOnSwith;
+
+    private int _numOfDriversConnected = 0;
+    private int _numOfDrivers = 0;
+
+    [SerializeField] private int recordDeviceIndex = 0;
+    [SerializeField] private string recordDeviceName;
+    [SerializeField] private float latency;
+
+    private Guid _micGuid;
+    private int _sampleRate;
+    private SPEAKERMODE _speakermode;
+    private int _numOfChannels;
+    private DRIVER_STATE _driverState;
+
+    private bool _dspEnbled = false;
+    private bool _playOkay = false;
+
+    public bool isRadioMode;
+
+    private MainController inputAction = InputManager.inputActions;
+
+
+    public override void OnStartClient()
+    {
+        if (IsOwner)
+        {
+            RuntimeManager.CoreSystem.getRecordNumDrivers(out _numOfDrivers, out _numOfDriversConnected);
+
+            if (_numOfDriversConnected == 0)
+            {
+                Debug.Log("Dont find any connected microphone");
+            }
+            else
+            {
+                Debug.Log($"You have {_numOfDriversConnected} devices");
+            }
+
+            RuntimeManager.CoreSystem.getRecordDriverInfo(
+                recordDeviceIndex,
+                out recordDeviceName,
+                50,
+                out _micGuid,
+                out _sampleRate,
+                out _speakermode,
+                out _numOfChannels,
+                out _driverState
+            );
+
+            AudioManager.instance.CreateSound(ref _sound, _numOfChannels, _sampleRate, ref _exinfo, _channelGroup, _channel,false);
+            RuntimeManager.CoreSystem.recordStart(recordDeviceIndex, _sound, true);
+
+            StartCoroutine(Wait());
+
+            inputAction.Player.VoiceChat.Enable();
+            inputAction.Player.VoiceChat.performed += PlayVoice;
+            inputAction.Player.VoiceChat.canceled += PlayVoice;
+        }
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(latency);
+        _channel.setPaused(true);
+        AudioManager.instance.PlaySound(ref _sound, ref _channelGroup, ref _channel);
+        _playOkay = true;
+        Debug.Log("Ready To Play!");
+    }
+
+    private void Update()
+    {
+        if (_playOkay) 
+        {
+            if(!isRadioMode)
+                _channel.setPaused(true);
+
+            if (Input.GetKeyDown(ReverbOnSwith))
+            {
+                REVERB_PROPERTIES propOn = PRESET.CONCERTHALL();
+                REVERB_PROPERTIES propOff = PRESET.OFF();
+                _dspEnbled = !_dspEnbled;
+                RuntimeManager.CoreSystem.setReverbProperties(1, ref _dspEnbled ? ref propOn : ref propOff);
+            }
+        }
+    }
+
+    public void PlayVoice(InputAction.CallbackContext context)
+    {
+        if(isRadioMode)
+            _channel.setPaused(context.ReadValueAsButton());
+    }
+
+    private void OnDestroy()
+    {
+        inputAction.Player.VoiceChat.performed -= PlayVoice;
+        inputAction.Player.VoiceChat.canceled -= PlayVoice;
+    }
+}

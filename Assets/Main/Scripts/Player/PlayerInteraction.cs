@@ -20,7 +20,7 @@ public class PlayerInteraction : MonoBehaviour
     protected void Interact(InputAction.CallbackContext callback)
     {
         Collider[] interactSphere = Physics.OverlapSphere(transform.position, interactRadius);
-        AudioManager.instance.Play(audioRef: cantInteractSound);
+        AudioManager.instance.PlayInstance(audioRef: cantInteractSound);
         for (int i = 0; i < interactSphere.Length; i++)
         {
             if (interactSphere[i].TryGetComponent(out InteractiveObjects interactiveObjects))

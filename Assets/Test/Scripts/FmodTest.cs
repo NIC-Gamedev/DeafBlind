@@ -13,7 +13,7 @@ public class FmodTest : MonoBehaviour
     {
         if (makeSound)
         {
-            AudioManager.instance.Play(refer,vol,1,false);
+            AudioManager.instance.PlayInstance(refer,vol,1,false);
             makeSound = false;
         }
     }
