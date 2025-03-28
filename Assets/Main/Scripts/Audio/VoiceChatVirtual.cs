@@ -39,7 +39,7 @@ public class VoiceChatVirtual : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        if (IsOwner)
+        if (IsOwner && enabled)
         {
             RuntimeManager.CoreSystem.getRecordNumDrivers(out _numOfDrivers, out _numOfDriversConnected);
 
@@ -88,7 +88,7 @@ public class VoiceChatVirtual : NetworkBehaviour
         if (_playOkay) 
         {
             if(!isRadioMode)
-                _channel.setPaused(true);
+                _channel.setPaused(false);
 
             if (Input.GetKeyDown(ReverbOnSwith))
             {
@@ -103,7 +103,7 @@ public class VoiceChatVirtual : NetworkBehaviour
     public void PlayVoice(InputAction.CallbackContext context)
     {
         if(isRadioMode)
-            _channel.setPaused(context.ReadValueAsButton());
+            _channel.setPaused(!context.ReadValueAsButton());
     }
 
     private void OnDestroy()

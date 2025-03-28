@@ -1783,6 +1783,7 @@ MonoBehaviour:
   - {fileID: -3196154209627593484}
   - {fileID: 5205152668318776948}
   - {fileID: -7803912585043878652}
+  - {fileID: 5404520336476509806}
   - {fileID: 3830739025761879604}
   - {fileID: 2447365932547691466}
   - {fileID: 3098165343212065482}
@@ -1876,14 +1877,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9fb5a3071d559a4e997c20a764418ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 4538416603781415790}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 4538416603781415790}
   ReverbOnSwith: 114
   recordDeviceIndex: 0
   recordDeviceName: 
-  latency: 0
-  isRadioMode: 0
+  latency: 2
+  isRadioMode: 1
 --- !u!1 &5162356912765425670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,7 +2272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac4822951f1eb46a50d3e82cf8aa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
   mouseSensitivity: {x: 0.05, y: 0.05}
@@ -2633,7 +2634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c512d9cb447c1e7449ae5f5cf3861f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
   canvas: {fileID: 4310186038091915950}
@@ -3774,7 +3775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6602383a75770a84a8bc8b3786717422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 7
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
 --- !u!4 &8297064875560626680 stripped
