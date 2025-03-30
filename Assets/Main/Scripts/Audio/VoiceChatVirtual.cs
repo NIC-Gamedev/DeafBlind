@@ -3,112 +3,140 @@ using FMOD;
 using FMODUnity;
 using System;
 using System.Collections;
+using System.Runtime.InteropServices;
+using FishNet.Broadcast;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Debug = UnityEngine.Debug;
 
 public class VoiceChatVirtual : NetworkBehaviour
 {
-    private Sound _sound;
+    private Sound _recordSound;
+    private Sound _playbackSound;
     private CREATESOUNDEXINFO _exinfo;
-    private Channel _channel;
+    private Channel _recordChannel;
+    private Channel _playbackСhannel;
     private ChannelGroup _channelGroup;
 
-    public KeyCode ReverbOnSwith;
-
-    private int _numOfDriversConnected = 0;
-    private int _numOfDrivers = 0;
-
     [SerializeField] private int recordDeviceIndex = 0;
-    [SerializeField] private string recordDeviceName;
-    [SerializeField] private float latency;
-
-    private Guid _micGuid;
     private int _sampleRate;
-    private SPEAKERMODE _speakermode;
     private int _numOfChannels;
-    private DRIVER_STATE _driverState;
-
-    private bool _dspEnbled = false;
-    private bool _playOkay = false;
-
-    public bool isRadioMode;
+    
+    private bool isRecording = false;
+    private Coroutine _streamCoroutine;
 
     private MainController inputAction = InputManager.inputActions;
-
 
     public override void OnStartClient()
     {
         if (IsOwner)
         {
-            RuntimeManager.CoreSystem.getRecordNumDrivers(out _numOfDrivers, out _numOfDriversConnected);
-
-            if (_numOfDriversConnected == 0)
-            {
-                Debug.Log("Dont find any connected microphone");
-            }
-            else
-            {
-                Debug.Log($"You have {_numOfDriversConnected} devices");
-            }
-
+            // Получаем информацию о микрофоне
             RuntimeManager.CoreSystem.getRecordDriverInfo(
-                recordDeviceIndex,
-                out recordDeviceName,
-                50,
-                out _micGuid,
-                out _sampleRate,
-                out _speakermode,
-                out _numOfChannels,
-                out _driverState
+                recordDeviceIndex, out _, 50, out _, out _sampleRate, out _, out _numOfChannels, out _
             );
 
-            AudioManager.instance.CreateSound(ref _sound, _numOfChannels, _sampleRate, ref _exinfo, _channelGroup, _channel,false);
-            RuntimeManager.CoreSystem.recordStart(recordDeviceIndex, _sound, true);
+            // Создаём звук для записи
+            AudioManager.instance.CreateSound(ref _recordSound, _numOfChannels, _sampleRate, ref _exinfo, _channelGroup, _recordChannel, false);
+            RuntimeManager.CoreSystem.recordStart(recordDeviceIndex, _recordSound, true);
 
-            StartCoroutine(Wait());
-
+            // Включаем управление голосовым чатом
             inputAction.Player.VoiceChat.Enable();
             inputAction.Player.VoiceChat.performed += PlayVoice;
             inputAction.Player.VoiceChat.canceled += PlayVoice;
         }
-    }
-
-    private IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(latency);
-        _channel.setPaused(true);
-        AudioManager.instance.PlaySound(ref _sound, ref _channelGroup, ref _channel);
-        _playOkay = true;
-        Debug.Log("Ready To Play!");
-    }
-
-    private void Update()
-    {
-        if (_playOkay) 
+        else
         {
-            if(!isRadioMode)
-                _channel.setPaused(true);
-
-            if (Input.GetKeyDown(ReverbOnSwith))
-            {
-                REVERB_PROPERTIES propOn = PRESET.CONCERTHALL();
-                REVERB_PROPERTIES propOff = PRESET.OFF();
-                _dspEnbled = !_dspEnbled;
-                RuntimeManager.CoreSystem.setReverbProperties(1, ref _dspEnbled ? ref propOn : ref propOff);
-            }
+            // Регистрируем обработчик полученного звука
+            NetworkManager.ClientManager.RegisterBroadcast<VoiceData>(OnReceiveVoice);
         }
+    }
+
+    private IEnumerator StreamAudio()
+    {
+        byte[] buffer;
+        uint readPos = 1024, writePos;
+        IntPtr ptr1, ptr2;
+        uint len1, len2;
+
+        while (isRecording)
+        {
+            
+            bool recording = false;
+            RuntimeManager.CoreSystem.isRecording(recordDeviceIndex, out recording);
+            if (!recording) yield break;
+            
+            RuntimeManager.CoreSystem.getRecordPosition(recordDeviceIndex, out writePos);
+            if (writePos != readPos)
+            {
+                RESULT result = _recordSound.@lock(readPos, writePos - readPos, out ptr1, out ptr2, out len1, out len2);
+                buffer = new byte[len1 + len2];
+                if (result == RESULT.OK)
+                {
+                    Marshal.Copy(ptr1, buffer, 0, (int)len1);
+                    if (ptr2 != IntPtr.Zero)
+                    {
+                        Marshal.Copy(ptr2, buffer, (int)len1, (int)len2);
+                    }
+
+                    _recordSound.unlock(ptr1, ptr2, len1, len2);
+
+                    // Отправляем данные через FishNet
+                    NetworkManager.ClientManager.Broadcast(new VoiceData(buffer),FishNet.Transporting.Channel.Unreliable);
+
+                    readPos = writePos;
+                }
+            }
+            yield return new WaitForSeconds(0.02f); // 20 мс задержка
+        }
+    }
+
+    private void OnReceiveVoice(VoiceData voicePacket,FishNet.Transporting.Channel _)
+    {
+        byte[] audioData = voicePacket.audioData;
+        
+        AudioManager.instance.CreateSound(audioData, ref _playbackSound, _numOfChannels, _sampleRate, ref _exinfo, _channelGroup, _playbackСhannel, false);
+
+        AudioManager.instance.PlaySound(ref _playbackSound, ref _channelGroup, ref _playbackСhannel);
     }
 
     public void PlayVoice(InputAction.CallbackContext context)
     {
-        if(isRadioMode)
-            _channel.setPaused(context.ReadValueAsButton());
+        if (context.ReadValueAsButton()) // Начать запись
+        {
+            if (_streamCoroutine == null)
+            {
+                isRecording = true;
+                _streamCoroutine = StartCoroutine(StreamAudio());
+            }
+        }
+        else // Остановить запись
+        {
+            if (_streamCoroutine != null)
+            {
+                isRecording = false;
+                StopCoroutine(_streamCoroutine);
+                _streamCoroutine = null;
+            }
+        }
     }
 
     private void OnDestroy()
     {
         inputAction.Player.VoiceChat.performed -= PlayVoice;
         inputAction.Player.VoiceChat.canceled -= PlayVoice;
+        
+        if (_recordSound.hasHandle()) _recordSound.release();
+        if (_playbackSound.hasHandle()) _playbackSound.release();
+    }
+
+    [System.Serializable]
+    public struct VoiceData : IBroadcast
+    {
+        public byte[] audioData { get; set; }
+
+        public VoiceData(byte[] data)
+        {
+            audioData = data;
+        }
     }
 }

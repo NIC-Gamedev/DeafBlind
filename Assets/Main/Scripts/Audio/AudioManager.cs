@@ -42,6 +42,15 @@ public class AudioManager : MonoBehaviour
             PlaySound(ref sound, ref channelGroup, ref channel);
         }
     }
+    public void CreateSound(byte[] data,ref Sound sound, int numOfChannels, int sampleRate, ref CREATESOUNDEXINFO _exinfo, ChannelGroup channelGroup, Channel channel, bool playOnStart = true)
+    {
+        _exinfo.cbsize = Marshal.SizeOf(typeof(FMOD.CREATESOUNDEXINFO));
+        _exinfo.numchannels = numOfChannels;
+        _exinfo.format = FMOD.SOUND_FORMAT.PCM16;
+        _exinfo.defaultfrequency = sampleRate;
+        _exinfo.length = (uint)sampleRate * sizeof(short) * (uint)numOfChannels;
+        RuntimeManager.CoreSystem.createSound(data, FMOD.MODE.LOOP_NORMAL | FMOD.MODE.OPENUSER, ref _exinfo, out sound);
+    }
     public void PlaySound(ref Sound sound, ref ChannelGroup channelGroup, ref Channel channel)
     {
         RuntimeManager.CoreSystem.playSound(sound, channelGroup, true, out channel);
