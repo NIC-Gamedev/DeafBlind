@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using FishNet.Object;
 using FMOD;
 using FMOD.Studio;
 using FMODUnity;
@@ -9,7 +10,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : NetworkBehaviour
 {
     public static AudioManager instance { get; private set; }
     
@@ -20,7 +21,6 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             transform.SetParent(null);
-            DontDestroyOnLoad(gameObject);
             instance = this;
         }
         else
@@ -56,6 +56,17 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.CoreSystem.playSound(sound, channelGroup, true, out channel);
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void PlaySoundSyncServerRpc(EventReference audioRef, float volume = 1, float pitch = 1, bool loop = false)
+    {
+        PlaySoundSyncClientRpc(audioRef, volume, pitch, loop);
+    }
+
+    [ObserversRpc]
+    private void PlaySoundSyncClientRpc(EventReference audioRef, float volume, float pitch, bool loop)
+    {
+        PlayInstance(audioRef, volume, pitch, loop);
+    }
     public void PlayInstance(EventReference audioRef)
     {
         PlayInstance(audioRef,1,1,false);

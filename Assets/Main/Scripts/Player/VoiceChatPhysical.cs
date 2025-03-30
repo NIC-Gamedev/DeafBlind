@@ -36,11 +36,9 @@ namespace Main.Scripts.Player
         private bool _dspEnbled = false;
         private bool _playOrPause = true;
         private bool _playOkay = false;
-
-        private byte[] _audioBuffer = new byte[1024]; // Буфер для передачи звука
         public override void OnStartClient()
         {
-            if (IsOwner)
+            if (IsOwner && enabled)
             {
                 RuntimeManager.CoreSystem.getRecordNumDrivers(out _numOfDrivers, out _numOfDriversConnected);
 
@@ -74,7 +72,6 @@ namespace Main.Scripts.Player
         private IEnumerator Wait()
         {
             yield return new WaitForSeconds(latency);
-            _channel.setPaused(_playOrPause);
             PhysicalAudioManager.instance.PlayPhysSound(ref _sound, ref _channelGroup, ref _channel, transform, true);
             _playOkay = true;
             Debug.Log("Ready To Play!");
@@ -82,18 +79,13 @@ namespace Main.Scripts.Player
 
         private void Update()
         {
-            if (_playOkay)
+            if (_playOkay && IsOwner)
             {
-                /*if (IsOwner)
-                {
-                    _channel.setVolume(0);                    
-                }*/
-                
                 if (Input.GetKeyDown(PlayAndPause) )
                 {
                     _playOrPause = !_playOrPause;
+                    _channel.setPaused(_playOrPause);
                 }
-                _channel.setPaused(_playOrPause);
                 if (Input.GetKeyDown(ReverbOnSwith))
                 {
                     REVERB_PROPERTIES propOn = PRESET.CONCERTHALL();
