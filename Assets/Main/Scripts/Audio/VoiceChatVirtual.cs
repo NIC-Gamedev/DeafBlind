@@ -3,10 +3,13 @@ using FMOD;
 using FMODUnity;
 using System;
 using System.Collections;
+using System.Linq;
 using System.Runtime.InteropServices;
+using FishNet;
 using FishNet.Broadcast;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Debug = UnityEngine.Debug;
 
 public class VoiceChatVirtual : NetworkBehaviour
 {
@@ -46,32 +49,37 @@ public class VoiceChatVirtual : NetworkBehaviour
         }
         else
         {
-            // Регистрируем обработчик полученного звука
-            NetworkManager.ClientManager.RegisterBroadcast<VoiceData>(OnReceiveVoice);
+            Debug.Log("Listen");
+            InstanceFinder.ClientManager.RegisterBroadcast<VoiceData>(OnReceiveVoice);
         }
     }
 
     private IEnumerator StreamAudio()
     {
         byte[] buffer;
-        uint readPos = 1024, writePos;
+        uint readPos = 0, writePos;
         IntPtr ptr1, ptr2;
         uint len1, len2;
 
         while (isRecording)
         {
-            
             bool recording = false;
             RuntimeManager.CoreSystem.isRecording(recordDeviceIndex, out recording);
             if (!recording) yield break;
-            
+
             RuntimeManager.CoreSystem.getRecordPosition(recordDeviceIndex, out writePos);
-            if (writePos != readPos)
+
+            uint length;
+            if (writePos >= readPos)
+                length = writePos - readPos;
+            else
+                length = _exinfo.length - readPos + writePos; // Циклический буфер
+            if (length > 0)
             {
-                RESULT result = _recordSound.@lock(readPos, writePos - readPos, out ptr1, out ptr2, out len1, out len2);
-                buffer = new byte[len1 + len2];
+                RESULT result = _recordSound.@lock(readPos, length, out ptr1, out ptr2, out len1, out len2);
                 if (result == RESULT.OK)
                 {
+                    buffer = new byte[len1 + len2];
                     Marshal.Copy(ptr1, buffer, 0, (int)len1);
                     if (ptr2 != IntPtr.Zero)
                     {
@@ -81,21 +89,24 @@ public class VoiceChatVirtual : NetworkBehaviour
                     _recordSound.unlock(ptr1, ptr2, len1, len2);
 
                     // Отправляем данные через FishNet
-                    NetworkManager.ClientManager.Broadcast(new VoiceData(buffer),FishNet.Transporting.Channel.Unreliable);
+                    Debug.Log("Recive Brodcast");
+                    InstanceFinder.ClientManager.Broadcast(new VoiceData(buffer), FishNet.Transporting.Channel.Unreliable);
 
-                    readPos = writePos;
+                    readPos = (readPos + length) % _exinfo.length; // Обновляем с учетом кольцевого буфера
                 }
             }
+
             yield return new WaitForSeconds(0.02f); // 20 мс задержка
         }
     }
 
+
     private void OnReceiveVoice(VoiceData voicePacket,FishNet.Transporting.Channel _)
     {
         byte[] audioData = voicePacket.audioData;
-        
+        int lengthToShow = Math.Min(50, audioData.Length); // Покажем только 50 байт
+        Debug.Log("Buffer: " + string.Join(", ", audioData.Take(lengthToShow)));
         AudioManager.instance.CreateSound(audioData, ref _playbackSound, _numOfChannels, _sampleRate, ref _exinfo, _channelGroup, _playbackСhannel, false);
-
         AudioManager.instance.PlaySound(ref _playbackSound, ref _channelGroup, ref _playbackСhannel);
     }
 
@@ -132,7 +143,7 @@ public class VoiceChatVirtual : NetworkBehaviour
     [System.Serializable]
     public struct VoiceData : IBroadcast
     {
-        public byte[] audioData { get; set; }
+        public byte[] audioData;
 
         public VoiceData(byte[] data)
         {
