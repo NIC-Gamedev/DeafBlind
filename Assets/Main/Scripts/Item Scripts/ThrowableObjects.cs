@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Object;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ThrowableObjects : MonoBehaviour
+[RequireComponent(typeof(NetworkObject))]
+public class ThrowableObjects : NetworkBehaviour
 {
     [Header("Physics Settings")]
     [SerializeField] private float weight = 1f;
@@ -32,9 +34,23 @@ public class ThrowableObjects : MonoBehaviour
         }
     }
 
+    [ServerRpc]
+    public void ThrowServerRpc(Vector3 direction)
+    {
+        ThrowInternal(direction);
+    }
+
+    private void ThrowInternal(Vector3 direction)
+    {
+        rb.velocity = Vector3.zero;
+        rb.AddForce(direction.normalized * throwForce + Vector3.up * upwardThrowModifier, ForceMode.Impulse);
+    }
+
     public void Throw(Vector3 direction)
     {
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce(direction.normalized * throwForce + Vector3.up * upwardThrowModifier, ForceMode.Impulse);
+        if (IsOwner)
+        {
+            ThrowServerRpc(direction);
+        }
     }
 }
