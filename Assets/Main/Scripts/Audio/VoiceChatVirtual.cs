@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using FishNet;
 using FishNet.Broadcast;
+using FishNet.Connection;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
@@ -47,11 +48,6 @@ public class VoiceChatVirtual : NetworkBehaviour
             inputAction.Player.VoiceChat.performed += PlayVoice;
             inputAction.Player.VoiceChat.canceled += PlayVoice;
         }
-        else
-        {
-            Debug.Log("Listen");
-            InstanceFinder.ClientManager.RegisterBroadcast<VoiceData>(OnReceiveVoice);
-        }
     }
 
     private IEnumerator StreamAudio()
@@ -89,8 +85,8 @@ public class VoiceChatVirtual : NetworkBehaviour
                     _recordSound.unlock(ptr1, ptr2, len1, len2);
 
                     // Отправляем данные через FishNet
-                    Debug.Log("Recive Brodcast");
-                    InstanceFinder.ClientManager.Broadcast(new VoiceData(buffer), FishNet.Transporting.Channel.Unreliable);
+                    Debug.Log($"Sending {buffer.Length} bytes of voice data");
+                    TransmitAudioServerRpc(buffer,_sampleRate,_numOfChannels);
 
                     readPos = (readPos + length) % _exinfo.length; // Обновляем с учетом кольцевого буфера
                 }
@@ -99,15 +95,34 @@ public class VoiceChatVirtual : NetworkBehaviour
             yield return new WaitForSeconds(0.02f); // 20 мс задержка
         }
     }
-
-
-    private void OnReceiveVoice(VoiceData voicePacket,FishNet.Transporting.Channel _)
+    [ServerRpc(RequireOwnership = false)]
+    private void TransmitAudioServerRpc(byte[] audioData,int sampleRate, int numOfchannels, NetworkConnection sender = null)
     {
-        byte[] audioData = voicePacket.audioData;
-        int lengthToShow = Math.Min(50, audioData.Length); // Покажем только 50 байт
-        Debug.Log("Buffer: " + string.Join(", ", audioData.Take(lengthToShow)));
-        AudioManager.instance.CreateSound(audioData, ref _playbackSound, _numOfChannels, _sampleRate, ref _exinfo, _channelGroup, _playbackСhannel, false);
-        AudioManager.instance.PlaySound(ref _playbackSound, ref _channelGroup, ref _playbackСhannel);
+        TransmitAudioObserversRpc(audioData,sampleRate,numOfchannels, sender.ClientId);
+    }
+
+    [ObserversRpc]
+    private void TransmitAudioObserversRpc(byte[] audioData,int sampleRate, int numOfchannels, int senderClientId)
+    {
+        if (senderClientId == NetworkManager.ClientManager.Connection.ClientId)
+            return;
+
+        OnReceiveVoice(audioData,sampleRate,numOfchannels);
+    }
+
+
+
+    private void OnReceiveVoice(byte[] voicePacket,int sampleRate, int numOfchannels)
+    {
+        byte[] audioData = voicePacket;
+        int lengthToShow = Math.Min(50, audioData.Length);
+        if (!_playbackSound.hasHandle())
+        {
+            Debug.Log($"Sample Rate: {sampleRate}. Num of Channels: {numOfchannels}");
+            AudioManager.instance.CreateSound(audioData, ref _playbackSound, numOfchannels, sampleRate, ref _exinfo, _channelGroup, _playbackСhannel, false);
+            AudioManager.instance.PlaySound(ref _playbackSound, ref _channelGroup, ref _playbackСhannel);
+            _playbackСhannel.setPaused(false);
+        }
     }
 
     public void PlayVoice(InputAction.CallbackContext context)
@@ -129,6 +144,7 @@ public class VoiceChatVirtual : NetworkBehaviour
                 _streamCoroutine = null;
             }
         }
+        _playbackСhannel.setPaused(!isRecording);
     }
 
     private void OnDestroy()
@@ -138,16 +154,5 @@ public class VoiceChatVirtual : NetworkBehaviour
         
         if (_recordSound.hasHandle()) _recordSound.release();
         if (_playbackSound.hasHandle()) _playbackSound.release();
-    }
-
-    [System.Serializable]
-    public struct VoiceData : IBroadcast
-    {
-        public byte[] audioData;
-
-        public VoiceData(byte[] data)
-        {
-            audioData = data;
-        }
     }
 }
