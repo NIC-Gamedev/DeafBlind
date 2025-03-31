@@ -1,43 +1,28 @@
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class ItemPickUp : MonoBehaviour
+public class ItemPickUp : NetworkBehaviour
 {
-    //public float PickUpRadius = 1f;
-    //public InventoryItemData ItemData;
-
-    //private SphereCollider myCollider;
-
-    //private void Awake()
-    //{
-    //    myCollider = GetComponent<SphereCollider>();
-    //    //myCollider.isTrigger = true;
-    //    myCollider.radius = PickUpRadius;
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    var inventory = other.transform.GetComponent<InventoryHolder>();
-        
-    //    if (!inventory) return;
-
-    //    if (inventory.InventorySystem.AddToInventory(ItemData, 1))
-    //    {
-    //        Destroy(this.gameObject);
-    //    }
-    //}
+   
 
     private bool playerInRange = false;
     private InventoryHolder playerInventory;
     public InventoryItemData ItemData;
     private float pickUpRadius = 10;
+    private void Start()
+    {
+        SphereCollider col = GetComponent<SphereCollider>();
+        col.radius = pickUpRadius;
+        col.isTrigger = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        var inventory = other.transform.GetComponent<InventoryHolder>();
-
-        if (inventory)
+        InventoryHolder inventory = other.GetComponent<InventoryHolder>();
+        if (inventory != null && inventory.IsOwner)
         {
             playerInRange = true;
             playerInventory = inventory;
@@ -46,31 +31,30 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.GetComponent<InventoryHolder>() == playerInventory)
+        if (other.GetComponent<InventoryHolder>() == playerInventory)
         {
+           
             playerInRange = false;
             playerInventory = null;
         }
     }
 
-    private void Update()
+    [ServerRpc]
+    private void RequestPickUpServerRpc(ulong clientId)
     {
-        if (playerInRange && playerInventory != null && Input.GetKeyDown(KeyCode.E))
+        if (playerInventory == null || playerInventory.OwnerId != (int)(clientId)) return;
+
+        if (playerInventory.InventorySystem.AddToInventory(ItemData, 1))
         {
-           
-
-            if (!playerInventory) return;
-
-            if (playerInventory.InventorySystem.AddToInventory(ItemData, 1))
+            NetworkObject networkObject = GetComponent<NetworkObject>();
+            if (networkObject != null)
             {
-                Destroy(this.gameObject);
+                networkObject.Despawn();
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
-    }
-
-    private void Start()
-    {
-        gameObject.GetComponent<SphereCollider>().radius = pickUpRadius;
-        gameObject.GetComponent<SphereCollider>().isTrigger = true;
     }
 }

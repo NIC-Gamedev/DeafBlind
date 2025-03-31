@@ -1,8 +1,9 @@
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandHolder : MonoBehaviour
+public class HandHolder : NetworkBehaviour
 {
     [Header("Hand Settings")]
     [SerializeField] private Transform dropPoint; // Where the item will be dropped
@@ -11,9 +12,11 @@ public class HandHolder : MonoBehaviour
     public InventorySlot activeSlot; // The currently selected inventory slot
     public GameObject currentItemObject; // The current item in hand
 
-    
+
     private void Update()
     {
+        // Обработка ввода только у локального игрока
+        if (!IsOwner) return;
         HandleInput();
     }
 
@@ -30,6 +33,40 @@ public class HandHolder : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectItem(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SelectItem(1);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SelectItem(2);
+    }
+
+
+    /// <summary>
+    /// Запрос на использование предмета через сервер.
+    /// </summary>
+    [ServerRpc]
+    private void RequestUseItemServerRpc()
+    {
+        UseItem();
+        // После изменения состояния, можно дополнительно оповестить клиентов через ObserverRpc
+        UpdateHandItemClientRpc();
+    }
+
+    /// <summary>
+    /// Запрос на выброс предмета через сервер.
+    /// </summary>
+    [ServerRpc]
+    private void RequestDropItemServerRpc()
+    {
+        DropItem();
+        UpdateHandItemClientRpc();
+    }
+
+
+    /// <summary>
+    /// ObserverRpc, который обновляет отображение предмета у клиентов.
+    /// </summary>
+    [ObserversRpc]
+    private void UpdateHandItemClientRpc()
+    {
+        // Так как логика создания предмета уже выполнена на сервере, 
+        // можно вызывать локальное обновление у клиентов.
+        UpdateHandItem();
     }
 
     private void SelectItem(int slotIndex)
