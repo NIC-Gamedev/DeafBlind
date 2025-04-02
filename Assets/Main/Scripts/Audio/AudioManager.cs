@@ -28,7 +28,7 @@ public class AudioManager : NetworkBehaviour
             DestroyImmediate(gameObject);
         }
     }
-    public void CreateSound(ref Sound sound, int numOfChannels, int sampleRate, ref CREATESOUNDEXINFO _exinfo, ChannelGroup channelGroup, Channel channel, bool playOnStart = true)
+    public void CreateSound(out Sound sound, int numOfChannels, int sampleRate, ref CREATESOUNDEXINFO _exinfo, ChannelGroup channelGroup, Channel channel, bool playOnStart = true)
     {
         _exinfo.cbsize = Marshal.SizeOf(typeof(FMOD.CREATESOUNDEXINFO));
         _exinfo.numchannels = numOfChannels;
@@ -39,21 +39,56 @@ public class AudioManager : NetworkBehaviour
 
         if (playOnStart)
         {
-            PlaySound(ref sound, ref channelGroup, ref channel);
+            PlaySound(sound, channelGroup, out channel);
         }
     }
-    public void CreateSound(byte[] data,ref Sound sound, int numOfChannels, int sampleRate, ref CREATESOUNDEXINFO _exinfo, ChannelGroup channelGroup, Channel channel, bool playOnStart = true)
+    public unsafe RESULT CreateSound(
+        short[] pcmData,
+        out Sound sound,
+        int numOfChannels,
+        int sampleRate,
+        ref CREATESOUNDEXINFO _exinfo,
+        ChannelGroup channelGroup,
+        Channel channel,
+        bool playOnStart = true
+    )
     {
-        _exinfo.cbsize = Marshal.SizeOf(typeof(FMOD.CREATESOUNDEXINFO));
+        _exinfo.cbsize = Marshal.SizeOf(typeof(CREATESOUNDEXINFO));
         _exinfo.numchannels = numOfChannels;
         _exinfo.format = FMOD.SOUND_FORMAT.PCM16;
         _exinfo.defaultfrequency = sampleRate;
-        _exinfo.length = (uint)sampleRate * sizeof(short) * (uint)numOfChannels;
-        RuntimeManager.CoreSystem.createSound(data, FMOD.MODE.LOOP_NORMAL | FMOD.MODE.OPENUSER, ref _exinfo, out sound);
+        _exinfo.length = (uint)(pcmData.Length * sizeof(short)); // Общий размер в байтах
+
+        // Фиксируем массив в памяти, чтобы получить указатель
+        fixed (short* pData = pcmData)
+        {
+            // Создаем звук из сырых PCM-данных
+            FMOD.MODE mode = FMOD.MODE.OPENUSER | FMOD.MODE.OPENMEMORY | FMOD.MODE.OPENRAW | MODE.CREATESTREAM;
+            FMOD.RESULT result = RuntimeManager.CoreSystem.createSound(
+                (IntPtr)pData, // Указатель на данные
+                mode,
+                ref _exinfo,
+                out sound
+            );
+            
+            return result;
+        }
+
+        // Воспроизводим звук, если нужно
+        if (playOnStart)
+            RuntimeManager.CoreSystem.playSound(sound, channelGroup, false, out channel);
     }
-    public void PlaySound(ref Sound sound, ref ChannelGroup channelGroup, ref Channel channel)
+    
+    public RESULT PlaySound(Sound sound, ChannelGroup channelGroup, out Channel channel, bool startPaused = false)
     {
-        RuntimeManager.CoreSystem.playSound(sound, channelGroup, true, out channel);
+        // Воспроизводим звук (без паузы, если startPaused = false)
+        FMOD.RESULT result = RuntimeManager.CoreSystem.playSound(
+            sound,
+            channelGroup,
+            startPaused,
+            out channel
+        );
+        return result;
     }
 
     [ServerRpc(RequireOwnership = false)]

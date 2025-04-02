@@ -218,7 +218,6 @@ namespace FishNet.Managing
         /// </summary>
         internal const ushort MAXIMUM_FRAMERATE = 500;
         #endregion
-
         private void Awake()
         {
             InitializeLogging();
@@ -285,6 +284,7 @@ namespace FishNet.Managing
 
             _instances.Add(this);
             Initialized = true;
+            
         }
 
         private void Start()
