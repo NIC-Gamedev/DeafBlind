@@ -63,6 +63,7 @@ public class VoiceChatVirtual : NetworkBehaviour
         AudioManager.instance.PlaySound( _recordSound,  _channelGroup, out _recordChannel);
         _recordChannel.setPaused(false);
     }
+
     private IEnumerator StreamAudio()
     {
         uint bufferBytes = (uint)(_sampleRate * _numOfChannels * 2 * 0.1f);
@@ -74,19 +75,13 @@ public class VoiceChatVirtual : NetworkBehaviour
         {
             RuntimeManager.CoreSystem.getRecordPosition(recordDeviceIndex, out uint currentWritePos);
         
-        
-            RESULT lockResult = _recordSound.@lock(currentWritePos, (uint)bufferBytes, out ptr1, out ptr2, out len1, out len2);
+            RESULT lockResult = _recordSound.@lock(currentWritePos * 2, (uint)bufferBytes, out ptr1, out ptr2, out len1, out len2);
             currWritePos = currentWritePos;
             if (lockResult == RESULT.OK)
             {
                 short[] audioData = GetDataFromLock(ptr1, ptr2, len1, len2);
                 _recordSound.unlock(ptr1, ptr2, len1, len2);
             
-                if (audioData.All(s => s == 0))
-                {
-                    yield return null;
-                    continue;
-                }
             
                 if (isSoundValid)
                 {
@@ -98,7 +93,7 @@ public class VoiceChatVirtual : NetworkBehaviour
                 TransmitAudioServerRpc(audioData, _sampleRate, _numOfChannels);
             }
 
-            yield return new WaitForSeconds(0.05f);
+            yield return null;
         }
     
         if (isSoundValid) _playbackSound.release();
