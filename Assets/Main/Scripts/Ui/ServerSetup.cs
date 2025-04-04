@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +33,13 @@ public class ServerSetup : MonoBehaviour
     {
         PlayerPrefs.SetString("IsBlind", "false");
     }
+    public void Begin()
+    {
+        PlayerPrefs.SetString("IsServer", "true");
+        PlayerPrefs.SetInt("ServerPort", 80);
+        PlayerPrefs.SetString("IsBlind", "false");
+        FindObjectOfType<ServerManager>().ForceStart();
 
+    }
 
 }

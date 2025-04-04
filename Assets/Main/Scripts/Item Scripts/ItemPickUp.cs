@@ -26,6 +26,7 @@ public class ItemPickUp : NetworkBehaviour
         {
             playerInRange = true;
             playerInventory = inventory;
+            RequestPickUpServerRpc((ulong)inventory.OwnerId);
         }
     }
 
@@ -39,7 +40,7 @@ public class ItemPickUp : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void RequestPickUpServerRpc(ulong clientId)
     {
         if (playerInventory == null || playerInventory.OwnerId != (int)(clientId)) return;
@@ -57,4 +58,5 @@ public class ItemPickUp : NetworkBehaviour
             }
         }
     }
+
 }

@@ -51,4 +51,30 @@ public class ServerManager : MonoBehaviour
             _networkManager.ClientManager.StartConnection(ip, port);
         }
     }
+
+    public void ForceStart()
+    {
+        _networkManager = GetComponent<NetworkManager>();
+        _tugboat = GetComponent<Tugboat>();
+
+        string isServer = PlayerPrefs.GetString("IsServer");
+        Debug.Log(isServer);
+        if (Convert.ToBoolean(isServer))
+        {
+            int port = PlayerPrefs.GetInt("ServerPort", 80);
+            _tugboat.SetPort((ushort)port);
+            _networkManager.ServerManager.StartConnection();
+
+            _networkManager.ClientManager.StartConnection();
+        }
+        else
+        {
+            string serverip = PlayerPrefs.GetString("ServerIp");
+            string[] parts = serverip.Split(':');
+            string ip = parts.Length > 0 ? parts[0] : "";
+            ushort port = Convert.ToUInt16(parts.Length > 1 ? parts[1] : "80");
+
+            _networkManager.ClientManager.StartConnection(ip, port);
+        }
+    }
 }
