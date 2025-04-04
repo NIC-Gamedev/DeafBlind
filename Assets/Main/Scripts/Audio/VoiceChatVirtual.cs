@@ -54,7 +54,17 @@ public class VoiceChatVirtual : NetworkBehaviour
             inputAction.Player.VoiceChat.performed += PlayVoice;
             inputAction.Player.VoiceChat.canceled += PlayVoice;
             //StartCoroutine(Wait());
+            FMOD.DSP highpass;
+            RuntimeManager.CoreSystem.createDSPByType(FMOD.DSP_TYPE.HIGHPASS, out highpass);
+            highpass.setParameterFloat((int)FMOD.DSP_HIGHPASS.CUTOFF, 100.0f); // Гц
+            _playbackСhannel.addDSP(0, highpass);
+            FMOD.DSP normalize;
+            RuntimeManager.CoreSystem.createDSPByType(FMOD.DSP_TYPE.NORMALIZE, out normalize);
+            normalize.setParameterFloat((int)FMOD.DSP_NORMALIZE.FADETIME, 1.0f);
+            normalize.setParameterFloat((int)FMOD.DSP_NORMALIZE.MAXAMP, 2.0f); // максимальное усиление
+            _playbackСhannel.addDSP(1, normalize);   
         }
+
     }
 
     public IEnumerator Wait()
@@ -66,16 +76,20 @@ public class VoiceChatVirtual : NetworkBehaviour
 
     private IEnumerator StreamAudio()
     {
-        uint bufferBytes = (uint)(_sampleRate * _numOfChannels * 2 * 0.1f);
+        uint bufferBytes = (uint)(_sampleRate * _numOfChannels * sizeof(short) * 0.1f);
         IntPtr ptr1, ptr2;
         uint len1, len2;
-        Channel currentChannel = new Channel();
-
+        uint lastRecordPos = 0;
         while (isRecording)
         {
             RuntimeManager.CoreSystem.getRecordPosition(recordDeviceIndex, out uint currentWritePos);
-        
-            RESULT lockResult = _recordSound.@lock(currentWritePos * 2, (uint)bufferBytes, out ptr1, out ptr2, out len1, out len2);
+            if (currentWritePos == lastRecordPos)
+            {
+                yield return null;
+                continue;
+            }
+            lastRecordPos = currentWritePos;
+            RESULT lockResult = _recordSound.@lock(currentWritePos * sizeof(short), (uint)bufferBytes, out ptr1, out ptr2, out len1, out len2);
             currWritePos = currentWritePos;
             if (lockResult == RESULT.OK)
             {
@@ -88,19 +102,16 @@ public class VoiceChatVirtual : NetworkBehaviour
                     _playbackSound.release();
                     isSoundValid = false;
                 }
-            
-                Debug.Log($"Sending {audioData.Length} samples...");
+                
                 TransmitAudioServerRpc(audioData, _sampleRate, _numOfChannels);
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     
         if (isSoundValid) _playbackSound.release();
-        if (isChannelValid) currentChannel.stop();
     }
-
-
+    
     public unsafe short[] GetDataFromLock(IntPtr ptr1, IntPtr ptr2, uint len1, uint len2)
     {
         // Общий размер в семплах
@@ -120,7 +131,6 @@ public class VoiceChatVirtual : NetworkBehaviour
             // Копируем вторую часть (если есть)
             if (len2 > 0)
             {
-                Debug.Log($"Len2: {len2}");
                 Buffer.MemoryCopy(src2, dst + len1, len2, len2);
             }
         }
@@ -148,9 +158,8 @@ public class VoiceChatVirtual : NetworkBehaviour
     private void OnReceiveVoice(short[] voicePacket,int sampleRate, int numOfchannels)
     {
         short[] audioData = voicePacket;
-        int lengthToShow = Math.Min(50, audioData.Length);
-        Debug.Log($"Received: {string.Join(", ", audioData.Take(10))}");
-        Debug.Log($"Playing audio: size {audioData.Length}, sampleRate {sampleRate}, numChannels {numOfchannels}");
+        _playbackСhannel.getNumDSPs(out var numdsps);
+        Debug.Log($"DSPS:{numdsps}");
         var result = AudioManager.instance.CreateSound(
             audioData, 
             out _playbackSound, 
