@@ -30,7 +30,7 @@ public class VoiceChatVirtual : NetworkBehaviour
     private Coroutine _streamCoroutine;
 
     private MainController inputAction = InputManager.inputActions;
-    [SerializeField] private uint _lastReadPos;
+    [SerializeField] private uint currWritePos;
 
     public int bufferMultiplier = 1;
     
@@ -63,90 +63,53 @@ public class VoiceChatVirtual : NetworkBehaviour
         AudioManager.instance.PlaySound( _recordSound,  _channelGroup, out _recordChannel);
         _recordChannel.setPaused(false);
     }
-private IEnumerator StreamAudio()
-{
-    int bufferSize = 1024 * bufferMultiplier; // Учитываем множитель
-    uint bufferBytes = (uint)(bufferSize * sizeof(short) * _numOfChannels);
-    IntPtr ptr1, ptr2;
-    uint len1, len2;
-    Channel currentChannel = new Channel();
-
-    while (isRecording)
+    private IEnumerator StreamAudio()
     {
-        // 1. Получаем позицию записи
-        RESULT posResult = RuntimeManager.CoreSystem.getRecordPosition(
-            recordDeviceIndex, 
-            out uint currentWritePos
-        );
+        uint bufferBytes = (uint)(_sampleRate * _numOfChannels * 2 * 0.1f);
+        IntPtr ptr1, ptr2;
+        uint len1, len2;
+        Channel currentChannel = new Channel();
 
-        if (posResult != RESULT.OK)
+        while (isRecording)
         {
-            Debug.LogError("Failed to get record position");
-            yield return null;
-            continue;
-        }
-
-        // 2. Вычисляем доступные байты (с проверкой буфера)
-        uint availableBytes = (currentWritePos >= _lastReadPos) 
-            ? currentWritePos - _lastReadPos 
-            : (_recordExinfo.length - _lastReadPos) + currentWritePos;
-
-        Debug.Log($"Available: {availableBytes}, Buffer: {bufferBytes}, WritePos: {currentWritePos}, ReadPos: {_lastReadPos}");
-
-        if (availableBytes < bufferBytes)
-        {
-            yield return null;
-            continue;
-        }
-
-        // 3. Блокируем память
-        RESULT lockResult = _recordSound.@lock(
-            _lastReadPos, 
-            bufferBytes, 
-            out ptr1, out ptr2, 
-            out len1, out len2
-        );
-
-        if (lockResult == RESULT.OK)
-        {
-            // 4. Читаем данные
-            short[] audioData = GetDataFromLock(ptr1, ptr2, len1, len2);
-            _recordSound.unlock(ptr1, ptr2, len1, len2);
-
-            // 5. Проверяем пустой звук
-            if (audioData.All(s => s == 0))
+            RuntimeManager.CoreSystem.getRecordPosition(recordDeviceIndex, out uint currentWritePos);
+        
+        
+            RESULT lockResult = _recordSound.@lock(currentWritePos, (uint)bufferBytes, out ptr1, out ptr2, out len1, out len2);
+            currWritePos = currentWritePos;
+            if (lockResult == RESULT.OK)
             {
-                yield return null;
-                continue;
+                short[] audioData = GetDataFromLock(ptr1, ptr2, len1, len2);
+                _recordSound.unlock(ptr1, ptr2, len1, len2);
+            
+                if (audioData.All(s => s == 0))
+                {
+                    yield return null;
+                    continue;
+                }
+            
+                if (isSoundValid)
+                {
+                    _playbackSound.release();
+                    isSoundValid = false;
+                }
+            
+                Debug.Log($"Sending {audioData.Length} samples...");
+                TransmitAudioServerRpc(audioData, _sampleRate, _numOfChannels);
             }
 
-            // 6. Освобождаем прошлый звук
-            if (isSoundValid)
-            {
-                _playbackSound.release();
-                isSoundValid = false;
-            }
-
-            // 7. Отправляем звук
-            Debug.Log($"Sending {audioData.Length} samples...");
-            TransmitAudioServerRpc(audioData, _sampleRate, _numOfChannels);
-
-            // 8. **Аккуратно обновляем `_lastReadPos`**
-            uint step = Math.Min(len1 + len2, availableBytes); // Читаем не больше, чем доступно
-            _lastReadPos = (_lastReadPos + step) % _recordExinfo.length;
+            yield return new WaitForSeconds(0.05f);
         }
-
-        yield return null;
-    }
     
-    if (isSoundValid) _playbackSound.release();
-    if (isChannelValid) currentChannel.stop();
-}
+        if (isSoundValid) _playbackSound.release();
+        if (isChannelValid) currentChannel.stop();
+    }
 
 
     public unsafe short[] GetDataFromLock(IntPtr ptr1, IntPtr ptr2, uint len1, uint len2)
     {
-        short[] samples = new short[(len1 + len2) / sizeof(short)]; // Общий размер в семплах
+        // Общий размер в семплах
+        short[] samples = new short[(len1 + len2) / sizeof(short)];
     
         // Копируем данные через указатели
         byte* src1 = (byte*)ptr1.ToPointer();
@@ -161,11 +124,15 @@ private IEnumerator StreamAudio()
         
             // Копируем вторую часть (если есть)
             if (len2 > 0)
+            {
+                Debug.Log($"Len2: {len2}");
                 Buffer.MemoryCopy(src2, dst + len1, len2, len2);
+            }
         }
-    
+
         return samples;
     }
+
     [ServerRpc(RequireOwnership = false)]
     private void TransmitAudioServerRpc(short[] audioData,int sampleRate, int numOfchannels, NetworkConnection sender = null)
     {
