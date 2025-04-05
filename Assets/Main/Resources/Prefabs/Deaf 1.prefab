@@ -626,7 +626,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 0}
-  dropPoint: {fileID: 6472989570752565716}
+  dropPoint: {fileID: 4401575618019979955}
   inventoryHolder: {fileID: 7997701115940908432}
   activeSlot:
     itemData: {fileID: 0}
