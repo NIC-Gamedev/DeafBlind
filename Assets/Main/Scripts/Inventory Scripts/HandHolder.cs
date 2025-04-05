@@ -1,72 +1,36 @@
+using FishNet;
 using FishNet.Object;
-using System.Collections;
-using System.Collections.Generic;
+using FishNet.Object.Synchronizing;
 using UnityEngine;
 
 public class HandHolder : NetworkBehaviour
 {
     [Header("Hand Settings")]
-    [SerializeField] private Transform dropPoint; // Where the item will be dropped
-    [SerializeField] private InventoryHolder inventoryHolder; // Reference to the player's inventory
+    [SerializeField] private Transform dropPoint;
+    [SerializeField] private InventoryHolder inventoryHolder;
 
-    public InventorySlot activeSlot; // The currently selected inventory slot
-    public GameObject currentItemObject; // The current item in hand
-
+    public InventorySlot activeSlot;
+    public GameObject currentItemObject;
 
     private void Update()
     {
-        // ????????? ????? ?????? ? ?????????? ??????
         if (!IsOwner) return;
         HandleInput();
     }
 
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) // Press 'Q' to drop the currently selected item
+        if (Input.GetKeyDown(KeyCode.Q)) // Drop item
         {
-            DropItem();
+            RequestDropItemServerRpc();
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1)) // Press 'E' to use the current item
+        if (Input.GetKeyDown(KeyCode.Mouse1)) // Use item
         {
-            UseItem();
+            RequestUseItemServerRpc();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectItem(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SelectItem(1);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SelectItem(2);
-    }
-
-
-    /// <summary>
-    /// ?????? ?? ????????????? ???????? ????? ??????.
-    /// </summary>
-    [ServerRpc]
-    private void RequestUseItemServerRpc()
-    {
-        UseItem();
-        // ????? ????????? ?????????, ????? ????????????? ?????????? ???????? ????? ObserverRpc
-        UpdateHandItemClientRpc();
-    }
-
-    /// <summary>
-    /// ?????? ?? ?????? ???????? ????? ??????.
-    /// </summary>
-    [ServerRpc]
-    private void RequestDropItemServerRpc()
-    {
-        DropItem();
-        UpdateHandItemClientRpc();
-    }
-
-
-    /// <summary>
-    /// ObserverRpc, ??????? ????????? ??????????? ???????? ? ????????.
-    /// </summary>
-    [ObserversRpc]
-    private void UpdateHandItemClientRpc()
-    {
-        // ??? ??? ?????? ???????? ???????? ??? ????????? ?? ???????, 
-        // ????? ???????? ????????? ?????????? ? ????????.
-        UpdateHandItem();
     }
 
     private void SelectItem(int slotIndex)
@@ -77,60 +41,102 @@ public class HandHolder : NetworkBehaviour
         if (slot.ItemData == null) return;
 
         activeSlot = slot;
-        UpdateHandItem();
+        UpdateHandItemServerRpc();
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateHandItemServerRpc()
+    {
+        if (currentItemObject != null)
+        {
+            NetworkObject oldNetObj = currentItemObject.GetComponent<NetworkObject>();
+            if (oldNetObj != null && oldNetObj.IsSpawned)
+            {
+                Despawn(oldNetObj);
+            }
+            Destroy(currentItemObject);
+            currentItemObject = null;
+        }
+
+        if (activeSlot != null && activeSlot.ItemData != null && activeSlot.ItemData.ItemPrefab != null)
+        {
+            GameObject item = Instantiate(activeSlot.ItemData.ItemPrefab, dropPoint.position, dropPoint.rotation);
+            item.transform.SetParent(dropPoint);
+
+            TurnOffItem(item);
+
+            NetworkObject netObj = item.GetComponent<NetworkObject>();
+            if (netObj != null)
+            {
+                Spawn(netObj, Owner);
+                currentItemObject = item;
+                UpdateHandItemClientRpc((ushort)netObj.ObjectId);
+            }
+        }
+    }
+
+    [ObserversRpc]
+    private void UpdateHandItemClientRpc(ushort objectId)
+    {
+        NetworkObject netObj = InstanceFinder.ServerManager.Objects.Spawned[objectId];
+        
+        
+        if (netObj != null)
+        {
+            currentItemObject = netObj.gameObject;
+            currentItemObject.transform.SetParent(dropPoint);
+            currentItemObject.transform.localPosition = Vector3.zero;
+            currentItemObject.transform.localRotation = Quaternion.identity;
+            TurnOffItem(currentItemObject);
+        }
+    }
+
+    private void TurnOffItem(GameObject item)
+    {
+        if (item.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
+
+        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        {
+            pickup.enabled = false;
+        }
+
+        foreach (var col in item.GetComponents<Collider>())
+        {
+            col.enabled = false;
+        }
+    }
+
     private void UseItem()
     {
-        if (activeSlot == null || activeSlot.ItemData == null) return;
-
-        if (currentItemObject == null) return;
+        if (activeSlot == null || activeSlot.ItemData == null || currentItemObject == null) return;
 
         IUsable usableComponent = currentItemObject.GetComponent<IUsable>();
         if (usableComponent != null)
         {
-
             usableComponent.Use();
 
-            // Remove the item from the inventory
-            if (activeSlot.ItemData.isOneUse) activeSlot.RemoveFromStack(1);
+            if (activeSlot.ItemData.isOneUse)
+                activeSlot.RemoveFromStack(1);
 
-            // If the stack size reaches 0, clear the slot
-            if (activeSlot.StackSize <= 0) activeSlot.ClearSlot();
+            if (activeSlot.StackSize <= 0)
+                activeSlot.ClearSlot();
 
-            UpdateHandItem();
+            UpdateHandItemServerRpc();
         }
         else
         {
             Debug.Log("This item cannot be used.");
         }
     }
-    private void UpdateHandItem()
-    {
-        if (currentItemObject != null)
-        {
-            Destroy(currentItemObject);
-        }
 
-        if (activeSlot != null && activeSlot.ItemData != null && activeSlot.ItemData.ItemPrefab != null)
-        {
-            currentItemObject = Instantiate(activeSlot.ItemData.ItemPrefab, dropPoint.position, dropPoint.rotation, dropPoint);
-            TurnOffItem();
-        }
-    }
-    private void TurnOffItem()
-    {
-        currentItemObject.GetComponent<Rigidbody>().useGravity = false;
-        currentItemObject.GetComponent<Rigidbody>().isKinematic = true;
-        currentItemObject.GetComponent<ItemPickUp>().enabled = false;
-        currentItemObject.GetComponent<CapsuleCollider>().isTrigger = true;
-        currentItemObject.GetComponent<SphereCollider>().enabled = false;
-
-    }
     private void DropItem()
     {
         if (activeSlot == null || activeSlot.ItemData == null) return;
 
-        // Instantiate the item prefab in the world
         GameObject droppedItem = Instantiate(
             activeSlot.ItemData.ItemPrefab,
             dropPoint.position,
@@ -139,18 +145,33 @@ public class HandHolder : NetworkBehaviour
 
         if (droppedItem.TryGetComponent<Rigidbody>(out var rb))
         {
-            rb.AddForce(transform.forward * 2f, ForceMode.Impulse); // Add some force to make it fall forward
+            rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
         }
 
-        // Remove the item from the inventory
+        if (droppedItem.TryGetComponent<NetworkObject>(out var netObj))
+        {
+            Spawn(netObj);
+        }
+
         activeSlot.RemoveFromStack(1);
 
-        // If the stack size reaches 0, clear the slot
         if (activeSlot.StackSize <= 0)
         {
             activeSlot.ClearSlot();
         }
 
-        UpdateHandItem(); // Update the hand after dropping the item
+        UpdateHandItemServerRpc();
+    }
+
+    [ServerRpc]
+    private void RequestUseItemServerRpc()
+    {
+        UseItem();
+    }
+
+    [ServerRpc]
+    private void RequestDropItemServerRpc()
+    {
+        DropItem();
     }
 }

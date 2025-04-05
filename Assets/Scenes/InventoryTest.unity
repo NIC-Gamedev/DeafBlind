@@ -366,6 +366,12 @@ PrefabInstance:
       objectReference: {fileID: 1229571759}
     - target: {fileID: 4520166763032356023, guid: 165d440985463e742b0179fae5496cf8,
         type: 3}
+      propertyPath: _deafPrefab
+      value: 
+      objectReference: {fileID: 3649741552129244603, guid: 8b3898ca913b04d49ae1dbf923835cfe,
+        type: 3}
+    - target: {fileID: 4520166763032356023, guid: 165d440985463e742b0179fae5496cf8,
+        type: 3}
       propertyPath: 'Spawns.Array.data[0]'
       value: 
       objectReference: {fileID: 877700314}
@@ -19614,8 +19620,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 100
+  near clip plane: 0.09
+  far clip plane: 1000
   field of view: 100
   orthographic: 0
   orthographic size: 5
@@ -19642,8 +19648,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296168331}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.0041555674, z: 0, w: 0.9999914}
-  m_LocalPosition: {x: 11.60293, y: -15.385204, z: -57.929413}
+  m_LocalRotation: {x: -0.008996964, y: -0.00000011920448, z: 0.0000000010725146,
+    w: 0.9999595}
+  m_LocalPosition: {x: -32.83, y: 0.97339386, z: 17.147999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
