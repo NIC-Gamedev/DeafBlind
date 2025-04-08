@@ -21,6 +21,7 @@ public class VoiceChatVirtual : NetworkBehaviour
     [SerializeField] private int recordDeviceIndex = 0;
     [SerializeField] private int _sampleRate;
     [SerializeField] private int _numOfChannels;
+    [SerializeField] private string NAME;
     
     private bool isRecording = false;
     private Coroutine _streamCoroutine;
@@ -38,9 +39,8 @@ public class VoiceChatVirtual : NetworkBehaviour
         {
             // Получаем информацию о микрофоне
             RuntimeManager.CoreSystem.getRecordDriverInfo(
-                recordDeviceIndex, out _, 50, out _, out _sampleRate, out _, out _numOfChannels, out _
+                recordDeviceIndex, out NAME, 50, out _, out _sampleRate, out _, out _numOfChannels, out _
             );
-
             // Создаём звук для записи
             AudioManager.instance.CreateSound(out _recordSound, _numOfChannels, _sampleRate, ref _recordExinfo, _channelGroup, _recordChannel, false);
             RuntimeManager.CoreSystem.recordStart(recordDeviceIndex, _recordSound, true);
@@ -72,7 +72,7 @@ public class VoiceChatVirtual : NetworkBehaviour
 
     private IEnumerator StreamAudio()
     {
-        uint bufferBytes = (uint)(_sampleRate * _numOfChannels * sizeof(short) * 0.1f);
+        uint bufferBytes = (uint)(_sampleRate  * sizeof(short) * 0.1f);
         IntPtr ptr1, ptr2;
         uint len1, len2;
         uint lastRecordPos = 0;
@@ -102,7 +102,7 @@ public class VoiceChatVirtual : NetworkBehaviour
                 TransmitAudioServerRpc(audioData, _sampleRate, _numOfChannels);
             }
 
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
     
         if (isSoundValid) _playbackSound.release();
