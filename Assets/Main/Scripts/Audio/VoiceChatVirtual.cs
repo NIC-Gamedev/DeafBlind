@@ -3,10 +3,6 @@ using FMOD;
 using FMODUnity;
 using System;
 using System.Collections;
-using System.Linq;
-using System.Runtime.InteropServices;
-using FishNet;
-using FishNet.Broadcast;
 using FishNet.Connection;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -106,11 +102,12 @@ public class VoiceChatVirtual : NetworkBehaviour
                 TransmitAudioServerRpc(audioData, _sampleRate, _numOfChannels);
             }
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     
         if (isSoundValid) _playbackSound.release();
     }
+
     
     public unsafe short[] GetDataFromLock(IntPtr ptr1, IntPtr ptr2, uint len1, uint len2)
     {
@@ -174,9 +171,36 @@ public class VoiceChatVirtual : NetworkBehaviour
         if (result == RESULT.OK)
         {
             isSoundValid = true;
-            // Воспроизводим и сохраняем канал
             result = AudioManager.instance.PlaySound(_playbackSound, _channelGroup, out _playbackСhannel);
             isChannelValid = (result == RESULT.OK);
+
+            // Добавляем DSP после создания канала
+            /*if (isChannelValid)
+            {
+                // Highpass DSP
+                FMOD.DSP highpass;
+                RuntimeManager.CoreSystem.createDSPByType(FMOD.DSP_TYPE.HIGHPASS, out highpass);
+                highpass.setParameterFloat((int)FMOD.DSP_HIGHPASS.CUTOFF, 100.0f);
+                _playbackСhannel.addDSP(0, highpass);
+
+                // Normalize DSP
+                FMOD.DSP normalize;
+                RuntimeManager.CoreSystem.createDSPByType(FMOD.DSP_TYPE.NORMALIZE, out normalize);
+                normalize.setParameterFloat((int)FMOD.DSP_NORMALIZE.FADETIME, 1.0f);
+                normalize.setParameterFloat((int)FMOD.DSP_NORMALIZE.MAXAMP, 2.0f);
+                _playbackСhannel.addDSP(3, normalize);
+                
+                FMOD.DSP compressor;
+                RuntimeManager.CoreSystem.createDSPByType(FMOD.DSP_TYPE.COMPRESSOR, out compressor);
+                compressor.setParameterFloat((int)FMOD.DSP_COMPRESSOR.THRESHOLD, -20.0f);
+                compressor.setParameterFloat((int)FMOD.DSP_COMPRESSOR.RATIO, 4.0f);
+                _playbackСhannel.addDSP(1, compressor);
+                
+                FMOD.DSP aec;
+                RuntimeManager.CoreSystem.createDSPByType(FMOD.DSP_TYPE.ECHO, out aec);
+                aec.setParameterFloat((int)FMOD.DSP_ECHO.DELAY, 0.1f); // Уменьшение времени эха
+                _playbackСhannel.addDSP(2, aec);
+            }*/
         }
         _playbackСhannel.setPaused(false);
     }
