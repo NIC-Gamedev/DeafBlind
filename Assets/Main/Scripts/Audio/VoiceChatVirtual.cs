@@ -72,7 +72,7 @@ public class VoiceChatVirtual : NetworkBehaviour
 
     private IEnumerator StreamAudio()
     {
-        uint bufferBytes = (uint)(_sampleRate * _numOfChannels * sizeof(short) * 0.1f);
+        uint bufferBytes = (uint)(_sampleRate * _numOfChannels * sizeof(short) * 0.2f);
         IntPtr ptr1, ptr2;
         uint len1, len2;
         uint lastRecordPos = 0;
