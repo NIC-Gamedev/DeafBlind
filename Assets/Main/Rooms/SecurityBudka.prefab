@@ -999,6 +999,7 @@ MonoBehaviour:
   createsTags:
   - InitialSpawnPoint
   - Mainhall
+  - 2x3
   deadEndChance: 0
 --- !u!1 &3713737890356250190
 GameObject:

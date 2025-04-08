@@ -1011,12 +1011,13 @@ MonoBehaviour:
   seed: 0
   sectionContainer: {fileID: 0}
   maxLevelSize: 200
-  maxAllowedOrder: 10
+  maxAllowedOrder: 20
   sectionPrefabs:
   - {fileID: 7428806719187381883, guid: 31e31eaee2d49ac46bd4bd1474e76006, type: 3}
   - {fileID: 144433138431143244, guid: 6266829b5dfbb6b49a1033b2c6088c32, type: 3}
   - {fileID: 2714844086940027184, guid: 17b525a0347e32c43ab45ab5e9fad148, type: 3}
   - {fileID: 1958681794313335563, guid: f0b85bb537675e14b87dcac8aed377af, type: 3}
+  - {fileID: 8929438006999938277, guid: 509877433de3c0d42b5988df894aefe7, type: 3}
   endPrefabs:
   - {fileID: 1507596983847483420, guid: 55e54d17baccfc747a4786ed8d99053e, type: 3}
   - {fileID: 1507596983847483420, guid: ca6e33dceeb5dd747b9e32e27021c12c, type: 3}
