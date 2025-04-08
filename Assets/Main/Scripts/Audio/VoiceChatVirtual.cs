@@ -44,7 +44,7 @@ public class VoiceChatVirtual : NetworkBehaviour
             // Создаём звук для записи
             AudioManager.instance.CreateSound(out _recordSound, _numOfChannels, _sampleRate, ref _recordExinfo, _channelGroup, _recordChannel, false);
             RuntimeManager.CoreSystem.recordStart(recordDeviceIndex, _recordSound, true);
-
+            Debug.Log($"[VOICE] Mic: {NAME}, SampleRate: {_sampleRate}, Channels: {_numOfChannels}");
             // Включаем управление голосовым чатом
             inputAction.Player.VoiceChat.Enable();
             inputAction.Player.VoiceChat.performed += PlayVoice;
@@ -72,20 +72,23 @@ public class VoiceChatVirtual : NetworkBehaviour
 
     private IEnumerator StreamAudio()
     {
-        uint bufferBytes = (uint)(_sampleRate  * sizeof(short) * 0.1f);
         IntPtr ptr1, ptr2;
         uint len1, len2;
         uint lastRecordPos = 0;
         while (isRecording)
         {
             RuntimeManager.CoreSystem.getRecordPosition(recordDeviceIndex, out uint currentWritePos);
+            uint soundLengthBytes;
+            _recordSound.getLength(out soundLengthBytes, TIMEUNIT.PCMBYTES);
+            uint bufferBytes = (soundLengthBytes / 5);
+            uint byteOffset = currentWritePos * (uint)(_numOfChannels * sizeof(short));
             if (currentWritePos == lastRecordPos)
             {
                 yield return null;
                 continue;
             }
             lastRecordPos = currentWritePos;
-            RESULT lockResult = _recordSound.@lock(currentWritePos * sizeof(short), (uint)bufferBytes, out ptr1, out ptr2, out len1, out len2);
+            RESULT lockResult = _recordSound.@lock(byteOffset, (uint)bufferBytes, out ptr1, out ptr2, out len1, out len2);
             currWritePos = currentWritePos;
             if (lockResult == RESULT.OK)
             {
