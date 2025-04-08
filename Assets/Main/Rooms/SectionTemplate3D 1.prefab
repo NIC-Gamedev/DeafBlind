@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5048889786580007657
 Transform:
@@ -46,7 +46,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &32088315826561619
 Transform:
@@ -91,7 +91,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5535176130663972557
 Transform:
@@ -141,7 +141,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &353132567929833326
 Transform:
@@ -193,7 +193,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1499336921340261018
 Transform:
@@ -233,7 +233,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4743760540298355698
 Transform:
@@ -326,6 +326,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -399,6 +404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -474,6 +484,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -547,6 +562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -622,6 +642,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -695,6 +720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -770,6 +800,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -843,6 +878,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

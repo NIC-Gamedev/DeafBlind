@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4163906853099697268
 Transform:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8368789542050849846
 Transform:
@@ -77,7 +77,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3212915565587556085
 Transform:
@@ -132,7 +132,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6726311237399235098
 Transform:
@@ -163,7 +163,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8770140806119912974
 Transform:
@@ -194,7 +194,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1023987322604691781
 Transform:
@@ -225,7 +225,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3211860143287075826
 Transform:
@@ -256,7 +256,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7180965764598074526
 Transform:
@@ -287,7 +287,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6735926233822904731
 Transform:
@@ -318,7 +318,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5606389005711459923
 Transform:
@@ -349,7 +349,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1514113492398840229
 Transform:
@@ -387,7 +387,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5134578446083526904
 Transform:
@@ -418,7 +418,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3107055214157409613
 Transform:
@@ -449,7 +449,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5917208750479459618
 Transform:
@@ -480,7 +480,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6575911704170672306
 Transform:
@@ -511,7 +511,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5600074825060569092
 Transform:
@@ -543,7 +543,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8761991736470903485
 Transform:
@@ -590,7 +590,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5143747866548922903
 Transform:
@@ -653,7 +653,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2249965571989862141
 Transform:
@@ -684,7 +684,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9197767037822862325
 Transform:
@@ -715,7 +715,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7782270925822113171
 Transform:
@@ -746,7 +746,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8438257393325443910
 Transform:
@@ -777,7 +777,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8140314203304697861
 Transform:
@@ -808,7 +808,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &332203535440895964
 Transform:
@@ -839,7 +839,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8594441214026840157
 Transform:
@@ -873,7 +873,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5403323216241768453
 Transform:
@@ -904,7 +904,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7866820994832718277
 Transform:
@@ -935,7 +935,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3788217305371060427
 Transform:
@@ -966,7 +966,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5016593019067285919
 Transform:
@@ -997,7 +997,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6055106700249471619
 Transform:
@@ -1028,7 +1028,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4809548306371726786
 Transform:
@@ -1059,7 +1059,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8227111252223294754
 Transform:
@@ -1101,7 +1101,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7244365077822542338
 Transform:
@@ -1132,7 +1132,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1917427553012554795
 Transform:
@@ -1209,7 +1209,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6611236230773933867
 Transform:
@@ -1240,7 +1240,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1689118644941926025
 Transform:
@@ -1272,7 +1272,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3645352328486063467
 Transform:
@@ -1324,7 +1324,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7960343528102186165
 Transform:
@@ -1355,7 +1355,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4459605955104212635
 Transform:
@@ -1386,7 +1386,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8638809179935293630
 Transform:
@@ -1417,7 +1417,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5889101276279434463
 Transform:
@@ -1448,7 +1448,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &663379620640489883
 Transform:
@@ -1479,7 +1479,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1971412294790158752
 Transform:
@@ -1510,7 +1510,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8299164564083667687
 Transform:
@@ -1544,7 +1544,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6199832018434947282
 Transform:
@@ -1575,7 +1575,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8779534208971681920
 Transform:
@@ -1606,7 +1606,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3897297058823245685
 Transform:
@@ -1638,7 +1638,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1539426670153586619
 Transform:
@@ -1684,7 +1684,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5227144828505917308
 Transform:
@@ -1729,7 +1729,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6914955836285985437
 Transform:
@@ -1760,7 +1760,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2020660309660857345
 Transform:
@@ -1791,7 +1791,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2794211124165676227
 Transform:
@@ -1822,7 +1822,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4306446750844527618
 Transform:
@@ -1853,7 +1853,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1660758257024029600
 Transform:
@@ -1944,7 +1944,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5699834545534859284
 Transform:
@@ -1975,7 +1975,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8593971224781191410
 Transform:
@@ -2006,7 +2006,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8629031438746629100
 Transform:
@@ -2037,7 +2037,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5305560591366494738
 Transform:
@@ -2068,7 +2068,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2280355081676192426
 Transform:
@@ -2106,7 +2106,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4586257172032386132
 Transform:
@@ -2137,7 +2137,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5713057162633909114
 Transform:
@@ -2168,7 +2168,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3427690738255280774
 Transform:
@@ -2199,7 +2199,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8650630293762044393
 Transform:
@@ -2230,7 +2230,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7703921892986064949
 Transform:
@@ -2294,7 +2294,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6424655193424962178
 Transform:
@@ -2346,7 +2346,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8056628651217318806
 Transform:
@@ -2377,7 +2377,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7891593091400709010
 Transform:
@@ -2408,7 +2408,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1383288482135776732
 Transform:
@@ -2450,7 +2450,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3863388493433265382
 Transform:
@@ -2481,7 +2481,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &64624266051933675
 Transform:
@@ -2512,7 +2512,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &550807235303775318
 Transform:
@@ -2543,7 +2543,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7822349097992934686
 Transform:
@@ -2574,7 +2574,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2497514565558502492
 Transform:
@@ -2605,7 +2605,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1911075689823824107
 Transform:
@@ -2636,7 +2636,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3313808399373920561
 Transform:
@@ -2667,7 +2667,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6471989470258548875
 Transform:
@@ -2698,7 +2698,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4007206838390271445
 Transform:
@@ -2729,7 +2729,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2691509885225368247
 Transform:
@@ -2760,7 +2760,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4162282747767396747
 Transform:
@@ -2791,7 +2791,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1655119354482765184
 Transform:
@@ -2822,7 +2822,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1914506414215712701
 Transform:
@@ -2853,7 +2853,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5000578343110172662
 Transform:
@@ -2916,7 +2916,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9147421275492787790
 Transform:
@@ -2947,7 +2947,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6697340721660980075
 Transform:
@@ -2978,7 +2978,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4490995555759862771
 Transform:
@@ -3011,7 +3011,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8463380634719408
 Transform:
@@ -3042,7 +3042,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1354000078086524912
 Transform:
@@ -3073,7 +3073,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2685046163233268381
 Transform:
@@ -3104,7 +3104,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2945070272095862510
 Transform:
@@ -3136,7 +3136,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8306252892689109937
 Transform:
@@ -3188,7 +3188,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5769648297873647964
 Transform:
@@ -3222,7 +3222,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3640637275946165040
 Transform:
@@ -3253,7 +3253,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5549503651260561425
 Transform:
@@ -3287,7 +3287,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1744151303525675396
 Transform:
@@ -3393,7 +3393,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6222004146739739735
 Transform:
@@ -3424,7 +3424,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2286215522162883080
 Transform:
@@ -3456,7 +3456,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8763469372415625756
 Transform:
@@ -3508,7 +3508,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2150142058741820308
 Transform:
@@ -3540,7 +3540,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8261506402741821048
 Transform:
@@ -3597,7 +3597,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &234276298905228750
 Transform:
@@ -3635,7 +3635,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4919895079055050718
 Transform:
@@ -3666,7 +3666,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5584777159247943018
 Transform:
@@ -3706,6 +3706,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -3841,6 +3846,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3920,6 +3930,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3943,6 +3958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -4068,6 +4088,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4142,6 +4167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4165,6 +4195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -4240,6 +4275,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wallCube (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4313,6 +4353,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -4438,6 +4483,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4511,6 +4561,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791569450396183276, guid: 438f16d18f5c89b49aae7f8e4a7387e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4586,6 +4641,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4660,6 +4720,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4733,6 +4798,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4813,6 +4883,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (54)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4887,6 +4962,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wallCube
       objectReference: {fileID: 0}
+    - target: {fileID: 5474100195732932817, guid: aaaa47d852c9d80449e74418ed0e766f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4960,6 +5040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5040,6 +5125,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5113,6 +5203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5193,6 +5288,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5267,6 +5367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5290,6 +5395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -5415,6 +5525,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5489,6 +5604,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5562,6 +5682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5642,6 +5767,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5716,6 +5846,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5789,6 +5924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5869,6 +6009,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5947,6 +6092,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6032,6 +6182,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneCeiling
       objectReference: {fileID: 0}
+    - target: {fileID: 6834994758404631033, guid: e6281aada13964b4c8d7368e8a194acd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6106,6 +6261,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6129,6 +6289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -6264,6 +6429,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6338,6 +6508,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6361,6 +6536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -6491,6 +6671,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (52)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6565,6 +6750,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6638,6 +6828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6718,6 +6913,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6792,6 +6992,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6865,6 +7070,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6944,6 +7154,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7029,6 +7244,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7463978954658260568, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -1733957702214962801, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -1253996098385199550, guid: fe09635223aba0a4f93052e5612b9baa,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -7054,10 +7279,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -101.963
       objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe09635223aba0a4f93052e5612b9baa,
         type: 3}
       propertyPath: m_Name
       value: Camera (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233112405309087440, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7138116256542086714, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -7134,6 +7384,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7207,6 +7462,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7287,6 +7547,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7310,6 +7575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -7445,6 +7715,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (51)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7518,6 +7793,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7593,6 +7873,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7666,6 +7951,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7746,6 +8036,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7819,6 +8114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7894,6 +8194,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7967,6 +8272,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8047,6 +8357,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8070,6 +8385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -8195,6 +8515,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8218,6 +8543,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -8348,6 +8678,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8421,6 +8756,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8501,6 +8841,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (53)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8574,6 +8919,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8654,6 +9004,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (59)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8727,6 +9082,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8802,6 +9162,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8876,6 +9241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8949,6 +9319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655997513620514469, guid: be641ab4b2d579a4699a4b4d5f547049,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9029,6 +9404,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneCeiling
       objectReference: {fileID: 0}
+    - target: {fileID: 6834994758404631033, guid: e6281aada13964b4c8d7368e8a194acd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9108,6 +9488,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9181,6 +9566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9256,6 +9646,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9279,6 +9674,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -9409,6 +9809,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9482,6 +9887,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9562,6 +9972,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9641,6 +10056,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9664,6 +10084,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -9738,6 +10163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -9878,6 +10308,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (58)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9957,6 +10392,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10031,6 +10471,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10054,6 +10499,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -10179,6 +10629,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10252,6 +10707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10332,6 +10792,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10411,6 +10876,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10485,6 +10955,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10558,6 +11033,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10638,6 +11118,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10711,6 +11196,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10791,6 +11281,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10870,6 +11365,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10893,6 +11393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -11023,6 +11528,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11107,10 +11617,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 9ed9086c8931a6441b691ac0a01092d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: 9ed9086c8931a6441b691ac0a01092d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: 9ed9086c8931a6441b691ac0a01092d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -1599826595754709761, guid: 9ed9086c8931a6441b691ac0a01092d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 9ed9086c8931a6441b691ac0a01092d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ed9086c8931a6441b691ac0a01092d9,
         type: 3}
       propertyPath: m_Name
       value: shkaf
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ed9086c8931a6441b691ac0a01092d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: 9ed9086c8931a6441b691ac0a01092d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -11186,6 +11731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11266,6 +11816,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11289,6 +11844,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -11419,6 +11979,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11442,6 +12007,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -11567,6 +12137,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11640,6 +12215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11715,6 +12295,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11788,6 +12373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11868,6 +12458,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11947,6 +12542,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12020,6 +12620,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12100,6 +12705,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneCeiling
       objectReference: {fileID: 0}
+    - target: {fileID: 6834994758404631033, guid: e6281aada13964b4c8d7368e8a194acd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12173,6 +12783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12248,6 +12863,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12322,6 +12942,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12345,6 +12970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -12470,6 +13100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12543,6 +13178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12628,6 +13268,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneCeiling (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6834994758404631033, guid: e6281aada13964b4c8d7368e8a194acd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12701,6 +13346,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12781,6 +13431,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (38)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12804,6 +13459,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -12939,6 +13599,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13012,6 +13677,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13087,6 +13757,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13160,6 +13835,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13240,6 +13920,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13263,6 +13948,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -13388,6 +14078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13461,6 +14156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13541,6 +14241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13619,6 +14324,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13699,6 +14409,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13722,6 +14437,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -13852,6 +14572,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13926,6 +14651,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13949,6 +14679,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -14023,6 +14758,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -14153,6 +14893,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14227,6 +14972,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14300,6 +15050,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14380,6 +15135,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14453,6 +15213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14528,6 +15293,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14551,6 +15321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -14686,6 +15461,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14709,6 +15489,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -14844,6 +15629,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14922,6 +15712,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15007,6 +15802,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7463978954658260568, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -1733957702214962801, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -1253996098385199550, guid: fe09635223aba0a4f93052e5612b9baa,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -15032,10 +15837,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -101.963
       objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe09635223aba0a4f93052e5612b9baa,
         type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233112405309087440, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7138116256542086714, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: fe09635223aba0a4f93052e5612b9baa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -15117,6 +15947,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15190,6 +16025,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15265,6 +16105,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15288,6 +16133,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -15428,6 +16278,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15451,6 +16306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -15586,6 +16446,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15609,6 +16474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -15739,6 +16609,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15812,6 +16687,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15892,6 +16772,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (56)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15966,6 +16851,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15989,6 +16879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -16063,6 +16958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -16193,6 +17093,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16267,6 +17172,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16290,6 +17200,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -16374,6 +17289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -16504,6 +17424,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16578,6 +17503,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16601,6 +17531,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3982534809891909747, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -16736,6 +17671,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16759,6 +17699,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -16889,6 +17834,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16963,6 +17913,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16986,6 +17941,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -17111,6 +18071,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17190,6 +18155,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17263,6 +18233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17338,6 +18313,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17361,6 +18341,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -17491,6 +18476,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17564,6 +18554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17644,6 +18639,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17722,6 +18722,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (55)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17802,6 +18807,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17875,6 +18885,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17955,6 +18970,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17978,6 +18998,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -18108,6 +19133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (57)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18181,6 +19211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18261,6 +19296,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18334,6 +19374,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18409,6 +19454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18432,6 +19482,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020827308573339955, guid: ee5810c823780974baf112d937865090,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9152182959866084500, guid: ee5810c823780974baf112d937865090,
         type: 3}
@@ -18562,6 +19617,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18585,6 +19645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -18710,6 +19775,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18789,6 +19859,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18863,6 +19938,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18936,6 +20016,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19016,6 +20101,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19090,6 +20180,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19113,6 +20208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallCube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279541342627000069, guid: 4bb032dd0831a524fb2965dc371f4b5d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6639195496178306634, guid: 4bb032dd0831a524fb2965dc371f4b5d,
         type: 3}
@@ -19243,6 +20343,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19317,6 +20422,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorPlane (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19390,6 +20500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorPlane (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508580648255528169, guid: 480ee983699b4334c83d10b5958451a9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
