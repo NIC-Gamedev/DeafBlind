@@ -12,12 +12,17 @@ public class HandHolder : NetworkBehaviour
     public InventorySlot activeSlot;
     public GameObject currentItemObject;
 
+    public static event System.Action<GameObject> OnHandItemChanged;
+
     private void Update()
     {
         if (!IsOwner) return;
         HandleInput();
     }
-
+    public void TriggerHandItemChanged(GameObject item)
+    {
+        OnHandItemChanged?.Invoke(item);
+    }
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Q)) // Drop item
@@ -42,6 +47,8 @@ public class HandHolder : NetworkBehaviour
 
         activeSlot = slot;
         UpdateHandItemServerRpc();
+        OnHandItemChanged(currentItemObject);
+
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -64,7 +71,6 @@ public class HandHolder : NetworkBehaviour
             item.transform.SetParent(dropPoint);
 
             TurnOffItem(item);
-
             NetworkObject netObj = item.GetComponent<NetworkObject>();
             if (netObj != null)
             {
@@ -72,7 +78,11 @@ public class HandHolder : NetworkBehaviour
                 currentItemObject = item;
                 UpdateHandItemClientRpc((ushort)netObj.ObjectId);
             }
+
         }
+        OnHandItemChanged(currentItemObject);
+
+
     }
 
     [ObserversRpc]
@@ -88,6 +98,8 @@ public class HandHolder : NetworkBehaviour
             currentItemObject.transform.localPosition = Vector3.zero;
             currentItemObject.transform.localRotation = Quaternion.identity;
             TurnOffItem(currentItemObject);
+
+            OnHandItemChanged(currentItemObject);
         }
     }
 
@@ -108,6 +120,8 @@ public class HandHolder : NetworkBehaviour
         {
             col.enabled = false;
         }
+        OnHandItemChanged(currentItemObject);
+
     }
 
     private void UseItem()
@@ -131,6 +145,8 @@ public class HandHolder : NetworkBehaviour
         {
             Debug.Log("This item cannot be used.");
         }
+        OnHandItemChanged(currentItemObject);
+
     }
 
     private void DropItem()
@@ -161,6 +177,8 @@ public class HandHolder : NetworkBehaviour
         }
 
         UpdateHandItemServerRpc();
+        OnHandItemChanged(currentItemObject);
+
     }
 
     [ServerRpc]
