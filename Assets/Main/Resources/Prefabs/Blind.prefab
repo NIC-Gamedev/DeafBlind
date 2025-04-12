@@ -1484,7 +1484,6 @@ GameObject:
   - component: {fileID: 70317945891530972}
   - component: {fileID: 8291139309002991667}
   - component: {fileID: 2642234815770087722}
-  - component: {fileID: 2601992791307198760}
   - component: {fileID: 2125074627681875609}
   - component: {fileID: 2693171641269584819}
   - component: {fileID: 5064728990423627456}
@@ -1609,26 +1608,6 @@ MonoBehaviour:
       Data4: 8080861
     Path: event:/UI/Cancel
   interactRadius: 3
---- !u!114 &2601992791307198760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5138195267981253030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cd7e950482dcaa47885e75b794e8798, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 4538416603781415790}
-  _networkObjectCache: {fileID: 0}
-  PlayAndPause: 0
-  ReverbOnSwith: 0
-  recordDeviceIndex: 0
-  recordDeviceName: 
-  latency: 0
 --- !u!54 &2125074627681875609
 Rigidbody:
   m_ObjectHideFlags: 0

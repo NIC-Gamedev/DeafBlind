@@ -542,10 +542,13 @@ MonoBehaviour:
   - {fileID: -9058194595701247593}
   - {fileID: 2955802239629264974}
   - {fileID: -5482656074028921359}
+  - {fileID: 7997701115940908432}
+  - {fileID: 4906006030117767758}
   - {fileID: 1457572327187550515}
   - {fileID: 7640640126259735051}
   InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
+  InitializedNestedNetworkObjects:
+  - {fileID: 7039367735228372826}
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
@@ -563,13 +566,13 @@ MonoBehaviour:
   _enableStateForwarding: 1
   _networkTransform: {fileID: 0}
   _ownerInterpolation: 1
-  _ownerSmoothedProperties: 255
+  _ownerSmoothedProperties: 4294967295
   _adaptiveInterpolation: 3
-  _spectatorSmoothedProperties: 255
+  _spectatorSmoothedProperties: 4294967295
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 13
+  <PrefabId>k__BackingField: 23
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 15808821022311274863
   <SceneId>k__BackingField: 0
@@ -603,9 +606,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5620ce254cb0e084b862a5e26e84657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 4
   _addedNetworkObject: {fileID: 3649741552129244603}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 3649741552129244603}
   inventorySize: 3
   inventorySystem:
     inventorySlots:
@@ -623,15 +626,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14872d0dddb7d1499a94285b8160c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 3649741552129244603}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 3649741552129244603}
   dropPoint: {fileID: 4401575618019979955}
   inventoryHolder: {fileID: 7997701115940908432}
   activeSlot:
     itemData: {fileID: 0}
     stackSize: -1
   currentItemObject: {fileID: 0}
+  dropForce: 10
+  dropItemFlag: 0
+  timeBefDrop: 0.8
 --- !u!1 &1108625588232933670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,7 +2581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac4822951f1eb46a50d3e82cf8aa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 4
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
   mouseSensitivity: {x: 0.05, y: 0.05}
@@ -3457,6 +3463,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8924156957865181748, guid: fe31d0542957b0f45a8889c0b9be8755,
+        type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924156957865181748, guid: fe31d0542957b0f45a8889c0b9be8755,
+        type: 3}
+      propertyPath: <ComponentIndex>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924156957865181748, guid: fe31d0542957b0f45a8889c0b9be8755,
+        type: 3}
+      propertyPath: InitializedParentNetworkBehaviour
+      value: 
+      objectReference: {fileID: 7640640126259735051}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3480,6 +3501,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1902809119929177454}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7039367735228372826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8924156957865181748, guid: fe31d0542957b0f45a8889c0b9be8755,
+    type: 3}
+  m_PrefabInstance: {fileID: 1902809119929177454}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9201966541690776879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3580,6 +3613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6602383a75770a84a8bc8b3786717422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}

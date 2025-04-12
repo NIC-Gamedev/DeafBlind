@@ -65,7 +65,7 @@ public abstract class BaseAnimator : NetworkBehaviour
 
     public virtual int LockState(int s, float t)
     {
-        LockedTill = Time.time + t;
+        LockedTill = t - Time.deltaTime;
         return s;
     }
 }

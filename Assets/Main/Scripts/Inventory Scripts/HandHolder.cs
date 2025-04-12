@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using FishNet;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
@@ -12,8 +14,17 @@ public class HandHolder : NetworkBehaviour
     public InventorySlot activeSlot;
     public GameObject currentItemObject;
 
+    public Coroutine dropItemProcess;
+
+    public float dropForce = 2;
+
+    public bool dropItemFlag;
+
+    public float timeBefDrop;
+
     private void Update()
     {
+        dropItemFlag = dropItemProcess != null;
         if (!IsOwner) return;
         HandleInput();
     }
@@ -133,10 +144,10 @@ public class HandHolder : NetworkBehaviour
         }
     }
 
-    private void DropItem()
+    private IEnumerator DropItem()
     {
-        if (activeSlot == null || activeSlot.ItemData == null) return;
-
+        yield return new WaitForSeconds(timeBefDrop);
+        
         GameObject droppedItem = Instantiate(
             activeSlot.ItemData.ItemPrefab,
             dropPoint.position,
@@ -145,7 +156,7 @@ public class HandHolder : NetworkBehaviour
 
         if (droppedItem.TryGetComponent<Rigidbody>(out var rb))
         {
-            rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
+            rb.AddForce(transform.forward * dropForce, ForceMode.Impulse);
         }
 
         if (droppedItem.TryGetComponent<NetworkObject>(out var netObj))
@@ -161,6 +172,8 @@ public class HandHolder : NetworkBehaviour
         }
 
         UpdateHandItemServerRpc();
+
+        dropItemProcess = null;
     }
 
     [ServerRpc]
@@ -172,6 +185,10 @@ public class HandHolder : NetworkBehaviour
     [ServerRpc]
     private void RequestDropItemServerRpc()
     {
-        DropItem();
+        if(activeSlot == null || activeSlot.ItemData == null)
+            return;
+        
+        if(dropItemProcess == null)
+            dropItemProcess = StartCoroutine(DropItem());
     }
 }

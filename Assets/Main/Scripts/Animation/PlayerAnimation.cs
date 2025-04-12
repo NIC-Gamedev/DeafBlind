@@ -15,7 +15,17 @@ public class PlayerAnimation : BaseAnimator
             }
             return _playerMovement;
         }
-        set { }
+    }
+    private HandHolder _handHolder;
+    private HandHolder HandHolder {
+        get 
+        { 
+            if (_handHolder == null) 
+            {
+                _handHolder = GetComponent<HandHolder>();
+            }
+            return _handHolder;
+        }
     }
     private Rigidbody _rb; 
     private Rigidbody rb 
@@ -28,8 +38,6 @@ public class PlayerAnimation : BaseAnimator
             }
             return _rb;
         }
-        set
-        { }
     }
     private bool isJumpStart;
 
@@ -76,11 +84,19 @@ public class PlayerAnimation : BaseAnimator
         animationHash.Add("StartJump", Animator.StringToHash("HumanM@Jump01 - Start"));
         animationHash.Add("Fall", Animator.StringToHash("HumanM@Fall01"));
         animationHash.Add("Land", Animator.StringToHash("HumanM@Jump01 - Land"));
+        
+        animationHash.Add("Drop", Animator.StringToHash("mixamo_com"));
     }
 
     protected override int GetState()
     {
         bool isGround = playerMovement.IsOnGround();
+
+        if (HandHolder.dropItemProcess != null)
+        {
+            return animationHash["Drop"];
+        }
+
         if (rb.linearVelocity.y > 0 && !isGround)
         {
             isJumpStart = true;
