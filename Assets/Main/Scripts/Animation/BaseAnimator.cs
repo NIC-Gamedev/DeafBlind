@@ -1,5 +1,6 @@
 using FishNet.Object;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 public abstract class BaseAnimator : NetworkBehaviour
 {
@@ -11,10 +12,18 @@ public abstract class BaseAnimator : NetworkBehaviour
 
     public Dictionary<string, int> animationHash = new Dictionary<string, int>();
 
+    public List<AnimationClip> animationClips = new List<AnimationClip>();
+
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();
         InitAnimation();
+        RuntimeAnimatorController controller = anim.runtimeAnimatorController;
+
+        foreach (AnimationClip clip in controller.animationClips)
+        {
+            animationClips.Add(clip);
+        }
     }
     protected virtual void Update()
     {

@@ -86,11 +86,23 @@ public class PlayerAnimation : BaseAnimator
         animationHash.Add("Land", Animator.StringToHash("HumanM@Jump01 - Land"));
         
         animationHash.Add("Drop", Animator.StringToHash("mixamo_com"));
+        animationHash.Add("Attack", Animator.StringToHash("2H@Attack02"));
     }
 
     protected override int GetState()
     {
         bool isGround = playerMovement.IsOnGround();
+        
+        if (HandHolder.currentItemObject)
+        {
+            if (HandHolder.currentItemObject.TryGetComponent(out UsablePipe usablePipe))
+            {
+                if (usablePipe.attackProcess != null)
+                {
+                    return animationHash["Attack"];
+                }
+            }
+        }
 
         if (HandHolder.dropItemProcess != null)
         {
