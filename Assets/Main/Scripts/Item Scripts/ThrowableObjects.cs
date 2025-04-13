@@ -42,7 +42,7 @@ public class ThrowableObjects : NetworkBehaviour
 
     private void ThrowInternal(Vector3 direction)
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction.normalized * throwForce + Vector3.up * upwardThrowModifier, ForceMode.Impulse);
     }
 

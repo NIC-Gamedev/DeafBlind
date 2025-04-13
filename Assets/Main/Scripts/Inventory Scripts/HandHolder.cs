@@ -38,18 +38,56 @@ public class HandHolder : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3)) SelectItem(2);
     }
 
+    [ServerRpc(RequireOwnership = true)]
+
     private void SelectItem(int slotIndex)
     {
-        if (slotIndex < 0 || slotIndex >= inventoryHolder.InventorySystem.InventorySize) return;
+        // Вместо чтения данных локально просто делаем вызов серверного метода
+        RequestInventorySlotDataServerRpc(slotIndex);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestInventorySlotDataServerRpc(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= inventoryHolder.InventorySystem.InventorySize)
+        {
+            Debug.Log("Slot index out of range (server check)");
+            return;
+        }
 
         InventorySlot slot = inventoryHolder.InventorySystem.InventorySlots[slotIndex];
-        if (slot.ItemData == null) return;
 
+        if (slot.ItemData == null)
+        {
+            Debug.Log("Slot is null (server check)");
+            return;
+        }
+        else
+        {
+            Debug.Log("Slot item data is not null (server check)");
+        }
+
+        // Обновляем активный слот на сервере на основе серверных данных
         activeSlot = slot;
-        UpdateHandItemServerRpc();
-        OnHandItemChanged(currentItemObject);
 
+        // Затем вызываем серверный метод обновления руки (где производится спавн нового объекта)
+        UpdateHandItemServerRpc(slotIndex);
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateHandItemServerRpc(int slotIndex)
+    {
+        // Дополнительная проверка (при желании)
+        if (slotIndex < 0 || slotIndex >= inventoryHolder.InventorySystem.InventorySize)
+        {
+            Debug.Log("Slot index out of range (UpdateHandItemServerRpc)");
+            return;
+        }
+
+        InventorySlot slot = inventoryHolder.InventorySystem.InventorySlots[slotIndex];
+
+        UpdateHandItemServerRpc();
+    }
+
 
     [ServerRpc(RequireOwnership = false)]
     private void UpdateHandItemServerRpc()

@@ -42,4 +42,11 @@ public class ServerSetup : MonoBehaviour
 
     }
 
+    public void BeginClient()
+    {
+        PlayerPrefs.SetString("IsServer", "false");
+        PlayerPrefs.SetString("ServerIp", "127.0.0.1");
+        FindObjectOfType<ServerManager>().ForceStart();
+    }
+
 }

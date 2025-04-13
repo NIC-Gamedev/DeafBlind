@@ -22,7 +22,7 @@ public class ItemPickUp : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         InventoryHolder inventory = other.GetComponent<InventoryHolder>();
-        if (inventory != null && inventory.IsOwner)
+        if (inventory != null )
         {
             playerInRange = true;
             playerInventory = inventory;
