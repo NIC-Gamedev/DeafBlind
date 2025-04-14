@@ -33,6 +33,11 @@ public class ThrowableObjects : NetworkBehaviour
             collider.material = material;
         }
     }
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        EnablePhysicsInternal();
+    }
 
     [ServerRpc]
     public void ThrowServerRpc(Vector3 direction)
@@ -54,5 +59,31 @@ public class ThrowableObjects : NetworkBehaviour
         }
     }
 
-    
+    [ServerRpc]
+    public void EnablePhysicsServerRpc()
+    {
+        EnablePhysicsInternal();
+    }
+
+    private void EnablePhysicsInternal()
+    {
+        if (rb != null)
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        foreach (var col in GetComponents<Collider>())
+        {
+            col.enabled = true;
+        }
+
+        if (TryGetComponent<ItemPickUp>(out var pickup))
+        {
+            pickup.enabled = true;
+        }
+
+        transform.SetParent(null);
+    }
 }

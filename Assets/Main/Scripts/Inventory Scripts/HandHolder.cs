@@ -241,9 +241,11 @@ public class HandHolder : NetworkBehaviour
             Spawn(netObj);
         }
         TurnOnItemServerRpc(droppedItem);
-        if (droppedItem.TryGetComponent<Rigidbody>(out var rb))
+
+        ThrowableObjects objectthrow = droppedItem.GetComponent<ThrowableObjects>();
+        if (objectthrow)
         {
-            rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
+            objectthrow.Throw(Vector3.up);
         }
 
 
