@@ -26,17 +26,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ca79a691c23d3c64a93b6757e7c3ce26,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.4938526
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca79a691c23d3c64a93b6757e7c3ce26,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4248552
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca79a691c23d3c64a93b6757e7c3ce26,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.426404
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca79a691c23d3c64a93b6757e7c3ce26,
         type: 3}
@@ -262,6 +262,7 @@ MonoBehaviour:
   - {fileID: -6500451929495131678}
   - {fileID: -3274900571695502103}
   - {fileID: 7976312616611988563}
+  - {fileID: -4130741635217442219}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -292,7 +293,7 @@ MonoBehaviour:
   <AssetPathHash>k__BackingField: 3694059233019194369
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
-    Position: {x: 6.4938526, y: -1.4248552, z: 10.426404}
+    Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     Scale: {x: 0.1, y: 0.1, z: 0.1}
     IsValid: 1
@@ -308,9 +309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 8597946327302261100}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 8597946327302261100}
   _componentConfiguration: 0
   _synchronizeParent: 0
   _packing:

@@ -53,4 +53,6 @@ public class ThrowableObjects : NetworkBehaviour
             ThrowServerRpc(direction);
         }
     }
+
+    
 }

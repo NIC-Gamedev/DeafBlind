@@ -2,6 +2,7 @@ using FishNet;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class HandHolder : NetworkBehaviour
 {
@@ -112,56 +113,94 @@ public class HandHolder : NetworkBehaviour
             NetworkObject netObj = item.GetComponent<NetworkObject>();
             if (netObj != null)
             {
-                Spawn(netObj, Owner);
+                Spawn(netObj);
                 currentItemObject = item;
-                UpdateHandItemClientRpc((ushort)netObj.ObjectId);
+                currentItemObject = netObj.gameObject;
+                currentItemObject.transform.SetParent(dropPoint);
+                currentItemObject.transform.localPosition = Vector3.zero;
+                currentItemObject.transform.localRotation = Quaternion.identity;
+                TurnOffItem(currentItemObject);
+
+                OnHandItemChanged(currentItemObject);
             }
 
         }
+
         OnHandItemChanged(currentItemObject);
 
 
     }
 
-    [ObserversRpc]
-    private void UpdateHandItemClientRpc(ushort objectId)
-    {
-        NetworkObject netObj = InstanceFinder.ServerManager.Objects.Spawned[objectId];
-        
-        
-        if (netObj != null)
-        {
-            currentItemObject = netObj.gameObject;
-            currentItemObject.transform.SetParent(dropPoint);
-            currentItemObject.transform.localPosition = Vector3.zero;
-            currentItemObject.transform.localRotation = Quaternion.identity;
-            TurnOffItem(currentItemObject);
 
-            OnHandItemChanged(currentItemObject);
-        }
-    }
-
+    #region Must be fixed
+    [ServerRpc(RequireOwnership = false)]
     private void TurnOffItem(GameObject item)
     {
+        // Отключаем физику и задаём полное замораживание
         if (item.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.useGravity = false;
             rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll; // Фиксируем все оси
         }
 
+        // Отключаем скрипт подбора
         if (item.TryGetComponent<ItemPickUp>(out var pickup))
         {
             pickup.enabled = false;
         }
 
+        // Отключаем все коллайдеры
         foreach (var col in item.GetComponents<Collider>())
         {
             col.enabled = false;
         }
-        OnHandItemChanged(currentItemObject);
 
+        // Фиксируем позицию и вращение объекта относительно dropPoint
+        if (dropPoint != null)
+        {
+            item.transform.SetParent(dropPoint);
+            item.transform.localPosition = Vector3.zero;
+            item.transform.localRotation = Quaternion.identity;
+        }
+        TurnOffItemClient(item);
+        OnHandItemChanged?.Invoke(currentItemObject);
     }
 
+    [ObserversRpc]
+    private void TurnOffItemClient(GameObject item)
+    {
+        // Отключаем физику и задаём полное замораживание
+        if (item.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll; // Фиксируем все оси
+        }
+
+        // Отключаем скрипт подбора
+        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        {
+            pickup.enabled = false;
+        }
+
+        // Отключаем все коллайдеры
+        foreach (var col in item.GetComponents<Collider>())
+        {
+            col.enabled = false;
+        }
+
+        // Фиксируем позицию и вращение объекта относительно dropPoint
+        if (dropPoint != null)
+        {
+            item.transform.SetParent(dropPoint);
+            item.transform.localPosition = Vector3.zero;
+            item.transform.localRotation = Quaternion.identity;
+        }
+
+        OnHandItemChanged?.Invoke(currentItemObject);
+    }
+    #endregion
     private void UseItem()
     {
         if (activeSlot == null || activeSlot.ItemData == null || currentItemObject == null) return;
@@ -196,16 +235,18 @@ public class HandHolder : NetworkBehaviour
             dropPoint.position,
             Quaternion.identity
         );
-
+        NetworkObject netObj = droppedItem.GetComponent<NetworkObject>();
+        if (netObj != null)
+        {
+            Spawn(netObj);
+        }
+        TurnOnItemServerRpc(droppedItem);
         if (droppedItem.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
         }
 
-        if (droppedItem.TryGetComponent<NetworkObject>(out var netObj))
-        {
-            Spawn(netObj);
-        }
+
 
         activeSlot.RemoveFromStack(1);
 
@@ -230,4 +271,67 @@ public class HandHolder : NetworkBehaviour
     {
         DropItem();
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void TurnOnItemServerRpc(GameObject item)
+    {
+        if (item == null) return;
+
+        // Включаем физику
+        if (item.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        // Включаем скрипт подбора
+        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        {
+            pickup.enabled = true;
+        }
+
+        // Включаем все коллайдеры
+        foreach (var col in item.GetComponents<Collider>())
+        {
+            col.enabled = true;
+        }
+
+        // Отсоединяем от dropPoint
+        item.transform.SetParent(null);
+
+        // Уведомляем клиентов
+        TurnOnItemObserversRpc(item);
+    }
+
+
+    [ObserversRpc]
+    private void TurnOnItemObserversRpc(GameObject item)
+    {
+        if (item == null) return;
+
+        // Включаем физику
+        if (item.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        // Включаем скрипт подбора
+        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        {
+            pickup.enabled = true;
+        }
+
+        // Включаем все коллайдеры
+        foreach (var col in item.GetComponents<Collider>())
+        {
+            col.enabled = true;
+        }
+
+        // Отсоединяем от dropPoint
+        item.transform.SetParent(null);
+    }
+
 }
