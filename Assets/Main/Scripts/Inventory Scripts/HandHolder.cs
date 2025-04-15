@@ -20,6 +20,7 @@ public class HandHolder : NetworkBehaviour
         if (!IsOwner) return;
         HandleInput();
     }
+    [ObserversRpc]
     public void TriggerHandItemChanged(GameObject item)
     {
         OnHandItemChanged?.Invoke(item);
@@ -88,7 +89,7 @@ public class HandHolder : NetworkBehaviour
 
         UpdateHandItemServerRpc();
     }
-
+    
 
     [ServerRpc(RequireOwnership = false)]
     private void UpdateHandItemServerRpc()
@@ -159,7 +160,7 @@ public class HandHolder : NetworkBehaviour
         // Фиксируем позицию и вращение объекта относительно dropPoint
         if (dropPoint != null)
         {
-            item.transform.SetParent(dropPoint);
+            //item.transform.SetParent(dropPoint);
             item.transform.localPosition = Vector3.zero;
             item.transform.localRotation = Quaternion.identity;
         }
