@@ -20341,7 +20341,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6596529447997372124, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6596529447997372124, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+        type: 3}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6500451929495131678, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3274900571695502103, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
@@ -20403,6 +20413,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Can_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737134877383853521, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104547440457235425, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104547440457235425, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104547440457235425, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104547440457235425, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
+        type: 3}
+      propertyPath: m_ImplicitTensor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8597946327302261100, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}

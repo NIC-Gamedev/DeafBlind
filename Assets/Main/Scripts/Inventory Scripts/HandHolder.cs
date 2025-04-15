@@ -30,10 +30,14 @@ public class HandHolder : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) // Drop item
         {
             RequestDropItemServerRpc();
+            OnHandItemChanged(currentItemObject);
+
         }
         if (Input.GetKeyDown(KeyCode.Mouse1)) // Use item
         {
             RequestUseItemServerRpc();
+            OnHandItemChanged(currentItemObject);
+
         }
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectItem(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SelectItem(1);
@@ -267,12 +271,16 @@ public class HandHolder : NetworkBehaviour
     private void RequestUseItemServerRpc()
     {
         UseItem();
+        OnHandItemChanged(currentItemObject);
+
     }
 
     [ServerRpc]
     private void RequestDropItemServerRpc()
     {
         DropItem();
+        OnHandItemChanged(currentItemObject);
+
     }
 
     [ServerRpc(RequireOwnership = false)]
