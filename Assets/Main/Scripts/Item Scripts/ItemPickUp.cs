@@ -22,7 +22,7 @@ public class ItemPickUp : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         InventoryHolder inventory = other.GetComponent<InventoryHolder>();
-        if (inventory != null && inventory.IsOwner)
+        if (inventory != null )
         {
             playerInRange = true;
             playerInventory = inventory;
@@ -44,7 +44,11 @@ public class ItemPickUp : NetworkBehaviour
     private void RequestPickUpServerRpc(ulong clientId)
     {
         if (playerInventory == null || playerInventory.OwnerId != (int)(clientId)) return;
-
+        HandHolder handHolder = playerInventory.GetComponent<HandHolder>();
+        if (handHolder != null)
+        {
+            handHolder.TriggerHandItemChanged(ItemData.ItemPrefab);
+        }
         if (playerInventory.InventorySystem.AddToInventory(ItemData, 1))
         {
             NetworkObject networkObject = GetComponent<NetworkObject>();
@@ -57,6 +61,7 @@ public class ItemPickUp : NetworkBehaviour
                 Destroy(gameObject);
             }
         }
+        
     }
 
 }

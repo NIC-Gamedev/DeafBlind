@@ -18,4 +18,5 @@ public class InventoryHolder : NetworkBehaviour
     {
         inventorySystem = new InventorySystem(inventorySize);
     }
+
 }
