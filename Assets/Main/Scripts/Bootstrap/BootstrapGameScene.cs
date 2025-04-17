@@ -35,8 +35,11 @@ public class BootstrapGameScene : NetworkBehaviour
     {
         base.OnStartClient();
         serviceLocator.Initialize();
-        levelSpawner.OnLevelGeneratorComplete += InitAfterGenerateComplete;
-        levelSpawner.GenerateLevel();
+        if (levelSpawner)
+        {
+            levelSpawner.OnLevelGeneratorComplete += InitAfterGenerateComplete;
+            levelSpawner.GenerateLevel();
+        }
     }
 
     private IEnumerator InitAfterGenerateCompleteIE()

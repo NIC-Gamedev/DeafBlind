@@ -38,25 +38,13 @@ public class ThrowableObjects : NetworkBehaviour
         base.OnStartServer();
         EnablePhysicsInternal();
     }
-
-    [ServerRpc]
-    public void ThrowServerRpc(Vector3 direction)
-    {
-        ThrowInternal(direction);
-    }
-
-    private void ThrowInternal(Vector3 direction)
-    {
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce(direction.normalized * throwForce + Vector3.up * upwardThrowModifier, ForceMode.Impulse);
-    }
+    
 
     public void Throw(Vector3 direction)
     {
-        if (IsOwner)
-        {
-            ThrowServerRpc(direction);
-        }
+        rb.linearVelocity = Vector3.zero;
+        Debug.Log("I Add Force Internal");
+        rb.AddForce(direction.normalized * throwForce + Vector3.up * upwardThrowModifier, ForceMode.Impulse);
     }
 
     [ServerRpc]

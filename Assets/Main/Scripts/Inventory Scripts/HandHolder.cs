@@ -1,8 +1,6 @@
-using FishNet;
+using System.Collections;
 using FishNet.Object;
-using FishNet.Object.Synchronizing;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class HandHolder : NetworkBehaviour
 {
@@ -12,7 +10,9 @@ public class HandHolder : NetworkBehaviour
 
     public InventorySlot activeSlot;
     public GameObject currentItemObject;
-
+    public Coroutine dropItemProcess;
+    public float timeBefDrop;
+    public float dropForce = 10;
     public static event System.Action<GameObject> OnHandItemChanged;
 
     private void Update()
@@ -30,13 +30,13 @@ public class HandHolder : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) // Drop item
         {
             RequestDropItemServerRpc();
-            OnHandItemChanged(currentItemObject);
+            OnHandItemChanged?.Invoke(currentItemObject);
 
         }
         if (Input.GetKeyDown(KeyCode.Mouse1)) // Use item
         {
             RequestUseItemServerRpc();
-            OnHandItemChanged(currentItemObject);
+            OnHandItemChanged?.Invoke(currentItemObject);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectItem(0);
@@ -45,10 +45,9 @@ public class HandHolder : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = true)]
-
     private void SelectItem(int slotIndex)
     {
-        // Вместо чтения данных локально просто делаем вызов серверного метода
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         RequestInventorySlotDataServerRpc(slotIndex);
     }
     [ServerRpc(RequireOwnership = false)]
@@ -72,17 +71,17 @@ public class HandHolder : NetworkBehaviour
             Debug.Log("Slot item data is not null (server check)");
         }
 
-        // Обновляем активный слот на сервере на основе серверных данных
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         activeSlot = slot;
 
-        // Затем вызываем серверный метод обновления руки (где производится спавн нового объекта)
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
         UpdateHandItemServerRpc(slotIndex);
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void UpdateHandItemServerRpc(int slotIndex)
     {
-        // Дополнительная проверка (при желании)
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
         if (slotIndex < 0 || slotIndex >= inventoryHolder.InventorySystem.InventorySize)
         {
             Debug.Log("Slot index out of range (UpdateHandItemServerRpc)");
@@ -112,28 +111,23 @@ public class HandHolder : NetworkBehaviour
         if (activeSlot != null && activeSlot.ItemData != null && activeSlot.ItemData.ItemPrefab != null)
         {
             GameObject item = Instantiate(activeSlot.ItemData.ItemPrefab, dropPoint.position, dropPoint.rotation);
+            Debug.Log("I Was spawned");
             item.transform.SetParent(dropPoint);
-
-            TurnOffItem(item);
             NetworkObject netObj = item.GetComponent<NetworkObject>();
             if (netObj != null)
             {
-                Spawn(netObj);
-                currentItemObject = item;
+                Spawn(item);
                 currentItemObject = netObj.gameObject;
                 currentItemObject.transform.SetParent(dropPoint);
                 currentItemObject.transform.localPosition = Vector3.zero;
                 currentItemObject.transform.localRotation = Quaternion.identity;
                 TurnOffItem(currentItemObject);
 
-                OnHandItemChanged(currentItemObject);
+                OnHandItemChanged?.Invoke(currentItemObject);
             }
 
         }
-
-        OnHandItemChanged(currentItemObject);
-
-
+        OnHandItemChanged?.Invoke(currentItemObject);
     }
 
 
@@ -141,27 +135,27 @@ public class HandHolder : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void TurnOffItem(GameObject item)
     {
-        // Отключаем физику и задаём полное замораживание
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.useGravity = false;
             rb.isKinematic = true;
-            rb.constraints = RigidbodyConstraints.FreezeAll; // Фиксируем все оси
+            rb.constraints = RigidbodyConstraints.FreezeAll; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ
         }
 
-        // Отключаем скрипт подбора
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<ItemPickUp>(out var pickup))
         {
             pickup.enabled = false;
         }
 
-        // Отключаем все коллайдеры
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         foreach (var col in item.GetComponents<Collider>())
         {
             col.enabled = false;
         }
 
-        // Фиксируем позицию и вращение объекта относительно dropPoint
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropPoint
         if (dropPoint != null)
         {
             //item.transform.SetParent(dropPoint);
@@ -175,29 +169,30 @@ public class HandHolder : NetworkBehaviour
     [ObserversRpc]
     private void TurnOffItemClient(GameObject item)
     {
-        // Отключаем физику и задаём полное замораживание
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.useGravity = false;
             rb.isKinematic = true;
-            rb.constraints = RigidbodyConstraints.FreezeAll; // Фиксируем все оси
+            rb.constraints = RigidbodyConstraints.FreezeAll; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ
         }
 
-        // Отключаем скрипт подбора
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<ItemPickUp>(out var pickup))
         {
             pickup.enabled = false;
         }
 
-        // Отключаем все коллайдеры
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         foreach (var col in item.GetComponents<Collider>())
         {
             col.enabled = false;
         }
 
-        // Фиксируем позицию и вращение объекта относительно dropPoint
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropPoint
         if (dropPoint != null)
         {
+            Debug.Log( "This is Item: "+ item);
             item.transform.SetParent(dropPoint);
             item.transform.localPosition = Vector3.zero;
             item.transform.localRotation = Quaternion.identity;
@@ -231,29 +226,23 @@ public class HandHolder : NetworkBehaviour
 
     }
 
-    private void DropItem()
+    private IEnumerator DropItem()
     {
-        if (activeSlot == null || activeSlot.ItemData == null) return;
-
+        Debug.Log("Р”Рћ");
+        yield return new WaitForSeconds(timeBefDrop);
+        Debug.Log("РџРѕСЃР»Рµ");
         GameObject droppedItem = Instantiate(
             activeSlot.ItemData.ItemPrefab,
             dropPoint.position,
             Quaternion.identity
         );
-        NetworkObject netObj = droppedItem.GetComponent<NetworkObject>();
-        if (netObj != null)
-        {
-            Spawn(netObj);
-        }
+        
+        Spawn(droppedItem);
+        
         TurnOnItemServerRpc(droppedItem);
-
-        ThrowableObjects objectthrow = droppedItem.GetComponent<ThrowableObjects>();
-        if (objectthrow)
-        {
-            objectthrow.Throw(Vector3.up);
-        }
-
-
+        
+        Debug.Log($"IsOwner: {IsOwner}, IsServer: {IsServer}, IsClient: {IsClient}");
+        ThrowHeldItemServerRpc(Vector2.up);
 
         activeSlot.RemoveFromStack(1);
 
@@ -263,23 +252,38 @@ public class HandHolder : NetworkBehaviour
         }
 
         UpdateHandItemServerRpc();
-        OnHandItemChanged(currentItemObject);
-
+        OnHandItemChanged?.Invoke(currentItemObject);
+        dropItemProcess = null;
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void ThrowHeldItemServerRpc(Vector3 direction)
+    {
+        if (currentItemObject.TryGetComponent<ThrowableObjects>(out var throwable))
+        {
+            throwable.Throw(direction);
+        }
     }
 
     [ServerRpc]
     private void RequestUseItemServerRpc()
     {
         UseItem();
-        OnHandItemChanged(currentItemObject);
+        OnHandItemChanged?.Invoke(currentItemObject);
 
     }
 
     [ServerRpc]
     private void RequestDropItemServerRpc()
     {
-        DropItem();
-        OnHandItemChanged(currentItemObject);
+        if(activeSlot == null || activeSlot.ItemData == null)
+            return;
+        if (dropItemProcess == null)
+        {
+            Debug.Log($"I Request");
+            dropItemProcess = StartCoroutine(DropItem());
+        }
+        OnHandItemChanged?.Invoke(currentItemObject);
 
     }
 
@@ -288,7 +292,7 @@ public class HandHolder : NetworkBehaviour
     {
         if (item == null) return;
 
-        // Включаем физику
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.useGravity = true;
@@ -296,22 +300,22 @@ public class HandHolder : NetworkBehaviour
             rb.constraints = RigidbodyConstraints.None;
         }
 
-        // Включаем скрипт подбора
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<ItemPickUp>(out var pickup))
         {
             pickup.enabled = true;
         }
 
-        // Включаем все коллайдеры
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         foreach (var col in item.GetComponents<Collider>())
         {
             col.enabled = true;
         }
 
-        // Отсоединяем от dropPoint
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ dropPoint
         item.transform.SetParent(null);
 
-        // Уведомляем клиентов
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         TurnOnItemObserversRpc(item);
     }
 
@@ -321,7 +325,7 @@ public class HandHolder : NetworkBehaviour
     {
         if (item == null) return;
 
-        // Включаем физику
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.useGravity = true;
@@ -329,19 +333,19 @@ public class HandHolder : NetworkBehaviour
             rb.constraints = RigidbodyConstraints.None;
         }
 
-        // Включаем скрипт подбора
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (item.TryGetComponent<ItemPickUp>(out var pickup))
         {
             pickup.enabled = true;
         }
 
-        // Включаем все коллайдеры
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         foreach (var col in item.GetComponents<Collider>())
         {
             col.enabled = true;
         }
 
-        // Отсоединяем от dropPoint
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ dropPoint
         item.transform.SetParent(null);
     }
 

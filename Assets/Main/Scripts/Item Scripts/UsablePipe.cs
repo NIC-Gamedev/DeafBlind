@@ -17,6 +17,7 @@ public class UsablePipe : MonoBehaviour , IUsable
     
     public void Use()
     {
+        Debug.Log("Used");
         if (attackProcess == null)
         {
             attackProcess = StartCoroutine(AttackProcess());

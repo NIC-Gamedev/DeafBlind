@@ -305,6 +305,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 3649741552129244603}
   _networkObjectCache: {fileID: 3649741552129244603}
   isAnimReloaded: 1
+  animationClips: []
 --- !u!95 &2714114309824000358
 Animator:
   serializedVersion: 7
@@ -636,6 +637,7 @@ MonoBehaviour:
     itemData: {fileID: 0}
     stackSize: -1
   currentItemObject: {fileID: 0}
+  timeBefDrop: 1
 --- !u!114 &-2015992718997047097
 MonoBehaviour:
   m_ObjectHideFlags: 0
