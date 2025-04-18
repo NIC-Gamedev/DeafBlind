@@ -1,3 +1,4 @@
+using GameKit.Dependencies.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class BakeMicroscript : MonoBehaviour
     public bool combineOnStart = true;
     public bool destroyCombinedChildren = true;
     public bool generateColliders = true; // Нужно ли создавать коллайдеры?
+    public bool isGround = false;
 
     void Start()
     {
@@ -62,6 +64,8 @@ public class BakeMicroscript : MonoBehaviour
             combinedPart.transform.localPosition = Vector3.zero;
             combinedPart.transform.localRotation = Quaternion.identity;
             combinedPart.transform.localScale = Vector3.one;
+            if (isGround)
+                combinedPart.layer = LayerMask.NameToLayer("Ground");
 
             // Добавляем MeshFilter + MeshRenderer
             MeshFilter mf = combinedPart.AddComponent<MeshFilter>();
