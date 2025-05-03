@@ -7,37 +7,38 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using FishNet.Transporting;
+
 public class ChatBroadcast : MonoBehaviour
 {
     public Transform chatHolder;
     public GameObject msgElement;
-    public ScrollRect scrollRect; // Scroll View для прокрутки
+    public ScrollRect scrollRect;
     public TMP_InputField playerMsg;
-    private float messageHeight = 25f; // Высота одного сообщения
+    private float messageHeight = 25f;
 
-    // Переменные что мы переводим в прозрачный режим
-    public Image  scrollbar , scrollview, chatBackground;
+    public Image scrollbar, scrollview, chatBackground;
     public Scrollbar scroll;
 
     private Coroutine fadeCoroutine;
     [SerializeField]
-    private float fadeDuration = 3f; // Время исчезновения
-    private float visibleDuration = 5f; // Время перед исчезновением
+    private float fadeDuration = 3f;
+    private float visibleDuration = 5f;
 
     bool Ischatopen;
+
+    private const int MaxMessages = 30;
+    private readonly Queue<GameObject> _messages = new Queue<GameObject>();
 
     private void OnEnable()
     {
         InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageReceived);
         InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageReceived);
-
     }
 
     private void OnDisable()
     {
         InstanceFinder.ClientManager.UnregisterBroadcast<Message>(OnMessageReceived);
         InstanceFinder.ServerManager.UnregisterBroadcast<Message>(OnClientMessageReceived);
-
     }
 
     private void Start()
@@ -50,18 +51,16 @@ public class ChatBroadcast : MonoBehaviour
     {
         ApplyAlpha(scrollbar, alpha);
         ApplyAlpha(scroll.GetComponent<Image>(), alpha);
-        Debug.Log(alpha);
-        if(alpha == 255)
+
+        if (alpha == 255)
         {
             ApplyAlpha(scrollview, 100f);
-
         }
         else
         {
             ApplyAlpha(scrollview, 0f);
-
-
         }
+
         if (scrollbar != null)
         {
             ColorBlock cb = scroll.colors;
@@ -72,7 +71,6 @@ public class ChatBroadcast : MonoBehaviour
             cb.pressedColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, alpha);
             scroll.colors = cb;
         }
-
     }
 
     private void ApplyAlpha(Image img, float alpha)
@@ -82,7 +80,7 @@ public class ChatBroadcast : MonoBehaviour
             img.canvasRenderer.SetAlpha(alpha);
         }
     }
-    
+
     private void ScrollToBottom()
     {
         StartCoroutine(ScrollToBottomCoroutine());
@@ -90,30 +88,31 @@ public class ChatBroadcast : MonoBehaviour
 
     private IEnumerator ScrollToBottomCoroutine()
     {
-        yield return null; // Ждем один кадр, чтобы UI успел обновиться
-        scrollRect.verticalNormalizedPosition = 0f; // Прокрутка вниз
+        yield return null;
+        scrollRect.verticalNormalizedPosition = 0f;
     }
+
     private void ShowChatBackground()
     {
         if (fadeCoroutine != null)
             StopCoroutine(fadeCoroutine);
 
-        ApplyAlpha(chatBackground, 1f); // Делаем фон видимым
+        ApplyAlpha(chatBackground, 1f);
 
-        if (!Ischatopen) // Запускаем скрытие только если чат закрыт
+        if (!Ischatopen)
             fadeCoroutine = StartCoroutine(HideChatBackgroundAfterDelay());
     }
 
     private IEnumerator HideChatBackgroundAfterDelay()
     {
-        yield return new WaitForSeconds(visibleDuration); // Ждем 5 секунд
+        yield return new WaitForSeconds(visibleDuration);
 
         float elapsedTime = 0f;
         float startAlpha = chatBackground.color.a;
 
         while (elapsedTime < fadeDuration)
         {
-            if (Ischatopen) // Если чат открыт — выходим из корутины
+            if (Ischatopen)
             {
                 ApplyAlpha(chatBackground, 1f);
                 yield break;
@@ -125,39 +124,39 @@ public class ChatBroadcast : MonoBehaviour
             yield return null;
         }
 
-        ApplyAlpha(chatBackground, 0f); // Полностью скрываем фон
+        ApplyAlpha(chatBackground, 0f);
     }
-
-
     #endregion
 
     #region Логика обработки сообщений
     public void SendMessage()
     {
-        if(playerMsg.gameObject.activeSelf == false)
+        if (playerMsg.gameObject.activeSelf == false)
         {
             SetAlpha(255f);
             playerMsg.gameObject.SetActive(true);
             playerMsg.ActivateInputField();
-            ShowChatBackground(); // Делаем фон непрозрачным
+            ShowChatBackground();
             Ischatopen = true;
             return;
         }
-   
+
         Message msg = new Message()
         {
             username = PlayerPrefs.GetString("Username"),
             message = playerMsg.text,
             senderConnectionId = InstanceFinder.ClientManager.Connection.ClientId
-
         };
+
         playerMsg.gameObject.SetActive(false);
         SetAlpha(0f);
+
         if (playerMsg.text == "")
         {
             Ischatopen = false;
             return;
         }
+
         if (InstanceFinder.IsServer)
             InstanceFinder.ServerManager.Broadcast(msg);
         if (InstanceFinder.IsClient)
@@ -165,24 +164,41 @@ public class ChatBroadcast : MonoBehaviour
 
         Debug.Log("Message was sent");
         Ischatopen = false;
-
-
-        playerMsg.text = ""; // Очистка после отправки
+        playerMsg.text = "";
     }
 
     private void OnMessageReceived(Message msg, Channel channel)
     {
+        // Удаляем самое старое сообщение, если достигли максимума
+        if (_messages.Count >= MaxMessages)
+        {
+            GameObject oldestMessage = _messages.Dequeue();
+            if (oldestMessage != null)
+            {
+                // Получаем высоту удаляемого сообщения
+                float heightToRemove = oldestMessage.GetComponent<RectTransform>().rect.height;
+                // Удаляем сообщение
+                Destroy(oldestMessage);
+                // Уменьшаем размер chatHolder
+                chatHolder.GetComponent<RectTransform>().sizeDelta -= new Vector2(0, heightToRemove);
+            }
+        }
 
-
+        // Создаем новое сообщение
         GameObject finalMessage = Instantiate(msgElement, chatHolder);
-        chatHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, messageHeight);
+        _messages.Enqueue(finalMessage);
 
-        finalMessage.GetComponent<TMP_Text>().text = msg.username + ": " + msg.message;
+        TMP_Text textComponent = finalMessage.GetComponent<TMP_Text>();
+        textComponent.text = msg.username + ": " + msg.message;
 
-        Canvas.ForceUpdateCanvases(); // Обновляем UI
+        // Перестроим layout и обновим высоту
+        LayoutRebuilder.ForceRebuildLayoutImmediate(finalMessage.GetComponent<RectTransform>());
+        float newHeight = finalMessage.GetComponent<RectTransform>().rect.height;
+        chatHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, newHeight);
+
+        Canvas.ForceUpdateCanvases();
         ScrollToBottom();
-        ShowChatBackground(); // Делаем фон непрозрачным
-
+        ShowChatBackground();
     }
 
     private void OnClientMessageReceived(NetworkConnection connection, Message msg, Channel channel)
@@ -196,10 +212,7 @@ public class ChatBroadcast : MonoBehaviour
     {
         public string username;
         public string message;
-        public int senderConnectionId; // Добавляем идентификатор соединения отправителя
-
+        public int senderConnectionId;
     }
-
     #endregion
-
 }
