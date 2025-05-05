@@ -21,22 +21,18 @@ public class UsablePipe : MonoBehaviour , IUsable
         if (attackProcess == null)
         {
             attackProcess = StartCoroutine(AttackProcess());
-            StartCoroutine(AttackEndProcess());
         }
-    }
-
-    public IEnumerator AttackEndProcess()
-    {
-        yield return new WaitForSeconds(1.2f);
-        Debug.Log("AttackEnd");
-        StopCoroutine(attackProcess);
-        attackProcess = null;
     }
 
     private IEnumerator AttackProcess()
     {
-        while (attackProcess != null)
+        float attackDuration = 1.2f;
+        float timer = 0f;
+    
+        while (timer < attackDuration)
         {
+            timer += Time.fixedDeltaTime;
+        
             if (_playerInteractiveZone != null)
             {
                 var objectsInZone = _playerInteractiveZone.GetObjectsInZone();
@@ -50,7 +46,10 @@ public class UsablePipe : MonoBehaviour , IUsable
                     }
                 }
             }
-            yield return new FixedUpdate();
+            yield return new WaitForFixedUpdate();
         }
+    
+        Debug.Log("AttackEnd");
+        attackProcess = null;
     }
 }

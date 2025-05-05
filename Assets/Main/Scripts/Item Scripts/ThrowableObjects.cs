@@ -39,7 +39,7 @@ public class ThrowableObjects : NetworkBehaviour
         EnablePhysicsInternal();
     }
     
-
+    [ObserversRpc]
     public void Throw(Vector3 direction)
     {
         rb.linearVelocity = Vector3.zero;

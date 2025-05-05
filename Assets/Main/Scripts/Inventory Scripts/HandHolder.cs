@@ -12,7 +12,6 @@ public class HandHolder : NetworkBehaviour
     public GameObject currentItemObject;
     public Coroutine dropItemProcess;
     public float timeBefDrop;
-    public float dropForce = 10;
     public static event System.Action<GameObject> OnHandItemChanged;
 
     private void Update()
@@ -209,13 +208,13 @@ public class HandHolder : NetworkBehaviour
         {
             usableComponent.Use();
 
-            if (activeSlot.ItemData.isOneUse)
+            /*if (activeSlot.ItemData.isOneUse)
                 activeSlot.RemoveFromStack(1);
 
             if (activeSlot.StackSize <= 0)
                 activeSlot.ClearSlot();
 
-            UpdateHandItemServerRpc();
+            UpdateHandItemServerRpc();*/
         }
         else
         {
@@ -227,9 +226,7 @@ public class HandHolder : NetworkBehaviour
 
     private IEnumerator DropItem()
     {
-        Debug.Log("ДО");
         yield return new WaitForSeconds(timeBefDrop);
-        Debug.Log("После");
         GameObject droppedItem = Instantiate(
             activeSlot.ItemData.ItemPrefab,
             dropPoint.position,
@@ -240,7 +237,6 @@ public class HandHolder : NetworkBehaviour
         
         TurnOnItemServerRpc(droppedItem);
         
-        Debug.Log($"IsOwner: {IsOwner}, IsServer: {IsServer}, IsClient: {IsClient}");
         ThrowHeldItemServerRpc(transform.forward,droppedItem);
 
         activeSlot.RemoveFromStack(1);
@@ -268,7 +264,6 @@ public class HandHolder : NetworkBehaviour
     private void RequestUseItemServerRpc()
     {
         UseItem();
-
     }
 
     [ServerRpc]
