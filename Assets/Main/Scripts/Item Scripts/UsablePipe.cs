@@ -28,6 +28,7 @@ public class UsablePipe : MonoBehaviour , IUsable
     public IEnumerator AttackEndProcess()
     {
         yield return new WaitForSeconds(1.2f);
+        Debug.Log("AttackEnd");
         StopCoroutine(attackProcess);
         attackProcess = null;
     }

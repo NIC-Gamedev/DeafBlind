@@ -36,7 +36,6 @@ public class HandHolder : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1)) // Use item
         {
             RequestUseItemServerRpc();
-            OnHandItemChanged?.Invoke(currentItemObject);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectItem(0);
@@ -242,7 +241,7 @@ public class HandHolder : NetworkBehaviour
         TurnOnItemServerRpc(droppedItem);
         
         Debug.Log($"IsOwner: {IsOwner}, IsServer: {IsServer}, IsClient: {IsClient}");
-        ThrowHeldItemServerRpc(Vector2.up);
+        ThrowHeldItemServerRpc(transform.forward,droppedItem);
 
         activeSlot.RemoveFromStack(1);
 
@@ -257,9 +256,9 @@ public class HandHolder : NetworkBehaviour
     }
     
     [ServerRpc(RequireOwnership = false)]
-    private void ThrowHeldItemServerRpc(Vector3 direction)
+    private void ThrowHeldItemServerRpc(Vector3 direction, GameObject droppedItem)
     {
-        if (currentItemObject.TryGetComponent<ThrowableObjects>(out var throwable))
+        if (droppedItem.TryGetComponent<ThrowableObjects>(out var throwable))
         {
             throwable.Throw(direction);
         }
@@ -269,7 +268,6 @@ public class HandHolder : NetworkBehaviour
     private void RequestUseItemServerRpc()
     {
         UseItem();
-        OnHandItemChanged?.Invoke(currentItemObject);
 
     }
 

@@ -570,6 +570,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8424017274795240747, guid: f4370aaee4b51574fb422e0c113cbaa8,
+        type: 3}
+      propertyPath: throwForce
+      value: 205.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18006,7 +18011,7 @@ PrefabInstance:
     - target: {fileID: -3274900571695502103, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}
       propertyPath: throwForce
-      value: 25
+      value: 205.8
       objectReference: {fileID: 0}
     - target: {fileID: 41598712003331025, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}
@@ -19204,7 +19209,7 @@ PrefabInstance:
     - target: {fileID: -3274900571695502103, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}
       propertyPath: throwForce
-      value: 25
+      value: 205.8
       objectReference: {fileID: 0}
     - target: {fileID: 41598712003331025, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}
@@ -19642,7 +19647,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.008996964, y: -0.00000011920448, z: 0.0000000010725146,
     w: 0.9999595}
-  m_LocalPosition: {x: -32.82998, y: 0.92515516, z: 17.148956}
+  m_LocalPosition: {x: -32.83, y: 0.97339386, z: 17.147999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20463,7 +20468,7 @@ PrefabInstance:
     - target: {fileID: -3274900571695502103, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}
       propertyPath: throwForce
-      value: 25
+      value: 205.8
       objectReference: {fileID: 0}
     - target: {fileID: 41598712003331025, guid: 01c6bcbf975db6e4bb130dfd13baf84f,
         type: 3}
@@ -20700,6 +20705,11 @@ PrefabInstance:
         type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3221055438
+      objectReference: {fileID: 0}
+    - target: {fileID: 238840141760670530, guid: 79476d7f0edc93747b9a4e34e11f5748,
+        type: 3}
+      propertyPath: throwForce
+      value: 205.8
       objectReference: {fileID: 0}
     - target: {fileID: 7298219161156154659, guid: 79476d7f0edc93747b9a4e34e11f5748,
         type: 3}

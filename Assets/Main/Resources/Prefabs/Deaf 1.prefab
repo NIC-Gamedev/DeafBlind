@@ -637,7 +637,8 @@ MonoBehaviour:
     itemData: {fileID: 0}
     stackSize: -1
   currentItemObject: {fileID: 0}
-  timeBefDrop: 1
+  timeBefDrop: 0.8
+  dropForce: 10
 --- !u!114 &-2015992718997047097
 MonoBehaviour:
   m_ObjectHideFlags: 0
