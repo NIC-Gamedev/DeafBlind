@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -88,12 +89,12 @@ public class PlayerAnimation : BaseAnimator
         animationHash.Add("Drop", Animator.StringToHash("mixamo_com"));
         animationHash.Add("Attack", Animator.StringToHash("2H@Attack02"));
     }
-
+    
     protected override int GetState()
     {
         bool isGround = playerMovement.IsOnGround();
-        
-        if (HandHolder.currentItemObject)
+        Debug.Log(HandHolder.currentItemObject);
+        if (HandHolder.currentItemObject != null)
         {
             if (HandHolder.currentItemObject.TryGetComponent(out UsablePipe usablePipe))
             {

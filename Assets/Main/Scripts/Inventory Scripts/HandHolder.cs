@@ -95,6 +95,7 @@ public class HandHolder : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void UpdateHandItemServerRpc()
     {
+        Debug.Log("Update Hand");
         if (currentItemObject != null)
         {
             NetworkObject oldNetObj = currentItemObject.GetComponent<NetworkObject>();
@@ -120,12 +121,18 @@ public class HandHolder : NetworkBehaviour
                 currentItemObject.transform.localPosition = Vector3.zero;
                 currentItemObject.transform.localRotation = Quaternion.identity;
                 TurnOffItem(currentItemObject);
-
+                SyncHandItemObserversRpc(netObj);
                 OnHandItemChanged?.Invoke(currentItemObject);
             }
 
         }
         OnHandItemChanged?.Invoke(currentItemObject);
+    }
+    
+    [ObserversRpc]
+    public void SyncHandItemObserversRpc(NetworkObject networkObject)
+    {
+        currentItemObject = networkObject.gameObject;
     }
 
 
@@ -199,6 +206,7 @@ public class HandHolder : NetworkBehaviour
         OnHandItemChanged?.Invoke(currentItemObject);
     }
     #endregion
+    [ServerRpc]
     private void UseItem()
     {
         if (activeSlot == null || activeSlot.ItemData == null || currentItemObject == null) return;
@@ -259,14 +267,12 @@ public class HandHolder : NetworkBehaviour
             throwable.Throw(direction);
         }
     }
-
-    [ServerRpc]
+    
     private void RequestUseItemServerRpc()
     {
         UseItem();
     }
-
-    [ServerRpc]
+    
     private void RequestDropItemServerRpc()
     {
         if(activeSlot == null || activeSlot.ItemData == null)

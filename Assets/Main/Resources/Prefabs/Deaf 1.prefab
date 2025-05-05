@@ -638,7 +638,6 @@ MonoBehaviour:
     stackSize: -1
   currentItemObject: {fileID: 0}
   timeBefDrop: 0.8
-  dropForce: 10
 --- !u!114 &-2015992718997047097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3599,6 +3598,11 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8923035379105695230, guid: fe31d0542957b0f45a8889c0b9be8755,
+        type: 3}
+      propertyPath: _objectHealth
+      value: 
+      objectReference: {fileID: 2879799913157870573}
     - target: {fileID: 8924156957865181748, guid: fe31d0542957b0f45a8889c0b9be8755,
         type: 3}
       propertyPath: <IsNested>k__BackingField
@@ -3624,7 +3628,8 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u0446\u04461212312\u04323\u0432\u04461\u044B\u044B\u044B\u044B\u044B"
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1393474169969835977, guid: fe31d0542957b0f45a8889c0b9be8755, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIHpIcons : MonoBehaviour
 {
-    private ObjectHealth _objectHealth;
+    public ObjectHealth _objectHealth;
     private RectTransform _rectTransform;
 
     [SerializeField]
@@ -13,7 +13,6 @@ public class UIHpIcons : MonoBehaviour
     
     void Start()
     {
-        _objectHealth = GetComponentInParent<ObjectHealth>();
         _objectHealth.OnHealthValueChange += OnHealthChanged;
     }
 

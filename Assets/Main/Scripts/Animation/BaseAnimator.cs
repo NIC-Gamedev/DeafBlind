@@ -35,18 +35,13 @@ public abstract class BaseAnimator : NetworkBehaviour
         var state = GetState();
 
         if (state == CurrentState) return;
-        if (base.IsServerInitialized)
-        {
-            SetState(state);
-        }
-        if (IsOwner)
-        {
+        //SetState(state);
+        if(IsOwner)
             SendAnimationToServer(state);
-        }
     }
 
     protected virtual void InitAnimation(){}
-
+    
     protected virtual int GetState()
     {
         return 0;
@@ -68,6 +63,7 @@ public abstract class BaseAnimator : NetworkBehaviour
     private void SendAnimationToClients(int state)
     {
         if (anim == null) return; 
+        if (state == CurrentState) return;
         CurrentState = state;
         anim.CrossFade(state, 0.1f, 0);
     }

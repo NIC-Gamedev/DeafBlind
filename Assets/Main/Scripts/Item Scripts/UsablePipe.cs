@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class UsablePipe : MonoBehaviour , IUsable
+public class UsablePipe : NetworkBehaviour , IUsable
 {
     private Player_TriggerZone _playerInteractiveZone;
     public float dmg;
@@ -14,7 +15,7 @@ public class UsablePipe : MonoBehaviour , IUsable
     {
         _playerInteractiveZone = GetComponentInParent<Player_TriggerZone>();
     }
-    
+    [ObserversRpc]
     public void Use()
     {
         Debug.Log("Used");
@@ -32,7 +33,7 @@ public class UsablePipe : MonoBehaviour , IUsable
         while (timer < attackDuration)
         {
             timer += Time.fixedDeltaTime;
-        
+            Debug.Log(attackProcess);
             if (_playerInteractiveZone != null)
             {
                 var objectsInZone = _playerInteractiveZone.GetObjectsInZone();
