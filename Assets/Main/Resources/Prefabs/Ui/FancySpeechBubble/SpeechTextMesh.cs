@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Reflection.Emit;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 [RequireComponent(typeof(ContentSizeFitter))]
@@ -19,14 +20,27 @@ public class SpeechTextMesh : MonoBehaviour
 
     private string _processedText;
     public string processedText => _processedText;
-
+    public float delay = 0.35f; // задержка перед запуском Set
 
     private void OnEnable()
     {
+        TextMeshProUGUI label = GetComponent<TextMeshProUGUI>();
+        label.text = "";
+
         if (textToLoad != null)
         {
-            Set(textToLoad);
+            StartCoroutine(DelayedSet());
         }
+    }
+    private void OnDisable()
+    {
+        TextMeshProUGUI label = GetComponent<TextMeshProUGUI>();
+        label.text = "";
+    }
+    private IEnumerator DelayedSet()
+    {
+        yield return new WaitForSeconds(delay);
+        Set(textToLoad);
     }
 
     public void Set(string text)
@@ -34,7 +48,7 @@ public class SpeechTextMesh : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(SetRoutine(text));
     }
-
+   
     public IEnumerator SetRoutine(string text)
     {
         _rawText = text;
