@@ -75,6 +75,5 @@ public class PanelUnfold : MonoBehaviour
             yield return null;
         }
         rect.sizeDelta = new Vector2(0, rect.sizeDelta.y);
-        gameObject.SetActive(false); // отключаем после завершения
     }
 }

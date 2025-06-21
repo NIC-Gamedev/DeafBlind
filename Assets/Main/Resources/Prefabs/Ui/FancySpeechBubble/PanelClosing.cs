@@ -23,6 +23,7 @@ public class PanelClosing : MonoBehaviour
     public IEnumerator DelayPanelClose()
     {
         yield return new WaitForSeconds(delay);
+        gameObject.SetActive(false); // отключаем после завершения
 
     }
 }
