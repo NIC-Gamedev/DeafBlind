@@ -16,6 +16,7 @@ public class ButtonsCameraInstaller : MonoBehaviour
     public Button reset1;
     public Button reset2;
     public Button reset3;
+    public Button reset4;
 
     [Header("Точки камеры")]
     public Transform navPos1;
@@ -40,7 +41,7 @@ public class ButtonsCameraInstaller : MonoBehaviour
                 (nav3, navPos3),
                 (nav4, navPos4)
             },
-            new[] { reset1, reset2, reset3 },
+            new[] { reset1, reset2, reset3, reset4 },
             defaultPos
         );
     }
