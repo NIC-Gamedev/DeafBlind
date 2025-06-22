@@ -885,6 +885,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af83f577ba6de4649becedd71819caf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   maxHealth: 100
   currentHealth: 100
 --- !u!114 &9040391360943749155
@@ -899,6 +902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d372114c1a61b44fa5a24a6c052b3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectHealth: {fileID: 0}
   _iconList:
   - {fileID: 8245417672455434391}
   - {fileID: 2288224258851998792}

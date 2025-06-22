@@ -27,14 +27,14 @@ public class PlayerScanerThrow : WaveThrow
         } 
     }
 
-    private PlayerMovement _playerMovement;
-    private PlayerMovement playerMovement
+    private PlayerNetworkMovement _playerMovement;
+    private PlayerNetworkMovement playerMovement
     {
         get
         {
             if (_playerMovement == null)
             {
-                _playerMovement = GetComponent<PlayerMovement>();
+                _playerMovement = GetComponent<PlayerNetworkMovement>();
             }
             return _playerMovement;
         }
@@ -53,10 +53,10 @@ public class PlayerScanerThrow : WaveThrow
         {
             curentStepTime = stepTime;
             Debug.Log("asdasd");
-            /*if(!playerMovement.isSprinting)
-                audioManager.PlayByPos(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, pos: collision.contacts[0].point);
+            if(!playerMovement.isSprinting)
+                PhysicalAudioManager.instance.InstanceByPos(playerMoveSound, volume: 0.5f, minDistance: 0.1f, maxDistance: 5, pos: collision.contacts[0].point);
             else
-                audioManager.PlayByPos(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, pos: collision.contacts[0].point);*/
+                PhysicalAudioManager.instance.InstanceByPos(playerMoveSound, volume: 0.8f, minDistance: 0.1f, maxDistance: 8, pos: collision.contacts[0].point);
         }
         else
         {

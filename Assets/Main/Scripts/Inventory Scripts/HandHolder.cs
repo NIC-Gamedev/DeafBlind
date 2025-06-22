@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using FishNet.Object;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HandHolder : NetworkBehaviour
 {
@@ -12,8 +14,76 @@ public class HandHolder : NetworkBehaviour
     public GameObject currentItemObject;
     public Coroutine dropItemProcess;
     public float timeBefDrop;
-    public static event System.Action<GameObject> OnHandItemChanged;
+    public static event Action<GameObject> OnHandItemChanged;
 
+    public Action<InputAction.CallbackContext> pickHandle;
+    public Action<InputAction.CallbackContext> dropHandle;
+    public Action<InputAction.CallbackContext> useHandle;
+    
+    public bool isDropping;
+
+    public float pickUpRadius = 5;
+    public LayerMask itemLayer;
+
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (!IsOwner) return;
+        pickHandle = c => RequestPickItem();
+        dropHandle = c =>
+        {
+            RequestDropItemServerRpc();
+            OnHandItemChanged?.Invoke(currentItemObject);
+        };
+
+        
+        useHandle = c => RequestUseItemServerRpc();
+
+        InputManager.inputActions.Player.Enable();
+        InputManager.inputActions.Player.Interact.performed += pickHandle;
+        InputManager.inputActions.Player.DropItem.performed += dropHandle;
+        InputManager.inputActions.Player.UseItem.performed += useHandle;
+    }
+
+    private void OnDestroy()
+    {
+        if (!IsOwner) return;
+        InputManager.inputActions.Player.Interact.performed -= pickHandle;
+        InputManager.inputActions.Player.DropItem.performed -= dropHandle;
+        InputManager.inputActions.Player.UseItem.performed -= useHandle;
+    }
+    
+    private void RequestPickItem()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, pickUpRadius, itemLayer);
+    
+        if (colliders.Length == 0)
+            return;
+
+        PickAbleItem nearestItem = null;
+        float minDistance = float.MaxValue;
+
+        foreach (var col in colliders)
+        {
+            PickAbleItem item = col.GetComponent<PickAbleItem>();
+            if (item == null)
+                continue;
+
+            float distance = Vector3.Distance(transform.position, col.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestItem = item;
+            }
+        }
+
+        if (nearestItem != null)
+        {
+            nearestItem.PickUp(inventoryHolder);
+            OnHandItemChanged?.Invoke(nearestItem.gameObject);
+        }
+    }
     private void Update()
     {
         if (!IsOwner) return;
@@ -26,17 +96,6 @@ public class HandHolder : NetworkBehaviour
     }
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) // Drop item
-        {
-            RequestDropItemServerRpc();
-            OnHandItemChanged?.Invoke(currentItemObject);
-
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse1)) // Use item
-        {
-            RequestUseItemServerRpc();
-
-        }
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectItem(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SelectItem(1);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SelectItem(2);
@@ -68,11 +127,9 @@ public class HandHolder : NetworkBehaviour
         {
             Debug.Log("Slot item data is not null (server check)");
         }
-
-        // ��������� �������� ���� �� ������� �� ������ ��������� ������
+        
         activeSlot = slot;
-
-        // ����� �������� ��������� ����� ���������� ���� (��� ������������ ����� ������ �������)
+        SyncSlotObserverRpc(slotIndex);
         UpdateHandItemServerRpc(slotIndex);
     }
 
@@ -86,11 +143,13 @@ public class HandHolder : NetworkBehaviour
             return;
         }
 
-        InventorySlot slot = inventoryHolder.InventorySystem.InventorySlots[slotIndex];
-
         UpdateHandItemServerRpc();
     }
-    
+    [ObserversRpc]
+    private void SetIsDroppingObserversRpc(bool state)
+    {
+        isDropping = state;
+    }
 
     [ServerRpc(RequireOwnership = false)]
     private void UpdateHandItemServerRpc()
@@ -126,13 +185,26 @@ public class HandHolder : NetworkBehaviour
             }
 
         }
+        
         OnHandItemChanged?.Invoke(currentItemObject);
     }
     
     [ObserversRpc]
-    public void SyncHandItemObserversRpc(NetworkObject networkObject)
+    public void SyncSlotObserverRpc(int slotIndex)
     {
-        currentItemObject = networkObject.gameObject;
+        InventorySlot slot = inventoryHolder.InventorySystem.InventorySlots[slotIndex];
+        activeSlot = slot;
+    }
+    
+    [ObserversRpc]
+    private void SyncHandItemObserversRpc(NetworkObject itemNetObj)
+    {
+        currentItemObject = itemNetObj.gameObject;
+        currentItemObject.transform.SetParent(dropPoint);
+        currentItemObject.transform.localPosition = Vector3.zero;
+        currentItemObject.transform.localRotation = Quaternion.identity;
+        TurnOffItem(currentItemObject);
+        OnHandItemChanged?.Invoke(currentItemObject);
     }
 
 
@@ -149,7 +221,7 @@ public class HandHolder : NetworkBehaviour
         }
 
         // ��������� ������ �������
-        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        if (item.TryGetComponent<PickAbleItem>(out var pickup))
         {
             pickup.enabled = false;
         }
@@ -183,7 +255,7 @@ public class HandHolder : NetworkBehaviour
         }
 
         // ��������� ������ �������
-        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        if (item.TryGetComponent<PickAbleItem>(out var pickup))
         {
             pickup.enabled = false;
         }
@@ -206,7 +278,6 @@ public class HandHolder : NetworkBehaviour
         OnHandItemChanged?.Invoke(currentItemObject);
     }
     #endregion
-    [ServerRpc]
     private void UseItem()
     {
         if (activeSlot == null || activeSlot.ItemData == null || currentItemObject == null) return;
@@ -214,7 +285,7 @@ public class HandHolder : NetworkBehaviour
         IUsable usableComponent = currentItemObject.GetComponent<IUsable>();
         if (usableComponent != null)
         {
-            usableComponent.Use();
+            usableComponent.Use(gameObject);
 
             /*if (activeSlot.ItemData.isOneUse)
                 activeSlot.RemoveFromStack(1);
@@ -232,32 +303,33 @@ public class HandHolder : NetworkBehaviour
 
     }
 
-    private IEnumerator DropItem()
+    private IEnumerator ServerDropItem()
     {
         yield return new WaitForSeconds(timeBefDrop);
+
         GameObject droppedItem = Instantiate(
             activeSlot.ItemData.ItemPrefab,
             dropPoint.position,
             Quaternion.identity
         );
-        
+
         Spawn(droppedItem);
-        
+
         TurnOnItemServerRpc(droppedItem);
-        
-        ThrowHeldItemServerRpc(transform.forward,droppedItem);
+        ThrowHeldItemServerRpc(transform.forward, droppedItem);
 
         activeSlot.RemoveFromStack(1);
 
         if (activeSlot.StackSize <= 0)
-        {
             activeSlot.ClearSlot();
-        }
 
         UpdateHandItemServerRpc();
         OnHandItemChanged?.Invoke(currentItemObject);
+
         dropItemProcess = null;
+        SetIsDroppingObserversRpc(false);
     }
+
     
     [ServerRpc(RequireOwnership = false)]
     private void ThrowHeldItemServerRpc(Vector3 direction, GameObject droppedItem)
@@ -267,23 +339,23 @@ public class HandHolder : NetworkBehaviour
             throwable.Throw(direction);
         }
     }
-    
+    [ServerRpc(RequireOwnership = false)]
     private void RequestUseItemServerRpc()
     {
         UseItem();
     }
     
+    [ServerRpc(RequireOwnership = false)]
     private void RequestDropItemServerRpc()
     {
-        if(activeSlot == null || activeSlot.ItemData == null)
+        if (activeSlot == null || activeSlot.ItemData == null)
             return;
-        if (dropItemProcess == null)
-        {
-            Debug.Log($"I Request");
-            dropItemProcess = StartCoroutine(DropItem());
-        }
-        OnHandItemChanged?.Invoke(currentItemObject);
 
+        if (dropItemProcess != null)
+            return;
+
+        dropItemProcess = StartCoroutine(ServerDropItem());
+        SetIsDroppingObserversRpc(true);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -300,7 +372,7 @@ public class HandHolder : NetworkBehaviour
         }
 
         // �������� ������ �������
-        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        if (item.TryGetComponent<PickAbleItem>(out var pickup))
         {
             pickup.enabled = true;
         }
@@ -333,7 +405,7 @@ public class HandHolder : NetworkBehaviour
         }
 
         // �������� ������ �������
-        if (item.TryGetComponent<ItemPickUp>(out var pickup))
+        if (item.TryGetComponent<PickAbleItem>(out var pickup))
         {
             pickup.enabled = true;
         }

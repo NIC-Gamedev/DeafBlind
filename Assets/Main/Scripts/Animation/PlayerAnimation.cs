@@ -93,7 +93,6 @@ public class PlayerAnimation : BaseAnimator
     protected override int GetState()
     {
         bool isGround = playerMovement.IsOnGround();
-        Debug.Log(HandHolder.currentItemObject);
         if (HandHolder.currentItemObject != null)
         {
             if (HandHolder.currentItemObject.TryGetComponent(out UsablePipe usablePipe))
@@ -105,7 +104,7 @@ public class PlayerAnimation : BaseAnimator
             }
         }
 
-        if (HandHolder.dropItemProcess != null)
+        if (HandHolder.isDropping)
         {
             return animationHash["Drop"];
         }

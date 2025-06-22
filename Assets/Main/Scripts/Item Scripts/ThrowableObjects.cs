@@ -67,7 +67,7 @@ public class ThrowableObjects : NetworkBehaviour
             col.enabled = true;
         }
 
-        if (TryGetComponent<ItemPickUp>(out var pickup))
+        if (TryGetComponent<PickAbleItem>(out var pickup))
         {
             pickup.enabled = true;
         }

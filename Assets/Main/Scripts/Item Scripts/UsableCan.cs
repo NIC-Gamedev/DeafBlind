@@ -5,14 +5,14 @@ using FishNet;
 using FishNet.Object;
 public class UsableCan : NetworkBehaviour, IUsable
 {
-    private ItemPickUp _data;
+    private PickAbleItem _data;
     private GameObject _gameObject;
     private void Start()
     {
-        _data = GetComponent<ItemPickUp>();
+        _data = GetComponent<PickAbleItem>();
         _gameObject = _data.ItemData.ItemPrefab;
     }
-    public void Use()
+    public void Use(GameObject owner)
     {
         if (_data == null || _gameObject == null)
         {

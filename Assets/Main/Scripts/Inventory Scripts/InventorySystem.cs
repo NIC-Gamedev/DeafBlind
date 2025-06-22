@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
+using FishNet.Managing;
+using FishNet.Object;
 
 [System.Serializable]
 public class InventorySystem
@@ -23,7 +25,7 @@ public class InventorySystem
             inventorySlots.Add(new InventorySlot());
         }
     }
-
+    
     public bool AddToInventory(InventoryItemData itemToAdd, int amountToAdd)
     {
         if (ContainsItem(itemToAdd, out List<InventorySlot> invSlot)) // Check whether item exists in inventory.
@@ -49,7 +51,7 @@ public class InventorySystem
 
         return false;
     }
-
+    
     public bool ContainsItem(InventoryItemData itemToAdd, out List<InventorySlot> invSlot)
     {
         invSlot = InventorySlots.Where(i => i.ItemData == itemToAdd).ToList();

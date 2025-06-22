@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using FishNet.Object;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class UsablePipe : NetworkBehaviour , IUsable
 {
-    private Player_TriggerZone _playerInteractiveZone;
     public float dmg;
 
     public Coroutine attackProcess;
-    // Start is called before the first frame update
-    void Start()
-    {
-        _playerInteractiveZone = GetComponentInParent<Player_TriggerZone>();
-    }
+    public LayerMask damageLayer;
+    public CapsuleCollider collider;
+    public GameObject currPlayer;
+
     [ObserversRpc]
-    public void Use()
+    public void Use(GameObject owner)
     {
         Debug.Log("Used");
         if (attackProcess == null)
         {
+            currPlayer = owner;
             attackProcess = StartCoroutine(AttackProcess());
         }
     }
@@ -29,19 +27,30 @@ public class UsablePipe : NetworkBehaviour , IUsable
     {
         float attackDuration = 1.2f;
         float timer = 0f;
+        List<ObjectHealth> damagedObjects = new List<ObjectHealth>();
     
         while (timer < attackDuration)
         {
             timer += Time.fixedDeltaTime;
-            Debug.Log(attackProcess);
-            if (_playerInteractiveZone != null)
+            float height = collider.height * transform.localScale.y;
+            float radius = collider.radius * Mathf.Max(transform.localScale.x, transform.localScale.z);
+
+            Vector3 center = transform.position + collider.center;
+            Vector3 up = transform.up;
+            
+            Vector3 point1 = center + up * (height / 2f - radius);
+            Vector3 point2 = center - up * (height / 2f - radius);
+            Collider[] col = Physics.OverlapCapsule(point1, point2, radius*1.5f,damageLayer);
+            if (col.Length != 0)
             {
-                var objectsInZone = _playerInteractiveZone.GetObjectsInZone();
-                foreach (var obj in objectsInZone)
+                foreach (var obj in col)
                 {
+                    if (obj.gameObject == currPlayer.gameObject)
+                        continue;
                     ObjectHealth health = obj.GetComponent<ObjectHealth>();
-                    if (health != null)
+                    if (health != null && !damagedObjects.Contains(health))
                     {
+                        damagedObjects.Add(health);
                         health.GetDamage(dmg);
                         break;
                     }

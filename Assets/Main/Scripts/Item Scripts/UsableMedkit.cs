@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UsableMedkit  : MonoBehaviour,IUsable
 {
-    private ItemPickUp _data;
+    private PickAbleItem _data;
     private ObjectHealth _health;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class UsableMedkit  : MonoBehaviour,IUsable
         
     }
 
-    public void Use()
+    public void Use(GameObject owner)
     {
         _health.AddHealth(50);
     }

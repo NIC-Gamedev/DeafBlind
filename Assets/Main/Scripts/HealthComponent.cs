@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 
 public class ObjectHealth : MonoBehaviour
@@ -10,22 +11,23 @@ public class ObjectHealth : MonoBehaviour
 
     public Action<float> OnHealthValueChange;
 
-    protected virtual void Start()
+    private void Start()
     {
-        currentHealth = maxHealth; 
+        currentHealth = maxHealth;
+        OnHealthValueChange?.Invoke(currentHealth);
     }
-
+    
     public void GetDamage(float dmg)
     {
         currentHealth -= dmg;
-        currentHealth = Mathf.Max(currentHealth, 0); // ���������, ��� �������� �� ������ 0
+        currentHealth = Mathf.Max(currentHealth, 0);
         OnHealthValueChange?.Invoke(currentHealth);
     }
 
     public void AddHealth(float heal)
     {
         currentHealth += heal;
-        currentHealth = Mathf.Min(currentHealth, maxHealth); // ���������, ��� �������� �� ������ MaxHealth
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
         OnHealthValueChange?.Invoke(currentHealth);
     }
 }

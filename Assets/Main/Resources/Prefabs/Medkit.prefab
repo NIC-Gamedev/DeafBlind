@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 238840141760670530}
   - component: {fileID: 191838869919830798}
   - component: {fileID: -6772648701481281316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Medkit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8123028166904197507}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760f6a88bc1fad44698f4c1e571713d6, type: 3}
   m_Name: 
@@ -213,6 +213,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 191838869919830798}
   _networkObjectCache: {fileID: 191838869919830798}
   ItemData: {fileID: 11400000, guid: f0155440b97b0a34cbb73521a15b9a9c, type: 2}
+  inventoryHolder: {fileID: 0}
 --- !u!114 &5690676278608059219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +245,7 @@ MonoBehaviour:
   bounciness: 0.5
   throwForce: 10
   upwardThrowModifier: 0.5
+  pickAbleItem: {fileID: 7301493589190488016}
 --- !u!114 &191838869919830798
 MonoBehaviour:
   m_ObjectHideFlags: 0
