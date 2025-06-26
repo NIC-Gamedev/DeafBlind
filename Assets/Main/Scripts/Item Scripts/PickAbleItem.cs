@@ -11,7 +11,6 @@ public class PickAbleItem : NetworkBehaviour
     {
         if (inventory != null )
         {
-            Debug.Log("TryPickUp");
             RequestPickUpServerRpc((ulong)inventory.OwnerId,inventory);
         }
     }
@@ -19,7 +18,6 @@ public class PickAbleItem : NetworkBehaviour
     private void RequestPickUpServerRpc(ulong clientId,InventoryHolder inventoryHolder)
     {
         if (inventoryHolder == null || inventoryHolder.OwnerId != (int)(clientId)) return;
-        Debug.Log("Pick");
         HandHolder handHolder = inventoryHolder.GetComponent<HandHolder>();
         if (handHolder != null)
         {
