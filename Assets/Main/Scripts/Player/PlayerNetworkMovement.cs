@@ -5,6 +5,9 @@ using FishNet.Object;
 using static UnityEngine.InputManagerEntry;
 using FishNet.Object.Synchronizing;
 using System.Collections;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerNetworkMovement : MovementNetworkBase
 {
@@ -35,6 +38,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
     private float heightTemp;
 
     public GameObject pausePanel;
+    public GameObject ChatPanel;
 
     private bool isSneakReceived = false;
 
@@ -52,6 +56,7 @@ public class PlayerNetworkMovement : MovementNetworkBase
         {
             InputInit();
         }
+       
     }
 
 
@@ -70,20 +75,32 @@ public class PlayerNetworkMovement : MovementNetworkBase
         inputActions.Player.Pause.performed += Pause;
         heightTemp = (col as CapsuleCollider).height;
         inputActions.Player.Jump.performed += Jump;
+        inputActions.Player.OpenChat.Enable();
+        inputActions.Player.OpenChat.performed += ControlChatPanel;
+
     }
+
+    private void ControlChatPanel(InputAction.CallbackContext callback)
+    {
+        Debug.Log("Chat is open");
+        ChatBroadcast chat =  ChatPanel.GetComponentInParent<ChatBroadcast>();
+        UnityEngine.UI.Image[] images = ChatPanel.GetComponentsInChildren<UnityEngine.UI.Image>();
+        chat.SendMessage();
+    }
+   
     private void Pause(InputAction.CallbackContext callback)
     {
         pausePanel.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
 
     }
 
     public void UnPause()
     {
         pausePanel.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
     private void FixedUpdate()
     {
