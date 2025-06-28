@@ -897,7 +897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &320817323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18517,6 +18517,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1296168331}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &813433441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19586,7 +19598,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.09
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 100
   orthographic: 0
@@ -19614,9 +19626,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296168331}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.008996964, y: -0.00000011920448, z: 0.0000000010725146,
-    w: 0.9999595}
-  m_LocalPosition: {x: -32.83, y: 0.97339386, z: 17.147999}
+  m_LocalRotation: {x: 0.000000029802326, y: 0.0041555692, z: 9.313227e-10, w: 0.99999136}
+  m_LocalPosition: {x: 0.002, y: 0.853, z: 0.272}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20621,6 +20632,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ServerSetup, Assembly-CSharp
         m_MethodName: BeginClient
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1296168331}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

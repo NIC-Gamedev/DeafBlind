@@ -907,7 +907,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638784503519105796
+  lastModified: 638790179870587532
   FileSizes: []
   Exists: 1
 --- !u!114 &-4797661480880022165
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Dialogue_EN.bank
   Name: Dialogue_EN
   StudioPath: bank:/Dialogue_EN
-  lastModified: 638784503517275911
+  lastModified: 638790179869494327
   FileSizes: []
   Exists: 1
 --- !u!114 &-4234660435257203753
@@ -1673,7 +1673,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638784509143629137
+  lastModified: 638790179869581790
   FileSizes:
   - Name: 
     Value: 4104
@@ -1791,7 +1791,7 @@ MonoBehaviour:
   - {fileID: 963001979354286036}
   StringsBanks:
   - {fileID: -192186621522110071}
-  cacheTime: 638784509143954458
+  cacheTime: 638790179872457044
   cacheVersion: 131622
 --- !u!114 &118333938922326541
 MonoBehaviour:
@@ -1859,7 +1859,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/VO.bank
   Name: VO
   StudioPath: bank:/VO
-  lastModified: 638784509143954458
+  lastModified: 638790179872417180
   FileSizes: []
   Exists: 1
 --- !u!114 &789355249232411213
@@ -1928,7 +1928,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638784509143608820
+  lastModified: 638790179869561887
   FileSizes: []
   Exists: 1
 --- !u!114 &1042546098132861089
@@ -2229,7 +2229,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638784503523610108
+  lastModified: 638790179872457044
   FileSizes: []
   Exists: 1
 --- !u!114 &3864706007711605807
@@ -2665,7 +2665,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Dialogue_CN.bank
   Name: Dialogue_CN
   StudioPath: bank:/Dialogue_CN
-  lastModified: 638784503517100661
+  lastModified: 638790179869464403
   FileSizes: []
   Exists: 1
 --- !u!114 &5451385416897707693
@@ -2711,7 +2711,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Dialogue_JP.bank
   Name: Dialogue_JP
   StudioPath: bank:/Dialogue_JP
-  lastModified: 638784503517448560
+  lastModified: 638790179869536589
   FileSizes: []
   Exists: 1
 --- !u!114 &5630674450218260004
@@ -2780,7 +2780,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638784503522371332
+  lastModified: 638790179872381519
   FileSizes: []
   Exists: 1
 --- !u!114 &6176596007824301245
