@@ -36,8 +36,7 @@ public abstract class BaseAnimator : NetworkBehaviour
 
         if (state == CurrentState) return;
         //SetState(state);
-        if(IsOwner)
-            SendAnimationToServer(state);
+        SendAnimationToServer(state);
     }
 
     protected virtual void InitAnimation(){}
@@ -47,7 +46,7 @@ public abstract class BaseAnimator : NetworkBehaviour
         return 0;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void SendAnimationToServer(int state)
     {
         if (state == CurrentState) return;

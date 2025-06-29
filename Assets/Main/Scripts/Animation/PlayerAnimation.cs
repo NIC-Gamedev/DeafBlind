@@ -7,12 +7,12 @@ using UnityEngine.InputSystem;
 public class PlayerAnimation : BaseAnimator
 {
     private PlayerNetworkMovement _playerMovement;
-    private PlayerNetworkMovement playerMovement {
+    private PlayerNetworkMovement PlayerMovement {
         get 
         { 
             if (_playerMovement == null) 
             {
-                _playerMovement = GetComponent<PlayerNetworkMovement>();
+                TryGetComponent(out _playerMovement);
             }
             return _playerMovement;
         }
@@ -23,13 +23,13 @@ public class PlayerAnimation : BaseAnimator
         { 
             if (_handHolder == null) 
             {
-                _handHolder = GetComponent<HandHolder>();
+                TryGetComponent(out _handHolder);
             }
             return _handHolder;
         }
     }
     private Rigidbody _rb; 
-    private Rigidbody rb 
+    private Rigidbody Rb 
     {
         get
         {
@@ -40,14 +40,21 @@ public class PlayerAnimation : BaseAnimator
             return _rb;
         }
     }
-    private bool isJumpStart;
-
-  
-
-    protected override void Start()
+    
+    private PlayerKnockedDown _knockDown; 
+    private PlayerKnockedDown KnockDown
     {
-        base.Start();
+        get
+        {
+            if (_knockDown == null)
+            {
+                TryGetComponent(out _knockDown);
+            }
+            return _knockDown;
+        }
     }
+    private bool isJumpStart;
+    
 
     protected override void InitAnimation()
     {
@@ -88,11 +95,21 @@ public class PlayerAnimation : BaseAnimator
         
         animationHash.Add("Drop", Animator.StringToHash("mixamo_com"));
         animationHash.Add("Attack", Animator.StringToHash("2H@Attack02"));
+        animationHash.Add("Die", Animator.StringToHash("Death"));
     }
     
     protected override int GetState()
     {
-        bool isGround = playerMovement.IsOnGround();
+        bool isGround = PlayerMovement.IsOnGround();
+
+        if (KnockDown != null)
+        {
+            if (KnockDown.KnockDownProcess != null)
+            {
+                return animationHash["Die"];
+            }
+        }
+        
         if (HandHolder.currentItemObject != null)
         {
             if (HandHolder.currentItemObject.TryGetComponent(out UsablePipe usablePipe))
@@ -103,18 +120,24 @@ public class PlayerAnimation : BaseAnimator
                 }
             }
         }
+        
+        if (HandHolder.isDropping)
+        {
+            return animationHash["Drop"];
+        }
+
 
         if (HandHolder.isDropping)
         {
             return animationHash["Drop"];
         }
 
-        if (rb.linearVelocity.y > 0 && !isGround)
+        if (Rb.linearVelocity.y > 0 && !isGround)
         {
             isJumpStart = true;
             return animationHash["StartJump"];
         }
-        else if (rb.linearVelocity.y < 0 &&!isGround)
+        else if (Rb.linearVelocity.y < 0 &&!isGround)
         {
             return animationHash["Fall"];
         }
@@ -124,18 +147,18 @@ public class PlayerAnimation : BaseAnimator
             return animationHash["Land"];
         }
 
-        if (playerMovement.input != Vector3.zero)
-            return PlayerMoveAnimation(playerMovement.isSprinting,playerMovement.isSneak);
+        if (PlayerMovement.input != Vector3.zero && (Mathf.Abs(Rb.linearVelocity.z) > 0.5 || Mathf.Abs(Rb.linearVelocity.x) > 0.5) )
+            return PlayerMoveAnimation(PlayerMovement.isSprinting,PlayerMovement.isSneak);
 
-        return playerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
+        return PlayerMovement.isSneak == false ? animationHash["Idle"] : animationHash["CrouchIdle"];
     }
 
 
     private int PlayerMoveAnimation(bool isSprint,bool isSit)
     {
         if (isSit)
-            return animationHash[$"Crouch{playerMovement.input}"];
+            return animationHash[$"Crouch{PlayerMovement.input}"];
 
-        return animationHash[$"{(isSprint ? "Run" : "Walk")}{playerMovement.input}"];
+        return animationHash[$"{(isSprint ? "Run" : "Walk")}{PlayerMovement.input}"];
     }
 }

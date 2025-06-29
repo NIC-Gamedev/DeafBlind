@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 7997701115940908432}
   - component: {fileID: 4906006030117767758}
   - component: {fileID: -2015992718997047097}
+  - component: {fileID: 7069118678571740672}
   m_Layer: 8
   m_Name: Deaf 1
   m_TagString: Untagged
@@ -287,9 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af83f577ba6de4649becedd71819caf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 3649741552129244603}
-  _networkObjectCache: {fileID: 3649741552129244603}
   maxHealth: 100
   currentHealth: 100
 --- !u!114 &4145979754116566038
@@ -543,7 +541,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 2879799913157870573}
+  - {fileID: 0}
   - {fileID: 4145979754116566038}
   - {fileID: -9058194595701247593}
   - {fileID: 2955802239629264974}
@@ -662,6 +660,29 @@ MonoBehaviour:
   _overrideType: 3
   _updateHostVisibility: 1
   _observerConditions: []
+--- !u!114 &7069118678571740672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998811254615237603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af56ed2323952c1499e2fbb13a6665b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDie: 10
+  timeToGetUp: 4
+  onKnockDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onGetUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1108625588232933670
 GameObject:
   m_ObjectHideFlags: 0
@@ -3675,18 +3696,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1902809119929177454}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5192715629599960146 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5942527790911600956, guid: fe31d0542957b0f45a8889c0b9be8755,
-    type: 3}
-  m_PrefabInstance: {fileID: 1902809119929177454}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8901003765563386590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7039367735228372826 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8924156957865181748, guid: fe31d0542957b0f45a8889c0b9be8755,
@@ -3718,8 +3727,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 5192715629599960146}
-  _networkObjectCache: {fileID: 5192715629599960146}
+  _addedNetworkObject: {fileID: 7039367735228372826}
+  _networkObjectCache: {fileID: 0}
 --- !u!1001 &9201966541690776879
 PrefabInstance:
   m_ObjectHideFlags: 0

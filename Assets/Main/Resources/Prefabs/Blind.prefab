@@ -1493,6 +1493,11 @@ GameObject:
   - component: {fileID: 4538416603781415790}
   - component: {fileID: -7803912585043878652}
   - component: {fileID: 3302183967494193835}
+  - component: {fileID: 8513951720682001088}
+  - component: {fileID: 262089820998648280}
+  - component: {fileID: 3873897177461743226}
+  - component: {fileID: 4544810416139918387}
+  - component: {fileID: -8100968439393642648}
   m_Layer: 8
   m_Name: Blind
   m_TagString: Blind
@@ -1783,13 +1788,13 @@ MonoBehaviour:
   - {fileID: -3196154209627593484}
   - {fileID: 5205152668318776948}
   - {fileID: -7803912585043878652}
+  - {fileID: 8513951720682001088}
+  - {fileID: 262089820998648280}
   - {fileID: 3830739025761879604}
   - {fileID: 2447365932547691466}
   - {fileID: 3098165343212065482}
-  - {fileID: 0}
   InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects:
-  - {fileID: 0}
+  InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
@@ -1866,6 +1871,107 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+--- !u!114 &8513951720682001088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138195267981253030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5620ce254cb0e084b862a5e26e84657c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 5
+  _addedNetworkObject: {fileID: 3649741552129244603, guid: 8b3898ca913b04d49ae1dbf923835cfe,
+    type: 3}
+  _networkObjectCache: {fileID: 4538416603781415790}
+  inventorySize: 3
+  inventorySystem:
+    inventorySlots:
+    - itemData: {fileID: 0}
+      stackSize: 0
+--- !u!114 &262089820998648280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138195267981253030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14872d0dddb7d1499a94285b8160c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 6
+  _addedNetworkObject: {fileID: 3649741552129244603, guid: 8b3898ca913b04d49ae1dbf923835cfe,
+    type: 3}
+  _networkObjectCache: {fileID: 4538416603781415790}
+  dropPoint: {fileID: 4401575618019979955, guid: 8b3898ca913b04d49ae1dbf923835cfe,
+    type: 3}
+  inventoryHolder: {fileID: 8513951720682001088}
+  activeSlot:
+    itemData: {fileID: 0}
+    stackSize: -1
+  currentItemObject: {fileID: 0}
+  timeBefDrop: 0.8
+  isDropping: 0
+  pickUpRadius: 10
+  itemLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!114 &3873897177461743226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138195267981253030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af56ed2323952c1499e2fbb13a6665b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDie: 10
+  timeToGetUp: 4
+  onKnockDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onGetUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4544810416139918387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138195267981253030}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef48ab0760286249bfa0157355c3e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 0}
+--- !u!114 &-8100968439393642648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138195267981253030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3179d52dabee9cc47b9929231b6f6571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 4538416603781415790}
+  _networkObjectCache: {fileID: 0}
 --- !u!1 &5162356912765425670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,7 +2359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac4822951f1eb46a50d3e82cf8aa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
   mouseSensitivity: {x: 0.05, y: 0.05}
@@ -2615,7 +2721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c512d9cb447c1e7449ae5f5cf3861f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
   canvas: {fileID: 4310186038091915950}
@@ -3394,7 +3500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6602383a75770a84a8bc8b3786717422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 7
+  _componentIndexCache: 9
   _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
 --- !u!4 &8297064875560626680 stripped
