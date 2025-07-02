@@ -448,6 +448,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadinScreenCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4152253754942765071, guid: fff2e8609f1994448b5728b19bbd32ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -720,6 +725,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -52.69995
       objectReference: {fileID: 0}
+    - target: {fileID: 3355861634331861897, guid: 2dcc83d05262142489df6a91dd90bdb6,
+        type: 3}
+      propertyPath: _deafPrefab
+      value: 
+      objectReference: {fileID: 3649741552129244603, guid: 8b3898ca913b04d49ae1dbf923835cfe,
+        type: 3}
     - target: {fileID: 3355861634331861897, guid: 2dcc83d05262142489df6a91dd90bdb6,
         type: 3}
       propertyPath: 'Spawns.Array.data[0]'
@@ -1088,7 +1099,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907683586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -1166,7 +1177,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907683586}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
