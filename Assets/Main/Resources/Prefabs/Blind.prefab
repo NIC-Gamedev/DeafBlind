@@ -1614,6 +1614,9 @@ MonoBehaviour:
       Data4: 8080861
     Path: event:/UI/Cancel
   interactRadius: 3
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 1280
 --- !u!114 &2601992791307198760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1884,8 +1887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 5
-  _addedNetworkObject: {fileID: 3649741552129244603, guid: 8b3898ca913b04d49ae1dbf923835cfe,
-    type: 3}
+  _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
   inventorySize: 3
   inventorySystem:
@@ -1905,8 +1907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 6
-  _addedNetworkObject: {fileID: 3649741552129244603, guid: 8b3898ca913b04d49ae1dbf923835cfe,
-    type: 3}
+  _addedNetworkObject: {fileID: 4538416603781415790}
   _networkObjectCache: {fileID: 4538416603781415790}
   dropPoint: {fileID: 4401575618019979955, guid: 8b3898ca913b04d49ae1dbf923835cfe,
     type: 3}
@@ -1937,13 +1938,62 @@ MonoBehaviour:
   timeToGetUp: 4
   onKnockDown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -7803912585043878652}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2642234815770087722}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onGetUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -7803912585043878652}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2642234815770087722}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onPlayerDeath:
     m_PersistentCalls:
       m_Calls: []
+  isKnockDown: 0
 --- !u!114 &4544810416139918387
 MonoBehaviour:
   m_ObjectHideFlags: 0

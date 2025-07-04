@@ -17,6 +17,7 @@ public class ObjectHealth : MonoBehaviour
     {
         currentHealth -= dmg;
         currentHealth = Mathf.Max(currentHealth, 0);
+        Debug.Log(currentHealth);
         OnHealthValueChange?.Invoke(currentHealth);
     }
 
@@ -26,4 +27,5 @@ public class ObjectHealth : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth, maxHealth);
         OnHealthValueChange?.Invoke(currentHealth);
     }
+
 }

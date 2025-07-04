@@ -262,7 +262,6 @@ public class PlayerNetworkMovement : MovementNetworkBase
     [ServerRpc]
     public void SendServerGroundParam(bool onGround)
     {
-        Debug.Log($"{gameObject} is Grounded");
         isGrounded = onGround;
     }
     [ServerRpc]

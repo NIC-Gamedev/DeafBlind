@@ -299,7 +299,7 @@ public class HandHolder : NetworkBehaviour
         {
             Debug.Log("This item cannot be used.");
         }
-        OnHandItemChanged(currentItemObject);
+        OnHandItemChanged?.Invoke(currentItemObject);
 
     }
 

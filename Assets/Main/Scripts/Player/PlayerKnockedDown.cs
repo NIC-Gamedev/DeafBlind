@@ -4,64 +4,58 @@ using UnityEngine;
 using UnityEngine.Events;
 public class PlayerKnockedDown : MonoBehaviour
 {
-    [SerializeField] private float timeToDie;
     [SerializeField] private float timeToGetUp;
-    private float _currTimeToDie;
     private float _currTimeToGetUp;
     public UnityEvent onKnockDown;
     public UnityEvent onGetUp;
-    public UnityEvent onPlayerDeath;
 
-    public Coroutine KnockDownProcess;
+    public bool isKnockDown;
     public Coroutine GetUpProcess;
 
     public void OnKnockDown(float health)
     {
         if(health > 0)
             return;
-        if (KnockDownProcess == null)
+        if (!isKnockDown)
         {
+            isKnockDown = true;
             onKnockDown?.Invoke();
-            KnockDownProcess = StartCoroutine(KnockDown());
         }
     }
 
     public void StartGetUp() 
     {
-        if (GetUpProcess == null)
-            GetUpProcess = StartCoroutine(GetUp());
+        if (isKnockDown)
+        {
+            if (GetUpProcess == null)
+                GetUpProcess = StartCoroutine(GetUp());   
+        }
     }
     public void StopGetUp() 
     {
-        if (GetUpProcess != null)
-            StopCoroutine(GetUpProcess);
+        if (isKnockDown)
+        {
+            Debug.Log("Stop Get up");
+            if (GetUpProcess != null)
+            {
+                StopCoroutine(GetUpProcess);
+                GetUpProcess = null;
+            }
+        }
     }
 
     private IEnumerator GetUp()
     {
-        if (KnockDownProcess != null) //Shutdown knockdown coroutine
-        {
-            StopCoroutine(KnockDownProcess);
-            KnockDownProcess = null;
-        }
+        _currTimeToGetUp = timeToGetUp;
         while (_currTimeToGetUp > 0) //Start Timer
         {
             _currTimeToGetUp -= Time.deltaTime;
+            Debug.Log("Get up Processing");
             yield return null;
         }
         onGetUp?.Invoke();
+        isKnockDown = false;
         GetUpProcess = null;
-    }
-
-    private IEnumerator KnockDown()
-    {
-        _currTimeToDie = timeToDie;
-        while (_currTimeToDie > 0) //Start Timer
-        {
-            _currTimeToDie -= Time.deltaTime;
-            yield return null;
-        }
-        onPlayerDeath?.Invoke();
     }
 }
 

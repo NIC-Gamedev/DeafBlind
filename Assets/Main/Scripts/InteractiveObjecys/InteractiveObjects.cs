@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractiveObjects : MonoBehaviour
+public class InteractiveObjects : MonoBehaviour,IInteractable
 {
     [SerializeField] private UnityEvent OnInteractObject;
     [SerializeField] private bool useOnce;
     protected bool isOn = false;
-
-    public void InteractiveInvoke()
+    
+    public void OnInteract()
     {
         if (useOnce)
         {
@@ -23,5 +23,13 @@ public class InteractiveObjects : MonoBehaviour
         {
             OnInteractObject?.Invoke();
         }
+    }
+}
+
+public interface IInteractable
+{
+    public void OnInteract();
+    public void OnUnInteract()
+    {
     }
 }

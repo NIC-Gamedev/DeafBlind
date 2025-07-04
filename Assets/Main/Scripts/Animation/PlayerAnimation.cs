@@ -104,7 +104,7 @@ public class PlayerAnimation : BaseAnimator
 
         if (KnockDown != null)
         {
-            if (KnockDown.KnockDownProcess != null)
+            if (KnockDown.isKnockDown)
             {
                 return animationHash["Die"];
             }

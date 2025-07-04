@@ -36,7 +36,12 @@ public class EnemyPerception : MonoBehaviour
         {
             if (hit != null && IsInVisionAngle(hit.transform) && HasLineOfSight(hit))
             {
-                visibleObjects.Add(hit.gameObject);
+                if (hit.TryGetComponent(out ObjectHealth objectHealth))
+                {
+                    if(objectHealth.currentHealth <= 0)
+                        continue;
+                    visibleObjects.Add(hit.gameObject);   
+                }
             }  
         }
         return visibleObjects;
