@@ -54,7 +54,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _fresnel_power: 1.81
+    - _fresnel_power: 1.5
     - _glow_speed: 0.88
     - _glow_spread: 1.05
     - _wobble_amount: 0.2
@@ -65,6 +65,6 @@ Material:
     - _Color: {r: 0, g: 2.327571, b: 1.8430328, a: 1}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
     - _interiorPos: {r: 0, g: 0, b: 0, a: 0}
-    - _interior_color: {r: 1, g: 1, b: 1, a: 1}
+    - _interior_color: {r: 0, g: 0.6933659, b: 0.9811321, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
